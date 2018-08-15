@@ -35,22 +35,34 @@ public class MkiosActivity extends AppCompatActivity {
     }
 
     private void initMkios(){
-        MkiosModel mkios = new MkiosModel("Toko Yumna Jaya Cell", "08121151777716", "");
+        MkiosModel mkios = new MkiosModel("MUSA CELL", "081215297734", "");
         mkiosList.add(mkios);
 
-        mkios = new MkiosModel("Erlangga Cell", "08121151777716", "");
+        mkios = new MkiosModel("NOWO CELL", "081215297748", "");
         mkiosList.add(mkios);
 
-        mkios = new MkiosModel("Cinta Cell Borobudur", "08121151777716", "");
+        mkios = new MkiosModel("WILDAN CELL", "081215297751", "");
         mkiosList.add(mkios);
 
-        mkios = new MkiosModel("Yohanes Darmasasi - Bank TCAS", "08121151777716", "");
+        mkios = new MkiosModel("REDBERRI CELL", "081215297768", "");
         mkiosList.add(mkios);
 
-        mkios = new MkiosModel("Novi Cell", "08121151777716", "");
+        mkios = new MkiosModel("DOI CELL", "081215297781", "");
         mkiosList.add(mkios);
 
-        mkios = new MkiosModel("Kirana Phone", "08121151777716", "");
+        mkios = new MkiosModel("P-TECK CELL", "081215297797", "");
+        mkiosList.add(mkios);
+
+        mkios = new MkiosModel("FENS CARD CELL", "081215365096", "");
+        mkiosList.add(mkios);
+
+        mkios = new MkiosModel("PINK CELL", "081215370119", "");
+        mkiosList.add(mkios);
+
+        mkios = new MkiosModel("WAFFA 2", "", "");
+        mkiosList.add(mkios);
+
+        mkios = new MkiosModel("354 CELL", "081215604903", "");
         mkiosList.add(mkios);
     }
 

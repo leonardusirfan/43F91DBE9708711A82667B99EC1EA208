@@ -35,25 +35,35 @@ public class PerdanaActivity extends AppCompatActivity {
     }
 
     private void initPerdana() {
-        PerdanaModel perdana = new PerdanaModel("2 Maret Cell - Salam", "Jagang Lor RT 1 RW 2");
+        PerdanaModel perdana = new PerdanaModel("MUSA CELL", "jl. KH Hasan Munadi");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("205 Gadget Cell - Kaliangkrik", "Kaliangkrik");
+        perdana = new PerdanaModel("NOWO CELL", "jambu kulon");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("24 Celluler Cell - Kajoran", "Tunggangan");
+        perdana = new PerdanaModel("WILDAN CELL", "jambu kulon");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("3 in 1 Cell - Mungkid", "");
+        perdana = new PerdanaModel("REDBERRI CELL", "jl. duren");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("4S Cell - Grabag", "Paingan Grabag");
+        perdana = new PerdanaModel("DOI CELL", "lendoh");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("789 Cell", "Kwayuhan Gelangan Magelang Utara");
+        perdana = new PerdanaModel("P-TECK CELL", "Randugunting");
         listPerdana.add(perdana);
 
+        perdana = new PerdanaModel("FENS CARD CELL", "jln dokter cipto");
+        listPerdana.add(perdana);
 
+        perdana = new PerdanaModel("PINK CELL", "pasar bedono");
+        listPerdana.add(perdana);
+
+        perdana = new PerdanaModel("WAFFA 2", "Komplek Padar Pringapus");
+        listPerdana.add(perdana);
+
+        perdana = new PerdanaModel("354 CELL", "gedang anak");
+        listPerdana.add(perdana);
     }
 
     @Override

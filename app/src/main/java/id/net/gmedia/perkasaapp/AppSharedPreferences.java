@@ -27,8 +27,6 @@ public class AppSharedPreferences {
         editor.putBoolean(LOGIN_PREF, false);
         editor.putString(ID_PREF, "");
 
-        //Melakukan perubahan terhadap Shared Preferences secara asinkron
-        //lebih cepat, namun tidak memiliki nilai balikan
         editor.apply();
     }
 
