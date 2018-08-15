@@ -18,7 +18,7 @@ public class PerdanaOrderActivity extends AppCompatActivity {
         }
 
         TextView txt_nama = findViewById(R.id.txt_nama);
-        PerdanaModel perdana;
+        PerdanaOutletModel perdana;
         if(getIntent().hasExtra("perdana")){
             perdana = getIntent().getParcelableExtra("perdana");
             txt_nama.setText(perdana.getNama());

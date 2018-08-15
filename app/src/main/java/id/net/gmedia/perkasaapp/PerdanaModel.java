@@ -1,51 +1,38 @@
 package id.net.gmedia.perkasaapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.List;
 
-public class PerdanaModel implements Parcelable{
-
+public class PerdanaModel {
     private String nama;
-    private String alamat;
+    private int stok;
+    private TransaksiModel nota1;
+    private TransaksiModel nota2;
 
-    PerdanaModel(String nama, String alamat){
+    public PerdanaModel(String nama, int stok){
         this.nama = nama;
-        this.alamat = alamat;
+        this.stok = stok;
     }
 
-    public String getNama(){
+    PerdanaModel(String nama, int stok, TransaksiModel nota1, TransaksiModel nota2){
+        this.nama = nama;
+        this.stok = stok;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+    }
+
+    public int getStok() {
+        return stok;
+    }
+
+    public String getNama() {
         return nama;
     }
 
-    public String getAlamat(){
-        return alamat;
+    public TransaksiModel getNota1() {
+        return nota1;
     }
 
-    private PerdanaModel(Parcel in){
-        this.nama = in.readString();
-        this.alamat = in.readString();
-    }
-
-    public static final Parcelable.Creator<PerdanaModel> CREATOR = new Parcelable.Creator<PerdanaModel>() {
-        @Override
-        public PerdanaModel createFromParcel(Parcel source) {
-            return new PerdanaModel(source);
-        }
-
-        @Override
-        public PerdanaModel[] newArray(int size) {
-            return new PerdanaModel[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nama);
-        dest.writeString(alamat);
+    public TransaksiModel getNota2() {
+        return nota2;
     }
 }

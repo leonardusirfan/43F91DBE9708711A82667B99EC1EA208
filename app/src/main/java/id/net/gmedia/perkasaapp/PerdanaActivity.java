@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PerdanaActivity extends AppCompatActivity {
 
-    private List<PerdanaModel> listPerdana = new ArrayList<>();
+    private List<PerdanaOutletModel> listPerdana = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class PerdanaActivity extends AppCompatActivity {
         }
 
         RecyclerView rcy_perdana = findViewById(R.id.rcy_perdana);
-        PerdanaAdapter adapter = new PerdanaAdapter(listPerdana);
+        PerdanaOutletAdapter adapter = new PerdanaOutletAdapter(listPerdana);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rcy_perdana.setLayoutManager(layoutManager);
         rcy_perdana.setItemAnimator(new DefaultItemAnimator());
@@ -35,34 +35,34 @@ public class PerdanaActivity extends AppCompatActivity {
     }
 
     private void initPerdana() {
-        PerdanaModel perdana = new PerdanaModel("MUSA CELL", "jl. KH Hasan Munadi");
+        PerdanaOutletModel perdana = new PerdanaOutletModel("MUSA CELL", "jl. KH Hasan Munadi");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("NOWO CELL", "jambu kulon");
+        perdana = new PerdanaOutletModel("NOWO CELL", "jambu kulon");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("WILDAN CELL", "jambu kulon");
+        perdana = new PerdanaOutletModel("WILDAN CELL", "jambu kulon");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("REDBERRI CELL", "jl. duren");
+        perdana = new PerdanaOutletModel("REDBERRI CELL", "jl. duren");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("DOI CELL", "lendoh");
+        perdana = new PerdanaOutletModel("DOI CELL", "lendoh");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("P-TECK CELL", "Randugunting");
+        perdana = new PerdanaOutletModel("P-TECK CELL", "Randugunting");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("FENS CARD CELL", "jln dokter cipto");
+        perdana = new PerdanaOutletModel("FENS CARD CELL", "jln dokter cipto");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("PINK CELL", "pasar bedono");
+        perdana = new PerdanaOutletModel("PINK CELL", "pasar bedono");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("WAFFA 2", "Komplek Padar Pringapus");
+        perdana = new PerdanaOutletModel("WAFFA 2", "Komplek Padar Pringapus");
         listPerdana.add(perdana);
 
-        perdana = new PerdanaModel("354 CELL", "gedang anak");
+        perdana = new PerdanaOutletModel("354 CELL", "gedang anak");
         listPerdana.add(perdana);
     }
 

@@ -29,10 +29,11 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        LinearLayout btn_mkios, btn_perdana, btn_hari_ini;
+        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok;
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
         btn_hari_ini = findViewById(R.id.btn_hari_ini);
+        btn_stok = findViewById(R.id.btn_stok);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,13 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, HariIniActivity.class));
+            }
+        });
+
+        btn_stok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, StokActivity.class));
             }
         });
 
@@ -141,6 +149,7 @@ public class HomeActivity extends AppCompatActivity
             case R.id.nav_mkios:startActivity(new Intent(HomeActivity.this, MkiosActivity.class));break;
             case R.id.nav_perdana:startActivity(new Intent(HomeActivity.this, PerdanaActivity.class));break;
             case R.id.nav_hari_ini:startActivity(new Intent(HomeActivity.this, HariIniActivity.class));break;
+            case R.id.nav_stok:startActivity(new Intent(HomeActivity.this, StokActivity.class));break;
             case R.id.nav_logout:
                 AppSharedPreferences.LogOut(HomeActivity.this);
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));

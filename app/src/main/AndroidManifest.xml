@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
-        <activity android:name=".SplashScreen" android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -25,7 +29,8 @@
         <activity android:name=".MkiosActivity" />
         <activity android:name=".HariIniActivity" />
         <activity android:name=".MkiosOrderActivity" />
-        <activity android:name=".PerdanaOrderActivity"/>
+        <activity android:name=".PerdanaOrderActivity" />
+        <activity android:name=".StokActivity"></activity>
     </application>
 
 </manifest>
