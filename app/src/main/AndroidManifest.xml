@@ -30,7 +30,13 @@
         <activity android:name=".ActivityPenjualanHariIni" />
         <activity android:name=".ActivityOrderMkios2" />
         <activity android:name=".ActivityOrderPerdana2" />
-        <activity android:name=".ActivityStokPerdana"></activity>
+        <activity android:name=".ActivityStokPerdana" />
+        <activity android:name=".ActivityPiutang" />
+        <activity
+            android:name=".ActivityKomplain"
+            android:label="@string/title_activity_komplain"
+            android:theme="@style/AppThemeActionBar.NoActionBar" />
+        <activity android:name=".ActivityKomplain2"></activity>
     </application>
 
 </manifest>

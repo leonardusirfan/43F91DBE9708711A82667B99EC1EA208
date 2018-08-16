@@ -36,7 +36,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                     //Jika valid
                     startActivity(new Intent(ActivityLogin.this, ActivityHome.class));
-                    AppSharedPreferences.Login(ActivityLogin.this, username);
+                    AppSharedPreferences.Login(ActivityLogin.this, "Gmedia Test");
                     finish();
                 }
             }

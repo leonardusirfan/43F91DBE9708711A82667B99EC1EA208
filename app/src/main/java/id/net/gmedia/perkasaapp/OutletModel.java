@@ -9,6 +9,7 @@ public class OutletModel implements Parcelable {
     private String nomor;
     private double latitude;
     private double longitude;
+    private int piutang;
 
     OutletModel(String nama, String alamat, String nomor){
         this.nama = nama;
@@ -45,6 +46,14 @@ public class OutletModel implements Parcelable {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public void setPiutang(int piutang){
+        this.piutang = piutang;
+    }
+
+    public int getPiutang(){
+        return piutang;
     }
 
     //PARCELABLE

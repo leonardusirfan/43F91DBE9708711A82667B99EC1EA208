@@ -29,11 +29,13 @@ public class ActivityHome extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok;
+        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain;
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
         btn_hari_ini = findViewById(R.id.btn_hari_ini);
         btn_stok = findViewById(R.id.btn_stok);
+        btn_piutang = findViewById(R.id.btn_piutang);
+        btn_komplain = findViewById(R.id.btn_komplain);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,14 +65,20 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btn_piutang.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));
             }
-        });*/
+        });
+
+        btn_komplain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityKomplain.class));
+            }
+        });
+
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Perkasa App");
         }
@@ -150,6 +158,8 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_perdana:startActivity(new Intent(ActivityHome.this, ActivityOrderPerdana1.class));break;
             case R.id.nav_hari_ini:startActivity(new Intent(ActivityHome.this, ActivityPenjualanHariIni.class));break;
             case R.id.nav_stok:startActivity(new Intent(ActivityHome.this, ActivityStokPerdana.class));break;
+            case R.id.nav_piutang:startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));break;
+            case R.id.nav_komplain:startActivity(new Intent(ActivityHome.this, ActivityKomplain.class));break;
             case R.id.nav_logout:
                 AppSharedPreferences.LogOut(ActivityHome.this);
                 startActivity(new Intent(ActivityHome.this, ActivityLogin.class));

@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Nama Pelanggan"
+            android:textSize="@dimen/text14"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,15 +49,17 @@
             android:layout_marginTop="10dp"
             android:text="Nomor BA"
             android:textStyle="bold"
+            android:textSize="@dimen/text14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
 
         <EditText
-            android:id="@+id/txt_ba"
+            android:id="@+id/txt_komplain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
+            android:textSize="@dimen/text18"
             android:inputType="number"
             android:textAllCaps="true"
             app:layout_constraintStart_toStartOf="parent"

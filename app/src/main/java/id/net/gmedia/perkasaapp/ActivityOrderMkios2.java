@@ -7,9 +7,6 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class ActivityOrderMkios2 extends AppCompatActivity {
 
     private int total5 = 0, total10 = 0, total20 = 0, total25 = 0, total50 = 0, total100 = 0;
@@ -56,12 +53,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total5 = Integer.parseInt(s.toString()) * 5600;
-                    txt_total_s5.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total5)));
+                    txt_total_s5.setText(RupiahFormatterUtil.getRupiah(total5));
                     updateTotal();
                 }
                 else{
                     total5 = 0;
-                    txt_total_s5.setText("Rp 0, 00");
+                    txt_total_s5.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -77,12 +74,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total10 = Integer.parseInt(s.toString()) * 10600;
-                    txt_total_s10.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total10)));
+                    txt_total_s10.setText(RupiahFormatterUtil.getRupiah(total10));
                     updateTotal();
                 }
                 else{
                     total10 = 0;
-                    txt_total_s10.setText("Rp 0, 00");
+                    txt_total_s10.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -98,12 +95,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total20 = Integer.parseInt(s.toString()) * 20050;
-                    txt_total_s20.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total20)));
+                    txt_total_s20.setText(RupiahFormatterUtil.getRupiah(total20));
                     updateTotal();
                 }
                 else{
                     total20 = 0;
-                    txt_total_s20.setText("Rp 0, 00");
+                    txt_total_s20.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -119,12 +116,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total25 = Integer.parseInt(s.toString()) * 25100;
-                    txt_total_s25.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total25)));
+                    txt_total_s25.setText(RupiahFormatterUtil.getRupiah(total25));
                     updateTotal();
                 }
                 else{
                     total25 = 0;
-                    txt_total_s25.setText("Rp 0, 00");
+                    txt_total_s25.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -140,12 +137,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total50 = Integer.parseInt(s.toString()) * 49000;
-                    txt_total_s50.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total50)));
+                    txt_total_s50.setText(RupiahFormatterUtil.getRupiah(total50));
                     updateTotal();
                 }
                 else{
                     total50 = 0;
-                    txt_total_s50.setText("Rp 0, 00");
+                    txt_total_s50.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -161,12 +158,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     total100 = Integer.parseInt(s.toString()) * 97100;
-                    txt_total_s100.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total100)));
+                    txt_total_s100.setText(RupiahFormatterUtil.getRupiah(total100));
                     updateTotal();
                 }
                 else{
                     total100 = 0;
-                    txt_total_s100.setText("Rp 0, 00");
+                    txt_total_s100.setText(R.string.rupiah_0);
                     updateTotal();
                 }
             }
@@ -179,7 +176,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
     }
 
     private void updateTotal(){
-        txt_total.setText(String.format("Rp %s, 00", NumberFormat.getNumberInstance(Locale.US).format(total5 + total10 + total20 + total25 + total50 + total100)));
+        txt_total.setText(RupiahFormatterUtil.getRupiah(total5 + total10 + total20 + total25 + total50 + total100));
     }
 
     @Override

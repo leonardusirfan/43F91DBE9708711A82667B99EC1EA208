@@ -37,7 +37,7 @@
                     android:padding="@dimen/padding5"
                     android:text="TextView"
                     android:textColor="#fff"
-                    android:textSize="@dimen/text12"
+                    android:textSize="@dimen/text16"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text12"
+                    android:textSize="@dimen/text14"
                     android:text="Komplain"
                     android:gravity="center"/>
 
@@ -63,8 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                    android:textSize="@dimen/text12"
+                    android:textSize="@dimen/text14"
                     android:textStyle="bold" />
             </LinearLayout>
 

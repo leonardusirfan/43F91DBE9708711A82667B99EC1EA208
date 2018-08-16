@@ -33,4 +33,8 @@ public class AppSharedPreferences {
     public static boolean isLoggedIn(Context context){
         return getPreferences(context).getBoolean(LOGIN_PREF, false);
     }
+
+    public static String getUserId(Context context){
+        return getPreferences(context).getString(ID_PREF, "");
+    }
 }
