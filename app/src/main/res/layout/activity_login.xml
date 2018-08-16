@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
-    tools:context=".LoginActivity">
+    tools:context=".ActivityLogin">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -48,7 +48,7 @@
             android:layout_weight="0.85"
             android:hint="Username"
             android:inputType="textPersonName"
-            android:textSize="@dimen/smallTextSize"
+            android:textSize="@dimen/text12"
             />
     </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:hint="Password"
             android:layout_weight="0.85"
             android:inputType="textPassword"
-            android:textSize="@dimen/smallTextSize" />
+            android:textSize="@dimen/text12" />
     </LinearLayout>
 
 
@@ -96,7 +96,7 @@
         android:background="@color/colorAccent"
         android:text="Login"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/normalTextSize"
+        android:textSize="@dimen/text18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="5:1"
         app:layout_constraintEnd_toEndOf="@+id/view_username"

@@ -1,14 +1,25 @@
 package id.net.gmedia.perkasaapp;
 
-public class OutletModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class OutletModel implements Parcelable {
     private String nama;
     private String alamat;
     private String nomor;
     private double latitude;
     private double longitude;
-    private String status;
 
-    public OutletModel(String nama, String alamat, String nomor, double latitude, double longitude){
+    OutletModel(String nama, String alamat, String nomor){
+        this.nama = nama;
+        this.alamat = alamat;
+        this.nomor = nomor;
+
+        latitude = 0;
+        longitude = 0;
+    }
+
+    OutletModel(String nama, String alamat, String nomor, double latitude, double longitude){
         this.nama = nama;
         this.alamat = alamat;
         this.nomor = nomor;
@@ -36,7 +47,41 @@ public class OutletModel {
         return longitude;
     }
 
-    public String getStatus(){
-        return status;
+    //PARCELABLE
+
+    //konstruktor Parceable
+    private OutletModel(Parcel in){
+        this.nama = in.readString();
+        this.nomor = in.readString();
+        this.alamat = in.readString();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+    }
+
+    //kelas Creator Parcelable
+    public static final Parcelable.Creator<OutletModel> CREATOR = new Parcelable.Creator<OutletModel>(){
+        @Override
+        public OutletModel createFromParcel(Parcel source) {
+            return new OutletModel(source);
+        }
+
+        @Override
+        public OutletModel[] newArray(int size) {
+            return new OutletModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nama);
+        dest.writeString(alamat);
+        dest.writeString(nomor);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
     }
 }

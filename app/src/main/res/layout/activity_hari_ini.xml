@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HariIniActivity">
+    tools:context=".ActivityPenjualanHariIni">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:gravity="center_vertical"
                 android:text="Total"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/text18"
                 android:textStyle="bold" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:gravity="right|center_vertical|end"
                 android:text="Rp 0, 00"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/text18"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
         <activity
-            android:name=".SplashScreen"
+            android:name=".ActivitySplashScreen"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ActivityLogin"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ActivityHome"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PerdanaActivity" />
-        <activity android:name=".MkiosActivity" />
-        <activity android:name=".HariIniActivity" />
-        <activity android:name=".MkiosOrderActivity" />
-        <activity android:name=".PerdanaOrderActivity" />
-        <activity android:name=".StokActivity"></activity>
+        <activity android:name=".ActivityOrderPerdana1" />
+        <activity android:name=".ActivityOrderMkios1" />
+        <activity android:name=".ActivityPenjualanHariIni" />
+        <activity android:name=".ActivityOrderMkios2" />
+        <activity android:name=".ActivityOrderPerdana2" />
+        <activity android:name=".ActivityStokPerdana"></activity>
     </application>
 
 </manifest>
