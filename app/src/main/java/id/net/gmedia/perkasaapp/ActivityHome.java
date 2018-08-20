@@ -29,13 +29,14 @@ public class ActivityHome extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain;
+        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain, btn_tcash;
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
         btn_hari_ini = findViewById(R.id.btn_hari_ini);
         btn_stok = findViewById(R.id.btn_stok);
         btn_piutang = findViewById(R.id.btn_piutang);
         btn_komplain = findViewById(R.id.btn_komplain);
+        btn_tcash = findViewById(R.id.btn_tcash);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,13 @@ public class ActivityHome extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityKomplain.class));
+            }
+        });
+
+        btn_tcash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityOrderTcash1.class));
             }
         });
 
@@ -160,6 +168,7 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_stok:startActivity(new Intent(ActivityHome.this, ActivityStokPerdana.class));break;
             case R.id.nav_piutang:startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));break;
             case R.id.nav_komplain:startActivity(new Intent(ActivityHome.this, ActivityKomplain.class));break;
+            case R.id.nav_tcash:startActivity(new Intent(ActivityHome.this, ActivityOrderTcash1.class));break;
             case R.id.nav_logout:
                 AppSharedPreferences.LogOut(ActivityHome.this);
                 startActivity(new Intent(ActivityHome.this, ActivityLogin.class));

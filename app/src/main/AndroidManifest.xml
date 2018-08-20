@@ -36,7 +36,10 @@
             android:name=".ActivityKomplain"
             android:label="@string/title_activity_komplain"
             android:theme="@style/AppThemeActionBar.NoActionBar" />
-        <activity android:name=".ActivityKomplain2"></activity>
+        <activity android:name=".ActivityKomplain2" />
+        <activity android:name=".ActivityOrderTcash1" />
+        <activity android:name=".ActivityOrderTcash2" />
+        <activity android:name=".ActivityOrderTcash3"></activity>
     </application>
 
 </manifest>
