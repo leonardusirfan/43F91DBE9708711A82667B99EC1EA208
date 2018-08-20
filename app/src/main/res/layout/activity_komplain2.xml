@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Nomor BA"
+        android:text="Komplain"
         android:textSize="@dimen/text16"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,15 +51,15 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:padding="@dimen/padding5"
-        android:textAllCaps="true"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_komplain"
         app:layout_constraintDimensionRatio="3:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_komplain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding40"
