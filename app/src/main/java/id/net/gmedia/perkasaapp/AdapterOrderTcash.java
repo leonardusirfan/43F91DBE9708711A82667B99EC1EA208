@@ -21,7 +21,7 @@ public class AdapterOrderTcash extends RecyclerView.Adapter<AdapterOrderTcash.Tc
     @NonNull
     @Override
     public AdapterOrderTcash.TcashViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_oder_mkios, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_mkios, parent, false);
         return new AdapterOrderTcash.TcashViewHolder(itemView);
     }
 

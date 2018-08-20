@@ -21,6 +21,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:text="Posisi anda dengan outlet adalah :"
+            android:textSize="@dimen/text14"
             app:layout_constraintBottom_toTopOf="@+id/btn_peta"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_keterangan" />
@@ -31,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:textSize="@dimen/text14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView18"
             app:layout_constraintTop_toBottomOf="@+id/txt_keterangan" />
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Keterangan"
+            android:textSize="@dimen/text14"
             app:layout_constraintBottom_toTopOf="@+id/txt_keterangan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -48,7 +51,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
@@ -66,6 +69,7 @@
                 android:layout_weight="1"
                 android:text="Total"
                 android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text14"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,13 +80,14 @@
                 android:gravity="end"
                 android:text="Rp 0, 00"
                 android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text14"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:id="@+id/layout_bulk"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -92,7 +97,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -112,7 +117,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -127,23 +132,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="BULK"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_bulk"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
-                            android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:maxLength="7"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -156,19 +163,21 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_bulk"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -177,7 +186,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s100"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_bulk"
@@ -187,7 +196,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -207,7 +216,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -222,23 +231,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S100"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s100"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -251,20 +262,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 97, 100"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s100"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -273,7 +286,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s50"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_s100"
@@ -283,7 +296,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -303,12 +316,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:weightSum="1">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -319,23 +332,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S50"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s50"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -348,20 +363,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 49, 000"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s50"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -370,7 +387,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s25"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_s50"
@@ -380,7 +397,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -400,7 +417,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -415,23 +432,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S25"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s25"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -444,20 +463,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 25,100"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s25"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -471,7 +492,7 @@
             android:text="TOKO YUNMA JAYA CELL"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="@dimen/text16"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="parent"
@@ -483,6 +504,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Pulsa"
+            android:textSize="@dimen/text14"
             app:layout_constraintBottom_toTopOf="@+id/layout_s5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
@@ -493,6 +515,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Nama Reseller"
+            android:textSize="@dimen/text14"
             app:layout_constraintBottom_toTopOf="@+id/txt_nama"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -500,7 +523,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s20"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_s25"
@@ -510,7 +533,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -530,7 +553,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -545,23 +568,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S20"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s20"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -574,20 +599,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 20,050"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s20"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -596,7 +623,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s10"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_s20"
@@ -606,7 +633,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -626,7 +653,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -641,23 +668,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S10"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s10"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -670,20 +699,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 10, 600"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s10"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="Rp 0, 00" />
+                            android:text="Rp 0, 00"
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -692,7 +723,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_s5"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_s10"
@@ -702,7 +733,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -722,7 +753,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:background="@drawable/style_edit_text"
                     android:orientation="horizontal"
@@ -737,23 +768,25 @@
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="S5"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/txt_jumlah_s5"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/white"
+                            android:background="@drawable/style_edit_text_border"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/text14" />
 
                     </LinearLayout>
 
@@ -766,21 +799,22 @@
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 5,600"
                             android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text14"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_total_s5"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="Rp 0, 00"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/text14" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -790,10 +824,12 @@
             android:id="@+id/txt_keterangan"
             android:layout_width="0dp"
             android:layout_height="76dp"
+            android:layout_marginTop="@dimen/padding10"
             android:background="@drawable/style_edit_text_border"
             android:ems="10"
             android:inputType="textMultiLine"
             android:padding="@dimen/padding5"
+            android:textSize="@dimen/text14"
             app:layout_constraintBottom_toTopOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -802,13 +838,13 @@
         <Button
             android:id="@+id/btn_proses"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
             android:background="@color/colorAccent"
             android:text="Proses"
             android:textColor="#fff"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_peta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_peta"
@@ -818,11 +854,13 @@
             android:id="@+id/btn_peta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/padding20"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            android:layout_marginTop="@dimen/padding10"
             android:background="#cacaca"
-            android:textColor="#000"
             android:text="Peta Outlet"
+            android:textColor="#000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_proses"
             app:layout_constraintHorizontal_bias="0.5"

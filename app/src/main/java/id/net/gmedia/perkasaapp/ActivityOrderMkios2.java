@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class ActivityOrderMkios2 extends AppCompatActivity {
 
-    private int total5 = 0, total10 = 0, total20 = 0, total25 = 0, total50 = 0, total100 = 0;
+    private int total5 = 0, total10 = 0, total20 = 0, total25 = 0, total50 = 0, total100 = 0, totalbulk = 0;
     private TextView txt_total;
 
     @Override
@@ -169,6 +169,28 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
             }
         });
 
+        txt_jumlah_bulk.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().equals("")){
+                    totalbulk = Integer.parseInt(s.toString());
+                    txt_total_bulk.setText(RupiahFormatterUtil.getRupiah(totalbulk));
+                    updateTotal();
+                }
+                else{
+                    totalbulk = 0;
+                    txt_total_bulk.setText(R.string.rupiah_0);
+                    updateTotal();
+                }
+            }
+        });
+
+
         if(getIntent().hasExtra("mkios")){
             OutletModel mkios = getIntent().getParcelableExtra("mkios");
             txt_nama.setText(mkios.getNama());
@@ -176,7 +198,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
     }
 
     private void updateTotal(){
-        txt_total.setText(RupiahFormatterUtil.getRupiah(total5 + total10 + total20 + total25 + total50 + total100));
+        txt_total.setText(RupiahFormatterUtil.getRupiah(total5 + total10 + total20 + total25 + total50 + total100 + totalbulk));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class AdapterOrderMkios extends RecyclerView.Adapter<AdapterOrderMkios.Mk
     @NonNull
     @Override
     public MkiosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_oder_mkios, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_mkios, parent, false);
         return new MkiosViewHolder(itemView);
     }
 
