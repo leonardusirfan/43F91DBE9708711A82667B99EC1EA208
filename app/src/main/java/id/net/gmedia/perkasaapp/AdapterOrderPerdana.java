@@ -12,22 +12,22 @@ import java.util.List;
 
 public class AdapterOrderPerdana extends RecyclerView.Adapter<AdapterOrderPerdana.PerdanaViewHolder> {
 
-    private List<OutletModel> perdanaList;
+    private List<ModelOutlet> perdanaList;
 
-    AdapterOrderPerdana(List<OutletModel> mkiosList){
+    AdapterOrderPerdana(List<ModelOutlet> mkiosList){
         this.perdanaList = mkiosList;
     }
 
     @NonNull
     @Override
     public PerdanaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_perdana, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_perdana1, parent, false);
         return new PerdanaViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PerdanaViewHolder holder, int position) {
-        final OutletModel perdana = perdanaList.get(position);
+        final ModelOutlet perdana = perdanaList.get(position);
         holder.txt_nama.setText(perdana.getNama());
         holder.txt_alamat.setText(perdana.getAlamat());
 

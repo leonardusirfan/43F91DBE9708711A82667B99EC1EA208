@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AdapterPiutang extends RecyclerView.Adapter<AdapterPiutang.PiutangViewHolder> {
 
-    private List<OutletModel> listOutlet;
+    private List<ModelOutlet> listOutlet;
 
-    AdapterPiutang(List<OutletModel> listOutlet){
+    AdapterPiutang(List<ModelOutlet> listOutlet){
         this.listOutlet = listOutlet;
     }
 
@@ -26,7 +26,7 @@ public class AdapterPiutang extends RecyclerView.Adapter<AdapterPiutang.PiutangV
 
     @Override
     public void onBindViewHolder(@NonNull PiutangViewHolder holder, int position) {
-        OutletModel outlet = listOutlet.get(position);
+        ModelOutlet outlet = listOutlet.get(position);
 
         holder.txt_nama.setText(outlet.getNama());
         holder.txt_alamat.setText(outlet.getAlamat());

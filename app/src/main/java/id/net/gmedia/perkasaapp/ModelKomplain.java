@@ -1,10 +1,10 @@
 package id.net.gmedia.perkasaapp;
 
-public class KomplainModel {
+public class ModelKomplain {
     private String nama;
     private String komplain;
 
-    KomplainModel(String nama, String komplain){
+    ModelKomplain(String nama, String komplain){
         this.nama = nama;
         this.komplain = komplain;
     }

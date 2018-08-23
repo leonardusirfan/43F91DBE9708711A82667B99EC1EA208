@@ -15,11 +15,11 @@ import java.util.List;
 
 public class AdapterStokPerdana extends RecyclerView.Adapter<AdapterStokPerdana.PerdanaViewHolder> {
 
-    private List<PerdanaModel> listPerdana;
-    private List<NotaModel> listNota;
+    private List<ModelPerdana> listPerdana;
+    private List<ModelNota> listNota;
     private Context context;
 
-    AdapterStokPerdana(Context context, List<PerdanaModel> listPerdana, List<NotaModel> listNota){
+    AdapterStokPerdana(Context context, List<ModelPerdana> listPerdana, List<ModelNota> listNota){
         this.context = context;
         this.listPerdana = listPerdana;
         this.listNota = listNota;
@@ -34,7 +34,7 @@ public class AdapterStokPerdana extends RecyclerView.Adapter<AdapterStokPerdana.
 
     @Override
     public void onBindViewHolder(@NonNull PerdanaViewHolder holder, int position) {
-        PerdanaModel perdana = listPerdana.get(position);
+        ModelPerdana perdana = listPerdana.get(position);
         holder.txt_nama.setText(perdana.getNama());
         holder.txt_sisa.setText(String.valueOf(perdana.getStok()));
 
@@ -48,8 +48,8 @@ public class AdapterStokPerdana extends RecyclerView.Adapter<AdapterStokPerdana.
         holder.rcy_nota.setAdapter(adapter);
 
         //Recycler View inisialisasi transaksi yang terkait perdana
-        for(NotaModel n : listNota){
-            for(TransaksiModel t : n.getListTransaksi()){
+        for(ModelNota n : listNota){
+            for(ModelTransaksi t : n.getListTransaksi()){
                 if(t.getNama().equals(perdana.getNama())){
                     listNotaId.add(n.getId());
                     listTerjual.add(t.getJumlah());

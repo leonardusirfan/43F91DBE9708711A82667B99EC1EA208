@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityOrderPerdana1 extends AppCompatActivity {
 
-    private List<OutletModel> listPerdana = new ArrayList<>();
+    private List<ModelOutlet> listPerdana = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,34 +35,35 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
     }
 
     private void initPerdana() {
-        OutletModel perdana = new OutletModel("MUSA CELL", "jl. KH Hasan Munadi", "");
+        /*Tempat Inisialisasi Outlet*/
+        ModelOutlet perdana = new ModelOutlet("MUSA CELL", "jl. KH Hasan Munadi", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("NOWO CELL", "jambu kulon", "");
+        perdana = new ModelOutlet("NOWO CELL", "jambu kulon", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("WILDAN CELL", "jambu kulon", "");
+        perdana = new ModelOutlet("WILDAN CELL", "jambu kulon", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("REDBERRI CELL", "jl. duren", "");
+        perdana = new ModelOutlet("REDBERRI CELL", "jl. duren", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("DOI CELL", "lendoh", "");
+        perdana = new ModelOutlet("DOI CELL", "lendoh", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("P-TECK CELL", "Randugunting", "");
+        perdana = new ModelOutlet("P-TECK CELL", "Randugunting", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("FENS CARD CELL", "jln dokter cipto", "");
+        perdana = new ModelOutlet("FENS CARD CELL", "jln dokter cipto", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("PINK CELL", "pasar bedono", "");
+        perdana = new ModelOutlet("PINK CELL", "pasar bedono", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("WAFFA 2", "Komplek Padar Pringapus", "");
+        perdana = new ModelOutlet("WAFFA 2", "Komplek Padar Pringapus", "");
         listPerdana.add(perdana);
 
-        perdana = new OutletModel("354 CELL", "gedang anak", "");
+        perdana = new ModelOutlet("354 CELL", "gedang anak", "");
         listPerdana.add(perdana);
     }
 

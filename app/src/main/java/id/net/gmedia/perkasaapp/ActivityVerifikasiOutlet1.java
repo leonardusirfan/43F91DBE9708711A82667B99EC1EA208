@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityVerifikasiOutlet1 extends AppCompatActivity {
 
-    private List<OutletModel> listOutlet = new ArrayList<>();
+    private List<ModelOutlet> listOutlet = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +35,19 @@ public class ActivityVerifikasiOutlet1 extends AppCompatActivity {
     }
 
     private void initOutlet(){
-        OutletModel outlet = new OutletModel("MUSA CELL", "jl. KH Hasan Munadi", "81215297734", "81215297734", 0, 0);
+        ModelOutlet outlet = new ModelOutlet("MUSA CELL", "jl. KH Hasan Munadi", "81215297734", "81215297734", -7.0213463,110.4270008);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("NOWO CELL", "jambu kulon", "81215297748", "81215297748", 0, 0);
+        outlet = new ModelOutlet("NOWO CELL", "jambu kulon", "81215297748", "81215297748", -7.0213463,110.4270008);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("WILDAN CELL", "jambu kulon", "81215297751", "81215297751", 0, 0);
+        outlet = new ModelOutlet("WILDAN CELL", "jambu kulon", "81215297751", "81215297751", -7.0213463,110.4270008);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("REDBERRI CELL", "jl. duren", "81215297768", "81215297768", 0, 0);
+        outlet = new ModelOutlet("REDBERRI CELL", "jl. duren", "81215297768", "81215297768", -7.0213463,110.4270008);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("DOI CELL", "lendoh", "81215297781", "81215297781", 0, 0);
+        outlet = new ModelOutlet("DOI CELL", "lendoh", "81215297781", "81215297781", -7.0213463,110.4270008);
         listOutlet.add(outlet);
     }
 

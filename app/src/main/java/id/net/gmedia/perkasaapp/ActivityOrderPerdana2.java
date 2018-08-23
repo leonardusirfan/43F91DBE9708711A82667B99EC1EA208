@@ -2,10 +2,17 @@ package id.net.gmedia.perkasaapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivityOrderPerdana2 extends AppCompatActivity {
+
+    private List<ModelPerdana> listPerdana = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +25,26 @@ public class ActivityOrderPerdana2 extends AppCompatActivity {
         }
 
         TextView txt_nama = findViewById(R.id.txt_nama);
-        OutletModel perdana;
+        ModelOutlet perdana;
         if(getIntent().hasExtra("perdana")){
             perdana = getIntent().getParcelableExtra("perdana");
             txt_nama.setText(perdana.getNama());
         }
+
+        AdapterOrderPerdanaBarang adapter = new AdapterOrderPerdanaBarang(listPerdana);
+
+        RecyclerView rcy_barang = findViewById(R.id.rcy_barang);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rcy_barang.setLayoutManager(layoutManager);
+        rcy_barang.setAdapter(adapter);
+
+        initPerdana();
+    }
+
+    private void initPerdana(){
+        //Tempat inisialisasi Perdana
+        ModelPerdana perdana = new ModelPerdana("128k 4G LTE 2FF/3FF/4FF USIM MIGRATION (S100)", "SJ/MG/1806/0350", 3000, 1);
+        listPerdana.add(perdana);
     }
 
     @Override

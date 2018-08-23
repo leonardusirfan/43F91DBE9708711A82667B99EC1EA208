@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityOrderMkios1 extends AppCompatActivity {
 
-    private List<OutletModel> mkiosList = new ArrayList<>();
+    private List<ModelOutlet> mkiosList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,34 +35,36 @@ public class ActivityOrderMkios1 extends AppCompatActivity {
     }
 
     private void initMkios(){
-        OutletModel mkios = new OutletModel("MUSA CELL", "", "081215297734");
+
+        /*Tempat Inisialisasi Mkios Outlet*/
+        ModelOutlet mkios = new ModelOutlet("MUSA CELL", "", "081215297734");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("NOWO CELL","", "081215297748");
+        mkios = new ModelOutlet("NOWO CELL","", "081215297748");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("WILDAN CELL","", "081215297751");
+        mkios = new ModelOutlet("WILDAN CELL","", "081215297751");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("REDBERRI CELL","", "081215297768");
+        mkios = new ModelOutlet("REDBERRI CELL","", "081215297768");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("DOI CELL","", "081215297781");
+        mkios = new ModelOutlet("DOI CELL","", "081215297781");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("P-TECK CELL","", "081215297797");
+        mkios = new ModelOutlet("P-TECK CELL","", "081215297797");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("FENS CARD CELL","", "081215365096");
+        mkios = new ModelOutlet("FENS CARD CELL","", "081215365096");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("PINK CELL","", "081215370119");
+        mkios = new ModelOutlet("PINK CELL","", "081215370119");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("WAFFA 2","", "");
+        mkios = new ModelOutlet("WAFFA 2","", "");
         mkiosList.add(mkios);
 
-        mkios = new OutletModel("354 CELL","", "081215604903");
+        mkios = new ModelOutlet("354 CELL","", "081215604903");
         mkiosList.add(mkios);
     }
 

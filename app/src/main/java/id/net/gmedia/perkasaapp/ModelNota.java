@@ -3,16 +3,16 @@ package id.net.gmedia.perkasaapp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotaModel {
+public class ModelNota {
     private String id;
-    private List<TransaksiModel> listTransaksi = new ArrayList<>();
+    private List<ModelTransaksi> listTransaksi = new ArrayList<>();
 
-    public NotaModel(String id, List<TransaksiModel> listTransaksi){
+    public ModelNota(String id, List<ModelTransaksi> listTransaksi){
         this.id = id;
         this.listTransaksi = listTransaksi;
     }
 
-    NotaModel(String id){
+    ModelNota(String id){
         this.id = id;
     }
 
@@ -20,15 +20,15 @@ public class NotaModel {
         return id;
     }
 
-    public void addTransaksi(TransaksiModel transaksi){
+    public void addTransaksi(ModelTransaksi transaksi){
         listTransaksi.add(transaksi);
     }
 
-    public List<TransaksiModel> getListTransaksi() {
+    public List<ModelTransaksi> getListTransaksi() {
         return listTransaksi;
     }
 
-    public TransaksiModel getTransaksi(int i){
+    public ModelTransaksi getTransaksi(int i){
         return listTransaksi.get(i);
     }
 }

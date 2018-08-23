@@ -173,7 +173,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:background="@drawable/style_edit_text_border"
+            android:background="@drawable/style_box_bordered_rounded"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/btn_kalender_start"
             app:layout_constraintEnd_toEndOf="parent"

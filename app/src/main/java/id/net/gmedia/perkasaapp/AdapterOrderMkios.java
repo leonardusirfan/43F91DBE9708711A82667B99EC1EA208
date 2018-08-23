@@ -12,9 +12,9 @@ import java.util.List;
 
 public class AdapterOrderMkios extends RecyclerView.Adapter<AdapterOrderMkios.MkiosViewHolder> {
 
-    private List<OutletModel> mkiosList;
+    private List<ModelOutlet> mkiosList;
 
-    AdapterOrderMkios(List<OutletModel> mkiosList){
+    AdapterOrderMkios(List<ModelOutlet> mkiosList){
         this.mkiosList = mkiosList;
     }
 
@@ -27,7 +27,7 @@ public class AdapterOrderMkios extends RecyclerView.Adapter<AdapterOrderMkios.Mk
 
     @Override
     public void onBindViewHolder(@NonNull MkiosViewHolder holder, int position) {
-        final OutletModel mkios = mkiosList.get(position);
+        final ModelOutlet mkios = mkiosList.get(position);
         holder.txt_nama.setText(mkios.getNama());
         holder.txt_no_reseller.setText(mkios.getNomor());
         holder.txt_tgl_order.setText("");

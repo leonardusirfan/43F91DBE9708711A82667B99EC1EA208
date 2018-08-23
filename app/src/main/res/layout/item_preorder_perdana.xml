@@ -15,7 +15,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_red">
+            android:background="@drawable/style_box_bordered_red">
 
             <LinearLayout
                 android:id="@+id/linearLayout4"

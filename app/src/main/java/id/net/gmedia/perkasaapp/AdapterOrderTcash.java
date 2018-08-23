@@ -12,9 +12,9 @@ import java.util.List;
 
 public class AdapterOrderTcash extends RecyclerView.Adapter<AdapterOrderTcash.TcashViewHolder> {
 
-    private List<OutletModel> outletList;
+    private List<ModelOutlet> outletList;
 
-    AdapterOrderTcash(List<OutletModel> outletList){
+    AdapterOrderTcash(List<ModelOutlet> outletList){
         this.outletList = outletList;
     }
 
@@ -27,7 +27,7 @@ public class AdapterOrderTcash extends RecyclerView.Adapter<AdapterOrderTcash.Tc
 
     @Override
     public void onBindViewHolder(@NonNull AdapterOrderTcash.TcashViewHolder holder, int position) {
-        final OutletModel tcash = outletList.get(position);
+        final ModelOutlet tcash = outletList.get(position);
         holder.txt_nama.setText(tcash.getNama());
         holder.txt_no_reseller.setText(tcash.getNomor());
         holder.txt_tgl_order.setText("");

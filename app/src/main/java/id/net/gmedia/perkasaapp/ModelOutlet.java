@@ -3,7 +3,7 @@ package id.net.gmedia.perkasaapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class OutletModel implements Parcelable {
+public class ModelOutlet implements Parcelable {
     private String nama;
     private String alamat;
     private String nomorTelepon;
@@ -12,7 +12,7 @@ public class OutletModel implements Parcelable {
     private double longitude;
     private int piutang;
 
-    OutletModel(String nama, String alamat, String nomor){
+    ModelOutlet(String nama, String alamat, String nomor){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomor;
@@ -21,7 +21,7 @@ public class OutletModel implements Parcelable {
         longitude = 0;
     }
 
-    OutletModel(String nama, String alamat, String nomor, double latitude, double longitude){
+    ModelOutlet(String nama, String alamat, String nomor, double latitude, double longitude){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomor;
@@ -29,7 +29,7 @@ public class OutletModel implements Parcelable {
         this.longitude = longitude;
     }
 
-    OutletModel(String nama, String alamat, String nomorTelepon, String nomorHp, double latitude, double longitude){
+    ModelOutlet(String nama, String alamat, String nomorTelepon, String nomorHp, double latitude, double longitude){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomorTelepon;
@@ -73,25 +73,25 @@ public class OutletModel implements Parcelable {
     //PARCELABLE
 
     //konstruktor Parceable
-    private OutletModel(Parcel in){
+    private ModelOutlet(Parcel in){
         this.nama = in.readString();
+        this.alamat = in.readString();
         this.nomorTelepon = in.readString();
         this.nomorHp = in.readString();
-        this.alamat = in.readString();
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
     }
 
     //kelas Creator Parcelable
-    public static final Parcelable.Creator<OutletModel> CREATOR = new Parcelable.Creator<OutletModel>(){
+    public static final Parcelable.Creator<ModelOutlet> CREATOR = new Parcelable.Creator<ModelOutlet>(){
         @Override
-        public OutletModel createFromParcel(Parcel source) {
-            return new OutletModel(source);
+        public ModelOutlet createFromParcel(Parcel source) {
+            return new ModelOutlet(source);
         }
 
         @Override
-        public OutletModel[] newArray(int size) {
-            return new OutletModel[size];
+        public ModelOutlet[] newArray(int size) {
+            return new ModelOutlet[size];
         }
     };
 

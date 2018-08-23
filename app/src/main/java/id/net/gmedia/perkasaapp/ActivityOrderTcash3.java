@@ -34,7 +34,7 @@ public class ActivityOrderTcash3 extends AppCompatActivity {
         txt_harga.setText(R.string.rupiah_0);
         txt_jarak.setText("0 Km");
         if(getIntent().hasExtra("tcash")){
-            OutletModel tcash = getIntent().getParcelableExtra("tcash");
+            ModelOutlet tcash = getIntent().getParcelableExtra("tcash");
             txt_nama.setText(tcash.getNama());
         }
 

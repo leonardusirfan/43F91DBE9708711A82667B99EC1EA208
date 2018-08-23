@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityPiutang extends AppCompatActivity {
 
-    private List<OutletModel> listOutlet = new ArrayList<>();
+    private List<ModelOutlet> listOutlet = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,15 @@ public class ActivityPiutang extends AppCompatActivity {
     }
 
     private void initPiutang(){
-        OutletModel outlet = new OutletModel("MUSA CELL", "jl. KH Hasan Munadi", "");
+        ModelOutlet outlet = new ModelOutlet("MUSA CELL", "jl. KH Hasan Munadi", "");
         outlet.setPiutang(5000000);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("NOWO CELL", "jambu kulon", "");
+        outlet = new ModelOutlet("NOWO CELL", "jambu kulon", "");
         outlet.setPiutang(1200000);
         listOutlet.add(outlet);
 
-        outlet = new OutletModel("354 CELL", "gedang anak", "");
+        outlet = new ModelOutlet("354 CELL", "gedang anak", "");
         outlet.setPiutang(700000);
         listOutlet.add(outlet);
     }

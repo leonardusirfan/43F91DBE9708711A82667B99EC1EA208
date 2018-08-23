@@ -27,6 +27,11 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
         final TextView txt_jumlah_s5,txt_jumlah_s10, txt_jumlah_s20, txt_jumlah_s25, txt_jumlah_s50, txt_jumlah_s100, txt_jumlah_bulk;
         final TextView txt_total_s5,txt_total_s10, txt_total_s20, txt_total_s25, txt_total_s50, txt_total_s100, txt_total_bulk;
 
+        if(getIntent().hasExtra("mkios")){
+            ModelOutlet mkios = getIntent().getParcelableExtra("mkios");
+            txt_nama.setText(mkios.getNama());
+        }
+
         txt_jumlah_s5 = findViewById(R.id.txt_jumlah_s5);
         txt_jumlah_s10 = findViewById(R.id.txt_jumlah_s10);
         txt_jumlah_s20 = findViewById(R.id.txt_jumlah_s20);
@@ -189,12 +194,6 @@ public class ActivityOrderMkios2 extends AppCompatActivity {
                 }
             }
         });
-
-
-        if(getIntent().hasExtra("mkios")){
-            OutletModel mkios = getIntent().getParcelableExtra("mkios");
-            txt_nama.setText(mkios.getNama());
-        }
     }
 
     private void updateTotal(){

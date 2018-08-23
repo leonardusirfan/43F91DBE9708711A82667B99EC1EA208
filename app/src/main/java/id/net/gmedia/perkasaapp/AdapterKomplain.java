@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AdapterKomplain extends RecyclerView.Adapter<AdapterKomplain.KomplainViewHolder> {
 
-    private List<KomplainModel> listKomplain;
+    private List<ModelKomplain> listKomplain;
 
-    public AdapterKomplain(List<KomplainModel> listKomplain){
+    public AdapterKomplain(List<ModelKomplain> listKomplain){
         this.listKomplain = listKomplain;
     }
 
@@ -26,7 +26,7 @@ public class AdapterKomplain extends RecyclerView.Adapter<AdapterKomplain.Kompla
 
     @Override
     public void onBindViewHolder(@NonNull KomplainViewHolder holder, int position) {
-        KomplainModel komplain = listKomplain.get(position);
+        ModelKomplain komplain = listKomplain.get(position);
 
         holder.txt_nama.setText(komplain.getNama());
         holder.txt_komplain.setText(komplain.getKomplain());

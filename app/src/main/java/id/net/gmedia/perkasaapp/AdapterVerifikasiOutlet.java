@@ -12,9 +12,9 @@ import java.util.List;
 
 public class AdapterVerifikasiOutlet extends RecyclerView.Adapter<AdapterVerifikasiOutlet.VerifikasiOutletViewHolder> {
 
-    private List<OutletModel> outletList;
+    private List<ModelOutlet> outletList;
 
-    AdapterVerifikasiOutlet(List<OutletModel> outletList){
+    AdapterVerifikasiOutlet(List<ModelOutlet> outletList){
         this.outletList = outletList;
     }
 
@@ -27,7 +27,7 @@ public class AdapterVerifikasiOutlet extends RecyclerView.Adapter<AdapterVerifik
 
     @Override
     public void onBindViewHolder(@NonNull VerifikasiOutletViewHolder holder, int position) {
-        final OutletModel outlet = outletList.get(position);
+        final ModelOutlet outlet = outletList.get(position);
 
         holder.txt_nama.setText(outlet.getNama());
         holder.txt_alamat.setText(outlet.getAlamat());

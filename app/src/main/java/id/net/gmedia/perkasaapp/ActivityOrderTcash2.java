@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityOrderTcash2 extends AppCompatActivity {
 
-    private List<OutletModel> outletList = new ArrayList<>();
+    private List<ModelOutlet> outletList = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,34 +36,34 @@ public class ActivityOrderTcash2 extends AppCompatActivity {
     }
     
     private void initOutlet(){
-        OutletModel tcash = new OutletModel("MUSA CELL", "", "081215297734");
+        ModelOutlet tcash = new ModelOutlet("MUSA CELL", "", "081215297734");
         outletList.add(tcash);
 
-        tcash = new OutletModel("NOWO CELL","", "081215297748");
+        tcash = new ModelOutlet("NOWO CELL","", "081215297748");
         outletList.add(tcash);
 
-        tcash = new OutletModel("WILDAN CELL","", "081215297751");
+        tcash = new ModelOutlet("WILDAN CELL","", "081215297751");
         outletList.add(tcash);
 
-        tcash = new OutletModel("REDBERRI CELL","", "081215297768");
+        tcash = new ModelOutlet("REDBERRI CELL","", "081215297768");
         outletList.add(tcash);
 
-        tcash = new OutletModel("DOI CELL","", "081215297781");
+        tcash = new ModelOutlet("DOI CELL","", "081215297781");
         outletList.add(tcash);
 
-        tcash = new OutletModel("P-TECK CELL","", "081215297797");
+        tcash = new ModelOutlet("P-TECK CELL","", "081215297797");
         outletList.add(tcash);
 
-        tcash = new OutletModel("FENS CARD CELL","", "081215365096");
+        tcash = new ModelOutlet("FENS CARD CELL","", "081215365096");
         outletList.add(tcash);
 
-        tcash = new OutletModel("PINK CELL","", "081215370119");
+        tcash = new ModelOutlet("PINK CELL","", "081215370119");
         outletList.add(tcash);
 
-        tcash = new OutletModel("WAFFA 2","", "");
+        tcash = new ModelOutlet("WAFFA 2","", "");
         outletList.add(tcash);
 
-        tcash = new OutletModel("354 CELL","", "081215604903");
+        tcash = new ModelOutlet("354 CELL","", "081215604903");
         outletList.add(tcash);
     }
 

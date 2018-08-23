@@ -80,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/padding20"
-                android:layout_marginTop="@dimen/padding10"
+                android:layout_marginTop="@dimen/padding5"
                 android:text="TextView"
                 android:textSize="@dimen/text12"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,8 +97,8 @@
                 android:text="TextView"
                 android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toTopOf="@+id/txt_lokasi"
-                app:layout_constraintEnd_toEndOf="@+id/txt_alamat"
-                app:layout_constraintStart_toStartOf="@+id/txt_alamat"
+                app:layout_constraintEnd_toEndOf="@+id/txt_nama"
+                app:layout_constraintStart_toStartOf="@+id/txt_nama"
                 app:layout_constraintTop_toBottomOf="@+id/txt_alamat" />
 
             <TextView
@@ -121,7 +121,6 @@
                 android:text="TextView"
                 android:textSize="@dimen/text18"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txt_alamat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="0.8"

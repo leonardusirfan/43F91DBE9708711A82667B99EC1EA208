@@ -1,10 +1,10 @@
 package id.net.gmedia.perkasaapp;
 
-public class TransaksiModel {
+public class ModelTransaksi {
     private String nama;
     private int jumlah;
 
-    TransaksiModel(String nama, int jumlah){
+    ModelTransaksi(String nama, int jumlah){
         this.nama = nama;
         this.jumlah = jumlah;
     }

@@ -28,6 +28,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">#fff</item>
+    </style>
+
+    <style name="PopupTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="AppThemeActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppThemeActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

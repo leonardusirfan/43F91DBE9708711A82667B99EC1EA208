@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         android:focusableInTouchMode="true"
-        android:layout_height="wrap_content"
         tools:context=".ActivityOrderMkios2">
 
         <TextView
@@ -119,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -144,7 +142,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -218,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -243,7 +241,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -318,7 +316,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp"
                     android:weightSum="1">
@@ -344,7 +342,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -419,7 +417,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -444,7 +442,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -555,7 +553,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -580,7 +578,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -655,7 +653,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -680,7 +678,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -755,7 +753,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:background="@drawable/style_edit_text"
+                    android:background="@drawable/style_box_rounded"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
@@ -780,7 +778,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/style_edit_text_border"
+                            android:background="@drawable/style_box_bordered_rounded"
                             android:ems="10"
                             android:hint="Jumlah"
                             android:inputType="number"
@@ -825,7 +823,7 @@
             android:layout_width="0dp"
             android:layout_height="76dp"
             android:layout_marginTop="@dimen/padding10"
-            android:background="@drawable/style_edit_text_border"
+            android:background="@drawable/style_box_bordered_rounded"
             android:ems="10"
             android:inputType="textMultiLine"
             android:padding="@dimen/padding5"

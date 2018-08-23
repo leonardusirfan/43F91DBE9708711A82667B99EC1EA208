@@ -77,7 +77,7 @@
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/style_edit_text_border"
+            android:background="@drawable/style_box_bordered_rounded"
             android:gravity="center"
             android:hint="Nama Outlet" />
 
