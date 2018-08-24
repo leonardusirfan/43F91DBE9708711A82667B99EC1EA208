@@ -133,10 +133,10 @@
                 android:clickable="false"
                 android:orientation="vertical"
                 app:layout_constraintDimensionRatio="h,1:1"
-                app:layout_constraintEnd_toEndOf="@+id/btn_kustomer"
+                app:layout_constraintEnd_toEndOf="@+id/btn_customer"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/btn_kustomer"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kustomer">
+                app:layout_constraintStart_toStartOf="@+id/btn_customer"
+                app:layout_constraintTop_toBottomOf="@+id/btn_customer">
 
                 <ImageView
                     android:id="@+id/imageView14"
@@ -289,7 +289,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btn_kustomer"
+                android:id="@+id/btn_customer"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

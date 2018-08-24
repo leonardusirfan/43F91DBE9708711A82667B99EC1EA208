@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -51,6 +52,14 @@ public class ActivityLokasiOutlet2 extends AppCompatActivity implements OnMapRea
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        final ScrollView layout_scroll = findViewById(R.id.layout_scroll);
+        ((CustomMapView) getSupportFragmentManager().findFragmentById(R.id.map)).setListener(new CustomMapView.OnTouchListener() {
+            @Override
+            public void onTouch() {
+                layout_scroll.requestDisallowInterceptTouchEvent(true);
+            }
+        });
+
         LatLng roominc = new LatLng(outlet.getLatitude(),outlet.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(roominc).title("Posisi Outlet"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(roominc));

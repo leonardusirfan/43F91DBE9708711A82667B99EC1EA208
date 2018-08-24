@@ -9,7 +9,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hari_ini);
+        setContentView(R.layout.activity_penjualan_hari_ini);
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -19,6 +19,7 @@
         android:theme="@style/AppThemeActionBar">
         <activity
             android:name=".ActivitySplashScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,28 +29,59 @@
         </activity>
         <activity
             android:name=".ActivityLogin"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ActivityHome"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ActivityOrderPerdana1" />
-        <activity android:name=".ActivityOrderMkios1" />
-        <activity android:name=".ActivityPenjualanHariIni" />
-        <activity android:name=".ActivityOrderMkios2" />
-        <activity android:name=".ActivityOrderPerdana2" />
-        <activity android:name=".ActivityStokPerdana" />
-        <activity android:name=".ActivityPiutang" />
         <activity
-            android:name=".ActivityKomplain"
+            android:name=".ActivityOrderPerdana1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityOrderMkios1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityPenjualanHariIni"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ActivityOrderMkios2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityOrderPerdana2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityStokPerdana"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityPiutang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityKomplain1"
             android:label="@string/title_activity_komplain"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ActivityKomplain2" />
-        <activity android:name=".ActivityOrderTcash1" />
-        <activity android:name=".ActivityOrderTcash2" />
-        <activity android:name=".ActivityOrderTcash3" />
-        <activity android:name=".ActivityVerifikasiOutlet1" />
-        <activity android:name=".ActivityVerifikasiOutlet2" />
+        <activity
+            android:name=".ActivityKomplain2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityOrderTcash1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ActivityOrderTcash2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityOrderTcash3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVerifikasiOutlet1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVerifikasiOutlet2"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -63,16 +95,36 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ActivityLokasiOutlet"
+            android:name=".ActivityLokasiOutlet1"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeActionBar.NoActionBar" />
         <activity
             android:name=".ActivityOrderPerdana3"
-            android:hardwareAccelerated="true" />
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name=".ActivityLokasiOutlet2"></activity>
+        <activity
+            android:name=".ActivityLokasiOutlet2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityRiwayatPenjualan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ActivityTambahCustomer1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityTambahCustomer2"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActivityPreorderPerdana1" />
+        <activity android:name=".ActivityPreorderPerdana2" />
+        <activity android:name=".ActivityKunjungan" />
+        <activity android:name=".ActivityKunjunganOutlet" />
+        <activity android:name=".ActivityKunjunganSales" />
+        <activity android:name=".ActivityPreorderPerdana3"></activity>
     </application>
 
 </manifest>

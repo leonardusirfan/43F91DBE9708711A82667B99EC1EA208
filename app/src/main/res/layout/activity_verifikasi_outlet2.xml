@@ -333,7 +333,7 @@
             android:layout_marginTop="@dimen/padding10"
             android:background="@color/colorAccent"
             android:padding="@dimen/padding5"
-            android:text="Simpan Data Kustomer"
+            android:text="Simpan Data Customer"
             android:textColor="#fff"
             android:textSize="@dimen/text14"
             app:layout_constraintBottom_toBottomOf="parent"

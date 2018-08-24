@@ -43,7 +43,7 @@ public class ActivityOrderPerdana2 extends AppCompatActivity {
 
     private void initPerdana(){
         //Tempat inisialisasi Perdana
-        ModelPerdana perdana = new ModelPerdana("128k 4G LTE 2FF/3FF/4FF USIM MIGRATION (S100)", "SJ/MG/1806/0350", 3000, 1);
+        ModelPerdana perdana = new ModelPerdana("128k 4G LTE 2FF/3FF/4FF USIM MIGRATION (S100)", "SJ/MG/1806/0350", 3000, 1520);
         listPerdana.add(perdana);
     }
 
