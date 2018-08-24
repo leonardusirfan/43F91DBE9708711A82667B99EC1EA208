@@ -315,7 +315,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center_horizontal"
-                    android:text="Tambah Kustomer"
+                    android:text="Tambah Customer"
                     android:textColor="#000"
                     android:textSize="@dimen/text10" />
             </LinearLayout>

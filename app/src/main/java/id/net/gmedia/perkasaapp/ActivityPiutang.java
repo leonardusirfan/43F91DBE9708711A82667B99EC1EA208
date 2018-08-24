@@ -47,6 +47,10 @@ public class ActivityPiutang extends AppCompatActivity {
         outlet = new ModelOutlet("354 CELL", "gedang anak", "");
         outlet.setPiutang(700000);
         listOutlet.add(outlet);
+
+        outlet = new ModelOutlet("354 CELL", "gedang anak", "");
+        outlet.setPiutang(700000);
+        listOutlet.add(outlet);
     }
 
     @Override

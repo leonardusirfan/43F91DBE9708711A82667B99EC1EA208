@@ -10,6 +10,7 @@
     <dimen name="padding10">10dp</dimen>
     <dimen name="padding20">20dp</dimen>
     <dimen name="padding40">40dp</dimen>
+    <dimen name="img_size_small">40dp</dimen>
     <dimen name="img_size">50dp</dimen>
     <dimen name="popup_width">400dp</dimen>
     <dimen name="popup_height">600dp</dimen>

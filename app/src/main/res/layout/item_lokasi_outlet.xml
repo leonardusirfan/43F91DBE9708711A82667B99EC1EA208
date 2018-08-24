@@ -10,11 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding10"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding10"
+            android:paddingRight="@dimen/padding10">
 
             <LinearLayout
                 android:id="@+id/linearLayout8"
@@ -63,12 +66,15 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView48"
+                android:id="@+id/btn_lokasi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center"
                 android:text="Edit Posisi"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text12"
+                android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_lokasi"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="0.3"
@@ -82,9 +88,9 @@
                 android:layout_marginBottom="@dimen/padding20"
                 android:layout_marginTop="@dimen/padding5"
                 android:text="TextView"
-                android:textSize="@dimen/text12"
+                android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView48"
+                app:layout_constraintEnd_toStartOf="@+id/btn_lokasi"
                 app:layout_constraintHorizontal_weight="0.7"
                 app:layout_constraintStart_toStartOf="@+id/txt_kontak"
                 app:layout_constraintTop_toBottomOf="@+id/txt_kontak" />

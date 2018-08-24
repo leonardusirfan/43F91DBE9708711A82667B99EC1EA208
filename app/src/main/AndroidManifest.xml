@@ -43,7 +43,7 @@
         <activity
             android:name=".ActivityKomplain"
             android:label="@string/title_activity_komplain"
-            android:theme="@style/AppThemeActionBar.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity android:name=".ActivityKomplain2" />
         <activity android:name=".ActivityOrderTcash1" />
         <activity android:name=".ActivityOrderTcash2" />
@@ -62,12 +62,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ActivityLokasiOutlet" />
-        <activity android:name=".ActivityOrderPerdana3" android:hardwareAccelerated="true"/>
+        <activity
+            android:name=".ActivityLokasiOutlet"
+            android:theme="@style/AppThemeActionBar.NoActionBar" />
+        <activity
+            android:name=".ActivityOrderPerdana3"
+            android:hardwareAccelerated="true" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+        <activity android:name=".ActivityLokasiOutlet2"></activity>
     </application>
 
 </manifest>
