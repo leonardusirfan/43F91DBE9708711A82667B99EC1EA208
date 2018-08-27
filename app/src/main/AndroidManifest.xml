@@ -121,9 +121,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ActivityPreorderPerdana1" />
         <activity android:name=".ActivityPreorderPerdana2" />
-        <activity android:name=".ActivityKunjungan" />
-        <activity android:name=".ActivityKunjunganOutlet" />
-        <activity android:name=".ActivityKunjunganSales" />
+        <activity android:name=".ActKunjungan.ActivityKunjungan" />
+        <activity android:name=".ActKunjungan.ActivityKunjunganOutlet" />
+        <activity android:name=".ActKunjungan.ActivityKunjunganSales" />
         <activity android:name=".ActivityPreorderPerdana3"></activity>
     </application>
 

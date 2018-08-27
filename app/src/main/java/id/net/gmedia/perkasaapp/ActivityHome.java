@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
+
 public class ActivityHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

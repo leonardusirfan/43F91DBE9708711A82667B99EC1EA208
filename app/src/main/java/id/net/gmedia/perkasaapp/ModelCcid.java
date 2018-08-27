@@ -5,7 +5,7 @@ public class ModelCcid {
     private String nama;
     private int harga;
 
-    ModelCcid(String ccid, String nama, int harga){
+    public ModelCcid(String ccid, String nama, int harga){
         this.ccid = ccid;
         this.nama = nama;
         this.harga = harga;

@@ -12,7 +12,7 @@ public class ModelOutlet implements Parcelable {
     private double longitude;
     private int piutang;
 
-    ModelOutlet(String nama, String alamat, String nomor){
+    public ModelOutlet(String nama, String alamat, String nomor){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomor;
@@ -21,7 +21,7 @@ public class ModelOutlet implements Parcelable {
         longitude = 0;
     }
 
-    ModelOutlet(String nama, String alamat, String nomor, double latitude, double longitude){
+    public ModelOutlet(String nama, String alamat, String nomor, double latitude, double longitude){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomor;
@@ -29,7 +29,7 @@ public class ModelOutlet implements Parcelable {
         this.longitude = longitude;
     }
 
-    ModelOutlet(String nama, String alamat, String nomorTelepon, String nomorHp, double latitude, double longitude){
+    public ModelOutlet(String nama, String alamat, String nomorTelepon, String nomorHp, double latitude, double longitude){
         this.nama = nama;
         this.alamat = alamat;
         this.nomorTelepon = nomorTelepon;

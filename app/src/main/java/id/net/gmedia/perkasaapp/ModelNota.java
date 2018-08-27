@@ -7,7 +7,7 @@ public class ModelNota {
     private String id;
     private List<ModelTransaksi> listTransaksi = new ArrayList<>();
 
-    ModelNota(String id){
+    public ModelNota(String id){
         this.id = id;
     }
 

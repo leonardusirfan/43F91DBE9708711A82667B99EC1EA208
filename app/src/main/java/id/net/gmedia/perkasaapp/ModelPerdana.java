@@ -9,20 +9,20 @@ public class ModelPerdana implements Parcelable{
     private int harga;
     private int stok;
 
-    ModelPerdana(String nama, String surat_jalan, int harga, int stok){
+    public ModelPerdana(String nama, String surat_jalan, int harga, int stok){
         this.nama = nama;
         this.surat_jalan = surat_jalan;
         this.stok = stok;
         this.harga = harga;
     }
 
-    ModelPerdana(String nama, int harga, int stok){
+    public ModelPerdana(String nama, int harga, int stok){
         this.nama = nama;
         this.stok = stok;
         this.harga = harga;
     }
 
-    ModelPerdana(String nama, int stok){
+    public ModelPerdana(String nama, int stok){
         this.nama = nama;
         this.stok = stok;
         this.harga = 0;

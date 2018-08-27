@@ -4,7 +4,7 @@ public class ModelSales {
     private String nama;
     private int jumlah;
 
-    ModelSales(String nama, int jumlah){
+    public ModelSales(String nama, int jumlah){
         this.nama = nama;
         this.jumlah = jumlah;
     }

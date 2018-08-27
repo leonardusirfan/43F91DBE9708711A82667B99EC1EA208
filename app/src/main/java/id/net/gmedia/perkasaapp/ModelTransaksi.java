@@ -4,7 +4,7 @@ public class ModelTransaksi {
     private String nama;
     private int jumlah;
 
-    ModelTransaksi(String nama, int jumlah){
+    public ModelTransaksi(String nama, int jumlah){
         this.nama = nama;
         this.jumlah = jumlah;
     }
