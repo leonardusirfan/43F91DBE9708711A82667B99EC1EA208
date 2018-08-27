@@ -3,6 +3,7 @@ package id.net.gmedia.perkasaapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class ActivityKunjunganOutlet extends AppCompatActivity {
 
@@ -15,6 +16,9 @@ public class ActivityKunjunganOutlet extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Kunjungan Outlet");
         }
+
+        EditText txt_cari = findViewById(R.id.txt_cari);
+        txt_cari.setHint(R.string.nama_outlet);
     }
 
     @Override

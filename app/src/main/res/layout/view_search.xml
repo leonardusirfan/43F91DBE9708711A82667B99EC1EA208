@@ -19,7 +19,7 @@
             android:src="@drawable/search_grey" />
 
         <EditText
-            android:id="@+id/txt_nama"
+            android:id="@+id/txt_cari"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.85"

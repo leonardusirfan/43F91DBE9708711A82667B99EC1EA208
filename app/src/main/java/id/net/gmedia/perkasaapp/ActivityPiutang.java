@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class ActivityPiutang extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Piutang");
         }
+
+        EditText txt_cari = findViewById(R.id.txt_cari);
+        txt_cari.setHint(R.string.nama_outlet);
 
         RecyclerView rcy_piutang = findViewById(R.id.rcy_piutang);
 

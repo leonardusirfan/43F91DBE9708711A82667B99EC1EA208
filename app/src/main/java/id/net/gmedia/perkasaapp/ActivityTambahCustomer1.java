@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,9 @@ public class ActivityTambahCustomer1 extends AppCompatActivity{
                 startActivity(new Intent(ActivityTambahCustomer1.this, ActivityTambahCustomer2.class));
             }
         });
+
+        EditText txt_cari = findViewById(R.id.txt_cari);
+        txt_cari.setHint(R.string.nama_customer);
 
         RecyclerView rcy_customer = findViewById(R.id.rcy_customer);
         AdapterTambahCustomer adapter = new AdapterTambahCustomer(listOutlet);

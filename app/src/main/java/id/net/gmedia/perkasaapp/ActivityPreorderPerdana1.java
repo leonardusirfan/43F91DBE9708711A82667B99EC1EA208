@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 public class ActivityPreorderPerdana1 extends AppCompatActivity {
 
@@ -26,6 +27,9 @@ public class ActivityPreorderPerdana1 extends AppCompatActivity {
                 startActivity(new Intent(ActivityPreorderPerdana1.this, ActivityPreorderPerdana2.class));
             }
         });
+
+        EditText txt_cari = findViewById(R.id.txt_cari);
+        txt_cari.setHint(R.string.nama_barang);
     }
 
     @Override
