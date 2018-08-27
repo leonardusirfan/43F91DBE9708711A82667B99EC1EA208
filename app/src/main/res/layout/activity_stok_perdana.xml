@@ -16,6 +16,7 @@
 
         <ImageView
             android:layout_width="0dp"
+            android:contentDescription="@string/cari"
             android:layout_height="match_parent"
             android:layout_weight="0.15"
             android:padding="@dimen/padding5"
@@ -27,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.85"
             android:background="@android:color/transparent"
-            android:hint="Nama Barang"
+            android:hint="@string/nama_barang"
             android:inputType="text"
             android:textSize="@dimen/text16" />
     </LinearLayout>

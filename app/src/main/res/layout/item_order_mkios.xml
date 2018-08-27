@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:text="TOKO YUMNA JAYA CELL"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text14"
@@ -45,6 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:baselineAligned="false"
                 android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="No. Reseller"
+                        android:text="@string/nomor_reseller"
                         android:textSize="@dimen/text12" />
 
                     <TextView
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Terakhir Order"
+                        android:text="@string/terakhir_order"
                         android:textSize="@dimen/text12" />
 
                     <TextView
@@ -104,6 +104,7 @@
 
             <ImageView
                 android:id="@+id/imageView3"
+                android:contentDescription="@string/konfirmasi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="10dp"

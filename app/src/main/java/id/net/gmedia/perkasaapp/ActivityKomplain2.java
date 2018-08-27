@@ -19,7 +19,7 @@ public class ActivityKomplain2 extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Verifikasi Outlet");
+            getSupportActionBar().setTitle("Komplain");
         }
 
         TextView txt_nama = findViewById(R.id.txt_nama);

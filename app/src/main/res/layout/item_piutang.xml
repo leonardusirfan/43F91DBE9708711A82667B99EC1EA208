@@ -42,7 +42,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/padding5"
-                        android:text="TextView"
                         android:textColor="#fff"
                         android:textSize="@dimen/text16"
                         android:textStyle="bold" />
@@ -52,7 +51,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="TextView"
                         android:textColor="#fff"
                         android:textSize="@dimen/text16" />
 
@@ -81,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Jumlah Piutang"
+                    android:text="@string/jumlah_piutang"
                     android:textSize="@dimen/text12" />
 
                 <TextView
@@ -89,7 +87,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Rp 5.000.000"
                     android:textSize="@dimen/text18"
                     android:textStyle="bold" />
             </LinearLayout>

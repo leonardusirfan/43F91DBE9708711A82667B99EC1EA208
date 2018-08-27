@@ -23,7 +23,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/padding20"
             android:gravity="center"
-            android:text="Tahan point untuk memindahkan . Tekan pada bagian map"
+            android:text="@string/edit_lokasi"
             android:textSize="@dimen/text14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
             android:layout_marginTop="@dimen/padding20"
             android:background="@color/colorAccent"
             android:padding="@dimen/padding5"
-            android:text="Simpan"
+            android:text="@string/simpan"
             android:textColor="#fff"
             android:textSize="@dimen/text14"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +63,7 @@
 
         <ImageView
             android:id="@+id/img_outlet"
+            android:contentDescription="@string/outlet"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/padding40"
@@ -77,6 +78,7 @@
 
         <ImageView
             android:id="@+id/img_camera"
+            android:contentDescription="@string/kamera"
             android:layout_width="@dimen/img_size_small"
             android:layout_height="@dimen/img_size_small"
             android:layout_marginBottom="@dimen/padding5"
@@ -125,7 +127,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="@dimen/padding5"
-                    android:text="TextView"
                     android:textSize="@dimen/text14" />
 
             </LinearLayout>
@@ -151,7 +152,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="@dimen/padding5"
-                    android:text="TextView"
                     android:textSize="@dimen/text14" />
             </LinearLayout>
 

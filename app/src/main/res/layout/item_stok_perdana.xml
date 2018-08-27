@@ -35,13 +35,13 @@
                     android:layout_weight="0.9"
                     android:gravity="center"
                     android:padding="@dimen/padding5"
-                    android:text="TextView"
                     android:textColor="#fff"
                     android:textSize="@dimen/text12"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView19"
+                    android:contentDescription="@string/konfirmasi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
@@ -72,7 +72,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.7"
-                        android:text="Sisa"
+                        android:text="@string/sisa"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text16"
                         android:textStyle="bold"
@@ -86,7 +86,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:text="Sisa"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text16"
                         android:textStyle="bold"
@@ -109,7 +108,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.7"
-                        android:text="Nota"
+                        android:text="@string/nota"
                         android:textColor="#000"
                         android:textSize="@dimen/text12"
                         android:textStyle="bold" />
@@ -118,7 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:text="Terjual"
+                        android:text="@string/terjual"
                         android:textColor="#000"
                         android:textSize="@dimen/text12"
                         android:textStyle="bold" />

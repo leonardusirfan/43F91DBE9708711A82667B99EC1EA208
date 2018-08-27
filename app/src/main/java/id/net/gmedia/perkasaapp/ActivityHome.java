@@ -26,9 +26,14 @@ public class ActivityHome extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Perkasa App");
+        }
 
+        //Inisialisasi button UI
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan;
         btn_mkios = findViewById(R.id.btn_mkios);
@@ -131,10 +136,7 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setTitle("Perkasa App");
-        }
-
+        //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -202,7 +204,7 @@ public class ActivityHome extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle Drawer Navigation
         int id = item.getItemId();
 
         switch (id){

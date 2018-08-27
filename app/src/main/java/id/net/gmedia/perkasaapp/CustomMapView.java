@@ -23,8 +23,10 @@ public class CustomMapView extends SupportMapFragment {
 
         frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
-        ((ViewGroup) layout).addView(frameLayout,
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if(layout != null){
+            ((ViewGroup) layout).addView(frameLayout,
+                    new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
 
         return layout;
     }
@@ -34,7 +36,7 @@ public class CustomMapView extends SupportMapFragment {
     }
 
     public interface OnTouchListener {
-        public abstract void onTouch();
+        void onTouch();
     }
 
     public class TouchableWrapper extends FrameLayout {

@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Total"
+                android:text="@string/total"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text18"
                 android:textStyle="bold" />
@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
                 android:gravity="right|center_vertical|end"
-                android:text="Rp 0, 00"
+                android:text="@string/rupiah_0"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text18"
                 android:textStyle="bold" />
@@ -62,9 +62,9 @@
             android:layout_height="0dp"
             android:layout_weight="0.6"
             android:gravity="bottom"
-            android:text="*Transaksi yang pending/ gagal tidak dihitung pada total"
+            android:text="@string/warning_transaksi"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/style_box_bordered_rounded"
             android:gravity="center"
-            android:hint="Nama Outlet" />
+            android:hint="@string/nama_outlet" />
 
     </LinearLayout>
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingLeft="@dimen/padding5"
-            android:text="Nama"
+            android:text="@string/nama"
             android:textStyle="bold" />
 
         <TextView
@@ -118,7 +118,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:paddingRight="@dimen/padding5"
-            android:text="Total"
+            android:text="@string/total"
             android:textStyle="bold" />
     </LinearLayout>
 

@@ -34,7 +34,7 @@ public class AdapterTambahCustomer extends RecyclerView.Adapter<AdapterTambahCus
         holder.txt_alamat.setText(outlet.getAlamat());
         holder.txt_telepon.setText(outlet.getNomor());
         holder.txt_handphone.setText(outlet.getNomorHp());
-        holder.txt_status.setText("AKTIF");
+        holder.txt_status.setText(R.string.status_aktif);
         holder.txt_status.setTextColor(Color.BLUE);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

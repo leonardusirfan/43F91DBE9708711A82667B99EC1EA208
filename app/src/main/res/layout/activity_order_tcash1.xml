@@ -36,7 +36,7 @@
             android:layout_weight="0.5"
             android:gravity="center_vertical"
             android:padding="@dimen/padding10"
-            android:text="Total"
+            android:text="@string/total"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text18"
             android:textStyle="bold" />
@@ -70,6 +70,7 @@
 
         <ImageView
             android:id="@+id/btn_confirm"
+            android:contentDescription="@string/konfirmasi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/padding5"
@@ -102,6 +103,7 @@
 
             <ImageView
                 android:id="@+id/img_calendar1"
+                android:contentDescription="@string/kalender"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
@@ -114,7 +116,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="@dimen/text14" />
 
         </LinearLayout>
@@ -148,6 +149,7 @@
 
             <ImageView
                 android:id="@+id/imageView24"
+                android:contentDescription="@string/kalender"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
@@ -160,7 +162,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="@dimen/text14" />
 
         </LinearLayout>
@@ -183,6 +184,7 @@
 
             <ImageView
                 android:id="@+id/img_search"
+                android:contentDescription="@string/cari"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.1"

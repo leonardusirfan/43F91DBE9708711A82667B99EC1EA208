@@ -129,11 +129,9 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     class SpinnerAdapter extends ArrayAdapter<String> {
         private String[] items;
         private int res_view;
-        private Context context;
 
         SpinnerAdapter(Context context, int res_view, String[] objects) {
             super(context, res_view, objects);
-            this.context = context;
             this.res_view = res_view;
             this.items = objects;
         }

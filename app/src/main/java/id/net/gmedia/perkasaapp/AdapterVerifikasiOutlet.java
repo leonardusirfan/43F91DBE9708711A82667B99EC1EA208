@@ -33,7 +33,7 @@ public class AdapterVerifikasiOutlet extends RecyclerView.Adapter<AdapterVerifik
         holder.txt_alamat.setText(outlet.getAlamat());
         holder.txt_telepon.setText(outlet.getNomor());
         holder.txt_handphone.setText(outlet.getNomorHp());
-        holder.txt_status.setText("SEDANG DIPROSES");
+        holder.txt_status.setText(R.string.status_proses);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

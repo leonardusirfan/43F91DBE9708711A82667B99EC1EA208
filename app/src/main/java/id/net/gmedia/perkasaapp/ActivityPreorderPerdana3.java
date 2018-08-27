@@ -97,7 +97,13 @@ public class ActivityPreorderPerdana3 extends AppCompatActivity {
                     Toast.makeText(ActivityPreorderPerdana3.this, "Tanggal tidak valid", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    int jumlah = Integer.parseInt(txt_jumlah.getText().toString());
+                    String jumlah_string = txt_jumlah.getText().toString();
+                    if(!jumlah_string.equals("")){
+                        int jumlah = Integer.parseInt(jumlah_string);
+                    }
+                    else{
+                        Toast.makeText(ActivityPreorderPerdana3.this, "Jumlah tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

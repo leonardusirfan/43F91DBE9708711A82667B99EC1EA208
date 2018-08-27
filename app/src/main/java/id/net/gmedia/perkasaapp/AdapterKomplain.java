@@ -13,7 +13,7 @@ public class AdapterKomplain extends RecyclerView.Adapter<AdapterKomplain.Kompla
 
     private List<ModelKomplain> listKomplain;
 
-    public AdapterKomplain(List<ModelKomplain> listKomplain){
+    AdapterKomplain(List<ModelKomplain> listKomplain){
         this.listKomplain = listKomplain;
     }
 

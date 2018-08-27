@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -33,6 +32,7 @@
 
                 <ImageView
                     android:id="@+id/imageView26"
+                    android:contentDescription="@string/akun"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -41,6 +41,7 @@
 
                 <ImageView
                     android:id="@+id/imageView27"
+                    android:contentDescription="@string/outlet"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -49,6 +50,7 @@
 
                 <ImageView
                     android:id="@+id/imageView28"
+                    android:contentDescription="@string/kontak"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -57,6 +59,7 @@
 
                 <ImageView
                     android:id="@+id/imageView29"
+                    android:contentDescription="@string/lokasi"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -71,8 +74,9 @@
                 android:layout_height="0dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
-                android:text="Edit Posisi"
+                android:text="@string/edit_posisi"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_lokasi"
@@ -87,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/padding20"
                 android:layout_marginTop="@dimen/padding5"
-                android:text="TextView"
                 android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_lokasi"
@@ -100,7 +103,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding10"
-                android:text="TextView"
                 android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toTopOf="@+id/txt_lokasi"
                 app:layout_constraintEnd_toEndOf="@+id/txt_nama"
@@ -112,7 +114,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding10"
-                android:text="TextView"
                 android:textSize="@dimen/text14"
                 app:layout_constraintBottom_toTopOf="@+id/txt_kontak"
                 app:layout_constraintEnd_toEndOf="@+id/txt_nama"
@@ -124,7 +125,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding20"
-                android:text="TextView"
                 android:textSize="@dimen/text18"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

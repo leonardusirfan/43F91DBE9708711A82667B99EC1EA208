@@ -26,6 +26,7 @@
 
                 <ImageView
                     android:id="@+id/imageView21"
+                    android:contentDescription="@string/akun"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15"
@@ -42,7 +43,6 @@
                         android:id="@+id/txt_nama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text18"
                         android:textStyle="bold" />
@@ -51,13 +51,13 @@
                         android:id="@+id/txt_jumlah"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
                         android:textColor="#000"
                         android:textSize="@dimen/text12" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/imageView20"
+                    android:contentDescription="@string/konfirmasi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15"

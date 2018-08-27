@@ -7,11 +7,6 @@ public class ModelNota {
     private String id;
     private List<ModelTransaksi> listTransaksi = new ArrayList<>();
 
-    public ModelNota(String id, List<ModelTransaksi> listTransaksi){
-        this.id = id;
-        this.listTransaksi = listTransaksi;
-    }
-
     ModelNota(String id){
         this.id = id;
     }
@@ -26,9 +21,5 @@ public class ModelNota {
 
     public List<ModelTransaksi> getListTransaksi() {
         return listTransaksi;
-    }
-
-    public ModelTransaksi getTransaksi(int i){
-        return listTransaksi.get(i);
     }
 }

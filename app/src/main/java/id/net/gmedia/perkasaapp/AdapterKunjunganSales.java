@@ -14,7 +14,7 @@ public class AdapterKunjunganSales extends RecyclerView.Adapter<AdapterKunjungan
 
     private List<ModelSales> listSales;
 
-    public AdapterKunjunganSales(List<ModelSales> listSales){
+    AdapterKunjunganSales(List<ModelSales> listSales){
         this.listSales = listSales;
     }
 
@@ -41,9 +41,9 @@ public class AdapterKunjunganSales extends RecyclerView.Adapter<AdapterKunjungan
 
     class KunjunganSalesViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txt_nama, txt_jumlah;
+        private TextView txt_nama, txt_jumlah;
 
-        public KunjunganSalesViewHolder(@NonNull View itemView) {
+        private KunjunganSalesViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_nama = itemView.findViewById(R.id.txt_nama);
             txt_jumlah = itemView.findViewById(R.id.txt_jumlah);

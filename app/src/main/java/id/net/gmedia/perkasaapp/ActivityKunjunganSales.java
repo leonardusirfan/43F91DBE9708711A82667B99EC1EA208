@@ -1,6 +1,5 @@
 package id.net.gmedia.perkasaapp;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,6 +35,7 @@ public class ActivityKunjunganSales extends AppCompatActivity {
     }
 
     private void initSales(){
+        //Inisialisasi item Recycler View Sales
         ModelSales sales = new ModelSales("Andi Kusworo", 20);
         listSales.add(sales);
     }

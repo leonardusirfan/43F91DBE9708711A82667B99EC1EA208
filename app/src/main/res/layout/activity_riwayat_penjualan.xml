@@ -24,7 +24,7 @@
             android:layout_weight="0.5"
             android:gravity="center_vertical"
             android:padding="@dimen/padding10"
-            android:text="Total"
+            android:text="@string/total"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text18"
             android:textStyle="bold" />
@@ -65,7 +65,7 @@
             android:layout_marginLeft="@dimen/padding10"
             android:layout_marginStart="10dp"
             android:layout_marginTop="@dimen/padding5"
-            android:text="Sales"
+            android:text="@string/sales"
             android:textSize="@dimen/text14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +116,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="@dimen/text14" />
 
         </LinearLayout>
@@ -162,7 +161,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="@dimen/text14" />
 
         </LinearLayout>
@@ -186,6 +184,7 @@
 
             <ImageView
                 android:id="@+id/img_search"
+                android:contentDescription="@string/cari"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.1"

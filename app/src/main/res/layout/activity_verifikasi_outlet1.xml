@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.85"
             android:background="@android:color/transparent"
-            android:hint="Nama Customer"
+            android:hint="@string/nama_customer"
             android:inputType="text"
             android:textSize="@dimen/text16" />
     </LinearLayout>

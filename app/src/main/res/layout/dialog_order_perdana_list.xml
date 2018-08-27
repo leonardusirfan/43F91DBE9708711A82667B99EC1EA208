@@ -24,6 +24,7 @@
 
         <ImageView
             android:layout_width="0dp"
+            android:contentDescription="@string/cari"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:padding="@dimen/padding5"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:background="@android:color/transparent"
-            android:hint="CCID"
+            android:hint="@string/ccid"
+            android:inputType="text"
             android:padding="@dimen/padding5"
             android:textSize="@dimen/text16" />
 
@@ -78,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding5"
-            android:text="Batal"
+            android:text="@string/batal"
             android:textColor="#fff"
             android:textSize="@dimen/text14"
             android:textStyle="bold" />
@@ -88,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding5"
-            android:text="Simpan"
+            android:text="@string/simpan"
             android:textColor="#fff"
             android:textSize="@dimen/text14"
             android:textStyle="bold" />
