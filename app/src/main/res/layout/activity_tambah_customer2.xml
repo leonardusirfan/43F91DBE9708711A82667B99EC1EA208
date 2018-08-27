@@ -20,7 +20,7 @@
             android:layout_marginLeft="@dimen/padding10"
             android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/padding10"
-            android:text="@string/area"
+            android:text="@string/area_star"
             android:textSize="@dimen/text14"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
