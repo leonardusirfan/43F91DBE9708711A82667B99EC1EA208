@@ -18,17 +18,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        tools:context=".ActivityOrderPerdana2">
+        android:padding="@dimen/padding10"
+        tools:context=".ActOrderPerdana.ActivityOrderPerdana2">
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding10"
             android:text="@string/nama_pelanggan"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
+            style="@style/TitleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,9 +34,8 @@
             android:id="@+id/txt_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding10"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text18"
+            android:text=""
+            style="@style/ValueText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -48,14 +45,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding10"
             android:text="@string/nomor_ba"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
+            style="@style/TitleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
 
         <EditText
             android:id="@+id/txt_komplain"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding10"
             android:background="@drawable/style_box_bordered_rounded"

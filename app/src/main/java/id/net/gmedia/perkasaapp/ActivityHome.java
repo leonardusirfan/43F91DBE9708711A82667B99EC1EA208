@@ -1,5 +1,6 @@
 package id.net.gmedia.perkasaapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +17,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.maulana.custommodul.SessionManager;
+
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
+import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios1;
+import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
 
 public class ActivityHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean exit = false;
     private NavigationView navigationView;
+    private SessionManager session;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,9 @@ public class ActivityHome extends AppCompatActivity
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Perkasa App");
         }
+
+        context = this;
+        session = new SessionManager(context);
 
         //Inisialisasi button UI
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain,
@@ -223,14 +233,10 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_customer:startActivity(new Intent(ActivityHome.this, ActivityTambahCustomer1.class));break;
             case R.id.nav_preorder:startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));break;
             case R.id.nav_kunjungan:startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));break;
-            case R.id.nav_logout:
-                AppSharedPreferences.LogOut(ActivityHome.this);
-                startActivity(new Intent(ActivityHome.this, ActivityLogin.class));
-                finish();break;
-
-                default:
-                    System.out.println(id);
-                    break;
+            case R.id.nav_logout:session.logoutUser(new Intent(context, ActivityLogin.class));break;
+            default:
+                //System.out.println(id);
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

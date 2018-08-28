@@ -1,6 +1,12 @@
 package id.net.gmedia.perkasaapp;
 
+import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,38 +14,173 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ActivityLogin extends AppCompatActivity {
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.maulana.custommodul.ApiVolley;
+import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.RuntimePermissionsActivity;
+import com.maulana.custommodul.SessionManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import id.net.gmedia.perkasaapp.NotificationUtils.InitFirebaseSetting;
+import id.net.gmedia.perkasaapp.Utils.ServerURL;
+
+public class ActivityLogin extends RuntimePermissionsActivity {
+
+    private Context context;
+    private SessionManager session;
+    private ItemValidation iv = new ItemValidation();
     private EditText txt_username, txt_password;
+    private Button btn_login;
+    private static final int REQUEST_PERMISSIONS = 20;
+    private String refreshToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        context = this;
+        session = new SessionManager(this);
+
+        InitFirebaseSetting.getFirebaseSetting(context);
+
+        refreshToken = FirebaseInstanceId.getInstance().getToken();
+
+        initPermission();
+        initUI();
+        initEvent();
+        initData();
+    }
+
+    private void initData() {
+
+        if(session.isLoggedIn()){
+            redirectToLogin();
+        }
+    }
+
+    private void initPermission() {
+
+        if (ContextCompat.checkSelfPermission(
+                ActivityLogin.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityLogin.super.requestAppPermissions(new
+                            String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
+                    , Manifest.permission.ACCESS_COARSE_LOCATION
+                    }, R.string
+                            .runtime_permissions_txt
+                    , REQUEST_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode) {
+
+    }
+
+    private void initUI() {
+
+        btn_login = findViewById(R.id.btn_login);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);
+    }
 
-        Button btn_login = findViewById(R.id.btn_login);
+    private void initEvent() {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = txt_username.getText().toString();
-                String password = txt_password.getText().toString();
 
-                if(username.equals("") || password.equals("")){
-                    Toast.makeText(ActivityLogin.this, "Username atau Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    //Cek username dan password
+                if(txt_username.getText().toString().isEmpty()){
 
-                    //Jika valid
-                    startActivity(new Intent(ActivityLogin.this, ActivityHome.class));
-                    AppSharedPreferences.Login(ActivityLogin.this, "Gmedia Test");
-                    finish();
+                    txt_username.setError("Username tidak boleh kosong");
+                    txt_username.requestFocus();
+                    return;
                 }
+
+                if(txt_password.getText().toString().isEmpty()){
+
+                    txt_password.setError("Password tidak boleh kosong");
+                    txt_password.requestFocus();
+                    return;
+                }
+
+                saveData();
+
             }
         });
+    }
+
+    private void saveData() {
+
+        btn_login.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("username", txt_username.getText().toString());
+            jBody.put("password", txt_password.getText().toString());
+            jBody.put("fcm_id", refreshToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.auth, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "";
+                btn_login.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    if(iv.parseNullInteger(status) == 200){
+
+                        if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+
+                        String nikGa = response.getJSONObject("response").getString("nik_ga");
+                        String nikMkios = response.getJSONObject("response").getString("nik_mkios");
+                        String nama = response.getJSONObject("response").getString("nama");
+                        String username = response.getJSONObject("response").getString("username");
+                        session.createLoginSession(username,
+                                nikGa,
+                                nikMkios,
+                                nama);
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                        redirectToLogin();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String result) {
+                Snackbar.make(findViewById(android.R.id.content), "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Snackbar.LENGTH_LONG).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btn_login.setEnabled(true);
+            }
+        });
+    }
+
+    private void redirectToLogin() {
+
+        Intent intent = new Intent(context, ActivityHome.class);
+        startActivity(intent);
+        finish();
     }
 }

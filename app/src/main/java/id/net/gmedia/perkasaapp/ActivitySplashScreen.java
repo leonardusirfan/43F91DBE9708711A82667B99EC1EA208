@@ -18,16 +18,11 @@ public class ActivitySplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!AppSharedPreferences.isLoggedIn(ActivitySplashScreen.this)){
-                    Intent intent = new Intent(ActivitySplashScreen.this, ActivityLogin.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else{
-                    Intent intent = new Intent(ActivitySplashScreen.this, ActivityHome.class);
-                    startActivity(intent);
-                    finish();
-                }
+
+                Intent intent = new Intent(ActivitySplashScreen.this, ActivityLogin.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
             }
         }, SPLASH_SCREEN_DELAY);
     }

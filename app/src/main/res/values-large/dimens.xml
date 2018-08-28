@@ -7,7 +7,9 @@
     <dimen name="text12">24sp</dimen>
     <dimen name="text10">20sp</dimen>
     <dimen name="text24">48sp</dimen>
+    <dimen name="padding2">4dp</dimen>
     <dimen name="padding5">10dp</dimen>
+    <dimen name="padding8">12dp</dimen>
     <dimen name="padding10">20dp</dimen>
     <dimen name="padding20">40dp</dimen>
     <dimen name="padding40">80dp</dimen>

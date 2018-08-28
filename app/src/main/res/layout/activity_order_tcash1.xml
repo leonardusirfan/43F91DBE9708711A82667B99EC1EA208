@@ -189,7 +189,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.1"
                 android:padding="@dimen/padding5"
-                app:srcCompat="@drawable/search" />
+                android:src="@drawable/search" />
 
             <EditText
                 android:id="@+id/txt_nama"
