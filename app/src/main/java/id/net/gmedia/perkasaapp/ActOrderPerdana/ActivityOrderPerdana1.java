@@ -136,6 +136,7 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
                 CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(view.getContext(), ActivityOrderPerdana2.class);
                 intent.putExtra("kdcus", item.getItem1());
+                intent.putExtra("nama", item.getItem2());
                 view.getContext().startActivity(intent);
             }
         });
@@ -143,7 +144,13 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
 
     private void initPerdana() {
 
-        isLoading = true;
+        listReller.add(new CustomItem(
+                "1"
+                ,"Tetew"
+                ,"Jangli"
+        ));
+
+        /*isLoading = true;
         if(start == 0) dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
         lvReseller.addFooterView(footerList);
@@ -224,7 +231,7 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
 
                 dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
             }
-        });
+        });*/
     }
 
     @Override
