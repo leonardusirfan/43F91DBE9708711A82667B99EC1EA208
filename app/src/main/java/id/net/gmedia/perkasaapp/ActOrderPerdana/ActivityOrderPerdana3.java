@@ -1,23 +1,37 @@
 package id.net.gmedia.perkasaapp.ActOrderPerdana;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
+import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -26,14 +40,33 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,13 +80,12 @@ import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.AdapterOrderPerdanaCcid;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.AdapterOrderPerdanaCcidRentang;
+import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.ModelCcid;
-import id.net.gmedia.perkasaapp.ModelPerdana;
 import id.net.gmedia.perkasaapp.R;
-import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
-public class ActivityOrderPerdana3 extends AppCompatActivity {
+public class ActivityOrderPerdana3 extends AppCompatActivity implements LocationListener {
 
     private Context context;
     private DialogBox dialogBox;
@@ -85,6 +117,41 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
     private List<ModelCcid> selectedCcidRentang;
     private AdapterOrderPerdanaCcidRentang adapterRentang;
     private EditText txt_banyak_ccid;
+    private Button btnProses;
+    private String kdcus = "";
+
+    // Location
+    private double latitude, longitude;
+    private LocationManager locationManager;
+    private Criteria criteria;
+    private String provider;
+    private Location location;
+    private final int REQUEST_PERMISSION_COARSE_LOCATION=2;
+    private final int REQUEST_PERMISSION_FINE_LOCATION=3;
+    public boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
+    private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
+    private String jarak = "",range = "", latitudeOutlet = "", longitudeOutlet = "";
+
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+    private LocationRequest mLocationRequest;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
+            UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    private LocationSettingsRequest mLocationSettingsRequest;
+    private SettingsClient mSettingsClient;
+    private static final int REQUEST_CHECK_SETTINGS = 0x1;
+    private Boolean mRequestingLocationUpdates;
+    private Location mCurrentLocation;
+    private boolean isUpdateLocation = false;
+    private String TAG = "PERDANA";
+    private SessionManager session;
+    private RadioButton rbSegel, rbEvent;
+    private RadioGroup rgJenisBarang;
+    public static final String flag = "PERDANA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +165,9 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
 
         context = this;
         dialogBox = new DialogBox(context);
+        session = new SessionManager(context);
 
+        initLocationUtils();
         initUI();
         initEvent();
         //Mengisi allCcid yang berisi list CCID yang bisa dibeli
@@ -337,6 +406,28 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
         });
     }
 
+    private void initLocationUtils() {
+
+        // getLocation update by google
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mSettingsClient = LocationServices.getSettingsClient(this);
+        mRequestingLocationUpdates = false;
+
+        createLocationCallback();
+        createLocationRequest();
+        buildLocationSettingsRequest();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        setCriteria();
+        latitude = 0;
+        longitude = 0;
+        location = new Location("set");
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        //location = getLocation();
+        updateAllLocation();
+    }
+
     private void showDialogRentangCCID() {
 
         // Ambil dengan Rentang
@@ -436,6 +527,12 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
         btn_list = findViewById(R.id.btn_list);
         btn_rentang = findViewById(R.id.btn_rentang);
         btn_scan = findViewById(R.id.btn_scan);
+        btnProses = (Button) findViewById(R.id.btn_proses);
+
+        rbSegel = (RadioButton) findViewById(R.id.rb_segel);
+        rbEvent = (RadioButton) findViewById(R.id.rb_event);
+
+        rgJenisBarang = (RadioGroup) findViewById(R.id.rg_jenis_barang);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -444,6 +541,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
             namabrg = bundle.getString("namabrg", "");
             hargabrg = bundle.getString("harga", "");
             suratJalan = bundle.getString("suratjalan", "");
+            kdcus = bundle.getString("kdcus", "");
 
             txt_nama.setText(namabrg);
             txt_harga.setText(iv.ChangeToRupiahFormat(hargabrg));
@@ -474,6 +572,137 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
                 };
 
                 new DatePickerDialog(context,date,customDate.get(Calendar.YEAR),customDate.get(Calendar.MONTH),customDate.get(Calendar.DATE)).show();
+            }
+        });
+
+        btnProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Validasi
+                if(suratJalan.isEmpty()){
+
+                    Toast.makeText(context, "Tidak ada surat jalan, mohon cek data anda", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(selectedCcid.size() <= 0){
+
+                    Toast.makeText(context, "Silahkan pilih minimal satu ccid", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Apakah anda yakin melakukan penjualan "+String.valueOf(selectedCcid.size())+ " dengan harga" + txt_total_harga.getText().toString() +" ?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                saveData();
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
+    private void saveData() {
+
+        btnProses.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONArray jualD = new JSONArray();
+
+        for(ModelCcid ccid: selectedCcid){
+
+            JSONObject joJualD = new JSONObject();
+            try {
+                joJualD.put("kodebrg", kdbrg);
+                joJualD.put("ccid", ccid.getCcid());
+                joJualD.put("harga", ccid.getHarga());
+                joJualD.put("jumlah", "1");
+                joJualD.put("nopengeluaran", suratJalan);
+                jualD.put(joJualD);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        RadioButton selectedRadio = (RadioButton) findViewById(rgJenisBarang.getCheckedRadioButtonId());
+        String jenisBarang = selectedRadio.getText().toString();
+
+        JSONObject jualH = new JSONObject();
+        try {
+            jualH.put("tgl", iv.getCurrentDate(FormatItem.formatDate));
+            jualH.put("kdcus", kdcus);
+            jualH.put("tgltempo", iv.ChangeFormatDateString(edtTanggal.getText().toString(), FormatItem.formatDateDisplay, FormatItem.formatDate));
+            jualH.put("nik", session.getNikGa());
+            jualH.put("total", txt_total_harga.getText().toString().replaceAll("[,.]", ""));
+            jualH.put("userid", session.getUsername());
+            jualH.put("useru", session.getUsername());
+            jualH.put("usertgl", iv.getCurrentDate(FormatItem.formatTimestamp));
+            jualH.put("status", "1");
+            jualH.put("nomutasi", suratJalan);
+            jualH.put("crbayar", "T");
+            jualH.put("jenis_barang", jenisBarang);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("jual_d", jualD);
+            jBody.put("jual_h", jualH);
+            jBody.put("latitude", iv.doubleToStringFull(latitude));
+            jBody.put("longitude", iv.doubleToStringFull(longitude));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveTransaksiPerdana, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                btnProses.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Intent intent = new Intent(context, ActivityHome.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("flag", flag);
+                        startActivity(intent);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btnProses.setEnabled(true);
             }
         });
     }
@@ -561,7 +790,6 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
                     case 2:
                         selectedCcidRentang.clear();
                         adapterRentang.notifyDataSetChanged();
-
                         break;
                     default:
                         break;
@@ -585,6 +813,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
 
                             JSONObject jo = jsonArray.getJSONObject(i);
                             if(flag == 1){
+
                                 allCcid.add(new ModelCcid(
                                         jo.getString("ccid")
                                         , jo.getString("namabrg")
@@ -592,12 +821,22 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
                                         , false
                                 ));
                             }else if(flag == 2){
+
                                 selectedCcidRentang.add(new ModelCcid(
                                         jo.getString("ccid")
                                         , jo.getString("namabrg")
                                         , jo.getString("harga")
                                         , false
                                 ));
+                            }else if(flag == 3){
+
+                                selectedCcid.add(new ModelCcid(
+                                        jo.getString("ccid")
+                                        , jo.getString("namabrg")
+                                        , jo.getString("harga")
+                                        , false
+                                ));
+                                updateCcid();
                             }
 
                         }
@@ -670,16 +909,27 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Hasil dari QR Code Scanner
+
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
+        if(requestCode == REQUEST_CHECK_SETTINGS){
+
+            if(resultCode == Activity.RESULT_CANCELED){
+
+                mRequestingLocationUpdates = false;
+            }else if(resultCode == Activity.RESULT_OK){
+
+                startLocationUpdates();
+            }
+
+        }else if(result != null) {
+
             if(result.getContents() != null){
                 //System.out.println(result.getContents());
 
                 //Menambahkan data CCID ke list
-                selectedCcid.add(new ModelCcid(result.getContents(), "sdfsd", "3000"));
-                updateCcid();
+                initCcid(3, result.getContents().substring(5,21),"", "");
             }
-        } else {
+        }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -694,4 +944,314 @@ public class ActivityOrderPerdana3 extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //region location
+
+    private void createLocationRequest() {
+
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private void createLocationCallback() {
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                mCurrentLocation = locationResult.getLastLocation();
+                //mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+                onLocationChanged(mCurrentLocation);
+            }
+        };
+    }
+
+    private void buildLocationSettingsRequest() {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        mLocationSettingsRequest = builder.build();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates() {
+        if (!mRequestingLocationUpdates) {
+            Log.d(TAG, "stopLocationUpdates: updates never requested, no-op.");
+            return;
+        }
+
+        // It is a good practice to remove location requests when the activity is in a paused or
+        // stopped state. Doing so helps battery performance and is especially
+        // recommended in applications that request frequent location updates.
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        mRequestingLocationUpdates = false;
+                    }
+                });
+    }
+
+    private boolean checkPermissions() {
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void startLocationUpdates() {
+        // Begin by checking if the device has the necessary location settings.
+
+        isUpdateLocation = true;
+        mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
+                .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+                    @Override
+                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                        Log.i(TAG, "All location settings are satisfied.");
+
+                        isUpdateLocation = false;
+                        //noinspection MissingPermission
+                        if (ActivityCompat.checkSelfPermission(ActivityOrderPerdana3.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ActivityOrderPerdana3.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                            return;
+                        }
+                        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                                mLocationCallback, Looper.myLooper());
+
+                        mFusedLocationClient.getLastLocation()
+                                .addOnSuccessListener(ActivityOrderPerdana3.this, new OnSuccessListener<Location>() {
+                                    @Override
+                                    public void onSuccess(Location clocation) {
+
+                                        mRequestingLocationUpdates = true;
+                                        if (clocation != null) {
+
+                                            onLocationChanged(clocation);
+                                        }else{
+                                            location = getLocation();
+                                        }
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        int statusCode = ((ApiException) e).getStatusCode();
+                        switch (statusCode) {
+                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                                Log.i(TAG, "Location settings are not satisfied. Attempting to upgrade " +
+                                        "location settings ");
+                                try {
+                                    // Show the dialog by calling startResolutionForResult(), and check the
+                                    // result in onActivityResult().
+                                    ResolvableApiException rae = (ResolvableApiException) e;
+                                    rae.startResolutionForResult(ActivityOrderPerdana3.this, REQUEST_CHECK_SETTINGS);
+                                } catch (IntentSender.SendIntentException sie) {
+                                    Log.i(TAG, "PendingIntent unable to execute request.");
+                                }
+                                break;
+                            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                String errorMessage = "Location settings are inadequate, and cannot be " +
+                                        "fixed here. Fix in Settings.";
+                                Log.e(TAG, errorMessage);
+                                Toast.makeText(ActivityOrderPerdana3.this, errorMessage, Toast.LENGTH_LONG).show();
+                                mRequestingLocationUpdates = false;
+                                //refreshMode = false;
+                        }
+
+                        //get Location
+                        isUpdateLocation = false;
+                        location = getLocation();
+                    }
+                });
+    }
+
+    private void updateAllLocation(){
+        mRequestingLocationUpdates = true;
+        startLocationUpdates();
+    }
+
+    public Location getLocation() {
+
+        isUpdateLocation = true;
+        try {
+
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            // getting GPS status
+            isGPSEnabled = locationManager
+                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            Log.v("isGPSEnabled", "=" + isGPSEnabled);
+
+            // getting network status
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            Log.v("isNetworkEnabled", "=" + isNetworkEnabled);
+
+            if (isGPSEnabled == false && isNetworkEnabled == false) {
+                // no network provider is enabled
+                Toast.makeText(ActivityOrderPerdana3.this, "Cannot identify the location.\nPlease turn on GPS or turn on your data.",
+                        Toast.LENGTH_LONG).show();
+
+            } else {
+                this.canGetLocation = true;
+                if (isNetworkEnabled) {
+                    //location = null;
+
+                    // Granted the permission first
+                    if (ActivityCompat.checkSelfPermission(ActivityOrderPerdana3.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ActivityOrderPerdana3.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(ActivityOrderPerdana3.this,
+                                Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                            showExplanation("Permission Needed", "Rationale", Manifest.permission.ACCESS_COARSE_LOCATION, REQUEST_PERMISSION_COARSE_LOCATION);
+                        } else {
+                            requestPermission(Manifest.permission.ACCESS_COARSE_LOCATION, REQUEST_PERMISSION_COARSE_LOCATION);
+                        }
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(ActivityOrderPerdana3.this,
+                                Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            showExplanation("Permission Needed", "Rationale", Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_PERMISSION_FINE_LOCATION);
+                        } else {
+                            requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_PERMISSION_FINE_LOCATION);
+                        }
+                        isUpdateLocation = false;
+                        return null;
+                    }
+
+                    locationManager.requestLocationUpdates(
+                            LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    Log.d("Network", "Network");
+
+                    if (locationManager != null) {
+
+                        if(jarak != ""){ // Jarak sudah terdeteksi
+
+                            Location locationBuffer = locationManager
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                            location = locationBuffer;
+
+                        }else{
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        }
+
+                        if (location != null) {
+                            //Changed(location);
+                        }
+                    }
+                }
+
+                // if GPS Enabled get lat/long using GPS Services
+                if (isGPSEnabled) {
+
+                    locationManager.requestLocationUpdates(
+                            LocationManager.GPS_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    Log.d("GPS Enabled", "GPS Enabled");
+
+                    if (locationManager != null) {
+
+                        if(jarak != ""){ // Jarak sudah terdeteksi
+
+                            Location locationBuffer = locationManager
+                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                            location = locationBuffer;
+
+                        }else{
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        }
+
+                        if (location != null) {
+                            //onLocationChanged(location);
+                        }
+                    }
+                }else{
+                    //Toast.makeText(context, "Turn on your GPS for better accuracy", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        isUpdateLocation = false;
+        if(location != null){
+            onLocationChanged(location);
+        }
+
+        return location;
+    }
+
+    public void setCriteria() {
+        criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+        provider = locationManager.getBestProvider(criteria, true);
+    }
+
+    private void showExplanation(String title,
+                                 String message,
+                                 final String permission,
+                                 final int permissionRequestCode) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        requestPermission(permission, permissionRequestCode);
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void requestPermission(String permissionName, int permissionRequestCode) {
+        ActivityCompat.requestPermissions(ActivityOrderPerdana3.this,
+                new String[]{permissionName}, permissionRequestCode);
+    }
+
+    @Override
+    public void onLocationChanged(Location clocation) {
+
+        this.location = clocation;
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
+
+        /*if(!isUpdateLocation && !editMode){
+            getJarak();
+        }*/
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        //location = getLocation();
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+        //location = getLocation();
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+    //endregion
 }

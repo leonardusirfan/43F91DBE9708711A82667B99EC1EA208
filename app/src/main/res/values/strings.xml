@@ -17,6 +17,7 @@
     <string name="cari">Cari</string>
     <string name="ccid">CCID</string>
     <string name="harga">Harga</string>
+    <string name="jenis_barang">Jenis Barang</string>
     <string name="total_ccid">Total CCID dan Harga</string>
     <string name="ccid_perdana">CCID Perdana</string>
     <string name="scan_ccid">SCAN CCID</string>
@@ -64,6 +65,7 @@
     <string name="akun">Akun</string>
     <string name="hapus">Hapus</string>
     <string name="status">Status</string>
+    <string name="tanggal_tempo">Tanggal Tempo</string>
     <string name="kontak">Kontak</string>
     <string name="lokasi">Lokasi</string>
     <string name="sisa">Sisa</string>

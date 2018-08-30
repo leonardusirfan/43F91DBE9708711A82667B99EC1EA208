@@ -11,4 +11,6 @@ public class ServerURL {
     public static final String getResellerPerdana = baseUrl + "perdana/view_customer/";
     public static final String getSuratJalan = baseUrl + "perdana/list_surat_jalan/";
     public static final String getListCCID = baseUrl + "perdana/list_perdana/";
+    public static final String saveTransaksiPerdana = baseUrl + "perdana/jual/";
+    public static final String getTransaksiHariIni = baseUrl + "Transaksi/today/";
 }

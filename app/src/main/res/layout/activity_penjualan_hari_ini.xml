@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityPenjualanHariIni">
+    tools:context=".ActPenjualanHariIni.ActivityPenjualanHariIni">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy_riwayat"
+    <ListView
+        android:id="@+id/lv_riwayat"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout18" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <LinearLayout
         android:id="@+id/linearLayout20"
@@ -84,42 +84,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <AutoCompleteTextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:background="@drawable/style_box_bordered_rounded"
-            android:gravity="center"
-            android:hint="@string/nama_outlet" />
+            android:weightSum="1">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="match_parent"
+                android:src="@drawable/search"
+                android:padding="@dimen/padding8"
+                android:scaleType="fitCenter"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout18"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f6f4f5"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding5"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@color/zxing_transparent"
+                android:id="@+id/edt_search"
+                android:inputType="textPersonName"
+                android:imeOptions="actionSearch"
+                android:hint="@string/nama_outlet" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/padding5"
-            android:text="@string/nama"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:paddingRight="@dimen/padding5"
-            android:text="@string/total"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <android.support.constraint.Guideline
@@ -127,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"

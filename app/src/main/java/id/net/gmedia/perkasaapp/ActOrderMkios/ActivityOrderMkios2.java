@@ -77,6 +77,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private boolean isLoading = false;
     private Button btnProses;
     private final String TAG = "ORDERMKIOS";
+    public static final String flag = "MKIOS";
 
     // Location
     private double latitude, longitude;
@@ -364,6 +365,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
 
                         Intent intent = new Intent(context, ActivityHome.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("flag", flag);
                         startActivity(intent);
                         finish();
                     }

@@ -20,10 +20,12 @@ import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrderPerdanaBarang.OrderPerdanaBarangViewHolder> {
 
     private List<ModelPerdana> listPerdana;
+    private String kdcus;
     private ItemValidation iv = new ItemValidation();
 
-    public AdapterOrderPerdanaBarang(List<ModelPerdana> listPerdana){
+    public AdapterOrderPerdanaBarang(List<ModelPerdana> listPerdana, String kdcus){
         this.listPerdana = listPerdana;
+        this.kdcus = kdcus;
     }
 
     @NonNull
@@ -50,6 +52,7 @@ public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrder
                 i.putExtra("namabrg", perdana.getNama());
                 i.putExtra("harga", perdana.getHargaString());
                 i.putExtra("suratjalan", perdana.getSurat_jalan());
+                i.putExtra("kdcus", kdcus);
                 v.getContext().startActivity(i);
             }
         });

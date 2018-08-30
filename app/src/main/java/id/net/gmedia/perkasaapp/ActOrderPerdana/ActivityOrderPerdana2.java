@@ -96,7 +96,7 @@ public class ActivityOrderPerdana2 extends AppCompatActivity {
             txt_nama.setText(nama);
         }
 
-        adapter = new AdapterOrderPerdanaBarang(listPerdana);
+        adapter = new AdapterOrderPerdanaBarang(listPerdana, kdcus);
 
         rcy_barang = findViewById(R.id.rcy_barang);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

@@ -66,7 +66,7 @@
             android:name=".ActOrderMkios.ActivityOrderMkios1"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityPenjualanHariIni"
+            android:name=".ActPenjualanHariIni.ActivityPenjualanHariIni"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity

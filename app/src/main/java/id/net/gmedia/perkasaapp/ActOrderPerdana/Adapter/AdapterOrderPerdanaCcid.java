@@ -1,6 +1,8 @@
 package id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,8 +54,25 @@ public class AdapterOrderPerdanaCcid extends RecyclerView.Adapter<AdapterOrderPe
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listCcid.remove(current_idx);
-                ((ActivityOrderPerdana3)context).updateCcid();
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("APakah anda yakin ingin menghapus ccid "+ccid.getCcid()+" ?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                listCcid.remove(current_idx);
+                                ((ActivityOrderPerdana3)context).updateCcid();
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+
             }
         });
 

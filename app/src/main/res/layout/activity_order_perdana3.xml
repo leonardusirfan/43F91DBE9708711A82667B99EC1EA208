@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">
 
-
         <LinearLayout
             android:id="@+id/linearLayout13"
             android:layout_width="match_parent"
@@ -166,7 +165,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_tanggal" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_jenis_barang" />
 
         <TextView
             android:id="@+id/txt_harga"
@@ -196,6 +195,7 @@
             android:id="@+id/ll_tanggal"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/padding5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView62"
             android:weightSum="1">
@@ -220,6 +220,48 @@
                 android:src="@mipmap/ic_date"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_jenis_barang"
+            app:layout_constraintTop_toBottomOf="@+id/ll_tanggal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding10"
+                android:layout_marginTop="@dimen/padding10"
+                style="@style/TitleText"
+                android:text="@string/jenis_barang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/rg_jenis_barang"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="SEGEL"
+                    android:id="@+id/rb_segel"
+                    android:checked="true"></RadioButton>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="EVENT"
+                    android:id="@+id/rb_event"></RadioButton>
+            </RadioGroup>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView62"
             android:layout_width="match_parent"
@@ -228,7 +270,7 @@
             android:layout_marginRight="@dimen/padding10"
             android:layout_marginTop="@dimen/padding10"
             style="@style/TitleText"
-            android:text="Tanggal Tempo"
+            android:text="@string/tanggal_tempo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_harga" />
 
@@ -315,7 +357,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcy_ccid"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginEnd="@dimen/padding20"
             android:layout_marginLeft="@dimen/padding20"
             android:layout_marginRight="@dimen/padding20"
@@ -355,15 +397,13 @@
 
         <TextView
             android:id="@+id/txt_posisi"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
             android:layout_marginTop="@dimen/padding10"
             android:text="@string/jarak_0"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text16"
-            android:textStyle="bold"
+            style="@style/ValueText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView70" />
 
