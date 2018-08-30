@@ -24,6 +24,7 @@ import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
+import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 
 public class ActivityHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

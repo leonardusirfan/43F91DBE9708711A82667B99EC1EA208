@@ -7,4 +7,6 @@
 
     <color name="color_notif">#ff0504</color>
     <color name="color_blue">#28166F</color>
+    <color name="color_grey_header">#939393</color>
+    <color name="color_grey_footer">#d4d4d4</color>
 </resources>

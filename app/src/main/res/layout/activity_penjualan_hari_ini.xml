@@ -41,10 +41,11 @@
                 android:text="@string/total"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text18"
+                android:layout_marginRight="@dimen/padding5"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tv_total"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
@@ -103,7 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.85"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:background="@color/zxing_transparent"
                 android:id="@+id/edt_search"
                 android:inputType="textPersonName"
@@ -118,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.11" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"

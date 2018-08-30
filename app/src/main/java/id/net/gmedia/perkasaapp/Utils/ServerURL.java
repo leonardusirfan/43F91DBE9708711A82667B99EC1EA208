@@ -13,4 +13,5 @@ public class ServerURL {
     public static final String getListCCID = baseUrl + "perdana/list_perdana/";
     public static final String saveTransaksiPerdana = baseUrl + "perdana/jual/";
     public static final String getTransaksiHariIni = baseUrl + "Transaksi/today/";
+    public static final String getRiwayatTransaksi = baseUrl + "Transaksi/history/";
 }
