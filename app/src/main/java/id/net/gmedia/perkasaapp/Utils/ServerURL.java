@@ -9,4 +9,6 @@ public class ServerURL {
     public static final String getDetailResellerMkios = baseUrl + "mkios/segmentasi/";
     public static final String saveTransaksiMkios = baseUrl + "mkios/transaksi/";
     public static final String getResellerPerdana = baseUrl + "perdana/view_customer/";
+    public static final String getSuratJalan = baseUrl + "perdana/list_surat_jalan/";
+    public static final String getListCCID = baseUrl + "perdana/list_perdana/";
 }

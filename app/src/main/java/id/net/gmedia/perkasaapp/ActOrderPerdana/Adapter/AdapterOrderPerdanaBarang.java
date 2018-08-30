@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.maulana.custommodul.ItemValidation;
+
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
@@ -18,6 +20,7 @@ import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrderPerdanaBarang.OrderPerdanaBarangViewHolder> {
 
     private List<ModelPerdana> listPerdana;
+    private ItemValidation iv = new ItemValidation();
 
     public AdapterOrderPerdanaBarang(List<ModelPerdana> listPerdana){
         this.listPerdana = listPerdana;
@@ -36,14 +39,17 @@ public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrder
 
         holder.txt_nama.setText(perdana.getNama());
         holder.txt_surat_jalan.setText(perdana.getSurat_jalan());
-        holder.txt_harga.setText(RupiahFormatterUtil.getRupiah(perdana.getHarga()));
-        holder.txt_stok.setText(String.valueOf(perdana.getStok()));
+        holder.txt_harga.setText(iv.ChangeToRupiahFormat(perdana.getHargaString()));
+        holder.txt_stok.setText(iv.ChangeToCurrencyFormat(perdana.getStokString()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ActivityOrderPerdana3.class);
-                i.putExtra("perdana", perdana);
+                i.putExtra("kdbrg", perdana.getKodebrg());
+                i.putExtra("namabrg", perdana.getNama());
+                i.putExtra("harga", perdana.getHargaString());
+                i.putExtra("suratjalan", perdana.getSurat_jalan());
                 v.getContext().startActivity(i);
             }
         });

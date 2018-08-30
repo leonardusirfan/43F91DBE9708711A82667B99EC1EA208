@@ -8,6 +8,7 @@ public class ModelPerdana implements Parcelable{
     private String nama;
     private int harga;
     private int stok;
+    private String tanggal, kodegudang, kodebrg, hargaString, stokString;
 
     public ModelPerdana(String nama, String surat_jalan, int harga, int stok){
         this.nama = nama;
@@ -26,6 +27,17 @@ public class ModelPerdana implements Parcelable{
         this.nama = nama;
         this.stok = stok;
         this.harga = 0;
+    }
+
+    public ModelPerdana(String nama, String surat_jalan, String hargaString, String stokString, String tanggal, String kodegudang, String kodebrg){
+
+        this.nama = nama;
+        this.surat_jalan = surat_jalan;
+        this.hargaString = hargaString;
+        this.stokString = stokString;
+        this.tanggal = tanggal;
+        this.kodegudang = kodegudang;
+        this.kodebrg = kodebrg;
     }
 
     public String getSurat_jalan() {
@@ -78,5 +90,45 @@ public class ModelPerdana implements Parcelable{
         dest.writeString(this.surat_jalan);
         dest.writeInt(this.harga);
         dest.writeInt(this.stok);
+    }
+
+    public String getHargaString() {
+        return hargaString;
+    }
+
+    public void setHargaString(String hargaString) {
+        this.hargaString = hargaString;
+    }
+
+    public String getStokString() {
+        return stokString;
+    }
+
+    public void setStokString(String stokString) {
+        this.stokString = stokString;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
+    }
+
+    public String getKodegudang() {
+        return kodegudang;
+    }
+
+    public void setKodegudang(String kodegudang) {
+        this.kodegudang = kodegudang;
+    }
+
+    public String getKodebrg() {
+        return kodebrg;
+    }
+
+    public void setKodebrg(String kodebrg) {
+        this.kodebrg = kodebrg;
     }
 }

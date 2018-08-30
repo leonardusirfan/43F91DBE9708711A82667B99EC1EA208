@@ -36,7 +36,9 @@
             android:layout_weight="0.9"
             android:background="@android:color/transparent"
             android:hint="@string/ccid"
-            android:inputType="text"
+            android:id="@+id/edt_search"
+            android:inputType="numberSigned"
+            android:imeOptions="actionSearch"
             android:padding="@dimen/padding5"
             android:textSize="@dimen/text16" />
 

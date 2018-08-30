@@ -3,12 +3,20 @@ package id.net.gmedia.perkasaapp;
 public class ModelCcid {
     private String ccid;
     private String nama;
-    private int harga;
+    private String harga;
+    private boolean selected;
 
-    public ModelCcid(String ccid, String nama, int harga){
+    public ModelCcid(String ccid, String nama, String harga){
         this.ccid = ccid;
         this.nama = nama;
         this.harga = harga;
+    }
+
+    public ModelCcid(String ccid, String nama, String harga, boolean selected){
+        this.ccid = ccid;
+        this.nama = nama;
+        this.harga = harga;
+        this.selected = selected;
     }
 
     public String getCcid() {
@@ -19,7 +27,15 @@ public class ModelCcid {
         return nama;
     }
 
-    public int getHarga() {
+    public String getHarga() {
         return harga;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

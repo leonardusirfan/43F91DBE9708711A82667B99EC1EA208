@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.maulana.custommodul.ItemValidation;
+
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
@@ -21,6 +23,7 @@ public class AdapterOrderPerdanaCcid extends RecyclerView.Adapter<AdapterOrderPe
     private Context context;
     private List<ModelCcid> listCcid;
     private TextView txt_no, txt_nama, txt_harga;
+    private ItemValidation iv = new ItemValidation();
 
     public AdapterOrderPerdanaCcid(Context context, List<ModelCcid> listCcid, TextView txt_no, TextView txt_nama, TextView txt_harga){
         this.listCcid = listCcid;
@@ -43,8 +46,8 @@ public class AdapterOrderPerdanaCcid extends RecyclerView.Adapter<AdapterOrderPe
         final ModelCcid ccid = listCcid.get(current_idx);
 
         holder.txt_no_ccid.setText(String.valueOf(position + 1));
-        holder.txt_nama_ccid.setText(ccid.getNama());
-        holder.txt_harga_ccid.setText(RupiahFormatterUtil.getRupiah(ccid.getHarga()));
+        holder.txt_nama_ccid.setText(ccid.getCcid());
+        holder.txt_harga_ccid.setText(iv.ChangeToCurrencyFormat(ccid.getHarga()));
 
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +62,7 @@ public class AdapterOrderPerdanaCcid extends RecyclerView.Adapter<AdapterOrderPe
             public void onClick(View v) {
                 txt_no.setText(ccid.getCcid());
                 txt_nama.setText(ccid.getNama());
-                txt_harga.setText(RupiahFormatterUtil.getRupiah(ccid.getHarga()));
+                txt_harga.setText(iv.ChangeToCurrencyFormat(ccid.getHarga()));
             }
         });
     }
