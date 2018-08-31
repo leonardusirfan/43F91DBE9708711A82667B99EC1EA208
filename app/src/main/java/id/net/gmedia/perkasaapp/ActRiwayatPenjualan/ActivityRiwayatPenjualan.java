@@ -5,6 +5,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -201,6 +203,24 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                 return false;
             }
         });
+
+        txt_nama.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                keyword = editable.toString();
+            }
+        });
     }
 
     private void initData() {
@@ -246,8 +266,8 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                             //header
                             if(!lastTgl.equals(jo.getString("tgl"))){
 
-                                lastTgl = iv.ChangeFormatDateString(jo.getString("tgl"), FormatItem.formatDate, FormatItem.formatDateDisplay);
-                                listRiwayat.add(new CustomItem("H", lastTgl));
+                                lastTgl = jo.getString("tgl");
+                                listRiwayat.add(new CustomItem("H", iv.ChangeFormatDateString(lastTgl, FormatItem.formatDate, FormatItem.formatDateDisplay)));
 
                                 totalPerNama = 0;
                             }

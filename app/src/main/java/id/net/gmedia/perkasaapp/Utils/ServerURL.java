@@ -2,7 +2,8 @@ package id.net.gmedia.perkasaapp.Utils;
 
 public class ServerURL {
 
-    private static final String baseUrl = "http://192.168.17.15/perkasa-sales/";
+    //private static final String baseUrl = "http://192.168.17.15/perkasa-sales/";
+    private static final String baseUrl = "http://36.66.177.165/sales/";
 
     public static final String auth = baseUrl + "authentication/";
     public static final String getResellerMkios = baseUrl + "mkios/view_reseller/";
