@@ -80,28 +80,55 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_head" />
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="@string/posisi_user"
-            android:textSize="@dimen/text14"
+            android:orientation="horizontal"
+            android:id="@+id/ll_jarak"
+            android:layout_marginTop="@dimen/padding10"
             app:layout_constraintBottom_toTopOf="@+id/btn_peta"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_keterangan" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_keterangan"
+            android:weightSum="1">
 
-        <TextView
-            android:id="@+id/txt_posisi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/txt_keterangan" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/posisi_user"
+                    android:textSize="@dimen/text14"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_jarak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text18"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_height_thor"
+                    android:layout_height="@dimen/ic_height_thor"
+                    android:background="?attr/selectableItemBackground"
+                    android:id="@+id/iv_refresh_jarak"
+                    android:src="@mipmap/ic_refresh"/>
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView17"
@@ -165,7 +192,7 @@
             android:padding="@dimen/padding5"
             android:text=""
             android:textSize="@dimen/text14"
-            app:layout_constraintBottom_toTopOf="@+id/textView18"
+            app:layout_constraintBottom_toTopOf="@+id/ll_jarak"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -200,7 +227,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_proses"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_jarak" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

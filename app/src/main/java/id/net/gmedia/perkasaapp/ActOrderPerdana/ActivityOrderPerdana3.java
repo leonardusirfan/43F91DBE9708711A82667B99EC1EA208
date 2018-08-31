@@ -39,6 +39,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -152,6 +153,9 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     private RadioButton rbSegel, rbEvent;
     private RadioGroup rgJenisBarang;
     public static final String flag = "PERDANA";
+    private TextView tvJarak;
+    private ImageView ivRefreshJarak;
+    private boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -528,11 +532,15 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         btn_rentang = findViewById(R.id.btn_rentang);
         btn_scan = findViewById(R.id.btn_scan);
         btnProses = (Button) findViewById(R.id.btn_proses);
+        tvJarak = (TextView) findViewById(R.id.tv_jarak);
+        ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
 
         rbSegel = (RadioButton) findViewById(R.id.rb_segel);
         rbEvent = (RadioButton) findViewById(R.id.rb_event);
 
         rgJenisBarang = (RadioGroup) findViewById(R.id.rg_jenis_barang);
+
+        isLoading = false;
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -608,6 +616,14 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                             }
                         })
                         .show();
+            }
+        });
+
+        ivRefreshJarak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!isLoading) updateAllLocation();
             }
         });
     }
@@ -1232,9 +1248,86 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
 
-        /*if(!isUpdateLocation && !editMode){
-            getJarak();
-        }*/
+        if(!isUpdateLocation/* && !editMode*/){
+            if(!isLoading) getJarak();
+        }
+    }
+
+    private void getJarak() {
+
+        isLoading = true;
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("nomor", "");
+            jBody.put("latitude", iv.doubleToStringFull(latitude));
+            jBody.put("longitude", iv.doubleToStringFull(longitude));
+            jBody.put("kdcus", kdcus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getJarakReseller, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONObject jo = response.getJSONObject("response");
+                        String jarak = jo.getString("jarak");
+                        tvJarak.setText(jarak);
+
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getJarak();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getJarak();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+            }
+        });
     }
 
     @Override

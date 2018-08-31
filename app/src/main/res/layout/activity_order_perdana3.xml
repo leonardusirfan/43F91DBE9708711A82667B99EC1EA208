@@ -73,16 +73,57 @@
             app:layout_constraintStart_toEndOf="@+id/btn_peta"
             app:layout_constraintTop_toTopOf="@+id/btn_peta" />
 
-        <TextView
-            android:id="@+id/textView70"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/ll_jarak"
             android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
             android:layout_marginTop="@dimen/padding10"
-            android:text="@string/posisi_user"
-            style="@style/TitleText"
+            app:layout_constraintBottom_toTopOf="@+id/btn_peta"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/posisi_user"
+                    android:textSize="@dimen/text14"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_jarak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text18"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_height_thor"
+                    android:layout_height="@dimen/ic_height_thor"
+                    android:background="?attr/selectableItemBackground"
+                    android:id="@+id/iv_refresh_jarak"
+                    android:src="@mipmap/ic_refresh"/>
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView67"
@@ -395,18 +436,6 @@
                 style="@style/ValueText" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_posisi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/jarak_0"
-            style="@style/ValueText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView70" />
-
         <Button
             android:id="@+id/btn_peta"
             android:layout_width="0dp"
@@ -423,7 +452,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_proses"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_posisi" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_jarak" />
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
