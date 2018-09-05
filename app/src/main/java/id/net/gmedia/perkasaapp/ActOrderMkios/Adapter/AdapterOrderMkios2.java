@@ -1,5 +1,6 @@
 package id.net.gmedia.perkasaapp.ActOrderMkios.Adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -24,9 +25,11 @@ public class AdapterOrderMkios2 extends RecyclerView.Adapter<AdapterOrderMkios2.
 
     private List<ModelPulsa> listPulsa;
     private ItemValidation iv = new ItemValidation();
+    private Context context;
 
-    public AdapterOrderMkios2(List<ModelPulsa> listPulsa) {
+    public AdapterOrderMkios2(List<ModelPulsa> listPulsa, Context context) {
         this.listPulsa = listPulsa;
+        this.context = context;
     }
 
     public List<ModelPulsa> getItems(){
@@ -85,7 +88,7 @@ public class AdapterOrderMkios2 extends RecyclerView.Adapter<AdapterOrderMkios2.
                     listPulsa.get(position).setTotalHarga("0");
                 }
 
-                ActivityOrderMkios2.updateHarga();
+                ((ActivityOrderMkios2) context).updateHarga();
             }
         });
     }

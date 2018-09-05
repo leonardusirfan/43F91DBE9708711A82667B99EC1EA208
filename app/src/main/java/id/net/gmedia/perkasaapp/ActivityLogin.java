@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,8 @@ import com.maulana.custommodul.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import id.net.gmedia.perkasaapp.NotificationUtils.InitFirebaseSetting;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
@@ -35,6 +38,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private Button btn_login;
     private static final int REQUEST_PERMISSIONS = 20;
     private String refreshToken = "";
+    private String imei1 = "", imei2 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +69,17 @@ public class ActivityLogin extends RuntimePermissionsActivity {
 
         if (ContextCompat.checkSelfPermission(
                 ActivityLogin.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityLogin.super.requestAppPermissions(new
                             String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
                     , Manifest.permission.ACCESS_COARSE_LOCATION
+                    , Manifest.permission.READ_PHONE_STATE
+                    , Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    , Manifest.permission.READ_EXTERNAL_STORAGE
                     }, R.string
                             .runtime_permissions_txt
                     , REQUEST_PERMISSIONS);
@@ -123,11 +133,37 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        ArrayList<String> imeiList = iv.getIMEI(context);
+        if(imeiList.size() > 1){ // dual sim
+            imei1 = imeiList.get(0);
+            imei2 = imeiList.get(1);
+        }else if(imeiList.size() == 1){ // single sim
+            imei1 = imeiList.get(0);
+        }
+
+        PackageInfo pInfo = null;
+        String version = "";
+
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        version = pInfo.versionName;
+
+        String deviceName = android.os.Build.MODEL;
+        String deviceMan = android.os.Build.MANUFACTURER;
+
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("username", txt_username.getText().toString());
             jBody.put("password", txt_password.getText().toString());
             jBody.put("fcm_id", refreshToken);
+            jBody.put("imei1", imei1);
+            jBody.put("imei2", imei2);
+            jBody.put("phone_model", deviceMan +" "+ deviceName);
+            jBody.put("version", version);
         } catch (JSONException e) {
             e.printStackTrace();
         }

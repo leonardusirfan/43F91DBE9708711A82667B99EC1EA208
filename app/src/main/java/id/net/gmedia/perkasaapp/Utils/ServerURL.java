@@ -16,4 +16,5 @@ public class ServerURL {
     public static final String getTransaksiHariIni = baseUrl + "Transaksi/today/";
     public static final String getRiwayatTransaksi = baseUrl + "Transaksi/history/";
     public static final String getJarakReseller = baseUrl + "Location/hitung_jarak/";
+    public static final String getLokasiReseller = baseUrl + "Location/view_outlet/";
 }

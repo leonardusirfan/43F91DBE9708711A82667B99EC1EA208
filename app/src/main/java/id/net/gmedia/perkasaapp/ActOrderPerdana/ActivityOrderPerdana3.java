@@ -82,6 +82,7 @@ import java.util.Locale;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.AdapterOrderPerdanaCcid;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.AdapterOrderPerdanaCcidRentang;
 import id.net.gmedia.perkasaapp.ActivityHome;
+import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.ModelCcid;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
@@ -156,6 +157,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     private TextView tvJarak;
     private ImageView ivRefreshJarak;
     private boolean isLoading = false;
+    private Button btnPeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +172,9 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         context = this;
         dialogBox = new DialogBox(context);
         session = new SessionManager(context);
+        allCcid = new ArrayList<>();
+        selectedCcid = new ArrayList<>();
+        checkBoxes = new ArrayList<>();
 
         initLocationUtils();
         initUI();
@@ -527,6 +532,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         txt_total_harga = findViewById(R.id.txt_total_harga);
         llTanggal = (LinearLayout) findViewById(R.id.ll_tanggal);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
+        btnPeta = (Button) findViewById(R.id.btn_peta);
 
         btn_list = findViewById(R.id.btn_list);
         btn_rentang = findViewById(R.id.btn_rentang);
@@ -624,6 +630,107 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             public void onClick(View view) {
 
                 if(!isLoading) updateAllLocation();
+            }
+        });
+
+        btnPeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getLokasiReseller();
+            }
+        });
+    }
+
+    private void getLokasiReseller() {
+
+        isLoading = true;
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("nomor", "");
+            jBody.put("keyword", "");
+            jBody.put("start", "");
+            jBody.put("count", "");
+            jBody.put("kdcus", kdcus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getLokasiReseller, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        JSONObject jo = ja.getJSONObject(0);
+                        String namaRS = jo.getString("nama");
+                        latitudeOutlet = jo.getString("latitude");
+                        longitudeOutlet = jo.getString("longitude");
+                        String photo = jo.getString("image");
+
+                        if(latitude != 0 || longitude != 0){
+
+                            Intent intent = new Intent(context, MapsResellerActivity.class);
+                            intent.putExtra("lat", iv.doubleToStringFull(latitude));
+                            intent.putExtra("long", iv.doubleToStringFull(longitude));
+                            intent.putExtra("lat_outlet", latitudeOutlet);
+                            intent.putExtra("long_outlet", longitudeOutlet);
+                            intent.putExtra("nama", namaRS);
+                            intent.putExtra("photo", photo);
+
+                            startActivity(intent);
+                        }
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getLokasiReseller();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getLokasiReseller();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -1256,7 +1363,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     private void getJarak() {
 
         isLoading = true;
-        dialogBox.showDialog(true);
+        //dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
 
         try {
@@ -1273,7 +1380,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             public void onSuccess(String result) {
 
                 isLoading = false;
-                dialogBox.dismissDialog();
+                //dialogBox.dismissDialog();
                 String message = "";
 
                 try {
@@ -1296,7 +1403,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                 } catch (JSONException e) {
 
                     e.printStackTrace();
-                    View.OnClickListener clickListener = new View.OnClickListener() {
+                    /*View.OnClickListener clickListener = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 
@@ -1305,17 +1412,15 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                         }
                     };
 
-                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");*/
                 }
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(String result) {
 
                 isLoading = false;
-                dialogBox.dismissDialog();
+                /*dialogBox.dismissDialog();
                 View.OnClickListener clickListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1325,7 +1430,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                     }
                 };
 
-                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");*/
             }
         });
     }

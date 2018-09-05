@@ -49,6 +49,7 @@ import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,6 +58,7 @@ import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActOrderMkios.Adapter.AdapterOrderMkios2;
 import id.net.gmedia.perkasaapp.ActivityHome;
+import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.ModelPulsa;
 import id.net.gmedia.perkasaapp.R;
@@ -64,8 +66,8 @@ import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityOrderMkios2 extends AppCompatActivity implements LocationListener {
 
-    private static List<ModelPulsa> listPulsa = new ArrayList<>();
-    private static double totalHarga;
+    private List<ModelPulsa> listPulsa = new ArrayList<>();
+    private double totalHarga;
     private Context context;
     private SessionManager session;
     private String nomor = "", kodeCV = "";
@@ -109,6 +111,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private boolean isUpdateLocation = false;
     private TextView tvJarak;
     private ImageView ivRefreshJarak;
+    private Button btnPeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +164,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         btnProses = (Button) findViewById(R.id.btn_proses);
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
+        btnPeta = (Button) findViewById(R.id.btn_peta);
 
         if(getIntent().hasExtra("nomor")){
             //ModelOutlet mkios = getIntent().getParcelableExtra("mkios");
@@ -172,7 +176,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         isLoading = false;
 
         listPulsa = new ArrayList<>();
-        adapter = new AdapterOrderMkios2(listPulsa);
+        adapter = new AdapterOrderMkios2(listPulsa, context);
         RecyclerView rcy_pulsa = findViewById(R.id.rcy_pulsa);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rcy_pulsa.setLayoutManager(layoutManager);
@@ -327,6 +331,107 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                 if(!isLoading) updateAllLocation();
             }
         });
+
+        btnPeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getLokasiReseller();
+            }
+        });
+    }
+
+    private void getLokasiReseller() {
+
+        isLoading = true;
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("nomor", nomor);
+            jBody.put("keyword", "");
+            jBody.put("start", "");
+            jBody.put("count", "");
+            jBody.put("kdcus", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getLokasiReseller, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        JSONObject jo = ja.getJSONObject(0);
+                        String namaRS = jo.getString("nama");
+                        latitudeOutlet = jo.getString("latitude");
+                        longitudeOutlet = jo.getString("longitude");
+                        String photo = jo.getString("image");
+
+                        if(latitude != 0 || longitude != 0){
+
+                            Intent intent = new Intent(context, MapsResellerActivity.class);
+                            intent.putExtra("lat", iv.doubleToStringFull(latitude));
+                            intent.putExtra("long", iv.doubleToStringFull(longitude));
+                            intent.putExtra("lat_outlet", latitudeOutlet);
+                            intent.putExtra("long_outlet", longitudeOutlet);
+                            intent.putExtra("nama", namaRS);
+                            intent.putExtra("photo", photo);
+
+                            startActivity(intent);
+                        }
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getLokasiReseller();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                isLoading = false;
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getLokasiReseller();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void saveData() {
@@ -399,7 +504,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         });
     }
 
-    public static void updateHarga(){
+    public void updateHarga(){
 
         totalHarga = 0;
         if(listPulsa != null && listPulsa.size() > 0){
@@ -746,7 +851,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private void getJarak() {
 
         isLoading = true;
-        dialogBox.showDialog(true);
+        //dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
 
         try {
@@ -763,7 +868,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
             public void onSuccess(String result) {
 
                 isLoading = false;
-                dialogBox.dismissDialog();
+                //dialogBox.dismissDialog();
                 String message = "";
 
                 try {
@@ -786,7 +891,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                 } catch (JSONException e) {
 
                     e.printStackTrace();
-                    View.OnClickListener clickListener = new View.OnClickListener() {
+                    /*View.OnClickListener clickListener = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 
@@ -795,17 +900,16 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                         }
                     };
 
-                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");*/
+                    Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
                 }
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(String result) {
 
                 isLoading = false;
-                dialogBox.dismissDialog();
+                /*dialogBox.dismissDialog();
                 View.OnClickListener clickListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -815,7 +919,8 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                     }
                 };
 
-                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");*/
+                Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
             }
         });
     }
