@@ -209,6 +209,17 @@
             app:layout_constraintTop_toBottomOf="@+id/ll_jenis_barang" />
 
         <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginTop="@dimen/padding10"
+            style="@style/TitleText"
+            android:text="@string/harga"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
+
+        <TextView
             android:id="@+id/txt_harga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -220,15 +231,49 @@
             app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
         <TextView
-            android:id="@+id/textView58"
+            android:id="@+id/textView64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/padding10"
             android:layout_marginTop="@dimen/padding10"
             style="@style/TitleText"
-            android:text="@string/harga"
+            android:text="@string/jenis_transaksi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_harga" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_jenis_transaksi"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView64"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rb_tunai"
+                android:checked="true"
+                android:text="Tunai"/>
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rb_tempo"
+                android:text="Tempo"/>
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rb_transfer"
+                android:text="Transfer"/>
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -313,7 +358,7 @@
             style="@style/TitleText"
             android:text="@string/tanggal_tempo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_harga" />
+            app:layout_constraintTop_toBottomOf="@+id/rg_jenis_transaksi" />
 
         <TextView
             android:id="@+id/txt_nama"

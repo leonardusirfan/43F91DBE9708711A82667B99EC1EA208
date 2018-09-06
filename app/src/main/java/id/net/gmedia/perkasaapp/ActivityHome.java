@@ -31,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
+import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
+import id.net.gmedia.perkasaapp.ActMarketSurvey.ListMarketSurvey;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios1;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
@@ -72,20 +74,23 @@ public class ActivityHome extends AppCompatActivity
 
         //Inisialisasi button UI
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain,
-                btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan;
+                btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
+                , btn_market_survey;
+
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
         btn_hari_ini = findViewById(R.id.btn_hari_ini);
-        btn_stok = findViewById(R.id.btn_stok);
-        btn_piutang = findViewById(R.id.btn_piutang);
-        btn_komplain = findViewById(R.id.btn_komplain);
         btn_tcash = findViewById(R.id.btn_tcash);
         btn_verifikasi = findViewById(R.id.btn_verifikasi);
         btn_lokasi = findViewById(R.id.btn_lokasi);
         btn_riwayat = findViewById(R.id.btn_riwayat);
-        btn_customer = findViewById(R.id.btn_customer);
-        btn_preorder = findViewById(R.id.btn_preorder);
-        btn_kunjungan = findViewById(R.id.btn_kunjungan);
+        //btn_customer = findViewById(R.id.btn_customer);
+        //btn_piutang = findViewById(R.id.btn_piutang);
+        //btn_stok = findViewById(R.id.btn_stok);
+        //btn_kunjungan = findViewById(R.id.btn_kunjungan);
+        //btn_komplain = findViewById(R.id.btn_komplain);
+        //btn_preorder = findViewById(R.id.btn_preorder);
+        btn_market_survey = (LinearLayout) findViewById(R.id.btn_market_survey);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +113,53 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
+        btn_tcash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityOrderTcash1.class));
+            }
+        });
+
+        btn_verifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityVerifikasiOutlet1.class));
+            }
+        });
+
+        btn_lokasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityLokasiOutlet1.class));
+            }
+        });
+
+        btn_riwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityRiwayatPenjualan.class));
+            }
+        });
+
+        /*btn_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityTambahCustomer1.class));
+            }
+        });
+        btn_preorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));
+            }
+        });
+        btn_kunjungan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
+            }
+        });
+
         btn_stok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,49 +179,13 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityKomplain1.class));
             }
-        });
+        });*/
 
-        btn_tcash.setOnClickListener(new View.OnClickListener() {
+        btn_market_survey.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityOrderTcash1.class));
-            }
-        });
+            public void onClick(View view) {
 
-        btn_verifikasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityVerifikasiOutlet1.class));
-            }
-        });
-        btn_lokasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityLokasiOutlet1.class));
-            }
-        });
-        btn_riwayat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityRiwayatPenjualan.class));
-            }
-        });
-        btn_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityTambahCustomer1.class));
-            }
-        });
-        btn_preorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));
-            }
-        });
-        btn_kunjungan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
+                startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));
             }
         });
 
@@ -185,8 +201,15 @@ public class ActivityHome extends AppCompatActivity
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
+
             String flag = bundle.getString("flag", "");
-            if(flag.equals(ActivityOrderMkios2.flag) || flag.equals(ActivityOrderPerdana3.flag)) startActivity(new Intent(ActivityHome.this, ActivityPenjualanHariIni.class));
+            if(flag.equals(ActivityOrderMkios2.flag) || flag.equals(ActivityOrderPerdana3.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ActivityPenjualanHariIni.class));
+            }else if(flag.equals(DetailMarketSurvey.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));
+            }
         }
     }
 
@@ -239,7 +262,7 @@ public class ActivityHome extends AppCompatActivity
                     String status = responseAPI.getJSONObject("metadata").getString("status");
 
                     if(iv.parseNullInteger(status) == 200){
-                        latestVersion = responseAPI.getJSONObject("response").getString("versi");
+                        latestVersion = responseAPI.getJSONObject("response").getString("version");
                         link = responseAPI.getJSONObject("response").getString("link");
                         updateRequired = (iv.parseNullInteger(responseAPI.getJSONObject("response").getString("wajib")) == 1) ? true : false;
 
@@ -405,6 +428,7 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_customer:startActivity(new Intent(ActivityHome.this, ActivityTambahCustomer1.class));break;
             case R.id.nav_preorder:startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));break;
             case R.id.nav_kunjungan:startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));break;
+            case R.id.nav_market_survey:startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));break;
             case R.id.nav_logout:session.logoutUser(new Intent(context, ActivityLogin.class));break;
             default:
                 //System.out.println(id);

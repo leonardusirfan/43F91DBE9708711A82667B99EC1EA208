@@ -7,4 +7,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="ic_height">30dp</dimen>
     <dimen name="ic_height_thor">40dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="menu_height">100dp</dimen>
 </resources>

@@ -622,13 +622,14 @@ public class ItemValidation {
 
     //region Nullable value
     public int parseNullInteger(String s){
+
         int result = 0;
         if(s != null && s.length() > 0){
             try {
                 result = Integer.parseInt(s);
             }catch (Exception e){
+                result = 0;
                 e.printStackTrace();
-
             }
         }
         return result;

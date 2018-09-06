@@ -73,9 +73,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -158,6 +160,8 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     private ImageView ivRefreshJarak;
     private boolean isLoading = false;
     private Button btnPeta;
+    private String tanggalTempo = "", resellerTempo = "", currentCrbayar = "";
+    private RadioGroup rgJenisTransaksi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +185,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         initEvent();
         //Mengisi allCcid yang berisi list CCID yang bisa dibeli
         initCcid(1, "", "", "");
+        initDataReseller();
 
         //Inisialisasi dialog list CCID
         dialog_list = new Dialog(ActivityOrderPerdana3.this, R.style.PopupTheme);
@@ -415,6 +420,76 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         });
     }
 
+    private void initDataReseller() {
+
+        isLoading = true;
+        //dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("kdcus", kdcus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerInfo, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                isLoading = false;
+                //dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONObject jo = response.getJSONObject("response");
+                        resellerTempo = jo.getString("tempo");
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            initDataReseller();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                isLoading = false;
+                //dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        initDataReseller();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+            }
+        });
+    }
+
     private void initLocationUtils() {
 
         // getLocation update by google
@@ -533,6 +608,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         llTanggal = (LinearLayout) findViewById(R.id.ll_tanggal);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
         btnPeta = (Button) findViewById(R.id.btn_peta);
+        rgJenisTransaksi = (RadioGroup) findViewById(R.id.rg_jenis_transaksi);
 
         btn_list = findViewById(R.id.btn_list);
         btn_rentang = findViewById(R.id.btn_rentang);
@@ -564,14 +640,24 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
 
     private void initEvent() {
 
-        String curdate = iv.getCurrentDate(FormatItem.formatDateDisplay);
-        edtTanggal.setText(curdate);
+        tanggalTempo = iv.getCurrentDate(FormatItem.formatDate);
+        edtTanggal.setText(iv.getCurrentDate(FormatItem.formatDateDisplay));
+        currentCrbayar = "T";
 
         llTanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
+                Date dateValue = null;
                 final Calendar customDate;
+
+                try {
+                    dateValue = sdf.parse(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 customDate = Calendar.getInstance();
                 final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -581,11 +667,13 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                         customDate.set(Calendar.DATE,date);
 
                         SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
+                        tanggalTempo = iv.ChangeFormatDateString(sdFormat.format(customDate.getTime()), FormatItem.formatDateDisplay, FormatItem.formatDate);
                         edtTanggal.setText(sdFormat.format(customDate.getTime()));
                     }
                 };
 
-                new DatePickerDialog(context,date,customDate.get(Calendar.YEAR),customDate.get(Calendar.MONTH),customDate.get(Calendar.DATE)).show();
+                SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+                new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
             }
         });
 
@@ -608,7 +696,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
-                        .setMessage("Apakah anda yakin melakukan penjualan "+String.valueOf(selectedCcid.size())+ " dengan harga" + txt_total_harga.getText().toString() +" ?")
+                        .setMessage("Apakah anda yakin melakukan penjualan "+String.valueOf(selectedCcid.size())+ " item dengan harga " + txt_total_harga.getText().toString() +" ?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -638,6 +726,28 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             public void onClick(View view) {
 
                 getLokasiReseller();
+            }
+        });
+
+        rgJenisTransaksi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(radioGroup.getCheckedRadioButtonId() == R.id.rb_tempo){
+
+                    currentCrbayar = "T";
+                    tanggalTempo = iv.sumDate(tanggalTempo, iv.parseNullInteger(resellerTempo),FormatItem.formatDate);
+                }else if(radioGroup.getCheckedRadioButtonId() == R.id.rb_tempo){
+
+                    currentCrbayar = "K";
+                    tanggalTempo = iv.getCurrentDate(FormatItem.formatDate);
+                }else{
+
+                    currentCrbayar = "B";
+                    tanggalTempo = iv.getCurrentDate(FormatItem.formatDate);
+                }
+
+                edtTanggal.setText(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
             }
         });
     }
@@ -776,7 +886,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             jualH.put("usertgl", iv.getCurrentDate(FormatItem.formatTimestamp));
             jualH.put("status", "1");
             jualH.put("nomutasi", suratJalan);
-            jualH.put("crbayar", "T");
+            jualH.put("crbayar", currentCrbayar);
             jualH.put("jenis_barang", jenisBarang);
         } catch (JSONException e) {
             e.printStackTrace();

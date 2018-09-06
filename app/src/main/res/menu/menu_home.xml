@@ -16,19 +16,23 @@
         <item
             android:id="@+id/nav_tcash"
             android:icon="@drawable/order_tcash_putih"
-            android:title="Order Tcash"/>
+            android:title="Order Tcash"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_verifikasi"
             android:icon="@drawable/verifikasi_outlet_putih"
-            android:title="Verifikasi Outlet"/>
+            android:title="Verifikasi Outlet"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_lokasi"
             android:icon="@drawable/lokasi_grey"
-            android:title="Lokasi Outlet"/>
+            android:title="Lokasi Outlet"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_customer"
             android:icon="@drawable/tambah_customer_putih"
-            android:title="Tambah Customer"/>
+            android:title="Tambah Customer"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_hari_ini"
             android:icon="@drawable/penjualan_hari_ini_putih"
@@ -40,23 +44,32 @@
         <item
             android:id="@+id/nav_piutang"
             android:icon="@drawable/piutang_putih"
-            android:title="Daftar Piutang"/>
+            android:title="Daftar Piutang"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_stok"
             android:icon="@drawable/stok_perdana"
-            android:title="Stok Perdana"/>
+            android:title="Stok Perdana"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_kunjungan"
             android:icon="@drawable/kunjungan_putih"
-            android:title="Kunjungan"/>
+            android:title="Kunjungan"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_preorder"
             android:icon="@drawable/preorder_perdana_putih"
-            android:title="Preorder Perdana"/>
+            android:title="Preorder Perdana"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_komplain"
             android:icon="@drawable/complaint_putih"
-            android:title="Komplain"/>
+            android:title="Komplain"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_market_survey"
+            android:icon="@drawable/complaint_putih"
+            android:title="Market Survey"/>
     </group>
 
     <item android:title="Akun">
@@ -68,7 +81,8 @@
             <item
                 android:id="@+id/nav_password"
                 android:icon="@drawable/pass_putih"
-                android:title="Order Tcash"/>
+                android:title="Ubah Password"
+                android:visible="false"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout_putih"

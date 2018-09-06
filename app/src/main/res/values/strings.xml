@@ -17,6 +17,7 @@
     <string name="cari">Cari</string>
     <string name="ccid">CCID</string>
     <string name="harga">Harga</string>
+    <string name="jenis_transaksi">Jenis Transaksi</string>
     <string name="jenis_barang">Jenis Barang</string>
     <string name="total_ccid">Total CCID dan Harga</string>
     <string name="ccid_perdana">CCID Perdana</string>

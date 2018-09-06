@@ -147,13 +147,26 @@
         <activity
             android:name=".ActivityTambahCustomer2"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityPreorderPerdana1" />
-        <activity android:name=".ActivityPreorderPerdana2" />
-        <activity android:name=".ActKunjungan.ActivityKunjungan" />
-        <activity android:name=".ActKunjungan.ActivityKunjunganOutlet" />
-        <activity android:name=".ActKunjungan.ActivityKunjunganSales" />
-        <activity android:name=".ActivityPreorderPerdana3" />
-        <activity android:name=".MapsResellerActivity"></activity>
+        <activity android:name=".ActivityPreorderPerdana1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityPreorderPerdana2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActKunjungan.ActivityKunjungan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActKunjungan.ActivityKunjunganOutlet"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActKunjungan.ActivityKunjunganSales"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityPreorderPerdana3"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MapsResellerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActMarketSurvey.ListMarketSurvey"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActMarketSurvey.ListResellerMarketSurvey"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActMarketSurvey.DetailMarketSurvey"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
