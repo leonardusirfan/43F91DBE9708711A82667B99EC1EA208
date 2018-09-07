@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.maulana.custommodul.ApiVolley;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.RuntimePermissionsActivity;
 import com.maulana.custommodul.SessionManager;
@@ -61,7 +62,11 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private void initData() {
 
         if(session.isLoggedIn()){
-            redirectToLogin();
+
+            //redirectToLogin();
+            txt_username.setText(session.getUsername());
+            txt_password.setText(iv.decodeBase64(session.getPassword()));
+            saveData();
         }
     }
 
@@ -155,6 +160,10 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         String deviceName = android.os.Build.MODEL;
         String deviceMan = android.os.Build.MANUFACTURER;
 
+        String curdate = iv.getCurrentDate(FormatItem.formatTimestamp);
+        String sessions = iv.encodeMD5(curdate);
+        String expiration = iv.sumDate(curdate, 7,FormatItem.formatTimestamp);
+
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("username", txt_username.getText().toString());
@@ -164,6 +173,8 @@ public class ActivityLogin extends RuntimePermissionsActivity {
             jBody.put("imei2", imei2);
             jBody.put("phone_model", deviceMan +" "+ deviceName);
             jBody.put("version", version);
+            jBody.put("session", sessions);
+            jBody.put("expiration", expiration);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -191,7 +202,8 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                         session.createLoginSession(username,
                                 nikGa,
                                 nikMkios,
-                                nama);
+                                nama,
+                                iv.encodeBase64(txt_password.getText().toString()));
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                         redirectToLogin();

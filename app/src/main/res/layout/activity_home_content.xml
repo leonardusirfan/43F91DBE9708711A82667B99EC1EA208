@@ -481,7 +481,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="0.3"
                             android:layout_marginBottom="5dp"
-                            app:srcCompat="@drawable/kunjungan"/>
+                            app:srcCompat="@drawable/ic_survey_market"/>
 
                         <TextView
                             android:layout_width="match_parent"

@@ -39,6 +39,7 @@ import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
+import id.net.gmedia.perkasaapp.Services.LocationUpdater;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityHome extends AppCompatActivity
@@ -189,6 +190,13 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
+        if(!session.isLoggedIn()){
+            Intent intent = new Intent(context, ActivityLogin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
         //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -218,13 +226,12 @@ public class ActivityHome extends AppCompatActivity
         super.onResume();
 
         session = new SessionManager(context);
-        if(!session.isLoggedIn()){
+        if(session.isLoggedIn()){
 
-            /*if(iv.isServiceRunning(context, LocationUpdater.class)){
+            if(iv.isServiceRunning(context, LocationUpdater.class)){
                 //stopCurrentService();
             }
-            Intent intent = new Intent(context, ActivityLogin.class);
-            session.logoutUser(intent);*/
+
         }
 
         statusCheck();
@@ -339,9 +346,9 @@ public class ActivityHome extends AppCompatActivity
                     }
 
                     public void onFinish() {
-                        /*if(!iv.isServiceRunning(MainNavigationActivity.this, LocationUpdater.class)){
+                        if(!iv.isServiceRunning(context, LocationUpdater.class)){
                             startService(new Intent(getApplicationContext(), LocationUpdater.class));
-                        }*/
+                        }
                     }
 
                 }.start();

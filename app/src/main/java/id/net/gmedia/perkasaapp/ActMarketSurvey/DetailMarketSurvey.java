@@ -50,6 +50,7 @@ import com.google.android.gms.tasks.Task;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
@@ -115,6 +116,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
     private EditText edtKeterangan;
     private String state = "";
     public static final String flag = "MARKETSURVEY";
+    private String idSurvey = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,8 +170,102 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
             kdcus = bundle.getString("kdcus", "");
             String nama = bundle.getString("nama", "");
 
+            idSurvey = bundle.getString("id", "");
+
             tvNama.setText(nama);
+
+            if(!idSurvey.isEmpty()){
+
+                btnProses.setEnabled(false);
+            }else{
+                btnProses.setEnabled(true);
+            }
         }
+    }
+
+    private void getDetailSurvey() {
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("id", idSurvey);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getMarketSurvey, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONObject jo = response.getJSONObject("response");
+
+                        for(CustomItem tsel:listTelkomsel){
+
+                            tsel.setItem3(jo.getString("unit_"+tsel.getItem1()));
+                        }
+
+                        for(CustomItem nonTsel:listNonTelkomsel){
+
+                            nonTsel.setItem3(jo.getString("unit_"+nonTsel.getItem1()+"_small"));
+                            nonTsel.setItem4(jo.getString("unit_"+nonTsel.getItem1()+"_medium"));
+                            nonTsel.setItem5(jo.getString("unit_"+nonTsel.getItem1()+"_high"));
+                        }
+
+                        latitude = iv.parseNullDouble(jo.getString("latitude"));
+                        longitude = iv.parseNullDouble(jo.getString("longitude"));
+                        state = jo.getString("state");
+
+                        getJarak();
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDetailSurvey();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                }
+
+                adapterTelkomsel.notifyDataSetChanged();
+                adapterNonTelkomsel.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDetailSurvey();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+            }
+        });
     }
 
 
@@ -202,6 +298,12 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
             public void onClick(View view) {
 
                 //Validasi
+
+                if(!idSurvey.isEmpty()){
+
+                    Toast.makeText(context, "Maaf data yang sudah tersimpan tidak dapat diubah", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 boolean isTselEmpty = true;
                 for(CustomItem tsel : listTelkomsel){
@@ -359,6 +461,8 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
                 adapterTelkomsel.notifyDataSetChanged();
                 adapterNonTelkomsel.notifyDataSetChanged();
+
+                if(!idSurvey.isEmpty()) getDetailSurvey();
             }
 
             @Override
@@ -391,6 +495,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
         JSONObject jBody = new JSONObject();
         try {
+
             jBody.put("kdcus", kdcus);
 
             for(CustomItem tsel : listTelkomsel){
@@ -413,6 +518,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
             ArrayList<String> imeis = iv.getIMEI(context);
             if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
             jBody.put("imei", imei);
+            jBody.put("jarak", jarak);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -850,7 +956,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
 
-        if(!isUpdateLocation/* && !editMode*/){
+        if(!isUpdateLocation && idSurvey.isEmpty()){
             if(!isLoading) getJarak();
         }
     }

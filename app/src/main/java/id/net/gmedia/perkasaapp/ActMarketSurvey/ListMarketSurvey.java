@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -92,6 +93,19 @@ public class ListMarketSurvey extends AppCompatActivity {
         listSurvey = new ArrayList<>();
         adapter = new ListMarketSurveyAdapter((Activity) context, listSurvey);
         lvSurvey.setAdapter(adapter);
+
+        lvSurvey.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(context, DetailMarketSurvey.class);
+                intent.putExtra("id", item.getItem1());
+                intent.putExtra("kdcus", item.getItem5());
+                intent.putExtra("nama", item.getItem3());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     private void initEvent() {
@@ -235,6 +249,7 @@ public class ListMarketSurvey extends AppCompatActivity {
                                     ,iv.ChangeFormatDateString(jo.getString("tanggal"), FormatItem.formatDate, FormatItem.formatDateDisplay) + " "+jo.getString("jam")
                                     ,jo.getString("customer")
                                     ,jo.getString("state")
+                                    ,jo.getString("kdcus")
                             ));
 
                         }

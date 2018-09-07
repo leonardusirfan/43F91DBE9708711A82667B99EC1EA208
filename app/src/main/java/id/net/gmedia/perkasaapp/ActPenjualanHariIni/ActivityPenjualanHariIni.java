@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
@@ -152,18 +153,34 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                 JSONObject jo2 = jsonArray.getJSONObject(i+1);
                                 if(jo2.getString("nama").equals(jo.getString("nama")) && lastJenis.equals(jo2.getString("jenis"))){
 
-                                    listTransaksi.add(new CustomItem("I", jo.getString("nama"), jo.getString("total"), jo.getString("status")));
+                                    listTransaksi.add(new CustomItem(
+                                            "I"
+                                            , jo.getString("nama")
+                                            , jo.getString("total")
+                                            , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                    ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                 }else{
 
-                                    listTransaksi.add(new CustomItem("I", jo.getString("nama"), jo.getString("total"), jo.getString("status")));
+                                    listTransaksi.add(new CustomItem(
+                                            "I"
+                                            , jo.getString("nama")
+                                            , jo.getString("total")
+                                            , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                    ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                     listTransaksi.add(new CustomItem("F", String.valueOf(totalPerNama)));
                                     totalPerNama = 0;
                                 }
                             }else{
 
-                                listTransaksi.add(new CustomItem("I", jo.getString("nama"), jo.getString("total"), jo.getString("status")));
+                                listTransaksi.add(new CustomItem(
+                                        "I"
+                                        , jo.getString("nama")
+                                        , jo.getString("total")
+                                        , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+
+                                ));
                                 totalPerNama += iv.parseNullLong(jo.getString("total"));
                                 listTransaksi.add(new CustomItem("F", String.valueOf(totalPerNama)));
                                 totalPerNama = 0;

@@ -29,6 +29,7 @@ public class SessionManager {
 	public static final String TAG_NIK_GA = "nik_ga";
 	public static final String TAG_NIK_MKIOS = "nik_mkios";
 	public static final String TAG_NAMA = "nama";
+	public static final String TAG_PASSWORD = "password";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -40,7 +41,7 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String username, String nikGa, String nikMkios, String nama){
+	public void createLoginSession(String username, String nikGa, String nikMkios, String nama, String password){
 
 		editor.putString(TAG_USERNAME, username);
 
@@ -49,6 +50,8 @@ public class SessionManager {
 		editor.putString(TAG_NIK_MKIOS, nikMkios);
 
 		editor.putString(TAG_NAMA, nama);
+
+		editor.putString(TAG_PASSWORD, password);
 
 		// commit changes
 		editor.commit();
@@ -76,6 +79,10 @@ public class SessionManager {
 
 	public String getNama(){
 		return pref.getString(TAG_NAMA, "");
+	}
+
+	public String getPassword(){
+		return pref.getString(TAG_PASSWORD, "");
 	}
 
 	/**

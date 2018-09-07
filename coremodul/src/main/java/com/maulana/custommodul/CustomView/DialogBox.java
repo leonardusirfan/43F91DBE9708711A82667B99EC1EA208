@@ -260,6 +260,7 @@ public class DialogBox {
 
             final TextView tvText1 = (TextView) viewDialog.findViewById(R.id.tv_text1);
             tvText1.setText(message);
+            final ImageView ivCancel = (ImageView) viewDialog.findViewById(R.id.iv_cancel);
             final Button btnOK = (Button) viewDialog.findViewById(R.id.btn_ok);
 
             final AlertDialog alert = builder.create();
@@ -268,6 +269,21 @@ public class DialogBox {
             btnOK.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view2) {
+
+                    if(alert != null) {
+
+                        try {
+                            alert.dismiss();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            ivCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
                     if(alert != null) {
 

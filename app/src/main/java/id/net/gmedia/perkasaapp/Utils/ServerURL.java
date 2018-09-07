@@ -22,4 +22,5 @@ public class ServerURL {
     public static final String getProvider = baseUrl + "provider/master_provider/";
     public static final String saveMarketSurvey = baseUrl + "Market_Survey/add_survey/";
     public static final String getMarketSurvey = baseUrl + "Market_Survey/view_survey/";
+    public static final String logLocation = baseUrl + "location/log_location/";
 }

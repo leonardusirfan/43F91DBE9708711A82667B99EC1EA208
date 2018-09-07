@@ -47,6 +47,10 @@ public class AdapterProviderNonTelkomsel extends RecyclerView.Adapter<AdapterPro
         final CustomItem item = listItem.get(position);
 
         holder.tvItem1.setText(item.getItem2());
+        holder.edtItem1.setText(item.getItem3());
+        holder.edtItem2.setText(item.getItem4());
+        holder.edtItem3.setText(item.getItem5());
+
         holder.edtItem1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

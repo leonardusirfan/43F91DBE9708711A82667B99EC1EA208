@@ -23,7 +23,6 @@ import java.util.Map;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.R;
 
-
 /**
  * Created by Shin on 2/13/2017.
  */
