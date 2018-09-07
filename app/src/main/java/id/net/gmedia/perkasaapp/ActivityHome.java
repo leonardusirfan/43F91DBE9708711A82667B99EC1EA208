@@ -30,6 +30,7 @@ import com.maulana.custommodul.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.ListMarketSurvey;
@@ -188,6 +189,14 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));
+            }
+        });
+
+        btn_direct_selling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ResellerDetailSelling.class));
             }
         });
 

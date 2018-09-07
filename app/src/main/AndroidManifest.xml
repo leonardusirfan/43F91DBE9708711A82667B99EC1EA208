@@ -67,9 +67,10 @@
             android:name=".ActivityHome"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="ACT_HOME" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -156,26 +157,37 @@
         <activity
             android:name=".ActivityTambahCustomer2"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityPreorderPerdana1"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityPreorderPerdana2"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActKunjungan.ActivityKunjungan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActKunjungan.ActivityKunjunganOutlet"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActKunjungan.ActivityKunjunganSales"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityPreorderPerdana3"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MapsResellerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActMarketSurvey.ListMarketSurvey"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActMarketSurvey.ListResellerMarketSurvey"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActMarketSurvey.DetailMarketSurvey"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ActivityPreorderPerdana1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityPreorderPerdana2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjungan.ActivityKunjungan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjungan.ActivityKunjunganOutlet"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjungan.ActivityKunjunganSales"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityPreorderPerdana3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MapsResellerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketSurvey.ListMarketSurvey"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketSurvey.ListResellerMarketSurvey"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketSurvey.DetailMarketSurvey"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActDirectSelling.ResellerDetailSelling"></activity>
     </application>
 
 </manifest>
