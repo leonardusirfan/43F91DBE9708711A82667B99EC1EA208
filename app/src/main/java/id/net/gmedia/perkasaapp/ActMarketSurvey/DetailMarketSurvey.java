@@ -125,7 +125,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Order Mkios");
+            getSupportActionBar().setTitle("Detail Market Survey");
         }
 
         context = this;
@@ -176,9 +176,9 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
             if(!idSurvey.isEmpty()){
 
-                btnProses.setEnabled(false);
+                //btnProses.setEnabled(false);
             }else{
-                btnProses.setEnabled(true);
+                //btnProses.setEnabled(true);
             }
         }
     }
@@ -246,8 +246,18 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
                     dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
                 }
 
-                adapterTelkomsel.notifyDataSetChanged();
-                adapterNonTelkomsel.notifyDataSetChanged();
+                adapterTelkomsel = new AdapterProviderTelkomsel(listTelkomsel, context);
+                adapterNonTelkomsel = new AdapterProviderNonTelkomsel(listNonTelkomsel, context);
+
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+                rvTelkomsel.setLayoutManager(layoutManager);
+                rvTelkomsel.setItemAnimator(new DefaultItemAnimator());
+                rvTelkomsel.setAdapter(adapterTelkomsel);
+
+                RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(context);
+                rvNonTelkomsel.setLayoutManager(layoutManager1);
+                rvNonTelkomsel.setItemAnimator(new DefaultItemAnimator());
+                rvNonTelkomsel.setAdapter(adapterNonTelkomsel);
             }
 
             @Override

@@ -130,7 +130,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                             JSONObject jo = jsonArray.getJSONObject(i);
 
                             //header
-                            if(!lastJenis.equals(jo.getString("jenis")) && !lastFlag.equals("flag")){
+                            if(!lastJenis.equals(jo.getString("jenis")) || !lastFlag.equals(jo.getString("flag"))){
 
                                 lastJenis = jo.getString("jenis");
                                 lastFlag = jo.getString("flag");
@@ -157,7 +157,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                             "I"
                                             , jo.getString("nama")
                                             , jo.getString("total")
-                                            , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                            , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
                                     ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                 }else{
@@ -166,7 +166,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                             "I"
                                             , jo.getString("nama")
                                             , jo.getString("total")
-                                            , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                            , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
                                     ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                     listTransaksi.add(new CustomItem("F", String.valueOf(totalPerNama)));
@@ -178,7 +178,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                         "I"
                                         , jo.getString("nama")
                                         , jo.getString("total")
-                                        , (jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status") + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                        , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
 
                                 ));
                                 totalPerNama += iv.parseNullLong(jo.getString("total"));
@@ -186,7 +186,8 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                 totalPerNama = 0;
                             }
 
-                            if(!jo.getString("jenis").equals("1")){
+                            if(!jo.getString("jenis").equals("1") // transaksi
+                                    && !jo.getString("crbayar").toUpperCase().equals("K")){ // carabayar tempo
                                 totalAll += iv.parseNullDouble(jo.getString("total"));
                             }
                         }

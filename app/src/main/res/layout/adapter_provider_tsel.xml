@@ -62,6 +62,8 @@
                         android:hint="0"
                         android:gravity="right"
                         android:inputType="numberSigned"
+                        android:digits="0123456789"
+                        android:imeOptions="actionNext"
                         android:padding="@dimen/padding5"
                         android:textSize="@dimen/text14" />
                 </LinearLayout>

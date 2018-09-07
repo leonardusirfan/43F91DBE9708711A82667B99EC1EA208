@@ -48,9 +48,8 @@
         android:layout_height="0dp"
         android:background="#f6f4f5"
         android:padding="@dimen/padding10"
-        android:paddingLeft="@dimen/padding20"
-        android:paddingRight="@dimen/padding20"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        android:paddingLeft="@dimen/padding8"
+        android:paddingRight="@dimen/padding8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/padding5"
-            android:layout_marginRight="@dimen/padding5"
             android:padding="@dimen/padding5"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/btn_kalender_end"
@@ -91,8 +89,6 @@
             android:id="@+id/btn_kalender_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="horizontal"
@@ -179,8 +175,6 @@
             android:id="@+id/linearLayout10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:background="@drawable/style_box_bordered_rounded"
             android:orientation="horizontal"
             android:weightSum="1"
@@ -208,7 +202,7 @@
                 android:hint="@string/nama_customer"
                 android:inputType="textPersonName"
                 android:imeOptions="actionSearch"
-                android:padding="@dimen/padding5"
+                android:padding="@dimen/padding8"
                 android:textSize="@dimen/text18" />
 
         </LinearLayout>
@@ -228,13 +222,6 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <android.support.constraint.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -248,7 +235,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
         />
 
 </android.support.constraint.ConstraintLayout>

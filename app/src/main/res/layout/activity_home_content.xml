@@ -148,9 +148,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/ll_menu_direct_selling"
+                app:layout_constraintTop_toBottomOf="@id/ll_penjualan_ke_rs">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Direct Selling"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text12"
+                    android:textStyle="bold"
+                    android:typeface="normal"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginTop="5dp"
+                    android:background="#9b9b9b" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/menu_height"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:id="@+id/btn_direct_selling"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:layout_marginBottom="5dp"
+                            app:srcCompat="@drawable/preorder_perdana" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_horizontal"
+                            android:text="Direct Selling"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text10" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:id="@+id/ll_menu_supervisor"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/ll_penjualan_ke_rs">
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_direct_selling">
 
                 <TextView
                     android:layout_width="wrap_content"

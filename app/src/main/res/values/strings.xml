@@ -51,7 +51,7 @@
     <string name="kota">Kota</string>
     <string name="simpan_data_customer">Simpan Data Customer</string>
     <string name="alamat_star">Alamat*</string>
-    <string name="warning_transaksi">*Transaksi yang pending/ gagal tidak dihitung pada total</string>
+    <string name="warning_transaksi">*Transaksi yang pending/gagal/tempo tidak dihitung pada total</string>
     <string name="peta_outlet">Peta Outlet</string>
     <string name="kunjungan_sales">Kunjungan Sales</string>
     <string name="status_proses">SEDANG DIPROSES</string>

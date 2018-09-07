@@ -76,7 +76,7 @@ public class ActivityHome extends AppCompatActivity
         //Inisialisasi button UI
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
-                , btn_market_survey;
+                , btn_market_survey, btn_direct_selling;
 
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
@@ -92,6 +92,7 @@ public class ActivityHome extends AppCompatActivity
         //btn_komplain = findViewById(R.id.btn_komplain);
         //btn_preorder = findViewById(R.id.btn_preorder);
         btn_market_survey = (LinearLayout) findViewById(R.id.btn_market_survey);
+        btn_direct_selling = (LinearLayout) findViewById(R.id.btn_direct_selling);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
