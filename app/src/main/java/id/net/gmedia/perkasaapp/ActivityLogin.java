@@ -72,12 +72,17 @@ public class ActivityLogin extends RuntimePermissionsActivity {
 
     private void initPermission() {
 
-        if (ContextCompat.checkSelfPermission(
-                ActivityLogin.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (
+                ContextCompat.checkSelfPermission(ActivityLogin.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                ) {
 
             ActivityLogin.super.requestAppPermissions(new
                             String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -85,6 +90,10 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                     , Manifest.permission.READ_PHONE_STATE
                     , Manifest.permission.WRITE_EXTERNAL_STORAGE
                     , Manifest.permission.READ_EXTERNAL_STORAGE
+                    , Manifest.permission.CALL_PHONE
+                    , Manifest.permission.RECEIVE_SMS
+                    , Manifest.permission.READ_SMS
+                    , Manifest.permission.CAMERA
                     }, R.string
                             .runtime_permissions_txt
                     , REQUEST_PERMISSIONS);
@@ -161,8 +170,8 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         String deviceMan = android.os.Build.MANUFACTURER;
 
         String curdate = iv.getCurrentDate(FormatItem.formatTimestamp);
-        String sessions = iv.encodeMD5(curdate);
-        String expiration = iv.sumDate(curdate, 7,FormatItem.formatTimestamp);
+        final String sessions = iv.encodeMD5(curdate);
+        final String expiration = iv.sumDate(curdate, 7,FormatItem.formatTimestamp);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -203,7 +212,9 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                                 nikGa,
                                 nikMkios,
                                 nama,
-                                iv.encodeBase64(txt_password.getText().toString()));
+                                iv.encodeBase64(txt_password.getText().toString()),
+                                sessions,
+                                expiration);
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                         redirectToLogin();
@@ -218,7 +229,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
 
             @Override
             public void onError(String result) {
-                Snackbar.make(findViewById(android.R.id.content), "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(android.R.id.content), result, Snackbar.LENGTH_LONG).show();
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
                 btn_login.setEnabled(true);
             }

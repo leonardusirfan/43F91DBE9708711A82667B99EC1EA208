@@ -15,6 +15,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -55,6 +56,30 @@ public class ImageUtils {
     public void LoadRealImage(Context context, String uri, final ImageView image){
 
         Picasso.with(context).load(Uri.parse(uri)).into(image);
+    }
+
+    public void LoadRealImage(Context context, File file, final ImageView image){
+
+        Picasso.with(context)
+                .load(file)
+                .resize(50, 50)
+                .into(image);
+    }
+
+    public void LoadRealImage(Context context, String url, final ImageView image, int width, int height){
+
+        Picasso.with(context)
+                .load(url)
+                .resize(width, height)
+                .into(image);
+    }
+
+    public void LoadRealImage(Context context, File file, final ImageView image, int width, int height){
+
+        Picasso.with(context)
+                .load(file)
+                .resize(width, height)
+                .into(image);
     }
 
     public void LoadRealImage(Context context, String uri, final ImageView image, int thumb){

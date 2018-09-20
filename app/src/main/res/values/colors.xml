@@ -11,4 +11,7 @@
     <color name="color_grey_footer">#d4d4d4</color>
     <color name="color_red">#e20000</color>
     <color name="color_red_active">#f77e7e</color>
+    <color name="color_grey">#c9c9c9</color>
+    <color name="btn_color">#f50606</color>
+    <color name="btn_color_active">#fa5b5b</color>
 </resources>

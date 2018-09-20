@@ -120,7 +120,7 @@
                     android:id="@+id/actv_nama"
                     android:hint=""
                     android:text=""
-                    android:padding="@dimen/padding8"
+                    android:padding="@dimen/padding10"
                     android:background="@drawable/style_box_bordered_rounded"
                     android:gravity="center_vertical"
                     android:inputType="textPersonName"
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edt_alamat"
                     android:background="@drawable/bg_input"
-                    android:padding="@dimen/padding8"
+                    android:padding="@dimen/padding10"
                     android:gravity="center_vertical"
                     android:inputType="textPersonName"
                     android:imeOptions="actionDone"/>
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:background="@drawable/btn_red"
-                    android:padding="@dimen/padding8"
+                    android:padding="@dimen/padding10"
                     android:id="@+id/ll_beli_pulsa"
                     android:gravity="center"
                     android:weightSum="1">
@@ -195,10 +195,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/padding8"
+                    android:layout_marginTop="@dimen/padding10"
                     android:background="@drawable/btn_red"
                     android:gravity="center"
-                    android:padding="@dimen/padding8"
+                    android:padding="@dimen/padding10"
                     android:id="@+id/ll_beli_perdana"
                     android:weightSum="1">
 

@@ -30,17 +30,28 @@ import com.maulana.custommodul.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import id.net.gmedia.perkasaapp.ActBranding.DetailBranding;
+import id.net.gmedia.perkasaapp.ActBranding.ListBranding;
+import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
+import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
+import id.net.gmedia.perkasaapp.ActMarketIntelligent.DetailMarketIntelligent;
+import id.net.gmedia.perkasaapp.ActMarketIntelligent.ListMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.ListMarketSurvey;
+import id.net.gmedia.perkasaapp.ActNotePengajuan.DetailPerubahanDataRS;
+import id.net.gmedia.perkasaapp.ActNotePengajuan.ListPengajuanPerubahanRS;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios1;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
+import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
+import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 import id.net.gmedia.perkasaapp.Services.LocationUpdater;
+import id.net.gmedia.perkasaapp.SideAkunAnda.SideAccount;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityHome extends AppCompatActivity
@@ -75,9 +86,9 @@ public class ActivityHome extends AppCompatActivity
         session = new SessionManager(context);
 
         //Inisialisasi button UI
-        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_piutang, btn_komplain,
+        LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
-                , btn_market_survey, btn_direct_selling;
+                , btn_market_survey, btn_direct_selling, btn_perubahan_data_rs, btn_pelunasan_piutang, btn_branding, btn_market_intelligent;
 
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
@@ -87,13 +98,16 @@ public class ActivityHome extends AppCompatActivity
         btn_lokasi = findViewById(R.id.btn_lokasi);
         btn_riwayat = findViewById(R.id.btn_riwayat);
         //btn_customer = findViewById(R.id.btn_customer);
-        //btn_piutang = findViewById(R.id.btn_piutang);
         //btn_stok = findViewById(R.id.btn_stok);
         //btn_kunjungan = findViewById(R.id.btn_kunjungan);
         //btn_komplain = findViewById(R.id.btn_komplain);
         //btn_preorder = findViewById(R.id.btn_preorder);
         btn_market_survey = (LinearLayout) findViewById(R.id.btn_market_survey);
         btn_direct_selling = (LinearLayout) findViewById(R.id.btn_direct_selling);
+        btn_perubahan_data_rs = (LinearLayout) findViewById(R.id.btn_perubahan_data_rs);
+        btn_pelunasan_piutang = (LinearLayout) findViewById(R.id.btn_pelunasan_piutang);
+        btn_branding = (LinearLayout) findViewById(R.id.btn_branding);
+        btn_market_intelligent = (LinearLayout) findViewById(R.id.btn_market_intelligent);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,13 +184,6 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
-        btn_piutang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));
-            }
-        });
-
         btn_komplain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,6 +204,38 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, ResellerDetailSelling.class));
+            }
+        });
+
+        btn_perubahan_data_rs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListPengajuanPerubahanRS.class));
+            }
+        });
+
+        btn_pelunasan_piutang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));
+            }
+        });
+
+        btn_branding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListBranding.class));
+            }
+        });
+
+        btn_market_intelligent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListMarketIntelligent.class));
             }
         });
 
@@ -221,12 +260,28 @@ public class ActivityHome extends AppCompatActivity
         if(bundle != null){
 
             String flag = bundle.getString("flag", "");
-            if(flag.equals(ActivityOrderMkios2.flag) || flag.equals(ActivityOrderPerdana3.flag)){
+            if(flag.equals(ActivityOrderMkios2.flag)
+                    || flag.equals(ActivityOrderPerdana3.flag)
+                    || flag.equals(DirectSellingPulsa.flag)
+                    || flag.equals(DirectSellingPerdana.flag)
+                    ){
 
                 startActivity(new Intent(ActivityHome.this, ActivityPenjualanHariIni.class));
             }else if(flag.equals(DetailMarketSurvey.flag)){
 
                 startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));
+            }else if(flag.equals(DetailBranding.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ListBranding.class));
+            }else if(flag.equals(DetailMarketIntelligent.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ListMarketIntelligent.class));
+            }else if(flag.equals(DetailPerubahanDataRS.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ListPengajuanPerubahanRS.class));
+            }else if(flag.equals(DetailPelunasanPiutang.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));
             }
         }
     }
@@ -446,6 +501,7 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_preorder:startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));break;
             case R.id.nav_kunjungan:startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));break;
             case R.id.nav_market_survey:startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));break;
+            case R.id.nav_akun:startActivity(new Intent(ActivityHome.this, SideAccount.class));break;
             case R.id.nav_logout:session.logoutUser(new Intent(context, ActivityLogin.class));break;
             default:
                 //System.out.println(id);

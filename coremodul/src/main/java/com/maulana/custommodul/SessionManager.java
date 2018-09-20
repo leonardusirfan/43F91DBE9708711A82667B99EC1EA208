@@ -30,6 +30,8 @@ public class SessionManager {
 	public static final String TAG_NIK_MKIOS = "nik_mkios";
 	public static final String TAG_NAMA = "nama";
 	public static final String TAG_PASSWORD = "password";
+	public static final String TAG_SESSION = "session";
+	public static final String TAG_EXPIRATION = "expiration";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -41,7 +43,7 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String username, String nikGa, String nikMkios, String nama, String password){
+	public void createLoginSession(String username, String nikGa, String nikMkios, String nama, String password, String session, String expiration){
 
 		editor.putString(TAG_USERNAME, username);
 
@@ -52,6 +54,10 @@ public class SessionManager {
 		editor.putString(TAG_NAMA, nama);
 
 		editor.putString(TAG_PASSWORD, password);
+
+		editor.putString(TAG_SESSION, session);
+
+		editor.putString(TAG_EXPIRATION, expiration);
 
 		// commit changes
 		editor.commit();
@@ -83,6 +89,14 @@ public class SessionManager {
 
 	public String getPassword(){
 		return pref.getString(TAG_PASSWORD, "");
+	}
+
+	public String getSession(){
+		return pref.getString(TAG_SESSION, "");
+	}
+
+	public String getExpiration(){
+		return pref.getString(TAG_EXPIRATION, "");
 	}
 
 	/**

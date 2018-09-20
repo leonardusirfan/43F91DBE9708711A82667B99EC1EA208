@@ -48,6 +48,26 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="ValueEdittext">
+        <item name="android:textSize">@dimen/text16</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:padding">@dimen/padding8</item>
+    </style>
+
+    <style name="ValueEdittext.disable" parent="ValueEdittext">
+        <item name="android:background">@drawable/bg_input_disable</item>
+        <item name="android:editable">false</item>
+        <item name="android:inputType">none</item>
+    </style>
+
+    <style name="formGroup">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">@dimen/padding8</item>
+        <item name="android:layout_marginLeft">@dimen/padding8</item>
+        <item name="android:layout_marginRight">@dimen/padding8</item>
+    </style>
+
     <style name="AppThemeActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppThemeActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

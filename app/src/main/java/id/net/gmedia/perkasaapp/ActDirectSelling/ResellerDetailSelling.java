@@ -45,10 +45,9 @@ public class ResellerDetailSelling extends AppCompatActivity {
     private ProgressBar pbLoading;
     private List<HashMap<String,String >> masterList;
     private SimpleAdapter adapter;
-    private String nomor = "", lokasi = "", lastKdcus = "", lastCus = "", selectedKdcus = "", latitudePOI = "", longitudePOI = "", lastRadius = "";
+    private String nomorEvent = "", lokasi = "", lastKdcus = "", lastCus = "", selectedKdcus = "";
     private boolean isEvent = false;
     private LinearLayout llNomor, llLokasi;
-    private String latitude = "", longitude = "", radius = "", flagRadius = "";
     private AutoCompleteTextView actvPoi;
     private LinearLayout llPOI;
     private List<CustomItem> listPOI;
@@ -88,21 +87,17 @@ public class ResellerDetailSelling extends AppCompatActivity {
 
         if(bundle != null){
 
-            nomor = bundle.getString("nomor","");
+            nomorEvent = bundle.getString("nomorevent","");
             lokasi = bundle.getString("lokasi","");
 
-            if(nomor.length() > 0){
+            if(nomorEvent.length() > 0){
 
                 llNomor.setVisibility(View.VISIBLE);
                 llLokasi.setVisibility(View.VISIBLE);
 
-                edtNomor.setText(nomor);
+                edtNomor.setText(nomorEvent);
                 edtLokasi.setText(lokasi);
                 isEvent = true;
-                latitude = bundle.getString("lat", "");
-                longitude = bundle.getString("long", "");
-                radius = bundle.getString("radius", "");
-                flagRadius = bundle.getString("flag_radius", "");
             }
 
         }
@@ -154,12 +149,10 @@ public class ResellerDetailSelling extends AppCompatActivity {
                         }
                     }
 
-                    //getAutocompleteEvent(masterList);
                     setAutocomplete(listPOI);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    //getAutocompleteEvent(null);
                     setAutocomplete(null);
                 }
             }
@@ -167,45 +160,10 @@ public class ResellerDetailSelling extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                //getAutocompleteEvent(null);
                 setAutocomplete(null);
                 pbLoading.setVisibility(View.GONE);
             }
         });
-    }
-
-    private void getAutocompleteEvent(List<HashMap<String, String>> listItem) {
-
-        String[] from = {"nama"};
-        int[] to = new int[] { android.R.id.text1 };
-
-        actvPoi.setAdapter(null);
-        if(listItem != null){
-
-            adapter = new SimpleAdapter(context, listItem, android.R.layout.simple_list_item_1,
-                    from, to);
-            actvPoi.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-
-            actvPoi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    HashMap<String, String> customer = (HashMap<String, String>) adapterView.getItemAtPosition(i);
-                    lastKdcus = customer.get("kdcus");
-                    lastCus = customer.get("nama");
-                    String alamat = customer.get("alamat");
-
-                    actvPoi.setText(lastCus);
-                    if(actvPoi.getText().length() > 0) actvPoi.setSelection(actvPoi.getText().length());
-                    latitudePOI = customer.get("latitude");
-                    longitudePOI = customer.get("longitude");
-                    lastRadius = customer.get("radius");
-
-                    //edtAlamat.setText(alamat);
-                }
-            });
-        }
     }
 
     private void setAutocomplete(List<CustomItem> listItem) {
@@ -226,11 +184,11 @@ public class ResellerDetailSelling extends AppCompatActivity {
                     lastCus = item.getItem2();
                     String alamat =item.getItem3();
 
+                    /*actvNama.setText(lastCus);
+                    edtAlamat.setText(alamat);*/
                     //actvPoi.setText(lastCus);
                     //if(actvPoi.getText().length() > 0) actvPoi.setSelection(actvPoi.getText().length());
-                    latitudePOI = item.getItem4();
-                    longitudePOI = item.getItem5();
-                    lastRadius = item.getItem6();
+
                 }
             });
         }
@@ -298,25 +256,17 @@ public class ResellerDetailSelling extends AppCompatActivity {
             edtAlamat.setError(null);
         }
 
-        /*Intent intent = new Intent(context, DetailInjectPulsa.class);
-        if(!isPulsa) intent = new Intent(context, DetailDSPerdana.class);
+        Intent intent = new Intent(context, DirectSellingPulsa.class);
+        if(!isPulsa) intent = new Intent(context, DirectSellingPerdana.class);
 
         intent.putExtra("nama", actvNama.getText().toString());
         intent.putExtra("alamat", edtAlamat.getText().toString());
-        intent.putExtra("nomor", nomor);
-        intent.putExtra("lat", latitude);
-        intent.putExtra("long", longitude);
-        intent.putExtra("radius", radius);
-        intent.putExtra("flag_radius", flagRadius);
+        intent.putExtra("nomorevent", nomorEvent);
         if(lastCus.equals(actvPoi.getText().toString()) && !actvPoi.getText().toString().equals("")){
             intent.putExtra("kdcus", lastKdcus);
-            intent.putExtra("lat_poi", latitudePOI);
-            intent.putExtra("long_poi", longitudePOI);
-            intent.putExtra("radius", lastRadius);
-            intent.putExtra("poi", lastCus);
-
+            intent.putExtra("namapoi", lastCus);
         }
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override

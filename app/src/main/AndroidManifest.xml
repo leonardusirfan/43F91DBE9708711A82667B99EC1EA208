@@ -15,6 +15,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +31,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <!-- Service -->
 
@@ -41,6 +57,23 @@
             android:name=".Services.LocationUpdater"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".Services.USSDService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/config_service" />
+        </service>
+
+        <receiver android:name=".Services.SmsReceiverService">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -94,7 +127,7 @@
             android:name=".ActivityStokPerdana"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityPiutang"
+            android:name=".ActPelunasanPiutang.ActivityPiutang"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityKomplain1"
@@ -187,7 +220,49 @@
         <activity
             android:name=".ActMarketSurvey.DetailMarketSurvey"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActDirectSelling.ResellerDetailSelling"></activity>
+        <activity
+            android:name=".ActDirectSelling.ResellerDetailSelling"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActDirectSelling.DirectSellingPulsa"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActNotePengajuan.ResellerPerubahanData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActNotePengajuan.ListPengajuanPerubahanRS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActNotePengajuan.DetailPerubahanDataRS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActBranding.ListBranding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActBranding.ResellerBranding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActBranding.DetailBranding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketIntelligent.ListMarketIntelligent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketIntelligent.ResellerMarketIntelligent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActMarketIntelligent.DetailMarketIntelligent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPelunasanPiutang.ResellerPelunasanPiutang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPelunasanPiutang.DetailPelunasanPiutang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActDirectSelling.DirectSellingPerdana"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SideAkunAnda.SideAccount"></activity>
     </application>
 
 </manifest>

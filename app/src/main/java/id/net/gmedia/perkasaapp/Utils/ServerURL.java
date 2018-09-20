@@ -3,7 +3,8 @@ package id.net.gmedia.perkasaapp.Utils;
 public class ServerURL {
 
     //private static final String baseUrl = "http://192.168.17.15/perkasa-sales/";
-    private static final String baseUrl = "http://36.66.177.165/sales/";
+    //private static final String baseUrl = "http://36.66.177.165/sales/";
+    private static final String baseUrl = "http://api.myperkasa.com/sales/";
 
     public static final String auth = baseUrl + "authentication/";
     public static final String getResellerMkios = baseUrl + "mkios/view_reseller/";
@@ -23,4 +24,22 @@ public class ServerURL {
     public static final String saveMarketSurvey = baseUrl + "Market_Survey/add_survey/";
     public static final String getMarketSurvey = baseUrl + "Market_Survey/view_survey/";
     public static final String logLocation = baseUrl + "location/log_location/";
+    public static final String saveBrandingHeader = baseUrl + "branding/create_header/";
+    public static final String saveBrandingDetail = baseUrl + "branding/create_detail/";
+    public static final String getListBranding = baseUrl + "branding/view_branding/";
+    public static final String getListMarketIntelligent = baseUrl + "Market_Intel/view_market/";
+    public static final String saveMarketIntelligentHeader = baseUrl + "Market_Intel/create_header/";
+    public static final String saveMarketIntelligentDetail = baseUrl + "Market_Intel/create_detail/";
+    public static final String getPengajuanReseller = baseUrl + "customer/view_pengajuan/";
+    public static final String savePengajuanReseller = baseUrl + "customer/pengajuan/";
+    public static final String getResellerPelunasan = baseUrl + "pelunasan/view_customer/";
+    public static final String getDataAccount = baseUrl + "pelunasan/list_akun/";
+    public static final String getDataPiutang = baseUrl + "pelunasan/list_piutang/";
+    public static final String savePelunasanPiutang = baseUrl + "pelunasan/simpan_pelunasan/";
+    public static final String getPelunasanPiutang = baseUrl + "pelunasan/view_pelunasan/";
+    public static final String getBarangDS = baseUrl + "Direct_Sale/get_barang/";
+    public static final String logBalasanDS = baseUrl + "Direct_Sale/save_reply/";
+    public static final String saveOrderDS = baseUrl + "Direct_Sale/direct_order/";
+    public static final String getPerdanaDS = baseUrl + "Direct_Sale/get_perdana/";
+
 }

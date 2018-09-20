@@ -10,7 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        android:layout_margin="@dimen/padding10">
+        android:id="@+id/cv_container"
+        android:layout_marginTop="@dimen/padding10"
+        android:layout_marginLeft="@dimen/padding10"
+        android:layout_marginRight="@dimen/padding10"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +44,6 @@
                         android:id="@+id/txt_nama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:padding="@dimen/padding5"
                         android:textColor="#fff"
                         android:textSize="@dimen/text16"
@@ -50,7 +53,6 @@
                         android:id="@+id/txt_alamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:textColor="#fff"
                         android:textSize="@dimen/text16" />
 
@@ -70,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding20"
+                android:padding="@dimen/padding8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">

@@ -1160,7 +1160,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                 //System.out.println(result.getContents());
 
                 //Menambahkan data CCID ke list
-                initCcid(3, result.getContents().substring(5,21),"", "");
+                if(result.getContents().length() >= 21) initCcid(3, result.getContents().substring(5,21),"", "");
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data);

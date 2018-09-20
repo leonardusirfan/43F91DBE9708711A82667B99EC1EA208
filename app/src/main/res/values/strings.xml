@@ -50,6 +50,7 @@
     <string name="batal">Batal</string>
     <string name="kota">Kota</string>
     <string name="simpan_data_customer">Simpan Data Customer</string>
+    <string name="alamat">Alamat</string>
     <string name="alamat_star">Alamat*</string>
     <string name="warning_transaksi">*Transaksi yang pending/gagal/tempo tidak dihitung pada total</string>
     <string name="peta_outlet">Peta Outlet</string>
@@ -75,7 +76,7 @@
     <string name="nomor_telepon">Nomor Telephone</string>
     <string name="nomor_handphone">Nomor Handphone</string>
     <string name="edit_posisi">Edit Posisi</string>
-    <string name="jumlah_piutang">Jumlah Piutang</string>
+    <string name="jumlah_piutang">Jumlah Pelunasan Piutang</string>
     <string name="jumlah_stok">Jumlah Stok</string>
     <string name="nama_reseller">Nama Reseller</string>
     <string name="surat_jalan">Surat Jalan</string>
@@ -97,5 +98,9 @@
     <string name="simpan_komplain">Simpan Komplain</string>
     <string name="title_activity_komplain">ActivityKomplain</string>
     <string name="title_activity_test">Map</string>
+    <string name="foto_sebelum">Foto Sebelum</string>
+    <string name="foto_sesudah">Foto Sesudah</string>
+
+    <string name="accessibility_description">Layanan ini untuk mengakses balasan USSD</string>
 
 </resources>
