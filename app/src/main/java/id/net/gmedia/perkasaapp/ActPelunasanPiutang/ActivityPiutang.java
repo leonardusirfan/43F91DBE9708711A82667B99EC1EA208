@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ public class ActivityPiutang extends AppCompatActivity {
     private List<CustomItem> listOutlet = new ArrayList<>();
     private RecyclerView rvPiutang;
     private AdapterPiutang adapter;
+    private Button btnTotalSetoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,7 @@ public class ActivityPiutang extends AppCompatActivity {
         btnKalenderEnd = findViewById(R.id.btn_kalender_end);
         edtKeyword = (EditText) findViewById(R.id.edt_keyword);
         rvPiutang = (RecyclerView) findViewById(R.id.rcy_piutang);
+        btnTotalSetoran = (Button) findViewById(R.id.btn_total_setoran);
         keyword = "";
 
         dateStart = iv.getCurrentDate(FormatItem.formatDate);

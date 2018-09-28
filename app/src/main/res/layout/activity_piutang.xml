@@ -177,7 +177,7 @@
         android:paddingBottom="@dimen/padding10"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/ll_header"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_footer"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
 
@@ -190,7 +190,22 @@
         android:layout_marginEnd="@dimen/padding20"
         android:layout_marginRight="@dimen/padding20"
         android:src="@drawable/plus_putih"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_footer"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_footer"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btn_total_setoran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Total Setoran"
+            android:textColor="#fff" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

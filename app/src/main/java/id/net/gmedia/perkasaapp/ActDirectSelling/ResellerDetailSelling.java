@@ -117,7 +117,7 @@ public class ResellerDetailSelling extends AppCompatActivity {
         pbLoading.setVisibility(View.VISIBLE);
         JSONObject jBody = new JSONObject();
         try {
-            jBody.put("flag", "DS");
+            jBody.put("keyword", "");
         } catch (JSONException e) {
             e.printStackTrace();
         }

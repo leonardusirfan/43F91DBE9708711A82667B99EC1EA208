@@ -22,7 +22,6 @@ public class AutocompleteAdapter extends ArrayAdapter {
     private Context context;
     private int resource;
     private List<CustomItem> items, tempItems, suggestions;
-    private int rowPerAutocompleteItem; // list 50 item only
     private String flagDisplay = "C"; // custom
 
     public AutocompleteAdapter(Context context, List<CustomItem> items, String flagDisplay) {
@@ -93,7 +92,6 @@ public class AutocompleteAdapter extends ArrayAdapter {
                             x++;
                         }
                     }
-                    if(x >= rowPerAutocompleteItem) break;
                 }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = suggestions;

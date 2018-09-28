@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.maulana.custommodul.CustomItem;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class AdapterNotaPiutang extends RecyclerView.Adapter<AdapterNotaPiutang.
 
         holder.cbItem1.setText(item.getItem2());
         holder.tvItem1.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(item.getItem3())));
+        holder.tvItem2.setText(iv.ChangeFormatDateString(item.getItem5(), FormatItem.formatDate, FormatItem.formatDateDisplay));
 
         holder.cbItem1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -78,12 +80,13 @@ public class AdapterNotaPiutang extends RecyclerView.Adapter<AdapterNotaPiutang.
     class MineViewHolder extends RecyclerView.ViewHolder{
 
         private CheckBox cbItem1;
-        private TextView tvItem1;
+        private TextView tvItem1, tvItem2;
 
         private MineViewHolder(@NonNull View itemView) {
             super(itemView);
             cbItem1 = itemView.findViewById(R.id.cb_item1);
             tvItem1 = itemView.findViewById(R.id.tv_item1);
+            tvItem2 = itemView.findViewById(R.id.tv_item2);
         }
     }
 }

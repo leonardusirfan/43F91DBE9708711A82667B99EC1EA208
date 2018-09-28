@@ -507,6 +507,7 @@ public class DetailPelunasanPiutang extends AppCompatActivity implements Locatio
                                     ,jo.getString("nonota")
                                     ,jo.getString("jumlah")
                                     ,"1"
+                                    ,jo.getString("tgl")
                             ));
 
                             if(i == 0) listAccount.add(new OptionItem(jo.getString("kode_akun"), jo.getString("namaakun")));
@@ -606,6 +607,7 @@ public class DetailPelunasanPiutang extends AppCompatActivity implements Locatio
                                     ,jo.getString("nonota")
                                     ,jo.getString("sisa")
                                     ,"0"
+                                    ,jo.getString("tgl")
                             ));
 
                         }
