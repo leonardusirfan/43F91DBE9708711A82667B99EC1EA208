@@ -4,7 +4,8 @@ public class ServerURL {
 
     //private static final String baseUrl = "http://192.168.17.15/perkasa-sales/";
     //private static final String baseUrl = "http://36.66.177.165/sales/";
-    private static final String baseUrl = "http://api.myperkasa.com/sales/";
+    //private static final String baseUrl = "http://api.myperkasa.com/sales/";
+    private static final String baseUrl = "https://www.myperkasa.com/api/sales/";
 
     public static final String auth = baseUrl + "authentication/";
     public static final String getResellerMkios = baseUrl + "mkios/view_reseller/";
@@ -41,5 +42,7 @@ public class ServerURL {
     public static final String logBalasanDS = baseUrl + "Direct_Sale/save_reply/";
     public static final String saveOrderDS = baseUrl + "Direct_Sale/direct_order/";
     public static final String getPerdanaDS = baseUrl + "Direct_Sale/get_perdana/";
+    public static final String saveFinalMarketIntel = baseUrl + "Market_Intel/update_header/";
+    public static final String saveFinalBranding = baseUrl + "Branding/update_header/";
 
 }

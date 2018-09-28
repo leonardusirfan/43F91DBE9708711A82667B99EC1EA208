@@ -13,12 +13,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -171,6 +173,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
     private int statusUpload = 0;
     private String currentFlag = "1";
     public static final String flag = "MARKETINTELLIGENT";
+    private File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -477,7 +480,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
                     MediaStore.ACTION_IMAGE_CAPTURE);
             if(pictureIntent.resolveActivity(getPackageManager()) != null){
                 //Create a file to store the image
-                File photoFile = null;
+                photoFile = null;
                 try {
                     photoFile = createImageFile();
                 } catch (IOException ex) {
@@ -896,7 +899,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, filePath, namaFile);
+            copyFileFromUri(context, filePath, namaFile, null);
 
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null && data.getExtras().get("data") != null) {
 
@@ -908,21 +911,33 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, filePath, namaFile);
+            copyFileFromUri(context, filePath, namaFile, null);
 
         }else if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
 
             Cursor returnCursor =
                     getContentResolver().query(photoURI, null, null, null, null);
 
+            Matrix matrix = new Matrix();
+            try {
+
+                ExifInterface exif = new ExifInterface(photoFile.toString());
+                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                int rotationInDegrees = iv.exifToDegrees(rotation);
+                if (rotation != 0f) {matrix.preRotate(rotationInDegrees);}
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, photoURI, namaFile);
+            copyFileFromUri(context, photoURI, namaFile, matrix);
         }
     }
 
-    public boolean copyFileFromUri(Context context, Uri fileUri, String namaFile)
+    public boolean copyFileFromUri(Context context, Uri fileUri, String namaFile, Matrix matrix)
     {
         InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -951,13 +966,28 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
 
                 outputStream = new FileOutputStream( saveDirectory.getAbsoluteFile() + File.separator + time + namaFile); // filename.png, .mp3, .mp4 ...
                 Bitmap bm2 = BitmapFactory.decodeStream(inputStream);
-                //int maxWidth = bm2.getWidth() > bm2.getHeight() ? bm2.getWidth() : bm2.getHeight();
-                int scale = 100;
-                /*if(maxWidth > 720){
-                    maxWidth = 720;
-                    scale = 80;
-                }*/
-                //bm2.compress(Bitmap.CompressFormat.JPEG, scale, outputStream);
+                int scale = 80;
+
+                int imageHeight = bm2.getHeight();
+                int imageWidth = bm2.getWidth();
+
+                int newWidth = 0;
+                int newHeight = 0;
+
+                if(imageHeight > imageWidth){
+
+                    newWidth = 640;
+                    newHeight = newWidth * imageHeight / imageWidth;
+                }else{
+
+                    newHeight = 640;
+                    newWidth = newHeight * imageWidth / imageHeight;
+                }
+
+                bm2 = Bitmap.createScaledBitmap(bm2, newWidth, newHeight, false);
+                if(matrix != null) bm2 = Bitmap.createBitmap(bm2, 0, 0, bm2.getWidth(), bm2.getHeight(), matrix, true);
+
+                bm2.compress(Bitmap.CompressFormat.JPEG, scale, outputStream);
 
                 File file = new File(saveDirectory, time + namaFile);
                 //Log.i(TAG, "" + file);

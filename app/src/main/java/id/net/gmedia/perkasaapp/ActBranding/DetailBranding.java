@@ -13,12 +13,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -170,6 +172,8 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
     private int statusUpload = 0;
     private String currentFlag = "1";
     public static final String flag = "BRANDING";
+    private File photoFile;
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +192,13 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
         initLocationUtils();
         initUI();
         initEvent();
-        if(!idBranding.isEmpty()) initData();
+
+        isEdit = false;
+        if(!idBranding.isEmpty()){
+
+            isEdit = true;
+            initData();
+        }
     }
 
     private void initUI() {
@@ -283,7 +293,7 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
             @Override
             public void onClick(View view) {
 
-                if(!idBranding.isEmpty()){
+                if(isEdit){
 
                     Toast.makeText(context, "Data yang telah tersimpan tidak dapat diubah", Toast.LENGTH_LONG).show();
                     return;
@@ -329,69 +339,81 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
 
     private void saveData() {
 
-        btnProses.setEnabled(false);
-        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        if(idBranding.isEmpty()){
 
-        JSONObject jBody = new JSONObject();
-        try {
+            btnProses.setEnabled(false);
+            final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Menyimpan...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-            jBody.put("kdcus", kdcus);
-            jBody.put("latitude", iv.doubleToStringFull(latitude));
-            jBody.put("longitude", iv.doubleToStringFull(longitude));
-            jBody.put("state", state);
-            String imei = "";
-            ArrayList<String> imeis = iv.getIMEI(context);
-            if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
-            jBody.put("imei", imei);
-            jBody.put("jarak", jarak);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            JSONObject jBody = new JSONObject();
+            try {
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveBrandingHeader, new ApiVolley.VolleyCallback() {
-            @Override
-            public void onSuccess(String result) {
+                jBody.put("kdcus", kdcus);
+                jBody.put("latitude", iv.doubleToStringFull(latitude));
+                jBody.put("longitude", iv.doubleToStringFull(longitude));
+                jBody.put("state", state);
+                String imei = "";
+                ArrayList<String> imeis = iv.getIMEI(context);
+                if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
+                jBody.put("imei", imei);
+                jBody.put("jarak", jarak);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
-                btnProses.setEnabled(true);
+            ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveBrandingHeader, new ApiVolley.VolleyCallback() {
+                @Override
+                public void onSuccess(String result) {
 
-                try {
+                    String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                    btnProses.setEnabled(true);
 
-                    JSONObject response = new JSONObject(result);
-                    String status = response.getJSONObject("metadata").getString("status");
-                    message = response.getJSONObject("metadata").getString("message");
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                    if(iv.parseNullInteger(status) == 200){
+                    try {
 
-                        JSONObject jo = response.getJSONObject("response");
-                        idBranding = jo.getString("id");
-                        currentFlag = "1";
-                        counterSebelum = listSebelum.size() - 1;
-                        counterSesudah = listSesudah.size() - 1;
+                        JSONObject response = new JSONObject(result);
+                        String status = response.getJSONObject("metadata").getString("status");
+                        message = response.getJSONObject("metadata").getString("message");
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        if(iv.parseNullInteger(status) == 200){
 
-                        if(counterSebelum >= 0){
-                            new UploadFileToServer().execute();
+                            JSONObject jo = response.getJSONObject("response");
+                            idBranding = jo.getString("id");
+                            currentFlag = "1";
+                            counterSebelum = listSebelum.size() - 1;
+                            counterSesudah = listSesudah.size() - 1;
+
+                            if(counterSebelum >= 0){
+                                new UploadFileToServer().execute();
+                            }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                    if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
                 }
 
-                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
-            }
+                @Override
+                public void onError(String result) {
+                    Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                    if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                    btnProses.setEnabled(true);
+                }
+            });
+        }else{
 
-            @Override
-            public void onError(String result) {
-                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
-                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
-                btnProses.setEnabled(true);
+            currentFlag = "1";
+            counterSebelum = listSebelum.size() - 1;
+            counterSesudah = listSesudah.size() - 1;
+
+            if(counterSebelum >= 0){
+                new UploadFileToServer().execute();
             }
-        });
+        }
     }
 
     private void loadChooserDialog(){
@@ -449,7 +471,7 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
                     MediaStore.ACTION_IMAGE_CAPTURE);
             if(pictureIntent.resolveActivity(getPackageManager()) != null){
                 //Create a file to store the image
-                File photoFile = null;
+                photoFile = null;
                 try {
                     photoFile = createImageFile();
                 } catch (IOException ex) {
@@ -865,7 +887,7 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, filePath, namaFile);
+            copyFileFromUri(context, filePath, namaFile, null);
 
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null && data.getExtras().get("data") != null) {
 
@@ -877,21 +899,34 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, filePath, namaFile);
+            copyFileFromUri(context, filePath, namaFile, null);
 
         }else if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
 
             Cursor returnCursor =
-                    getContentResolver().query(photoURI, null, null, null, null);
+                    getApplication().getContentResolver().query(photoURI,
+                            null, null, null, null);
+
+            Matrix matrix = new Matrix();
+            try {
+
+                ExifInterface exif = new ExifInterface(photoFile.toString());
+                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                int rotationInDegrees = iv.exifToDegrees(rotation);
+                if (rotation != 0f) {matrix.preRotate(rotationInDegrees);}
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
-            copyFileFromUri(context, photoURI, namaFile);
+            copyFileFromUri(context, photoURI, namaFile, matrix);
         }
     }
 
-    public boolean copyFileFromUri(Context context, Uri fileUri, String namaFile)
+    public boolean copyFileFromUri(Context context, Uri fileUri, String namaFile, Matrix matrix)
     {
         InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -920,13 +955,32 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
 
                 outputStream = new FileOutputStream( saveDirectory.getAbsoluteFile() + File.separator + time + namaFile); // filename.png, .mp3, .mp4 ...
                 Bitmap bm2 = BitmapFactory.decodeStream(inputStream);
-                //int maxWidth = bm2.getWidth() > bm2.getHeight() ? bm2.getWidth() : bm2.getHeight();
-                int scale = 100;
-                /*if(maxWidth > 720){
-                    maxWidth = 720;
-                    scale = 80;
-                }*/
-                //bm2.compress(Bitmap.CompressFormat.JPEG, scale, outputStream);
+                int scale = 80;
+
+                int imageHeight = bm2.getHeight();
+                int imageWidth = bm2.getWidth();
+
+                int newWidth = 0;
+                int newHeight = 0;
+
+                if(imageHeight > imageWidth){
+
+                    newWidth = 640;
+                    newHeight = newWidth * imageHeight / imageWidth;
+                }else{
+
+                    newHeight = 640;
+                    newWidth = newHeight * imageWidth / imageHeight;
+                }
+
+                bm2 = Bitmap.createScaledBitmap(bm2, newWidth, newHeight, false);
+
+                if(matrix != null){
+
+                    bm2 = Bitmap.createBitmap(bm2, 0, 0, bm2.getWidth(), bm2.getHeight(), matrix, true);
+                }
+
+                bm2.compress(Bitmap.CompressFormat.JPEG, scale, outputStream);
 
                 File file = new File(saveDirectory, time + namaFile);
                 //Log.i(TAG, "" + file);
@@ -1160,11 +1214,7 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
 
                             //done
                             Toast.makeText(context, "All files already uploaded", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(context, ActivityHome.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.putExtra("flag", flag);
-                            startActivity(intent);
-                            finish();
+                            saveFinalBranding();
                         }else{
 
                             new UploadFileToServer().execute();
@@ -1185,6 +1235,61 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
 
             super.onPostExecute(result);
         }
+    }
+
+    private void saveFinalBranding() {
+
+        btnProses.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+
+            jBody.put("id", idBranding);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveFinalBranding, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                btnProses.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Intent intent = new Intent(context, ActivityHome.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("flag", flag);
+                        startActivity(intent);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btnProses.setEnabled(true);
+            }
+        });
     }
 
     public Location getLocation() {

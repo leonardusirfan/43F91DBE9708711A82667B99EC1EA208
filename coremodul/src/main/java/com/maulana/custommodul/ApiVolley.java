@@ -21,8 +21,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by Shin on 2/24/2017.
@@ -166,6 +175,8 @@ public class ApiVolley {
         };
         //endregion
 
+        trustAllCertivicate();
+
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
@@ -190,5 +201,53 @@ public class ApiVolley {
     public interface VolleyCallback{
         void onSuccess(String result);
         void onError(String result);
+    }
+
+    private void trustAllCertivicate() {
+
+        try {
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
+                public boolean verify(String hostname, SSLSession session) {
+                    if (hostname.equalsIgnoreCase("www.myperkasa.com") ||
+                            hostname.equalsIgnoreCase("api.crashlytics.com") ||
+                            hostname.equalsIgnoreCase("settings.crashlytics.com") ||
+                            hostname.equalsIgnoreCase("clients4.google.com") ||
+                            hostname.equalsIgnoreCase("www.facebook.com") ||
+                            hostname.equalsIgnoreCase("www.instagram.com") ||
+                            hostname.equalsIgnoreCase("lh1.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh2.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh3.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh4.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh5.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh6.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh7.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh8.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("lh9.googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("googleusercontent.com") ||
+                            hostname.equalsIgnoreCase("fbcdn.net") ||
+                            hostname.equalsIgnoreCase("scontent.xx.fbcdn.net") ||
+                            hostname.equalsIgnoreCase("lookaside.facebook.com")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }});
+
+            // SSL Tipe TLS
+            SSLContext context = SSLContext.getInstance("TLS");
+
+            context.init(null, new X509TrustManager[]{new X509TrustManager(){
+                public void checkClientTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public void checkServerTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }}}, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(
+                    context.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
