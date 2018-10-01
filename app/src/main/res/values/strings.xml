@@ -100,6 +100,7 @@
     <string name="title_activity_test">Map</string>
     <string name="foto_sebelum">Foto Sebelum</string>
     <string name="foto_sesudah">Foto Sesudah</string>
+    <string name="keyword">Keyword</string>
 
     <string name="accessibility_description">Layanan ini untuk mengakses balasan USSD</string>
 

@@ -44,5 +44,7 @@ public class ServerURL {
     public static final String getPerdanaDS = baseUrl + "Direct_Sale/get_perdana/";
     public static final String saveFinalMarketIntel = baseUrl + "Market_Intel/update_header/";
     public static final String saveFinalBranding = baseUrl + "Branding/update_header/";
+    public static final String getRekapSetoran = baseUrl + "pelunasan/rekap_pelunasan/";
+    public static final String getDetailRekapSetoran = baseUrl + "pelunasan/detail_pelunasan/";
 
 }

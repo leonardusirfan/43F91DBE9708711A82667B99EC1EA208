@@ -174,6 +174,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
     private String currentFlag = "1";
     public static final String flag = "MARKETINTELLIGENT";
     private File photoFile;
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,7 +212,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
         btnPeta = (Button) findViewById(R.id.btn_peta);
-
+        isEdit = false;
         isLoading = false;
 
         listKompetitor = new ArrayList<>();
@@ -250,6 +251,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
 
             if(!idMarketIntelligent.isEmpty()){
 
+                isEdit = true;
                 //btnProses.setEnabled(false);
             }else{
                 //btnProses.setEnabled(true);
@@ -307,7 +309,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
             @Override
             public void onClick(View view) {
 
-                if(!idMarketIntelligent.isEmpty()){
+                if(isEdit){
 
                     Toast.makeText(context, "Data yang telah tersimpan tidak dapat diubah", Toast.LENGTH_LONG).show();
                     return;
@@ -359,70 +361,84 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
 
     private void saveData() {
 
-        btnProses.setEnabled(false);
-        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        if(idMarketIntelligent.isEmpty()){
 
-        JSONObject jBody = new JSONObject();
-        try {
+            btnProses.setEnabled(false);
+            final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Menyimpan...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-            jBody.put("kdcus", kdcus);
-            jBody.put("latitude", iv.doubleToStringFull(latitude));
-            jBody.put("longitude", iv.doubleToStringFull(longitude));
-            jBody.put("state", state);
-            String imei = "";
-            ArrayList<String> imeis = iv.getIMEI(context);
-            if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
-            jBody.put("imei", imei);
-            jBody.put("jarak", jarak);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            JSONObject jBody = new JSONObject();
+            try {
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveMarketIntelligentHeader, new ApiVolley.VolleyCallback() {
-            @Override
-            public void onSuccess(String result) {
+                jBody.put("kdcus", kdcus);
+                jBody.put("latitude", iv.doubleToStringFull(latitude));
+                jBody.put("longitude", iv.doubleToStringFull(longitude));
+                jBody.put("state", state);
+                String imei = "";
+                ArrayList<String> imeis = iv.getIMEI(context);
+                if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
+                jBody.put("imei", imei);
+                jBody.put("jarak", jarak);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
-                btnProses.setEnabled(true);
+            ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveMarketIntelligentHeader, new ApiVolley.VolleyCallback() {
+                @Override
+                public void onSuccess(String result) {
 
-                try {
+                    String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                    btnProses.setEnabled(true);
 
-                    JSONObject response = new JSONObject(result);
-                    String status = response.getJSONObject("metadata").getString("status");
-                    message = response.getJSONObject("metadata").getString("message");
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                    if(iv.parseNullInteger(status) == 200){
+                    try {
 
-                        JSONObject jo = response.getJSONObject("response");
-                        idMarketIntelligent = jo.getString("id");
-                        currentFlag = "1";
-                        counterKompetitor = listKompetitor.size() - 1;
-                        counterSinyal = listSinyal.size() - 1;
-                        counterBooked = listBooked.size() - 1;
+                        JSONObject response = new JSONObject(result);
+                        String status = response.getJSONObject("metadata").getString("status");
+                        message = response.getJSONObject("metadata").getString("message");
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        if(iv.parseNullInteger(status) == 200){
 
-                        if(counterKompetitor >= 0){
-                            new UploadFileToServer().execute();
+                            JSONObject jo = response.getJSONObject("response");
+                            idMarketIntelligent = jo.getString("id");
+                            currentFlag = "1";
+                            counterKompetitor = listKompetitor.size() - 1;
+                            counterSinyal = listSinyal.size() - 1;
+                            counterBooked = listBooked.size() - 1;
+
+                            if(counterKompetitor >= 0){
+                                new UploadFileToServer().execute();
+                            }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                    if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
                 }
 
-                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
-            }
+                @Override
+                public void onError(String result) {
+                    Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                    if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                    btnProses.setEnabled(true);
+                }
+            });
+        }else{
 
-            @Override
-            public void onError(String result) {
-                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
-                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
-                btnProses.setEnabled(true);
+            currentFlag = "1";
+            currentFlag = "1";
+            counterKompetitor = listKompetitor.size() - 1;
+            counterSinyal = listSinyal.size() - 1;
+            counterBooked = listBooked.size() - 1;
+
+            if(counterKompetitor >= 0){
+                new UploadFileToServer().execute();
             }
-        });
+        }
     }
 
     private void loadChooserDialog(){
@@ -1238,11 +1254,7 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
 
                             //done
                             Toast.makeText(context, "All files already uploaded", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(context, ActivityHome.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.putExtra("flag", flag);
-                            startActivity(intent);
-                            finish();
+                            saveFinalMarketIntelligent();
                         }else{
 
                             new UploadFileToServer().execute();
@@ -1381,6 +1393,61 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
         }
 
         return location;
+    }
+
+    private void saveFinalMarketIntelligent() {
+
+        btnProses.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+
+            jBody.put("id", idMarketIntelligent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveFinalMarketIntel, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                btnProses.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Intent intent = new Intent(context, ActivityHome.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("flag", flag);
+                        startActivity(intent);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btnProses.setEnabled(true);
+            }
+        });
     }
 
     public void setCriteria() {

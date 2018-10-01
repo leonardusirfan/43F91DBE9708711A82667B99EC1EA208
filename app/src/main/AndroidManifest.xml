@@ -262,8 +262,14 @@
         <activity
             android:name=".ActDirectSelling.DirectSellingPerdana"
             android:screenOrientation="portrait" />
-        <activity android:name=".SideAkunAnda.SideAccount" />
-        <activity android:name=".ActPelunasanPiutang.DetailTotalSetoran"></activity>
+        <activity
+            android:name=".SideAkunAnda.SideAccount"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPelunasanPiutang.DetailTotalSetoran"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActPelunasanPiutang.DetailNotaTotalSetoran"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

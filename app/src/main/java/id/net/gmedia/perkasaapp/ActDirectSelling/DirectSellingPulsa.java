@@ -33,6 +33,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,6 +78,7 @@ import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Services.USSDService;
+import id.net.gmedia.perkasaapp.Utils.PinManager;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DirectSellingPulsa extends AppCompatActivity implements LocationListener {
@@ -151,6 +154,9 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
     private ImageView ivRefreshJarak;
     private static DialogBox dialogBox;
     private String latitudeOutlet = "", longitudeOutlet = "";
+    private static EditText edtPin;
+    private static CheckBox cbPin;
+    private static PinManager pinManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +173,8 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
         isLoading = false;
         dialogBox = new DialogBox(context);
         session = new SessionManager(context);
+        pinManager = new PinManager(context);
+
         nik = session.getNikGa();
         transactionID = iv.getCurrentDate(FormatItem.formatDateTimePure);
 
@@ -191,6 +199,8 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
         btnAppInfo = (Button) findViewById(R.id.btn_app_info);
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
+        edtPin = (EditText) findViewById(R.id.edt_pin);
+        cbPin = (CheckBox) findViewById(R.id.cb_pin);
 
         listBalasan = new ArrayList<>();
         nomorEvent = "";
@@ -204,6 +214,8 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
         isKonfirmasiManual = false;
         isSaveButtonClicked = false;
         isOnSaving = false;
+        cbPin.setChecked(pinManager.isPinSaved());
+        edtPin.setText(pinManager.getPin());
 
         isEvent = false;
         Bundle bundle = getIntent().getExtras();
@@ -326,6 +338,23 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
                     return;
                 }
 
+                if(edtPin.getText().toString().isEmpty()){
+
+                    edtPin.setError("Pin harap diisi");
+                    edtPin.requestFocus();
+                    return;
+                }else{
+
+                    edtPin.setError(null);
+                }
+
+                if(cbPin.isChecked()){
+
+                    pinManager.savePin(edtPin.getText().toString());
+                }else{
+                    pinManager.clearPin();
+                }
+
                 //1. kdbrg
                 //2. namabrg
                 //3. hargajual
@@ -354,7 +383,7 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
                                 }else{
                                     format = format.replace("[nominal]", selectedHarga);
                                 }
-                                format = format.replace("[pin]", selectedItemOrder.getItem6());
+                                format = format.replace("[pin]", edtPin.getText().toString());
                                 format = format.replace("#", Uri.encode("#"));
 
                                 Log.d(TAG, "onClick: " + format);
@@ -675,6 +704,7 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
             public void onClick(View view) {
 
                 final String nominal = edtNominal.getText().toString().replaceAll("[,.]", "");
+
                 if(nominal.isEmpty()){
 
                     edtNominal.setError("Nominal harap diisi");

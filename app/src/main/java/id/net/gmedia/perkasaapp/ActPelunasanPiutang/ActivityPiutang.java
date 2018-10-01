@@ -205,6 +205,15 @@ public class ActivityPiutang extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnTotalSetoran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, DetailTotalSetoran.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initPiutang(){

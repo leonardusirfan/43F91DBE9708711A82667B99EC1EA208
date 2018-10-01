@@ -96,6 +96,34 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Pin Chip"
+                    style="@style/TitleText"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edt_pin"
+                    style="@style/ValueEdittext"
+                    android:inputType="numberSigned"
+                    android:hint="1234"
+                    android:imeOptions="actionDone"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan Pin Chip"
+                    android:id="@+id/cb_pin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/formGroup">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Harga"
                     style="@style/TitleText"/>
 

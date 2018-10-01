@@ -450,7 +450,6 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
     }
 
     //region File Chooser
-
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -887,6 +886,22 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String namaFile = returnCursor.getString(nameIndex);
+
+            /*Matrix matrix = new Matrix();
+            try {
+
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                int columnIndex = returnCursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = returnCursor.getString(columnIndex);
+                ExifInterface exif = new ExifInterface(picturePath);
+                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                int rotationInDegrees = iv.exifToDegrees(rotation);
+                if (rotation != 0f) {matrix.preRotate(rotationInDegrees);}
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+
             copyFileFromUri(context, filePath, namaFile, null);
 
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null && data.getExtras().get("data") != null) {
