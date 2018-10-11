@@ -7,41 +7,212 @@
     android:focusableInTouchMode="true"
     tools:context=".ActKunjungan.ActivityKunjungan">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy_kunjungan"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_kunjungan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/ll_top"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_red"
+            android:paddingLeft="@dimen/padding8"
+            android:paddingRight="@dimen/padding8"
+            android:paddingBottom="@dimen/padding5">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/float_kunjungan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/padding20"
-        android:layout_marginEnd="@dimen/padding20"
-        android:layout_marginRight="@dimen/padding20"
-        android:src="@drawable/plus_putih"
-        app:layout_constraintBottom_toTopOf="@+id/btn_kunjungan"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_kunjungan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/select_button_red"
-        android:text="@string/kunjungan_sales"
-        android:textColor="#fff"
-        android:textSize="@dimen/text14"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/tv_date"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/color_white"
+                    android:paddingLeft="24dp"
+                    android:drawableRight="@mipmap/ic_date_white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:background="@color/color_white"
+                    android:layout_marginRight="@dimen/padding5"
+                    android:layout_marginLeft="@dimen/padding5"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/ll_bottom"
+            android:background="@color/color_red"
+            android:padding="@dimen/padding8">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kunjungan Sales"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginRight="@dimen/padding5"
+                android:layout_marginLeft="@dimen/padding5"
+                android:textColor="@color/color_white"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_top"
+            android:layout_above="@id/ll_bottom">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_footer"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:padding="@dimen/padding5"
+                    android:gravity="center_vertical|right">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@color/color_pjp_beli"
+                                android:layout_marginLeft="@dimen/padding5"
+                                android:layout_marginRight="@dimen/padding5"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:textColor="@color/color_black"
+                                android:layout_marginRight="@dimen/padding5"
+                                android:text="PJP Terkunjungi Belanja"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@color/color_pjp_belum"
+                                android:layout_marginLeft="@dimen/padding5"
+                                android:layout_marginRight="@dimen/padding5"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_black"
+                                android:layout_marginRight="@dimen/padding5"
+                                android:textSize="10sp"
+                                android:text="PJP Belum terkunjungi"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@color/color_pjp_diluar"
+                                android:layout_marginLeft="@dimen/padding5"
+                                android:layout_marginRight="@dimen/padding5"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_black"
+                                android:textSize="10sp"
+                                android:text="Diluar PJP"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@color/color_pjp_tidak"
+                                android:layout_marginLeft="@dimen/padding5"
+                                android:layout_marginRight="@dimen/padding5"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_black"
+                                android:textSize="10sp"
+                                android:text="Terkunjungi tidak belanja"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/ll_footer"
+                    android:divider="@null"
+                    android:id="@+id/lv_kunjungan"></ListView>
+            </RelativeLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_add_white"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="50dp"
+                app:backgroundTint="@color/color_red"
+                android:id="@+id/btn_add"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

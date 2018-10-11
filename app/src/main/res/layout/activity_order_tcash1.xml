@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityOrderTcash1">
+    tools:context=".ActOrderTcash.ActivityOrderTcash1">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/float_tambah"

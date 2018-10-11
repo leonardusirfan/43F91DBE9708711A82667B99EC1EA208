@@ -879,7 +879,20 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
 
         }else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-            Uri filePath = data.getData();
+            Uri imgUri = data.getData();
+
+            InputStream imageStream = null;
+            try {
+                imageStream = getContentResolver().openInputStream(
+                        imgUri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
+
+            Uri filePath = getImageUri(getApplicationContext(), imageBitmap);
+
             Cursor returnCursor =
                     getContentResolver().query(filePath, null, null, null, null);
 

@@ -137,9 +137,13 @@ public class ActivityOrderMkios1 extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(context, ActivityOrderMkios2.class);
-                intent.putExtra("nomor", item.getItem3());
-                startActivity(intent);
+                if(item != null){
+                    Intent intent = new Intent(context, ActivityOrderMkios2.class);
+                    intent.putExtra("nomor", item.getItem3());
+                    startActivity(intent);
+                }else{
+                    DialogBox.showDialog(context, 3,"Data tidak termuat dengan benar, harap ulangi proses");
+                }
             }
         });
     }

@@ -36,6 +36,7 @@ import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
+import id.net.gmedia.perkasaapp.ActKunjungan.DetailKunjungan;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.DetailMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.ListMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
@@ -46,6 +47,9 @@ import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios1;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana1;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
+import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash1;
+import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash2;
+import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash3;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
@@ -99,7 +103,6 @@ public class ActivityHome extends AppCompatActivity
         btn_riwayat = findViewById(R.id.btn_riwayat);
         //btn_customer = findViewById(R.id.btn_customer);
         //btn_stok = findViewById(R.id.btn_stok);
-        //btn_kunjungan = findViewById(R.id.btn_kunjungan);
         //btn_komplain = findViewById(R.id.btn_komplain);
         //btn_preorder = findViewById(R.id.btn_preorder);
         btn_market_survey = (LinearLayout) findViewById(R.id.btn_market_survey);
@@ -108,6 +111,7 @@ public class ActivityHome extends AppCompatActivity
         btn_pelunasan_piutang = (LinearLayout) findViewById(R.id.btn_pelunasan_piutang);
         btn_branding = (LinearLayout) findViewById(R.id.btn_branding);
         btn_market_intelligent = (LinearLayout) findViewById(R.id.btn_market_intelligent);
+        btn_kunjungan = findViewById(R.id.btn_kunjungan);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +137,7 @@ public class ActivityHome extends AppCompatActivity
         btn_tcash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityOrderTcash1.class));
+                startActivity(new Intent(ActivityHome.this, ActivityOrderTcash2.class));
             }
         });
 
@@ -168,12 +172,6 @@ public class ActivityHome extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));
-            }
-        });
-        btn_kunjungan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
             }
         });
 
@@ -246,6 +244,13 @@ public class ActivityHome extends AppCompatActivity
             finish();
         }
 
+        btn_kunjungan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
+            }
+        });
+
         //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -264,6 +269,7 @@ public class ActivityHome extends AppCompatActivity
                     || flag.equals(ActivityOrderPerdana3.flag)
                     || flag.equals(DirectSellingPulsa.flag)
                     || flag.equals(DirectSellingPerdana.flag)
+                    || flag.equals(ActivityOrderTcash3.flag)
                     ){
 
                 startActivity(new Intent(ActivityHome.this, ActivityPenjualanHariIni.class));
@@ -282,6 +288,9 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailPelunasanPiutang.flag)){
 
                 startActivity(new Intent(ActivityHome.this, ActivityPiutang.class));
+            }else if(flag.equals(DetailKunjungan.flag)){
+
+                startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
             }
         }
     }

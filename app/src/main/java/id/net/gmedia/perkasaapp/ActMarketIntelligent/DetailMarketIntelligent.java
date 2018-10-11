@@ -79,6 +79,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -908,7 +909,20 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
 
         }else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-            Uri filePath = data.getData();
+            Uri imgUri = data.getData();
+
+            InputStream imageStream = null;
+            try {
+                imageStream = getContentResolver().openInputStream(
+                        imgUri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
+
+            Uri filePath = getImageUri(getApplicationContext(), imageBitmap);
+
             Cursor returnCursor =
                     getContentResolver().query(filePath, null, null, null, null);
 

@@ -138,14 +138,14 @@
             android:name=".ActivityKomplain2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityOrderTcash1"
+            android:name=".ActOrderTcash.ActivityOrderTcash1"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ActivityOrderTcash2"
+            android:name=".ActOrderTcash.ActivityOrderTcash2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityOrderTcash3"
+            android:name=".ActOrderTcash.ActivityOrderTcash3"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityVerifikasiOutlet1"
@@ -268,7 +268,10 @@
         <activity
             android:name=".ActPelunasanPiutang.DetailTotalSetoran"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActPelunasanPiutang.DetailNotaTotalSetoran"
+        <activity
+            android:name=".ActPelunasanPiutang.DetailNotaTotalSetoran"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActKunjungan.DetailKunjungan"
             android:screenOrientation="portrait"></activity>
     </application>
 

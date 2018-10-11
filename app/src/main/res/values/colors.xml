@@ -14,4 +14,9 @@
     <color name="color_grey">#c9c9c9</color>
     <color name="btn_color">#f50606</color>
     <color name="btn_color_active">#fa5b5b</color>
+
+    <color name="color_pjp_diluar">#ece81b</color>
+    <color name="color_pjp_beli">#6be143</color>
+    <color name="color_pjp_belum">#e2332d</color>
+    <color name="color_pjp_tidak">#027fe5</color>
 </resources>

@@ -116,7 +116,6 @@
                     <LinearLayout
                         android:id="@+id/btn_tcash"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:visibility="invisible"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
@@ -423,32 +422,6 @@
                     </LinearLayout>-->
 
                     <!--<LinearLayout
-                        android:id="@+id/btn_kunjungan"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
-                        android:layout_height="@dimen/menu_height"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:layout_marginBottom="5dp"
-                            app:srcCompat="@drawable/kunjungan" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:gravity="center_horizontal"
-                            android:text="Kunjungan"
-                            android:textColor="#000"
-                            android:textSize="@dimen/text10" />
-                    </LinearLayout>-->
-
-                    <!--<LinearLayout
                         android:id="@+id/btn_komplain"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="0dp"
@@ -626,6 +599,32 @@
                             android:layout_weight="0.5"
                             android:gravity="center_horizontal"
                             android:text="Pelunasan Piutang"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_kunjungan"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="0.3"
+                            app:srcCompat="@drawable/kunjungan" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_horizontal"
+                            android:text="Jadwal Kunjungan"
                             android:textColor="#000"
                             android:textSize="@dimen/text10" />
                     </LinearLayout>

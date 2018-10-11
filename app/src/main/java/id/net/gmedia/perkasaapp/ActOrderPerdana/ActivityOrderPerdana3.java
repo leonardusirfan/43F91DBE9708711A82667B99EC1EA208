@@ -733,7 +733,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if(radioGroup.getCheckedRadioButtonId() == R.id.rb_tempo){
+                if(radioGroup.getCheckedRadioButtonId() == R.id.rb_tunai){
 
                     currentCrbayar = "T";
                     tanggalTempo = iv.sumDate(tanggalTempo, iv.parseNullInteger(resellerTempo),FormatItem.formatDate);

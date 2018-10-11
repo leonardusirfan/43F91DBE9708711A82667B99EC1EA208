@@ -2,7 +2,7 @@ package id.net.gmedia.perkasaapp.Utils;
 
 public class ServerURL {
 
-    //private static final String baseUrl = "http://192.168.17.15/perkasa-sales/";
+    //private static final String baseUrl = "http://192.168.17.187/perkasa-sales/";
     //private static final String baseUrl = "http://36.66.177.165/sales/";
     //private static final String baseUrl = "http://api.myperkasa.com/sales/";
     private static final String baseUrl = "https://www.myperkasa.com/api/sales/";
@@ -46,5 +46,10 @@ public class ServerURL {
     public static final String saveFinalBranding = baseUrl + "Branding/update_header/";
     public static final String getRekapSetoran = baseUrl + "pelunasan/rekap_pelunasan/";
     public static final String getDetailRekapSetoran = baseUrl + "pelunasan/detail_pelunasan/";
+    public static final String getHargaTcash = baseUrl + "tcash/get_harga/";
+    public static final String saveTcash = baseUrl + "tcash/transaksi/";
+    public static final String getResellerKunjungan = baseUrl + "kunjungan/view_reseller/";
+    public static final String getKunjungan = baseUrl + "kunjungan/view_kunjungan/";
+    public static final String saveKunjungan = baseUrl + "kunjungan/simpan_kunjungan/";
 
 }
