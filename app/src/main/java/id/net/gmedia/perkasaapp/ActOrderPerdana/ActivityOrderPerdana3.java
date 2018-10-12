@@ -898,6 +898,10 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             jBody.put("jual_h", jualH);
             jBody.put("latitude", iv.doubleToStringFull(latitude));
             jBody.put("longitude", iv.doubleToStringFull(longitude));
+            String imei = "";
+            ArrayList<String> imeis = iv.getIMEI(context);
+            if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
+            jBody.put("imei", imei);
         } catch (JSONException e) {
             e.printStackTrace();
         }

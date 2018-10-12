@@ -75,6 +75,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import cz.intik.overflowindicator.OverflowPagerIndicator;
+import cz.intik.overflowindicator.SimpleSnapHelper;
 import id.net.gmedia.perkasaapp.ActBranding.Adapter.PhotosAdapter;
 import id.net.gmedia.perkasaapp.ActKunjungan.Adapter.PhotoKunjunganAdapter;
 import id.net.gmedia.perkasaapp.ActivityHome;
@@ -137,6 +139,7 @@ public class DetailKunjungan extends AppCompatActivity implements LocationListen
     private static int PICK_IMAGE_REQUEST = 1212;
     private boolean isEdit = false;
     public static final String flag = "KUNJUNGAN";
+    private OverflowPagerIndicator opiPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +170,7 @@ public class DetailKunjungan extends AppCompatActivity implements LocationListen
         rbTutup = (RadioButton) findViewById(R.id.rb_tutup);
         rvPhoto = (RecyclerView) findViewById(R.id.rv_photo);
         ibAddPhoto = (ImageButton) findViewById(R.id.ib_add_photo);
+        opiPhoto = (OverflowPagerIndicator) findViewById(R.id.opi_photo);
 
         btnProses = (Button) findViewById(R.id.btn_proses);
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
@@ -179,6 +183,8 @@ public class DetailKunjungan extends AppCompatActivity implements LocationListen
         adapter = new PhotoKunjunganAdapter(context, photoList);
         rvPhoto.setLayoutManager(layoutManager);
         rvPhoto.setAdapter(adapter);
+        opiPhoto.attachToRecyclerView(rvPhoto);
+        new SimpleSnapHelper(opiPhoto).attachToRecyclerView(rvPhoto);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){

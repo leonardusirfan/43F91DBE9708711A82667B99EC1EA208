@@ -20,12 +20,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,6 +76,13 @@ public class ActivityHome extends AppCompatActivity
     private boolean updateRequired = false;
     private AlertDialog dialogVersion;
     private ItemValidation iv = new ItemValidation();
+    private SlidingUpPanelLayout suplContainer;
+    private ImageView ivIcon;
+    private TextView tvJabatan, tvNamaSales, tvTotalOmset
+            , tvDsTargetMkios, tvDsOmsetMkios, tvDsGapMkios
+            , tvDsTargetPerdana, tvDsOmsetPerdana, tvDsGapPerdana
+            , tvDsTargetBulk, tvDsOmsetBulk, tvDsGapBulk
+            , tvDsTargetSurvey, tvDsEffectiveCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +122,23 @@ public class ActivityHome extends AppCompatActivity
         btn_branding = (LinearLayout) findViewById(R.id.btn_branding);
         btn_market_intelligent = (LinearLayout) findViewById(R.id.btn_market_intelligent);
         btn_kunjungan = findViewById(R.id.btn_kunjungan);
+        suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
+        ivIcon = (ImageView) findViewById(R.id.iv_icon);
+
+        tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
+        tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
+        tvTotalOmset = (TextView) findViewById(R.id.tv_total_omset);
+        tvDsTargetMkios = (TextView) findViewById(R.id.tv_ds_target_mkios);
+        tvDsOmsetMkios = (TextView) findViewById(R.id.tv_ds_omset_mkios);
+        tvDsGapMkios = (TextView) findViewById(R.id.tv_ds_gap_mkios);
+        tvDsTargetPerdana = (TextView) findViewById(R.id.tv_ds_target_perdana);
+        tvDsOmsetPerdana = (TextView) findViewById(R.id.tv_ds_omset_perdana);
+        tvDsGapPerdana = (TextView) findViewById(R.id.tv_ds_gap_perdana);
+        tvDsTargetBulk = (TextView) findViewById(R.id.tv_ds_target_bulk);
+        tvDsOmsetBulk = (TextView) findViewById(R.id.tv_ds_omset_bulk);
+        tvDsGapBulk = (TextView) findViewById(R.id.tv_ds_gap_bulk);
+        tvDsTargetSurvey = (TextView) findViewById(R.id.tv_ds_target_survey);
+        tvDsEffectiveCall = (TextView) findViewById(R.id.tv_ds_effective_call);
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,6 +320,25 @@ public class ActivityHome extends AppCompatActivity
                 startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
             }
         }
+
+        suplContainer.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+            }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+
+                if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED){
+
+                    ivIcon.setImageResource(R.mipmap.ic_up);
+                }else{
+
+                    ivIcon.setImageResource(R.mipmap.ic_down);
+                }
+            }
+        });
     }
 
     @Override

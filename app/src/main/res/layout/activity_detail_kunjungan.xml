@@ -101,8 +101,16 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/rv_photo"></android.support.v7.widget.RecyclerView>
+
+                <cz.intik.overflowindicator.OverflowPagerIndicator
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/opi_photo"
+                    android:layout_marginBottom="@dimen/padding12"
+                    android:layout_marginTop="130dp"></cz.intik.overflowindicator.OverflowPagerIndicator>
 
                 <ImageButton
                     android:layout_width="50dp"

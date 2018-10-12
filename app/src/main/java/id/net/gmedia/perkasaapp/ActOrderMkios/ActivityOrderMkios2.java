@@ -462,6 +462,11 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
 
             jBody.put("latitude", iv.doubleToStringFull(latitude));
             jBody.put("longitude", iv.doubleToStringFull(longitude));
+
+            String imei = "";
+            ArrayList<String> imeis = iv.getIMEI(context);
+            if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
+            jBody.put("imei", imei);
         } catch (JSONException e) {
             e.printStackTrace();
         }
