@@ -181,7 +181,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_kalender_start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spn_sales">
+            app:layout_constraintTop_toBottomOf="@+id/ll_custom">
 
             <ImageView
                 android:id="@+id/img_search"
@@ -207,18 +207,58 @@
 
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spn_sales"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginTop="@dimen/padding10"
-            android:visibility="gone"
+            android:orientation="vertical"
+            android:id="@+id/ll_custom"
+            android:visibility="visible"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/padding8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+            app:layout_constraintTop_toBottomOf="@+id/textView48"
+            app:layout_constraintBottom_toTopOf="@id/linearLayout10">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/padding5"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:id="@+id/tv_sales"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/text18"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/color_black"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sales"
+                    android:textSize="@dimen/text10"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_red"
+                android:textColor="@color/color_white"
+                android:id="@+id/btn_pilih_sales"
+                android:text="Pilih Sales"/>
+
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline

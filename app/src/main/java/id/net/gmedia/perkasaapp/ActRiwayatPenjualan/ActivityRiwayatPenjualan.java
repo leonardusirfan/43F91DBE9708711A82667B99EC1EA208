@@ -1,7 +1,9 @@
 package id.net.gmedia.perkasaapp.ActRiwayatPenjualan;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -58,6 +61,9 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     private EditText txt_nama;
     private String keyword = "";
     private TextView tvTotal;
+    private LinearLayout ll_custom;
+    private Button btnPilihSales;
+    private TextView tvSales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +85,18 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     private void initUI() {
 
         //Inisialisasi UI Spinner
-        String[] arraySpinner = new String[] {
+        /*String[] arraySpinner = new String[] {
                 "Gmedia Test", "Andi Kusworo"
         };
         Spinner s = findViewById(R.id.spn_sales);
         SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.item_riwayat_penjualan_spinner, arraySpinner);
-        s.setAdapter(adapter);
+        s.setAdapter(adapter);*/
 
         //Inisialisasi UI Kalender
+
+        ll_custom = (LinearLayout) findViewById(R.id.ll_custom);
+        btnPilihSales = (Button) findViewById(R.id.btn_pilih_sales);
+        tvSales = (TextView) findViewById(R.id.tv_sales);
         txt_start = findViewById(R.id.txt_start);
         txt_end = findViewById(R.id.txt_end);
         keyword = "";
@@ -221,6 +231,31 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                 keyword = editable.toString();
             }
         });
+
+        btnPilihSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ActivityListSales.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+
+                String nik = data.getStringExtra("nik");
+                String nama = data.getStringExtra("nama");
+                tvSales.setText(nama);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 
     private void initData() {

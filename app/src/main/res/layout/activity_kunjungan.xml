@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:id="@+id/ll_bottom"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kunjungan Sales"
+                android:text="Pilih Sales"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:textSize="18sp"

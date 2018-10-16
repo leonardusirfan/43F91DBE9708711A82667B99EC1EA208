@@ -64,6 +64,7 @@ public class ActivityKunjungan extends AppCompatActivity {
     private LinearLayout llTop;
     private TextView tvDate;
     private String dateString = "";
+    private String dateKunjungan = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,7 @@ public class ActivityKunjungan extends AppCompatActivity {
         LayoutInflater li = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         footerList = li.inflate(R.layout.footer_list, null);
         session = new SessionManager(context);
+        dateKunjungan = iv.getCurrentDate(FormatItem.formatDate);
 
         selfCheckin = true;
         startIndex = 0;
@@ -158,45 +160,7 @@ public class ActivityKunjungan extends AppCompatActivity {
                 namaSales = bundle.getString("nama");
                 setTitle("Kunjungan Sales");
                 getSupportActionBar().setSubtitle("a/n "+ namaSales);
-                llTop.setVisibility(View.VISIBLE);
-                dateString = iv.getCurrentDate(FormatItem.formatDateDisplay);
-                tvDate.setText(dateString);
 
-                tvDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        final Calendar customDate;
-                        SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
-
-                        Date dateValue = null;
-
-                        try {
-                            dateValue = sdf.parse(dateString);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                        customDate = Calendar.getInstance();
-                        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                                customDate.set(Calendar.YEAR,year);
-                                customDate.set(Calendar.MONTH,month);
-                                customDate.set(Calendar.DATE,date);
-
-                                SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
-                                dateString = sdFormat.format(customDate.getTime());
-                                tvDate.setText(dateString);
-                                startIndex = 0;
-                                getDataKunjungan();
-                            }
-                        };
-
-                        SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
-                        new DatePickerDialog(context ,date , iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
-                    }
-                });
             }
         }else{
             nik = session.getNikGa();
@@ -226,8 +190,69 @@ public class ActivityKunjungan extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, ActivityKunjunganSales.class);
-                intent.putExtra("flag", flag);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+
+                String nik = data.getStringExtra("nik");
+                String nama = data.getStringExtra("nama");
+                setTitle("Kunjungan "+nama);
+                setDataSales();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
+    }
+
+    private void setDataSales(){
+
+        llTop.setVisibility(View.VISIBLE);
+        dateString = iv.getCurrentDate(FormatItem.formatDateDisplay);
+        tvDate.setText(dateString);
+
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar customDate;
+                SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
+
+                Date dateValue = null;
+
+                try {
+                    dateValue = sdf.parse(dateString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                customDate = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        customDate.set(Calendar.YEAR,year);
+                        customDate.set(Calendar.MONTH,month);
+                        customDate.set(Calendar.DATE,date);
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
+                        dateString = sdFormat.format(customDate.getTime());
+                        tvDate.setText(dateString);
+                        dateKunjungan = iv.ChangeFormatDateString(dateString, FormatItem.formatDateDisplay, FormatItem.formatDate);
+                        startIndex = 0;
+                        masterList.clear();
+                        getDataKunjungan();
+                    }
+                };
+
+                SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+                new DatePickerDialog(context ,date , iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
             }
         });
     }
@@ -250,7 +275,7 @@ public class ActivityKunjungan extends AppCompatActivity {
         try {
             jBody.put("start", startIndex);
             jBody.put("count", count);
-            jBody.put("date", iv.getCurrentDate(FormatItem.formatDate));
+            jBody.put("date", dateKunjungan);
             jBody.put("nomor", "");
             jBody.put("kdcus", "");
         } catch (JSONException e) {
