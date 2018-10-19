@@ -208,13 +208,18 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                         String nikMkios = response.getJSONObject("response").getString("nik_mkios");
                         String nama = response.getJSONObject("response").getString("nama");
                         String username = response.getJSONObject("response").getString("username");
+                        String flagSuperuser = response.getJSONObject("response").getString("flag");
+                        String nikHr = response.getJSONObject("response").getString("nik_hr");
                         session.createLoginSession(username,
                                 nikGa,
                                 nikMkios,
                                 nama,
                                 iv.encodeBase64(txt_password.getText().toString()),
                                 sessions,
-                                expiration);
+                                expiration,
+                                flagSuperuser,
+                                nikHr);
+
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                         redirectToLogin();

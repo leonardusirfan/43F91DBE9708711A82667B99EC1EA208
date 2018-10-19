@@ -21,10 +21,13 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +79,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private DialogBox dialogBox;
     private static ItemValidation iv = new ItemValidation();
     private TextView tvNomor, tvSegmentasi;
-    private AdapterOrderMkios2 adapter;
+    //private AdapterOrderMkios2 adapter;
     private boolean isLoading = false;
     private Button btnProses;
     private final String TAG = "ORDERMKIOS";
@@ -112,6 +115,15 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private TextView tvJarak;
     private ImageView ivRefreshJarak;
     private Button btnPeta;
+    private TextView tvNama1, tvJml1, tvHarga1, tvTotal1;
+    private TextView tvNama5, tvJml5, tvHarga5, tvTotal5;
+    private TextView tvNama10, tvJml10, tvHarga10, tvTotal10;
+    private TextView tvNama20, tvJml20, tvHarga20, tvTotal20;
+    private TextView tvNama25, tvJml25, tvHarga25, tvTotal25;
+    private TextView tvNama50, tvJml50, tvHarga50, tvTotal50;
+    private TextView tvNama100, tvJml100, tvHarga100, tvTotal100;
+    private TextView tvNamaBulk, tvJmlBulk, tvHargaBulk, tvTotalBulk;
+    private EditText edtJml1, edtJml5, edtJml10, edtJml20, edtJml25, edtJml50, edtJml100, edtJmlBulk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +142,7 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         initLocationUtils();
         initUI();
         initData();
-        initEvent();
+        //initEvent();
     }
 
     private void initLocationUtils() {
@@ -166,6 +178,42 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
         btnPeta = (Button) findViewById(R.id.btn_peta);
 
+        tvNama1 = (TextView) findViewById(R.id.tv_nama1);
+        tvNama5 = (TextView) findViewById(R.id.tv_nama5);
+        tvNama10 = (TextView) findViewById(R.id.tv_nama10);
+        tvNama20 = (TextView) findViewById(R.id.tv_nama20);
+        tvNama25 = (TextView) findViewById(R.id.tv_nama25);
+        tvNama50 = (TextView) findViewById(R.id.tv_nama50);
+        tvNama100 = (TextView) findViewById(R.id.tv_nama100);
+        tvNamaBulk = (TextView) findViewById(R.id.tv_namabulk);
+
+        edtJml1 = (EditText) findViewById(R.id.edt_jml1);
+        edtJml5 = (EditText) findViewById(R.id.edt_jml5);
+        edtJml10 = (EditText) findViewById(R.id.edt_jml10);
+        edtJml20 = (EditText) findViewById(R.id.edt_jml20);
+        edtJml25 = (EditText) findViewById(R.id.edt_jml25);
+        edtJml50 = (EditText) findViewById(R.id.edt_jml50);
+        edtJml100 = (EditText) findViewById(R.id.edt_jml100);
+        edtJmlBulk = (EditText) findViewById(R.id.edt_jmlbulk);
+
+        tvHarga1 = (TextView) findViewById(R.id.tv_harga1);
+        tvHarga5 = (TextView) findViewById(R.id.tv_harga5);
+        tvHarga10 = (TextView) findViewById(R.id.tv_harga10);
+        tvHarga20 = (TextView) findViewById(R.id.tv_harga20);
+        tvHarga25 = (TextView) findViewById(R.id.tv_harga25);
+        tvHarga50 = (TextView) findViewById(R.id.tv_harga50);
+        tvHarga100 = (TextView) findViewById(R.id.tv_harga100);
+        tvHargaBulk = (TextView) findViewById(R.id.tv_hargabulk);
+
+        tvTotal1 = (TextView) findViewById(R.id.tv_total1);
+        tvTotal5 = (TextView) findViewById(R.id.tv_total5);
+        tvTotal10 = (TextView) findViewById(R.id.tv_total10);
+        tvTotal20 = (TextView) findViewById(R.id.tv_total20);
+        tvTotal25 = (TextView) findViewById(R.id.tv_total25);
+        tvTotal50 = (TextView) findViewById(R.id.tv_total50);
+        tvTotal100 = (TextView) findViewById(R.id.tv_total100);
+        tvTotalBulk = (TextView) findViewById(R.id.tv_totalbulk);
+
         if(getIntent().hasExtra("nomor")){
             //ModelOutlet mkios = getIntent().getParcelableExtra("mkios");
             nomor = getIntent().getExtras().getString("nomor", "");
@@ -176,12 +224,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         isLoading = false;
 
         listPulsa = new ArrayList<>();
-        adapter = new AdapterOrderMkios2(listPulsa, context);
+        /*adapter = new AdapterOrderMkios2(listPulsa, context);
         RecyclerView rcy_pulsa = findViewById(R.id.rcy_pulsa);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rcy_pulsa.setLayoutManager(layoutManager);
         rcy_pulsa.setItemAnimator(new DefaultItemAnimator());
-        rcy_pulsa.setAdapter(adapter);
+        rcy_pulsa.setAdapter(adapter);*/
     }
 
     private void initData() {
@@ -221,13 +269,44 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
 
                         // Denom
                         listPulsa.add(new ModelPulsa("1", jo.getString("jk1"), "", ""));
+                        tvNama1.setText("1");
+                        tvHarga1.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk1"))));
+                        edtJml1.setText("");
+
                         listPulsa.add(new ModelPulsa("5", jo.getString("jk5"), "", ""));
+                        tvNama5.setText("5");
+                        tvHarga5.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk5"))));
+                        edtJml5.setText("");
+
                         listPulsa.add(new ModelPulsa("10", jo.getString("jk10"), "", ""));
+                        tvNama10.setText("10");
+                        tvHarga10.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk10"))));
+                        edtJml10.setText("");
+
                         listPulsa.add(new ModelPulsa("20", jo.getString("jk20"), "", ""));
+                        tvNama20.setText("20");
+                        tvHarga20.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk20"))));
+                        edtJml20.setText("");
+
                         listPulsa.add(new ModelPulsa("25", jo.getString("jk25"), "", ""));
+                        tvNama25.setText("25");
+                        tvHarga25.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk25"))));
+                        edtJml25.setText("");
+
                         listPulsa.add(new ModelPulsa("50", jo.getString("jk50"), "", ""));
+                        tvNama50.setText("50");
+                        tvHarga50.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk50"))));
+                        edtJml50.setText("");
+
                         listPulsa.add(new ModelPulsa("100", jo.getString("jk100"), "", ""));
+                        tvNama100.setText("100");
+                        tvHarga100.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("jk100"))));
+                        edtJml100.setText("");
+
                         listPulsa.add(new ModelPulsa("Bulk", jo.getString("jual_bulk"), "", ""));
+                        tvNamaBulk.setText("Bulk");
+                        tvHargaBulk.setText(iv.doubleToString(100 - iv.parseNullDouble(jo.getString("jual_bulk"))) + "%");
+                        edtJmlBulk.setText("");
 
                     }else{
 
@@ -249,7 +328,15 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                     dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
                 }
 
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
+                /*adapter = new AdapterOrderMkios2(listPulsa, context);
+                RecyclerView rcy_pulsa = findViewById(R.id.rcy_pulsa);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+                rcy_pulsa.setLayoutManager(layoutManager);
+                rcy_pulsa.setItemAnimator(new DefaultItemAnimator());
+                rcy_pulsa.setAdapter(adapter);*/
+
+                initEvent();
             }
 
             @Override
@@ -321,6 +408,150 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
                         })
                         .show();
 
+            }
+        });
+
+        edtJml1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml10.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml20.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml25.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml50.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJml100.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJmlBulk.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
             }
         });
 
@@ -512,26 +743,64 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     public void updateHarga(){
 
         totalHarga = 0;
-        if(listPulsa != null && listPulsa.size() > 0){
 
-            for(ModelPulsa pulsa : listPulsa){
+        double jml1 = iv.parseNullDouble(edtJml1.getText().toString());
+        double jml5 = iv.parseNullDouble(edtJml5.getText().toString());
+        double jml10 = iv.parseNullDouble(edtJml10.getText().toString());
+        double jml20 = iv.parseNullDouble(edtJml20.getText().toString());
+        double jml25 = iv.parseNullDouble(edtJml25.getText().toString());
+        double jml50 = iv.parseNullDouble(edtJml50.getText().toString());
+        double jml100 = iv.parseNullDouble(edtJml100.getText().toString());
+        double jmlBulk = iv.parseNullDouble(edtJmlBulk.getText().toString());
 
-                if(!pulsa.getJumlah().equals("")){
+        double harga1 = iv.parseNullDouble(listPulsa.get(0).getHargaString());
+        double harga5 = iv.parseNullDouble(listPulsa.get(1).getHargaString());
+        double harga10 = iv.parseNullDouble(listPulsa.get(2).getHargaString());
+        double harga20 = iv.parseNullDouble(listPulsa.get(3).getHargaString());
+        double harga25 = iv.parseNullDouble(listPulsa.get(4).getHargaString());
+        double harga50 = iv.parseNullDouble(listPulsa.get(5).getHargaString());
+        double harga100 = iv.parseNullDouble(listPulsa.get(6).getHargaString());
+        double hargaBulk = iv.parseNullDouble(listPulsa.get(7).getHargaString());
 
-                    double harga = 0;
-                    if(pulsa.getPulsaString().equals("Bulk")){
+        listPulsa.get(0).setJumlah(edtJml1.getText().toString());
+        listPulsa.get(1).setJumlah(edtJml5.getText().toString());
+        listPulsa.get(2).setJumlah(edtJml10.getText().toString());
+        listPulsa.get(3).setJumlah(edtJml20.getText().toString());
+        listPulsa.get(4).setJumlah(edtJml25.getText().toString());
+        listPulsa.get(5).setJumlah(edtJml50.getText().toString());
+        listPulsa.get(6).setJumlah(edtJml100.getText().toString());
+        listPulsa.get(7).setJumlah(edtJmlBulk.getText().toString());
 
-                        harga = (100 - iv.parseNullDouble(pulsa.getHargaString())) / 100 * iv.parseNullDouble(pulsa.getJumlah());
-                    }else{
+        double total1 = jml1 * harga1;
+        double total5 = jml5 * harga5;
+        double total10 = jml10 * harga10;
+        double total20 = jml20 * harga20;
+        double total25 = jml25 * harga25;
+        double total50 = jml50 * harga50;
+        double total100 = jml100 * harga100;
+        double totalBulk = (100 - hargaBulk) / 100 * jmlBulk;
 
-                        harga = iv.parseNullDouble(pulsa.getJumlah()) * iv.parseNullDouble(pulsa.getHargaString());
-                    }
+        listPulsa.get(0).setTotalHarga(iv.doubleToString(total1));
+        listPulsa.get(1).setTotalHarga(iv.doubleToString(total5));
+        listPulsa.get(2).setTotalHarga(iv.doubleToString(total10));
+        listPulsa.get(3).setTotalHarga(iv.doubleToString(total20));
+        listPulsa.get(4).setTotalHarga(iv.doubleToString(total25));
+        listPulsa.get(5).setTotalHarga(iv.doubleToString(total50));
+        listPulsa.get(6).setTotalHarga(iv.doubleToString(total100));
+        listPulsa.get(7).setTotalHarga(iv.doubleToString(totalBulk));
 
-                    totalHarga += harga;
-                }
-            }
-        }
+        tvTotal1.setText(iv.ChangeToCurrencyFormat(listPulsa.get(0).getTotalHarga()));
+        tvTotal5.setText(iv.ChangeToCurrencyFormat(listPulsa.get(1).getTotalHarga()));
+        tvTotal10.setText(iv.ChangeToCurrencyFormat(listPulsa.get(2).getTotalHarga()));
+        tvTotal20.setText(iv.ChangeToCurrencyFormat(listPulsa.get(3).getTotalHarga()));
+        tvTotal25.setText(iv.ChangeToCurrencyFormat(listPulsa.get(4).getTotalHarga()));
+        tvTotal50.setText(iv.ChangeToCurrencyFormat(listPulsa.get(5).getTotalHarga()));
+        tvTotal100.setText(iv.ChangeToCurrencyFormat(listPulsa.get(6).getTotalHarga()));
+        tvTotalBulk.setText(iv.ChangeToCurrencyFormat(listPulsa.get(7).getTotalHarga()));
 
+        totalHarga = total1 + total5 + total10 + total20 + total25 + total50 + total100 + totalBulk;
+
+        //adapter.notifyDataSetChanged();
         txt_total.setText(iv.ChangeToRupiahFormat(totalHarga));
     }
 

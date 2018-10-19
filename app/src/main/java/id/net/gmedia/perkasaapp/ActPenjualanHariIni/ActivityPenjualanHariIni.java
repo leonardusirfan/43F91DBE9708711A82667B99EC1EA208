@@ -1,13 +1,17 @@
 package id.net.gmedia.perkasaapp.ActPenjualanHariIni;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.Adapter.PenjualanHariIniAdapter;
+import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityListSales;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
@@ -40,6 +45,11 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
     private List<CustomItem> listTransaksi = new ArrayList<>();
     private PenjualanHariIniAdapter adapter;
     private TextView tvTotal;
+    private LinearLayout llCustom;
+    private Button btnPilihSales;
+    private TextView tvSales;
+    private SessionManager session;
+    private String selectedNikGa = "", selectedNikMkios = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
         context = this;
         dialogBox = new DialogBox(context);
+        session = new SessionManager(context);
 
         initUI();
         initEvent();
@@ -61,6 +72,9 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
     private void initUI() {
 
+        llCustom = (LinearLayout) findViewById(R.id.ll_custom);
+        btnPilihSales = (Button) findViewById(R.id.btn_pilih_sales);
+        tvSales = (TextView) findViewById(R.id.tv_sales);
         lvRiwayat = (ListView) findViewById(R.id.lv_riwayat);
         edtSearch = (EditText) findViewById(R.id.edt_search);
         tvTotal = (TextView) findViewById(R.id.tv_total);
@@ -68,6 +82,13 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
         listTransaksi = new ArrayList<>();
         adapter = new PenjualanHariIniAdapter(context, listTransaksi);
         lvRiwayat.setAdapter(adapter);
+
+        tvSales.setText(session.getNama());
+        if(session.isSuperuser()){
+            llCustom.setVisibility(View.VISIBLE);
+        }else{
+            llCustom.setVisibility(View.GONE);
+        }
     }
 
     private void initEvent() {
@@ -89,6 +110,35 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                 return false;
             }
         });
+
+        btnPilihSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ActivityListSales.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+
+            if(resultCode == Activity.RESULT_OK){
+
+                selectedNikGa = data.getStringExtra("nik_ga");
+                selectedNikMkios = data.getStringExtra("nik_mkios");
+                String nama = data.getStringExtra("nama");
+                tvSales.setText(nama);
+                listTransaksi.clear();
+                initData();
+
+            }else if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 
     private void initData() {
@@ -100,6 +150,8 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
             jBody.put("keyword", keyword);
             jBody.put("start", "");
             jBody.put("count", "");
+            jBody.put("nik_ga", selectedNikGa);
+            jBody.put("nik_mkios", selectedNikMkios);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActBranding.Adapter.ListBrandingAdapter;
+import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityListSales;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
@@ -55,6 +58,11 @@ public class ListBranding extends AppCompatActivity {
     private EditText edtKeyword;
     private List<CustomItem> listBranding = new ArrayList<>();
     private ListBrandingAdapter adapter;
+    private LinearLayout llCustom;
+    private Button btnPilihSales;
+    private TextView tvSales;
+    private SessionManager session;
+    private String selectedNikGa = "", selectedNikMkios = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,8 @@ public class ListBranding extends AppCompatActivity {
 
         context = this;
         dialogBox = new DialogBox(context);
+        session = new SessionManager(context);
+
         initUI();
         initEvent();
         initData();
@@ -75,6 +85,9 @@ public class ListBranding extends AppCompatActivity {
 
     private void initUI() {
 
+        llCustom = (LinearLayout) findViewById(R.id.ll_custom);
+        btnPilihSales = (Button) findViewById(R.id.btn_pilih_sales);
+        tvSales = (TextView) findViewById(R.id.tv_sales);
         fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
         tvStart = (TextView) findViewById(R.id.tv_start);
         tvEnd = (TextView) findViewById(R.id.tv_end);
@@ -106,6 +119,13 @@ public class ListBranding extends AppCompatActivity {
                 view.getContext().startActivity(intent);
             }
         });
+
+        tvSales.setText(session.getNama());
+        if(session.isSuperuser()){
+            llCustom.setVisibility(View.VISIBLE);
+        }else{
+            llCustom.setVisibility(View.GONE);
+        }
     }
 
     private void initEvent() {
@@ -210,6 +230,34 @@ public class ListBranding extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnPilihSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ActivityListSales.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+
+            if(resultCode == Activity.RESULT_OK){
+
+                selectedNikGa = data.getStringExtra("nik_ga");
+                selectedNikMkios = data.getStringExtra("nik_mkios");
+                String nama = data.getStringExtra("nama");
+                tvSales.setText(nama);
+                listBranding.clear();
+                initData();
+            }else if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 
     private void initData() {
@@ -220,6 +268,8 @@ public class ListBranding extends AppCompatActivity {
             jBody.put("datestart", dateStart);
             jBody.put("dateend", dateEnd);
             jBody.put("keyword", keyword);
+            jBody.put("nik_ga", selectedNikGa);
+            jBody.put("nik_mkios", selectedNikMkios);
         } catch (JSONException e) {
             e.printStackTrace();
         }

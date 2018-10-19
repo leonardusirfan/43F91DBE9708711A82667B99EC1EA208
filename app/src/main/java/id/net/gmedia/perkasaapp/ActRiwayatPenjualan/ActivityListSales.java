@@ -145,8 +145,9 @@ public class ActivityListSales extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 Intent returnIntent = new Intent();
-                                returnIntent.putExtra("nik",item.getItem1());
+                                returnIntent.putExtra("nik_ga",item.getItem1());
                                 returnIntent.putExtra("nama",item.getItem2());
+                                returnIntent.putExtra("nik_mkios",item.getItem2());
                                 setResult(Activity.RESULT_OK,returnIntent);
                                 finish();
                             }
@@ -183,7 +184,7 @@ public class ActivityListSales extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerPerdana, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSales, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -205,9 +206,9 @@ public class ActivityListSales extends AppCompatActivity {
 
                             JSONObject jo = jsonArray.getJSONObject(i);
                             listReller.add(new CustomItem(
-                                    jo.getString("kdcus")
+                                    jo.getString("nik_ga")
                                     ,jo.getString("nama")
-                                    ,jo.getString("alamat")
+                                    ,jo.getString("nik_mkios")
                             ));
                         }
 

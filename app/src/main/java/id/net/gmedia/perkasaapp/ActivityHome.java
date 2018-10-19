@@ -404,9 +404,15 @@ public class ActivityHome extends AppCompatActivity
                                         .setPositiveButton("Update Sekarang", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialogVersion.dismiss();
-                                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                                                startActivity(browserIntent);
+
+                                                try {
+                                                    dialogVersion.dismiss();
+                                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                                                    startActivity(browserIntent);
+                                                }catch (Exception e){
+                                                    e.printStackTrace();
+                                                    Toast.makeText(context, "Hp anda tidak memiliki browser tertanam", Toast.LENGTH_LONG).show();
+                                                }
                                             }
                                         })
                                         .setCancelable(false)
@@ -420,9 +426,15 @@ public class ActivityHome extends AppCompatActivity
                                         .setPositiveButton("Update Sekarang", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialogVersion.dismiss();
-                                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                                                startActivity(browserIntent);
+
+                                                try {
+                                                    dialogVersion.dismiss();
+                                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                                                    startActivity(browserIntent);
+                                                }catch (Exception e){
+                                                    e.printStackTrace();
+                                                    Toast.makeText(context, "Hp anda tidak memiliki browser tertanam", Toast.LENGTH_LONG).show();
+                                                }
                                             }
                                         })
                                         .setNegativeButton("Update Nanti", new DialogInterface.OnClickListener() {

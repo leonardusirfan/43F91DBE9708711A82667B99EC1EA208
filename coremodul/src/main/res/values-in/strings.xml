@@ -16,6 +16,6 @@
     <string name="msg_auth_issue">Tidak dapat terhubung ke internet, mohon cek koneksi anda</string>
     <string name="msg_parsing_issue">Kesalahan saat menerima data, harap coba kembali nanti</string>
     <string name="msg_noinet_issue">Tidak dapat terhubung ke internet, mohon cek koneksi anda</string>
-    <string name="msg_timeout_issue">Koneksi Lamban, harap cek koneksi anda</string>
+    <string name="msg_timeout_issue">Koneksi terdeteksi lamban, harap cek koneksi anda</string>
     <string name="msg_default_issue">Terjadi kesalahan saat memuat data, harap ulangi kembali</string>
 </resources>

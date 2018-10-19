@@ -154,6 +154,8 @@ public class ApiVolley {
                 params.put("Signature", token3);
                 params.put("Nik-Mkios", token4);
                 params.put("Nik-Ga", token5);
+                params.put("flag", session.getSuperuser());
+                params.put("Nik-Hr", session.getNikHR());
                 return params;
             }
 

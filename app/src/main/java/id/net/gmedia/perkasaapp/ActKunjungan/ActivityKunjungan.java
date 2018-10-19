@@ -65,6 +65,7 @@ public class ActivityKunjungan extends AppCompatActivity {
     private TextView tvDate;
     private String dateString = "";
     private String dateKunjungan = "";
+    private String selectedNikGa = "", selectedNikMkios = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +173,12 @@ public class ActivityKunjungan extends AppCompatActivity {
             btnAdd.setVisibility(View.GONE);
             llBottom.setVisibility(View.GONE);
         }
+
+        if(session.isSuperuser()){
+            llBottom.setVisibility(View.VISIBLE);
+        }else{
+            llBottom.setVisibility(View.GONE);
+        }
     }
 
     private void initEvent() {
@@ -201,9 +208,10 @@ public class ActivityKunjungan extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
 
-                String nik = data.getStringExtra("nik");
+                selectedNikGa = data.getStringExtra("nik_ga");
+                selectedNikMkios = data.getStringExtra("nik_mkios");
                 String nama = data.getStringExtra("nama");
-                setTitle("Kunjungan "+nama);
+                getSupportActionBar().setTitle("Kunjungan "+nama);
                 setDataSales();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -278,6 +286,8 @@ public class ActivityKunjungan extends AppCompatActivity {
             jBody.put("date", dateKunjungan);
             jBody.put("nomor", "");
             jBody.put("kdcus", "");
+            jBody.put("nik_ga", selectedNikGa);
+            jBody.put("nik_mkios", selectedNikMkios);
         } catch (JSONException e) {
             e.printStackTrace();
         }

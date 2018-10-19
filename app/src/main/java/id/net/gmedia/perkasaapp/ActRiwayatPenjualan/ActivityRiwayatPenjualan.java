@@ -31,6 +31,7 @@ import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +51,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
     private Context context;
     private ItemValidation iv = new ItemValidation();
+    private SessionManager session;
     private DialogBox dialogBox;
     private int start_day, start_month, start_year, end_day, end_month, end_year;
     private TextView txt_start, txt_end;
@@ -61,9 +63,10 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     private EditText txt_nama;
     private String keyword = "";
     private TextView tvTotal;
-    private LinearLayout ll_custom;
+    private LinearLayout llCustom;
     private Button btnPilihSales;
     private TextView tvSales;
+    private String selectedNikGa = "", selectedNikMkios = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
         context = this;
         dialogBox = new DialogBox(context);
+        session = new SessionManager(context);
+
         initUI();
         initEvent();
         initData();
@@ -94,9 +99,17 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
         //Inisialisasi UI Kalender
 
-        ll_custom = (LinearLayout) findViewById(R.id.ll_custom);
+        llCustom = (LinearLayout) findViewById(R.id.ll_custom);
         btnPilihSales = (Button) findViewById(R.id.btn_pilih_sales);
         tvSales = (TextView) findViewById(R.id.tv_sales);
+
+        tvSales.setText(session.getNama());
+        if(session.isSuperuser()){
+            llCustom.setVisibility(View.VISIBLE);
+        }else{
+            llCustom.setVisibility(View.GONE);
+        }
+
         txt_start = findViewById(R.id.txt_start);
         txt_end = findViewById(R.id.txt_end);
         keyword = "";
@@ -118,6 +131,12 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
         listRiwayat = new ArrayList<>();
         adapterRiwayat = new RiwayatPenjualanAdapter(context, listRiwayat);
         lvRiwayat.setAdapter(adapterRiwayat);
+
+        if(session.isSuperuser()){
+            llCustom.setVisibility(View.VISIBLE);
+        }else{
+            llCustom.setVisibility(View.GONE);
+        }
     }
 
     private void initEvent() {
@@ -248,11 +267,13 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
 
-                String nik = data.getStringExtra("nik");
+                selectedNikGa = data.getStringExtra("nik_ga");
+                selectedNikMkios = data.getStringExtra("nik_mkios");
                 String nama = data.getStringExtra("nama");
                 tvSales.setText(nama);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
+                listRiwayat.clear();
+                initData();
+            }else if (resultCode == Activity.RESULT_CANCELED) {
 
             }
         }
@@ -269,6 +290,8 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
             jBody.put("keyword", keyword);
             jBody.put("start", "");
             jBody.put("count", "");
+            jBody.put("nik_ga", selectedNikGa);
+            jBody.put("nik_mkios", selectedNikMkios);
         } catch (JSONException e) {
             e.printStackTrace();
         }
