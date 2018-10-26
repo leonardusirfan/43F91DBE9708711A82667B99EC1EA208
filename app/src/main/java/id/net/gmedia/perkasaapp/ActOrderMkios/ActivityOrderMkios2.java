@@ -26,9 +26,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +54,7 @@ import com.google.android.gms.tasks.Task;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
@@ -124,6 +129,12 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
     private TextView tvNama100, tvJml100, tvHarga100, tvTotal100;
     private TextView tvNamaBulk, tvJmlBulk, tvHargaBulk, tvTotalBulk;
     private EditText edtJml1, edtJml5, edtJml10, edtJml20, edtJml25, edtJml50, edtJml100, edtJmlBulk;
+    private RadioGroup rgCrbayar;
+    private RadioButton rbTunai, rbBank;
+    private String crBayar = "T";
+    private List<OptionItem> listAccount = new ArrayList<>();
+    private ArrayAdapter adapterAccount;
+    private Spinner spAkun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +225,11 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         tvTotal100 = (TextView) findViewById(R.id.tv_total100);
         tvTotalBulk = (TextView) findViewById(R.id.tv_totalbulk);
 
+        spAkun = (Spinner) findViewById(R.id.sp_akun);
+        rgCrbayar = (RadioGroup) findViewById(R.id.rg_crbayar);
+        rbTunai = (RadioButton) findViewById(R.id.rb_tunai);
+        rbBank = (RadioButton) findViewById(R.id.rb_bank);
+
         if(getIntent().hasExtra("nomor")){
             //ModelOutlet mkios = getIntent().getParcelableExtra("mkios");
             nomor = getIntent().getExtras().getString("nomor", "");
@@ -230,6 +246,107 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         rcy_pulsa.setLayoutManager(layoutManager);
         rcy_pulsa.setItemAnimator(new DefaultItemAnimator());
         rcy_pulsa.setAdapter(adapter);*/
+
+        adapterAccount = new ArrayAdapter(context, R.layout.layout_simple_list, listAccount);
+        spAkun.setAdapter(adapterAccount);
+        rgCrbayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(i == R.id.rb_tunai){
+
+                    crBayar = "T";
+                }else if(i == R.id.rb_bank){
+
+                    crBayar = "B";
+                }
+
+                getDataAccount();
+            }
+        });
+
+        crBayar = "T";
+        getDataAccount();
+    }
+
+    private void getDataAccount() {
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("flag", crBayar);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDataAccount, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    listAccount.clear();
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        for(int i = 0; i < ja.length(); i++){
+
+                            JSONObject jo = ja.getJSONObject(i);
+
+                            listAccount.add(new OptionItem(
+                                    jo.getString("kodeakun")
+                                    ,jo.getString("namaakun")
+                            ));
+                        }
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDataAccount();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+
+                adapterAccount.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDataAccount();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void initData() {
@@ -698,6 +815,8 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
             ArrayList<String> imeis = iv.getIMEI(context);
             if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
             jBody.put("imei", imei);
+            jBody.put("crbayar", crBayar);
+            jBody.put("kodeakun", ((OptionItem)spAkun.getSelectedItem()).getValue());
         } catch (JSONException e) {
             e.printStackTrace();
         }

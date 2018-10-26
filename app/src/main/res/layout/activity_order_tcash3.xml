@@ -35,6 +35,60 @@
             app:layout_constraintTop_toBottomOf="@+id/textView42"
             tools:text="@string/rupiah_0" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_akun"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            app:layout_constraintTop_toBottomOf="@+id/txt_nominal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                style="@style/TitleText"
+                android:text="Cara Bayar"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/rg_crbayar"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Tunai"
+                    android:checked="true"
+                    android:id="@+id/rb_tunai"/>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Transfer"
+                    android:id="@+id/rb_bank"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                style="@style/TitleText"
+                android:text="Akun"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_akun"
+                android:layout_marginTop="@dimen/padding10"></Spinner>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView42"
             android:layout_width="wrap_content"
@@ -43,10 +97,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="@dimen/padding10"
             android:text="@string/harga"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
+            style="@style/TitleText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nominal" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_akun" />
 
         <TextView
             android:id="@+id/textView41"
@@ -56,8 +109,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="@dimen/padding10"
             android:text="@string/nominal"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
+            style="@style/TitleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
 
@@ -69,8 +121,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="@dimen/padding10"
             android:text="@string/nama_pelanggan"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
+            style="@style/TitleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

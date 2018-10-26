@@ -24,8 +24,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +51,14 @@ import com.google.android.gms.tasks.Task;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActivityHome;
@@ -105,6 +111,12 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
     private ImageView ivRefreshJarak;
     private Button btnPeta;
     private String nomor = "";
+    private RadioGroup rgCrbayar;
+    private RadioButton rbTunai, rbBank;
+    private String crBayar = "T";
+    private List<OptionItem> listAccount = new ArrayList<>();
+    private ArrayAdapter adapterAccount;
+    private Spinner spAkun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +170,10 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
         btnPeta = (Button) findViewById(R.id.btn_peta);
+        spAkun = (Spinner) findViewById(R.id.sp_akun);
+        rgCrbayar = (RadioGroup) findViewById(R.id.rg_crbayar);
+        rbTunai = (RadioButton) findViewById(R.id.rb_tunai);
+        rbBank = (RadioButton) findViewById(R.id.rb_bank);
 
         txt_harga.setText(R.string.rupiah_0);
 
@@ -169,6 +185,27 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
 
             txt_nama.setText(nama);
         }
+
+        adapterAccount = new ArrayAdapter(context, R.layout.layout_simple_list, listAccount);
+        spAkun.setAdapter(adapterAccount);
+        rgCrbayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(i == R.id.rb_tunai){
+
+                    crBayar = "T";
+                }else if(i == R.id.rb_bank){
+
+                    crBayar = "B";
+                }
+
+                getDataAccount();
+            }
+        });
+
+        crBayar = "T";
+        getDataAccount();
     }
 
     private void initEvent() {
@@ -252,6 +289,86 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
         });
     }
 
+    private void getDataAccount() {
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("flag", crBayar);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDataAccount, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    listAccount.clear();
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        for(int i = 0; i < ja.length(); i++){
+
+                            JSONObject jo = ja.getJSONObject(i);
+
+                            listAccount.add(new OptionItem(
+                                    jo.getString("kodeakun")
+                                    ,jo.getString("namaakun")
+                            ));
+                        }
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDataAccount();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+
+                adapterAccount.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDataAccount();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void saveData() {
 
         btn_proses.setEnabled(false);
@@ -275,6 +392,8 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
             jBody.put("longitude", iv.doubleToStringFull(longitude));
             jBody.put("nominal", txt_nominal.getText().toString());
             jBody.put("imei", imei);
+            jBody.put("crbayar", crBayar);
+            jBody.put("kodeakun", ((OptionItem)spAkun.getSelectedItem()).getValue());
 
         } catch (JSONException e) {
             e.printStackTrace();

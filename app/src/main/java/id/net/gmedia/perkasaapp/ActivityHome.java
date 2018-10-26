@@ -57,6 +57,7 @@ import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
+import id.net.gmedia.perkasaapp.ActSetoran.ListSetoran;
 import id.net.gmedia.perkasaapp.Services.LocationUpdater;
 import id.net.gmedia.perkasaapp.SideAkunAnda.SideAccount;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
@@ -83,6 +84,7 @@ public class ActivityHome extends AppCompatActivity
             , tvDsTargetPerdana, tvDsOmsetPerdana, tvDsGapPerdana
             , tvDsTargetBulk, tvDsOmsetBulk, tvDsGapBulk
             , tvDsTargetSurvey, tvDsEffectiveCall;
+    private LinearLayout btnSetoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +124,7 @@ public class ActivityHome extends AppCompatActivity
         btn_branding = (LinearLayout) findViewById(R.id.btn_branding);
         btn_market_intelligent = (LinearLayout) findViewById(R.id.btn_market_intelligent);
         btn_kunjungan = findViewById(R.id.btn_kunjungan);
+        btnSetoran = (LinearLayout) findViewById(R.id.btn_setoran);
         suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
         ivIcon = (ImageView) findViewById(R.id.iv_icon);
 
@@ -275,6 +278,14 @@ public class ActivityHome extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
+            }
+        });
+
+        btnSetoran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListSetoran.class));
             }
         });
 

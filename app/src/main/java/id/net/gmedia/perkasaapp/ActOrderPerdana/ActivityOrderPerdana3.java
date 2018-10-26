@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -43,6 +44,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,7 @@ import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
@@ -162,6 +165,17 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     private Button btnPeta;
     private String tanggalTempo = "", resellerTempo = "", currentCrbayar = "";
     private RadioGroup rgJenisTransaksi;
+    private LinearLayout llAkun;
+    private List<OptionItem> listAccount = new ArrayList<>();
+    private ArrayAdapter adapterAccount;
+    private Spinner spAkun;
+    private RadioGroup rgCrbayar;
+    private RadioButton rbTunai, rbBank;
+    private String crBayar = "T";
+    private TextView tvTanggalTempo;
+    private int stateTempo = 1;
+    private RadioButton rbTempo;
+    private String jenisBarang = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -605,10 +619,15 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         txt_harga_ccid = findViewById(R.id.txt_harga_ccid);
         txt_total = findViewById(R.id.txt_total);
         txt_total_harga = findViewById(R.id.txt_total_harga);
+        tvTanggalTempo = (TextView) findViewById(R.id.textView62);
         llTanggal = (LinearLayout) findViewById(R.id.ll_tanggal);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
         btnPeta = (Button) findViewById(R.id.btn_peta);
         rgJenisTransaksi = (RadioGroup) findViewById(R.id.rg_jenis_transaksi);
+        rgCrbayar = (RadioGroup) findViewById(R.id.rg_crbayar);
+        rbTunai = (RadioButton) findViewById(R.id.rb_tunai);
+        rbBank = (RadioButton) findViewById(R.id.rb_bank);
+        rbTempo = (RadioButton) findViewById(R.id.rb_tempo);
 
         btn_list = findViewById(R.id.btn_list);
         btn_rentang = findViewById(R.id.btn_rentang);
@@ -621,6 +640,8 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         rbEvent = (RadioButton) findViewById(R.id.rb_event);
 
         rgJenisBarang = (RadioGroup) findViewById(R.id.rg_jenis_barang);
+        llAkun = (LinearLayout) findViewById(R.id.ll_akun);
+        spAkun = (Spinner) findViewById(R.id.sp_akun);
 
         isLoading = false;
 
@@ -632,6 +653,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             hargabrg = bundle.getString("harga", "");
             suratJalan = bundle.getString("suratjalan", "");
             kdcus = bundle.getString("kdcus", "");
+            jenisBarang = bundle.getString("jenis_barang", "");
 
             txt_nama.setText(namabrg);
             txt_harga.setText(iv.ChangeToRupiahFormat(hargabrg));
@@ -644,7 +666,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         edtTanggal.setText(iv.getCurrentDate(FormatItem.formatDateDisplay));
         currentCrbayar = "T";
 
-        llTanggal.setOnClickListener(new View.OnClickListener() {
+        /*llTanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -675,7 +697,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                 SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
                 new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
             }
-        });
+        });*/
 
         btnProses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -737,17 +759,216 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
 
                     currentCrbayar = "T";
                     tanggalTempo = iv.sumDate(tanggalTempo, iv.parseNullInteger(resellerTempo),FormatItem.formatDate);
+                    edtTanggal.setText(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                    tvTanggalTempo.setVisibility(View.GONE);
+                    llTanggal.setVisibility(View.GONE);
+
                 }else if(radioGroup.getCheckedRadioButtonId() == R.id.rb_tempo){
 
                     currentCrbayar = "K";
-                    tanggalTempo = iv.getCurrentDate(FormatItem.formatDate);
+                    stateTempo = 2;
+                    getDataTempo();
+                    tvTanggalTempo.setVisibility(View.VISIBLE);
+                    llTanggal.setVisibility(View.VISIBLE);
                 }else{
 
                     currentCrbayar = "B";
                     tanggalTempo = iv.getCurrentDate(FormatItem.formatDate);
+                    edtTanggal.setText(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                    tvTanggalTempo.setVisibility(View.GONE);
+                    llTanggal.setVisibility(View.GONE);
                 }
 
-                edtTanggal.setText(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
+            }
+        });
+
+        adapterAccount = new ArrayAdapter(context, R.layout.layout_simple_list, listAccount);
+        spAkun.setAdapter(adapterAccount);
+        rgCrbayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(i == R.id.rb_tunai_bayar){
+
+                    crBayar = "T";
+                }else if(i == R.id.rb_bank){
+
+                    crBayar = "B";
+                }
+
+                getDataAccount();
+            }
+        });
+
+        crBayar = "T";
+        getDataAccount();
+
+        stateTempo = 1;
+        getDataTempo();
+    }
+
+    private void getDataTempo() {
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("kdcus", kdcus);
+            jBody.put("nomor", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getTanggalTempo, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        if(stateTempo == 1){
+
+                            String flagTempo = response.getJSONObject("response").getString("flag_tempo");
+
+                            if(flagTempo.trim().toUpperCase().equals("N")){
+
+                                rbTempo.setVisibility(View.GONE);
+                            }else{
+
+                                rbTempo.setVisibility(View.VISIBLE);
+                            }
+                        }else{
+
+                            String tempo = response.getJSONObject("response").getString("tempo");
+                            tanggalTempo = iv.sumDate(tanggalTempo, iv.parseNullInteger(tempo),FormatItem.formatDate);
+                            edtTanggal.setText(iv.ChangeFormatDateString(tanggalTempo, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                        }
+
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDataTempo();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDataTempo();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getDataAccount() {
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("flag", crBayar);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDataAccount, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    listAccount.clear();
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        for(int i = 0; i < ja.length(); i++){
+
+                            JSONObject jo = ja.getJSONObject(i);
+
+                            listAccount.add(new OptionItem(
+                                    jo.getString("kodeakun")
+                                    ,jo.getString("namaakun")
+                            ));
+                        }
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDataAccount();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                    //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
+                }
+
+                adapterAccount.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDataAccount();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+                //Toast.makeText(context,"Terjadi kesalahan saat menghitung jarak, harap ulangi proses" , Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -872,7 +1093,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         }
 
         RadioButton selectedRadio = (RadioButton) findViewById(rgJenisBarang.getCheckedRadioButtonId());
-        String jenisBarang = selectedRadio.getText().toString();
+        //String jenisBarang = selectedRadio.getText().toString();
 
         JSONObject jualH = new JSONObject();
         try {
@@ -902,6 +1123,8 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
             ArrayList<String> imeis = iv.getIMEI(context);
             if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
             jBody.put("imei", imei);
+            jBody.put("crbayar", crBayar);
+            jBody.put("kodeakun", ((OptionItem)spAkun.getSelectedItem()).getValue());
         } catch (JSONException e) {
             e.printStackTrace();
         }

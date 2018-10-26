@@ -52,5 +52,7 @@ public class ServerURL {
     public static final String getKunjungan = baseUrl + "kunjungan/view_kunjungan/";
     public static final String saveKunjungan = baseUrl + "kunjungan/simpan_kunjungan/";
     public static final String getSales = baseUrl + "sales/index/";
+    public static final String getTanggalTempo = baseUrl + "customer/tempo/";
+    public static final String getPembayaranSetoran = baseUrl + "Pembayaran/index/";
 
 }

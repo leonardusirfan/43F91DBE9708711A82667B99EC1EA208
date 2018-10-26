@@ -164,7 +164,7 @@
                 android:ems="10"
                 android:hint="@string/nama_customer"
                 android:inputType="textPersonName"
-                android:imeOptions="actionSearch"
+                android:imeOptions="actionDone"
                 android:padding="@dimen/padding10"
                 android:textSize="@dimen/text18" />
 

@@ -8,7 +8,7 @@ public class ModelPerdana implements Parcelable{
     private String nama;
     private int harga;
     private int stok;
-    private String tanggal, kodegudang, kodebrg, hargaString, stokString;
+    private String tanggal, kodegudang, kodebrg, hargaString, stokString, tipeProgram;
 
     public ModelPerdana(String nama, String surat_jalan, int harga, int stok){
         this.nama = nama;
@@ -29,7 +29,7 @@ public class ModelPerdana implements Parcelable{
         this.harga = 0;
     }
 
-    public ModelPerdana(String nama, String surat_jalan, String hargaString, String stokString, String tanggal, String kodegudang, String kodebrg){
+    public ModelPerdana(String nama, String surat_jalan, String hargaString, String stokString, String tanggal, String kodegudang, String kodebrg, String tipeProgram){
 
         this.nama = nama;
         this.surat_jalan = surat_jalan;
@@ -38,6 +38,7 @@ public class ModelPerdana implements Parcelable{
         this.tanggal = tanggal;
         this.kodegudang = kodegudang;
         this.kodebrg = kodebrg;
+        this.tipeProgram = tipeProgram;
     }
 
     public String getSurat_jalan() {
@@ -130,5 +131,13 @@ public class ModelPerdana implements Parcelable{
 
     public void setKodebrg(String kodebrg) {
         this.kodebrg = kodebrg;
+    }
+
+    public String getTipeProgram() {
+        return tipeProgram;
+    }
+
+    public void setTipeProgram(String tipeProgram) {
+        this.tipeProgram = tipeProgram;
     }
 }

@@ -212,6 +212,7 @@ public class ActivityOrderPerdana2 extends AppCompatActivity {
                                     ,jo.getString("tgl")
                                     ,jo.getString("kodegudang")
                                     ,jo.getString("kodebrg")
+                                    ,jo.getString("tipeprogram")
                             ));
                         }
 

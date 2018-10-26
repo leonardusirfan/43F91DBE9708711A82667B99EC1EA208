@@ -53,6 +53,7 @@ public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrder
                 i.putExtra("harga", perdana.getHargaString());
                 i.putExtra("suratjalan", perdana.getSurat_jalan());
                 i.putExtra("kdcus", kdcus);
+                i.putExtra("jenis_barang", perdana.getTipeProgram());
                 v.getContext().startActivity(i);
             }
         });

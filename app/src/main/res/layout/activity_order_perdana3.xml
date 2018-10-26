@@ -272,6 +272,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/rb_transfer"
+                android:visibility="gone"
                 android:text="Transfer"/>
         </RadioGroup>
 
@@ -279,6 +280,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ll_tanggal"
+            android:visibility="gone"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/padding5"
@@ -309,8 +311,62 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_akun"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            app:layout_constraintTop_toBottomOf="@+id/ll_tanggal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                style="@style/TitleText"
+                android:text="Cara Bayar"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/rg_crbayar"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Tunai"
+                    android:checked="true"
+                    android:id="@+id/rb_tunai_bayar"/>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Transfer"
+                    android:id="@+id/rb_bank"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                style="@style/TitleText"
+                android:text="Akun"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_akun"
+                android:layout_marginTop="@dimen/padding10"></Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/ll_jenis_barang"
-            app:layout_constraintTop_toBottomOf="@+id/ll_tanggal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_akun"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <TextView
@@ -356,6 +412,7 @@
             android:layout_marginRight="@dimen/padding10"
             android:layout_marginTop="@dimen/padding10"
             style="@style/TitleText"
+            android:visibility="gone"
             android:text="@string/tanggal_tempo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rg_jenis_transaksi" />

@@ -643,6 +643,32 @@
                                 android:textSize="@dimen/text10" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/btn_setoran"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="0.3"
+                                app:srcCompat="@drawable/verifikasi_outlet" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Setoran"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+                        </LinearLayout>
+
                     </android.support.v7.widget.GridLayout>
 
                 </LinearLayout>
