@@ -1227,6 +1227,7 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         try {
 
             jBody.put("kdbrg", kdbrg);
+            jBody.put("kdcus", kdcus);
             jBody.put("ccid", ccid);
             jBody.put("ccid_awal", start);
             jBody.put("ccid_akhir", end);

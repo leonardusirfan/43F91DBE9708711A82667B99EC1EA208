@@ -177,6 +177,7 @@ public class ActivityOrderPerdana2 extends AppCompatActivity {
 
         try {
             jBody.put("keyword", keyword);
+            jBody.put("kdcus", kdcus);
             jBody.put("start", start);
             jBody.put("count", count);
         } catch (JSONException e) {
