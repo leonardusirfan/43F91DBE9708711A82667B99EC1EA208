@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ import id.net.gmedia.perkasaapp.ActChangePassword.ActChangePassword;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.ActKonsinyasi;
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
 import id.net.gmedia.perkasaapp.ActKunjungan.DetailKunjungan;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.DetailMarketIntelligent;
@@ -85,7 +87,7 @@ public class ActivityHome extends AppCompatActivity
             , tvDsTargetPerdana, tvDsOmsetPerdana, tvDsGapPerdana
             , tvDsTargetBulk, tvDsOmsetBulk, tvDsGapBulk
             , tvDsTargetSurvey, tvDsEffectiveCall;
-    private LinearLayout btnSetoran;
+    private LinearLayout btnSetoran, btnKonsinyasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +130,7 @@ public class ActivityHome extends AppCompatActivity
         btnSetoran = (LinearLayout) findViewById(R.id.btn_setoran);
         suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
         ivIcon = (ImageView) findViewById(R.id.iv_icon);
+        btnKonsinyasi = (LinearLayout) findViewById(R.id.btn_konsinyasi);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -190,6 +193,14 @@ public class ActivityHome extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityRiwayatPenjualan.class));
+            }
+        });
+
+        btnKonsinyasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ActKonsinyasi.class));
             }
         });
 

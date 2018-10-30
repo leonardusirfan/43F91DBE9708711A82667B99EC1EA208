@@ -280,7 +280,11 @@
         <activity
             android:name=".ActSetoran.ListSetoran"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActChangePassword.ActChangePassword"></activity>
+        <activity android:name=".ActChangePassword.ActChangePassword" />
+        <activity android:name=".ActKonsinyasi.ActKonsinyasi" />
+        <activity android:name=".ActKonsinyasi.MutasiKonsinyasi" />
+        <activity android:name=".ActKonsinyasi.OutletKonsinyasi" />
+        <activity android:name=".ActKonsinyasi.BarangKonsinyasi"></activity>
     </application>
 
 </manifest>
