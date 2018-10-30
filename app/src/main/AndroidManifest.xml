@@ -274,10 +274,13 @@
         <activity
             android:name=".ActKunjungan.DetailKunjungan"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActRiwayatPenjualan.ActivityListSales"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActSetoran.ListSetoran"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ActRiwayatPenjualan.ActivityListSales"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActSetoran.ListSetoran"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActChangePassword.ActChangePassword"></activity>
     </application>
 
 </manifest>

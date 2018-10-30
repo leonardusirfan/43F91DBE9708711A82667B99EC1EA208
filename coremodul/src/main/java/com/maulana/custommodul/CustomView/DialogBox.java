@@ -25,6 +25,7 @@ public class DialogBox {
     private Context context;
     private AlertDialog.Builder builder;
     private AlertDialog alert;
+    public static final int TAG_SUCCESS = 1, TAG_FAILED = 2, TAG_WARNING = 3;
 
 
     public DialogBox(Context context){
@@ -177,7 +178,7 @@ public class DialogBox {
 
     public static void showDialog(Context context,int state, String message){
 
-        if(state == 1){
+        if(state == TAG_SUCCESS){
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -214,7 +215,7 @@ public class DialogBox {
                 e.printStackTrace();
             }
 
-        }else if(state == 2){
+        }else if(state == TAG_FAILED){
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -250,7 +251,7 @@ public class DialogBox {
                 e.printStackTrace();
             }
 
-        }else if(state == 3){
+        }else if(state == TAG_WARNING){
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);

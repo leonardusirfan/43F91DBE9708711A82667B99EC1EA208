@@ -54,5 +54,6 @@ public class ServerURL {
     public static final String getSales = baseUrl + "sales/index/";
     public static final String getTanggalTempo = baseUrl + "customer/tempo/";
     public static final String getPembayaranSetoran = baseUrl + "Pembayaran/index/";
+    public static final String savePassword = baseUrl + "authentication/ganti_password/";
 
 }

@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import id.net.gmedia.perkasaapp.ActBranding.DetailBranding;
 import id.net.gmedia.perkasaapp.ActBranding.ListBranding;
+import id.net.gmedia.perkasaapp.ActChangePassword.ActChangePassword;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
@@ -579,6 +580,7 @@ public class ActivityHome extends AppCompatActivity
             case R.id.nav_preorder:startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));break;
             case R.id.nav_kunjungan:startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));break;
             case R.id.nav_market_survey:startActivity(new Intent(ActivityHome.this, ListMarketSurvey.class));break;
+            case R.id.nav_password:startActivity(new Intent(ActivityHome.this, ActChangePassword.class));break;
             case R.id.nav_akun:startActivity(new Intent(ActivityHome.this, SideAccount.class));break;
             case R.id.nav_logout:session.logoutUser(new Intent(context, ActivityLogin.class));break;
             default:

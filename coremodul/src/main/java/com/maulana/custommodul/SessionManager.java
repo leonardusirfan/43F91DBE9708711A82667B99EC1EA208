@@ -67,6 +67,13 @@ public class SessionManager {
 		// commit changes
 		editor.commit();
 	}
+
+	public void savePassword(String password){
+
+		editor.putString(TAG_PASSWORD, password);
+
+		editor.commit();
+	}
 	
 	/**
 	 * Get stored session data
