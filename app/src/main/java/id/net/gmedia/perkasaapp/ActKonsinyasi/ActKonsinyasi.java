@@ -12,6 +12,13 @@ import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
+import id.net.gmedia.perkasaapp.ActKonsinyasi.InformasiBarang.OutletInfoBarang;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.MutasiKonsinyasi.DetailMutasiKonsinyasi;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.MutasiKonsinyasi.MutasiKonsinyasi;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.Rekonsinyasi.DetailRekonsinyasi;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.Rekonsinyasi.Rekonsinyasi;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.Retur.ActReturKonsinyasi;
+import id.net.gmedia.perkasaapp.ActKonsinyasi.Retur.DetailReturKonsinyasi;
 import id.net.gmedia.perkasaapp.R;
 
 public class ActKonsinyasi extends AppCompatActivity {
@@ -21,6 +28,7 @@ public class ActKonsinyasi extends AppCompatActivity {
     private ItemValidation iv = new ItemValidation();
     private SessionManager session;
     private RelativeLayout rlMutasi, rlRekonsinyasi, rlInfoBarang, rlRetur;
+    private String flag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,24 @@ public class ActKonsinyasi extends AppCompatActivity {
         rlRekonsinyasi = (RelativeLayout) findViewById(R.id.rl_rekonsinyasi);
         rlInfoBarang = (RelativeLayout) findViewById(R.id.rl_info_barang);
         rlRetur = (RelativeLayout) findViewById(R.id.rl_retur);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            flag = bundle.getString("flag", "");
+
+            if(!flag.isEmpty()){
+
+                if(flag.equals(DetailMutasiKonsinyasi.flag)){
+
+                    startActivity(new Intent(context, MutasiKonsinyasi.class));
+                }else if(flag.equals(DetailRekonsinyasi.flag)){
+                    startActivity(new Intent(context, Rekonsinyasi.class));
+                }else if(flag.equals(DetailReturKonsinyasi.flag)){
+                    startActivity(new Intent(context, ActReturKonsinyasi.class));
+                }
+            }
+        }
     }
 
     private void initEvent() {
@@ -62,7 +88,7 @@ public class ActKonsinyasi extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                startActivity(new Intent(context, Rekonsinyasi.class));
             }
         });
 
@@ -70,6 +96,7 @@ public class ActKonsinyasi extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                startActivity(new Intent(context, OutletInfoBarang.class));
             }
         });
 
@@ -77,6 +104,7 @@ public class ActKonsinyasi extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                startActivity(new Intent(context, ActReturKonsinyasi.class));
             }
         });
     }

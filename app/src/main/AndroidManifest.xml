@@ -6,7 +6,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -159,7 +159,7 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -280,11 +280,40 @@
         <activity
             android:name=".ActSetoran.ListSetoran"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActChangePassword.ActChangePassword" />
-        <activity android:name=".ActKonsinyasi.ActKonsinyasi" />
-        <activity android:name=".ActKonsinyasi.MutasiKonsinyasi" />
-        <activity android:name=".ActKonsinyasi.OutletKonsinyasi" />
-        <activity android:name=".ActKonsinyasi.BarangKonsinyasi"></activity>
+        <activity
+            android:name=".ActChangePassword.ActChangePassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.ActKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.MutasiKonsinyasi.MutasiKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.MutasiKonsinyasi.OutletKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.MutasiKonsinyasi.BarangKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.MutasiKonsinyasi.DetailMutasiKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Rekonsinyasi.Rekonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Rekonsinyasi.OutletRekonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Rekonsinyasi.DetailRekonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.InformasiBarang.OutletInfoBarang"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActKonsinyasi.InformasiBarang.ActivityInfoBarang" />
+        <activity android:name=".ActKonsinyasi.Retur.OutletRetur" />
+        <activity android:name=".ActKonsinyasi.Retur.DetailReturKonsinyasi" />
+        <activity android:name=".ActKonsinyasi.Retur.ActReturKonsinyasi"></activity>
     </application>
 
 </manifest>

@@ -55,5 +55,16 @@ public class ServerURL {
     public static final String getTanggalTempo = baseUrl + "customer/tempo/";
     public static final String getPembayaranSetoran = baseUrl + "Pembayaran/index/";
     public static final String savePassword = baseUrl + "authentication/ganti_password/";
+    public static final String getMutasiKonsinyasi = baseUrl + "Konsinyasi/index/";
+    public static final String getBarangMutasiKonsinyasi = baseUrl + "Konsinyasi/view_barang/";
+    public static final String getCCIDMutasiKonsinyasi = baseUrl + "Konsinyasi/list_ccid/";
+    public static final String saveMutasiKonsinyasi = baseUrl + "Konsinyasi/simpan_konsinyasi/";
+
+    public static final String getListRekonsinyasi = baseUrl + "Konsinyasi/view_penjualan/";
+    public static final String getOutletKonsinyasi = baseUrl + "Konsinyasi/view_outlet/";
+    public static final String getBarangRekonsinyasi = baseUrl + "Konsinyasi/view_barang_rekonsinyasi/";
+    public static final String saveRekonsinyasi = baseUrl + "Konsinyasi/simpan_rekonsinyasi/";
+    public static final String returRekonsinyasi = baseUrl + "Konsinyasi/retur_konsinyasi/";
+    public static final String getReturKonsinyasi = baseUrl + "Konsinyasi/history_retur/";
 
 }

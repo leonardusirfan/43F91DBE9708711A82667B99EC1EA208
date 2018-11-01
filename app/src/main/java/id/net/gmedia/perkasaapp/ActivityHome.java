@@ -341,6 +341,11 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailKunjungan.flag)){
 
                 startActivity(new Intent(ActivityHome.this, ActivityKunjungan.class));
+            }else if(flag.contains("KONSINYASI")){
+
+                Intent intent = new Intent(ActivityHome.this, ActKonsinyasi.class);
+                intent.putExtra("flag", flag);
+                startActivity(intent);
             }
         }
 
