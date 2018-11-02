@@ -68,7 +68,7 @@ public class Rekonsinyasi extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Rekonsinyasi");
+            getSupportActionBar().setTitle("Rekon Stok Konsinyasi");
         }
 
         context = this;

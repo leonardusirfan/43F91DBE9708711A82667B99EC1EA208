@@ -142,7 +142,7 @@ public class DetailRekonsinyasi extends AppCompatActivity implements LocationLis
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        setTitle("Detail Rekonsinyasi");
+        setTitle("Detail Rekon Stok");
         context = this;
         dialogBox = new DialogBox(context);
         session = new SessionManager(context);

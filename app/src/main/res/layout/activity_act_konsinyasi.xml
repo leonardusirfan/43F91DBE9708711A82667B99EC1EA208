@@ -73,7 +73,7 @@
             android:layout_toRightOf="@id/iv_l_2"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/iv_r_2"
-            android:text="Rekonsinyasi"
+            android:text="Rekon Stok Konsinyasi"
             android:textColor="@color/color_white"
             android:textSize="@dimen/text16"/>
 
