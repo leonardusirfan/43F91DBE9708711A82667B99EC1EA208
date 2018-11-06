@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
+
 public class AdapterTambahCustomer extends RecyclerView.Adapter<AdapterTambahCustomer.TambahCustomerViewHolder> {
 
     private List<ModelOutlet> outletList;

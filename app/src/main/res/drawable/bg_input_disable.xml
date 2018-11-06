@@ -6,7 +6,7 @@
     <solid android:color="@color/color_grey_footer" />
 
     <stroke
-         android:width="2dp"
+         android:width="1dp"
          android:color="#979797"/>
 
     <corners

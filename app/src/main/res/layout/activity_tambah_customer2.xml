@@ -6,323 +6,303 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityTambahCustomer2">
+    tools:context=".ActCustomer.ActivityTambahCustomer2">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">
 
-        <TextView
-            android:id="@+id/textView56"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/area_star"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_kontak" />
-
-        <TextView
-            android:id="@+id/textView54"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/contact_person"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_rekening" />
-
-        <EditText
-            android:id="@+id/txt_kontak"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView54" />
-
-        <TextView
-            android:id="@+id/textView53"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/rekening"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_bank" />
-
-        <EditText
-            android:id="@+id/txt_rekening"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView53" />
-
-        <TextView
-            android:id="@+id/textView52"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/bank"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_email" />
-
-        <EditText
-            android:id="@+id/txt_bank"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView52" />
-
-        <TextView
-            android:id="@+id/textView51"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/email"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nomorhp" />
-
-        <EditText
-            android:id="@+id/txt_email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView51" />
-
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/nomor_hp"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nomor" />
-
-        <EditText
-            android:id="@+id/txt_nomorhp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-        <TextView
-            android:id="@+id/textView49"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/nomor_reseller_star"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_kota" />
-
-        <EditText
-            android:id="@+id/txt_nomor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView49" />
-
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/kota"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_alamat" />
-
-        <EditText
-            android:id="@+id/txt_kota"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView47" />
-
-        <TextView
-            android:id="@+id/textView45"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding20"
-            android:text="@string/nama_outlet_star"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/map" />
-
-        <EditText
-            android:id="@+id/txt_nama"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView45" />
-
-        <TextView
-            android:id="@+id/textView44"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:text="@string/alamat_star"
-            android:textSize="@dimen/text14"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nama" />
-
-        <EditText
-            android:id="@+id/txt_alamat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="@dimen/padding10"
-            android:layout_marginRight="@dimen/padding10"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/padding5"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding5"
-            android:textSize="@dimen/text14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView44" />
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="parent"
-            class="id.net.gmedia.perkasaapp.CustomMapView"
-            tools:context=".Activity_Tempat" />
+            android:id="@+id/rl_map"
+            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Spinner
-            android:id="@+id/spin_area"
-            android:layout_width="0dp"
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="id.net.gmedia.perkasaapp.CustomMapView"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sesuaikan Posisi"
+                android:id="@+id/btn_refresh_position"
+                android:textColor="@color/color_white"
+                android:paddingRight="@dimen/padding8"
+                android:drawableLeft="@mipmap/ic_refresh_white"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padding5"
+                android:layout_marginTop="@dimen/padding5"
+                android:background="@drawable/btn_black"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding5"
-            app:layout_constraintEnd_toEndOf="@+id/txt_kontak"
-            app:layout_constraintStart_toStartOf="@+id/textView56"
-            app:layout_constraintTop_toBottomOf="@+id/textView56" />
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/rl_map"
+            android:id="@+id/ll_nama"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_outlet_star"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_nama"
+            android:id="@+id/ll_alamat"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alamat_star"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_alamat"
+            android:id="@+id/ll_kota"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kota"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_kota"
+            android:id="@+id/ll_noreseller"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nomor_reseller_star"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_nomor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_noreseller"
+            android:id="@+id/ll_nopemilik"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nomor_hp"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_nomorhp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_nopemilik"
+            android:id="@+id/ll_email"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_email"
+            android:id="@+id/ll_bank"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bank"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_bank"
+            android:id="@+id/ll_rekening"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rekening"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_rekening"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rekening"
+            android:id="@+id/ll_cp"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_person"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_kontak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_cp"
+            android:id="@+id/ll_area"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/area_star"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext.disable"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/ll_area"
+            android:id="@+id/rl_gambar"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Foto (bisa lebih dari satu)"
+                android:id="@+id/tv_title"
+                style="@style/Subtitle"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="@dimen/padding5"
+                android:id="@+id/rv_photo"></android.support.v7.widget.RecyclerView>
+
+            <cz.intik.overflowindicator.OverflowPagerIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/opi_photo"
+                android:layout_marginBottom="@dimen/padding12"
+                android:layout_marginTop="150dp"></cz.intik.overflowindicator.OverflowPagerIndicator>
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/camera"
+                android:scaleType="centerInside"
+                android:id="@+id/ib_photo"
+                android:background="@drawable/style_box_bordered_rounded"
+                android:padding="@dimen/padding8"
+                android:layout_marginRight="@dimen/padding5"
+                android:layout_marginBottom="@dimen/padding5"/>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_simpan"
@@ -330,43 +310,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding20"
             android:layout_marginTop="@dimen/padding10"
-            android:background="@color/colorAccent"
-            android:padding="@dimen/padding5"
+            android:background="@drawable/btn_red"
             android:text="@string/simpan_data_customer"
-            android:textColor="#fff"
-            android:textSize="@dimen/text14"
+            android:textColor="@color/color_white"
+            android:padding="@dimen/padding8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_outlet" />
-
-        <ImageView
-            android:id="@+id/img_outlet"
-            android:contentDescription="@string/outlet"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/padding40"
-            android:layout_marginRight="@dimen/padding40"
-            android:layout_marginTop="@dimen/padding10"
-            android:background="@drawable/style_box_bordered_rounded"
-            app:layout_constraintDimensionRatio="h,1:0.7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spin_area"
-            app:srcCompat="@drawable/style_box_bordered_rounded" />
-
-        <ImageView
-            android:id="@+id/imageView25"
-            android:contentDescription="@string/kamera"
-            android:layout_width="@dimen/img_size"
-            android:layout_height="@dimen/img_size"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="@dimen/padding10"
-            android:background="@drawable/style_box_bordered_rounded"
-            android:padding="@dimen/padding5"
-            app:layout_constraintBottom_toTopOf="@+id/btn_simpan"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/camera" />
+            app:layout_constraintTop_toBottomOf="@+id/rl_gambar" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

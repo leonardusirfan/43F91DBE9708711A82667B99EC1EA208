@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:layout_margin="@dimen/padding10">
+        android:layout_margin="@dimen/padding5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding20"
+                android:padding="@dimen/padding8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
@@ -124,7 +124,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text14"
-                    android:textColor="#edd54b"
+                    android:text=""
+                    android:textColor="@color/color_red"
                     android:textStyle="bold" />
             </LinearLayout>
 

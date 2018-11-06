@@ -68,7 +68,7 @@ public class ActivityPiutang extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Pelusanan Piutang");
+            getSupportActionBar().setTitle("Pelunasan Piutang");
         }
 
         context = this;

@@ -20,7 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +36,7 @@ import org.json.JSONObject;
 import id.net.gmedia.perkasaapp.ActBranding.DetailBranding;
 import id.net.gmedia.perkasaapp.ActBranding.ListBranding;
 import id.net.gmedia.perkasaapp.ActChangePassword.ActChangePassword;
+import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer1;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
@@ -116,7 +116,7 @@ public class ActivityHome extends AppCompatActivity
         btn_verifikasi = findViewById(R.id.btn_verifikasi);
         btn_lokasi = findViewById(R.id.btn_lokasi);
         btn_riwayat = findViewById(R.id.btn_riwayat);
-        //btn_customer = findViewById(R.id.btn_customer);
+        btn_customer = findViewById(R.id.btn_customer);
         //btn_stok = findViewById(R.id.btn_stok);
         //btn_komplain = findViewById(R.id.btn_komplain);
         //btn_preorder = findViewById(R.id.btn_preorder);
@@ -204,13 +204,14 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
-        /*btn_customer.setOnClickListener(new View.OnClickListener() {
+        btn_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityTambahCustomer1.class));
             }
         });
-        btn_preorder.setOnClickListener(new View.OnClickListener() {
+
+        /*btn_preorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityPreorderPerdana1.class));

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".ActivityTambahCustomer1">
+    tools:context=".ActCustomer.ActivityTambahCustomer1">
 
     <include
         android:id="@+id/include_search"
@@ -13,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy_customer"
+    <ListView
+        android:id="@+id/lv_reseller"
+        android:layout_below="@id/ll_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:divider="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_search">
-
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/include_search"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/float_tambah"
