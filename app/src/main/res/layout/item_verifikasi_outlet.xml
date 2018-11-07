@@ -69,9 +69,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingTop="@dimen/padding10"
-                        android:paddingBottom="@dimen/padding10">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -92,9 +90,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingTop="@dimen/padding10"
-                        android:paddingBottom="@dimen/padding10">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -117,6 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/status"
+                    android:layout_marginTop="@dimen/padding5"
                     android:textSize="@dimen/text12" />
 
                 <TextView

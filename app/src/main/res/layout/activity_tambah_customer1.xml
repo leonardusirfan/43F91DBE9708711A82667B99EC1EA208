@@ -19,6 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:divider="@null"
+        android:layout_marginRight="@dimen/padding8"
+        android:layout_marginLeft="@dimen/padding8"
+        android:layout_marginBottom="@dimen/padding8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include_search"/>
 

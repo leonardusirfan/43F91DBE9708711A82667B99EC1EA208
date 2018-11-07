@@ -38,10 +38,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,7 +108,8 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
 
 
     private ModelOutlet outlet;
-    private TextView txt_nama, txt_alamat, txt_nomor, txt_nomorhp, txt_email, txt_bank, txt_rekening, txt_cp, txt_area;
+    private TextView txt_nama, txt_alamat, txt_nomor, txt_nomorhp, txt_email, txt_bank
+            , txt_rekening, txt_cp, txt_area, txt_tempo, txt_digipos, txt_kategori_outlet, txt_jenis_outlet, txt_limit_order_malam, txt_limit_konsinyasi;
     private Context context;
     private DialogBox dialogBox;
     private ItemValidation iv = new ItemValidation();
@@ -155,13 +160,36 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
     private Uri photoURI;
     private File saveDirectory;
     private String filePathURI = "";
+    private CheckBox cbTempo, cbKonsinyasi;
+    private Spinner spnSegmentasi;
+    private String kdcus = "", statusCustomer = "";
+    private boolean isEdit = false;
+    private Button btnTolak, btnSimpan;
+    private RelativeLayout rlKtp;
+    private Button btnKtp;
+    private boolean isKtp = false;
+    private ImageView ivKtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_customer2);
 
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Detail Reseller");
+        }
+
         context = this;
+        isEdit = false;
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            kdcus = bundle.getString("kdcus", "");
+            statusCustomer = bundle.getString("status", "");
+           if(!kdcus.isEmpty()) isEdit = true;
+        }
+
         initLocationUtils();
         initUI();
         initEvent();
@@ -177,11 +205,26 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         txt_bank = (EditText) findViewById(R.id.txt_bank);
         txt_rekening = (EditText) findViewById(R.id.txt_rekening);
         txt_cp = (EditText) findViewById(R.id.txt_kontak);
+        cbTempo = (CheckBox) findViewById(R.id.cb_tempo);
+        txt_tempo = (EditText) findViewById(R.id.txt_tempo);
+        txt_digipos = (EditText) findViewById(R.id.txt_digipos);
+        txt_kategori_outlet = (EditText) findViewById(R.id.txt_kategori_outlet);
+        txt_jenis_outlet = (EditText) findViewById(R.id.txt_jenis_outlet);
+        spnSegmentasi = (Spinner) findViewById(R.id.spn_segmentasi);
+        txt_limit_order_malam = (EditText) findViewById(R.id.txt_limit_order_malam);
+        cbKonsinyasi = (CheckBox) findViewById(R.id.cb_konsinyasi);
+        txt_limit_konsinyasi = (EditText) findViewById(R.id.txt_limit_konsinyasi);
+
         txt_area = (EditText) findViewById(R.id.txt_area);
         btnRefreshPosition = (Button) findViewById(R.id.btn_refresh_position);
         rvPhoto = (RecyclerView) findViewById(R.id.rv_photo);
         ibPhoto = (ImageButton) findViewById(R.id.ib_photo);
         opiPhoto = (OverflowPagerIndicator) findViewById(R.id.opi_photo);
+        ivKtp = (ImageView) findViewById(R.id.iv_ktp);
+        rlKtp = (RelativeLayout) findViewById(R.id.rl_ktp);
+        btnKtp = (Button) findViewById(R.id.btn_ktp);
+        btnTolak = (Button) findViewById(R.id.btn_tolak);
+        btnSimpan = (Button) findViewById(R.id.btn_simpan);
 
         listPhoto = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -203,6 +246,15 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        if(!statusCustomer.isEmpty()){
+
+            btnTolak.setVisibility(View.VISIBLE);
+            rlKtp.setVisibility(View.VISIBLE);
+            btnSimpan.setText("Setujui");
+        }else{
+            rlKtp.setVisibility(View.GONE);
+            btnTolak.setVisibility(View.GONE);
+        }
     }
 
     private void initLocationUtils() {
@@ -233,6 +285,16 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
             @Override
             public void onClick(View view) {
 
+                isKtp = false;
+                loadChooserDialog();
+            }
+        });
+
+        btnKtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isKtp = true;
                 loadChooserDialog();
             }
         });
@@ -554,8 +616,35 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
 
             filePathURI = Environment.getExternalStorageDirectory() + File.separator + "PerkasaSalesForce"  +File.separator + time + namaFile;
 
-            listPhoto.add(new PhotoModel(filePathURI, ""));
-            adapterPhoto.notifyDataSetChanged();
+            if(isKtp){
+                ImageUtils iu = new ImageUtils();
+                File file = new File(filePathURI);
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+                int imageHeight = options.outHeight;
+                int imageWidth = options.outWidth;
+
+                int newWidth = 0;
+                int newHeight = 0;
+
+                if(imageHeight > imageWidth){
+
+                    newWidth = 512;
+                    newHeight = newWidth * imageHeight / imageWidth;
+                }else{
+
+                    newHeight = 512;
+                    newWidth = newHeight * imageWidth / imageHeight;
+                }
+
+                iu.LoadRealImage(context, file, ivKtp, newWidth, newHeight);
+            }else{
+
+                listPhoto.add(new PhotoModel(filePathURI, ""));
+                adapterPhoto.notifyDataSetChanged();
+            }
 
             //new UploadFileToServer().execute();
         } catch ( Exception e ){
@@ -853,7 +942,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
 
-        if(!isUpdateLocation/* && !editMode*/){
+        if(!isUpdateLocation && !isEdit){
 
             setPointMap();
         }

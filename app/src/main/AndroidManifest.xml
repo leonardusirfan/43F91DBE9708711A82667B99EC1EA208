@@ -148,10 +148,10 @@
             android:name=".ActOrderTcash.ActivityOrderTcash3"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityVerifikasiOutlet1"
+            android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet1"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityVerifikasiOutlet2"
+            android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet2"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

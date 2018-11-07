@@ -266,7 +266,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.5"
                                 android:gravity="center_horizontal"
-                                android:text="Verifikasi Outlet"
+                                android:text="Verifikasi Reseller"
                                 android:textColor="#000"
                                 android:textSize="@dimen/text10" />
 
@@ -279,6 +279,7 @@
                             android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:clickable="false"
+                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <ImageView

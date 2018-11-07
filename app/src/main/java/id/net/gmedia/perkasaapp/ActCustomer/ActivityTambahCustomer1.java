@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -89,6 +90,18 @@ public class ActivityTambahCustomer1 extends AppCompatActivity{
         adapter = new ListCustomerAdapter((Activity) context, listItems);
         lvReseller.removeFooterView(footerList);
         lvReseller.setAdapter(adapter);
+
+        lvReseller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(context, ActivityTambahCustomer2.class);
+                intent.putExtra("kdcus", item.getItem1());
+                startActivity(intent);
+            }
+        });
 
         lvReseller.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

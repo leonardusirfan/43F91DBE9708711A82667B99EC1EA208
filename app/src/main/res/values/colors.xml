@@ -20,6 +20,9 @@
     <color name="color_orange">#f7591b</color>
     <color name="color_orange_active">#df4103</color>
 
+    <color name="color_blue_active">#07abd4</color>
+    <color name="color_blue1">#2cc3e9</color>
+
     <color name="color_pjp_diluar">#ece81b</color>
     <color name="color_pjp_beli">#6be143</color>
     <color name="color_pjp_belum">#e2332d</color>

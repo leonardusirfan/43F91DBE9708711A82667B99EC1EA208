@@ -5,45 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".ActivityVerifikasiOutlet1">
+    tools:context=".ActVerifikasiReseller.ActivityVerifikasiOutlet1">
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding5">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:contentDescription="@string/cari"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:padding="@dimen/padding5"
-            android:src="@drawable/search_grey" />
-
-        <EditText
-            android:id="@+id/txt_nama"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.85"
-            android:background="@android:color/transparent"
-            android:hint="@string/nama_outlet"
-            android:inputType="text"
-            android:textSize="@dimen/text16" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/linearLayout6"
-        android:background="#9b9b9b" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy_outlet"
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view2" />
+        android:id="@+id/tl_top"
+        android:background="@color/colorPrimary"
+        app:tabTextColor="@color/color_white"
+        app:tabSelectedTextColor="@color/color_white"
+        android:layout_alignParentTop="true"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@color/color_white"
+        >
+
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Butuh Approval SPV"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Butuh Verifikasi Displan"/>
+
+    </android.support.design.widget.TabLayout>
+
+    <include
+        android:id="@+id/include_search"
+        layout="@layout/view_search"
+        android:layout_below="@id/tl_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/lv_reseller"
+        android:layout_below="@id/include_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"/>
 
 </RelativeLayout>

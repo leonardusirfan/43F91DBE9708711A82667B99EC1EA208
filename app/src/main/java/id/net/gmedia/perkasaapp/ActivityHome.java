@@ -61,6 +61,7 @@ import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 import id.net.gmedia.perkasaapp.ActSetoran.ListSetoran;
+import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
 import id.net.gmedia.perkasaapp.Services.LocationUpdater;
 import id.net.gmedia.perkasaapp.SideAkunAnda.SideAccount;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
@@ -88,6 +89,7 @@ public class ActivityHome extends AppCompatActivity
             , tvDsTargetBulk, tvDsOmsetBulk, tvDsGapBulk
             , tvDsTargetSurvey, tvDsEffectiveCall;
     private LinearLayout btnSetoran, btnKonsinyasi;
+    private LinearLayout llSupervisor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,13 @@ public class ActivityHome extends AppCompatActivity
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
                 , btn_market_survey, btn_direct_selling, btn_perubahan_data_rs, btn_pelunasan_piutang, btn_branding, btn_market_intelligent;
+
+        llSupervisor = (LinearLayout) findViewById(R.id.ll_menu_supervisor);
+        if(session.isSuperuser()){
+            llSupervisor.setVisibility(View.VISIBLE);
+        }else{
+            llSupervisor.setVisibility(View.VISIBLE);
+        }
 
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
