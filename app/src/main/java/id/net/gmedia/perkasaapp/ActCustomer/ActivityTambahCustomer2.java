@@ -2,6 +2,7 @@ package id.net.gmedia.perkasaapp.ActCustomer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +38,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -75,13 +77,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.maulana.custommodul.ApiVolley;
+import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ImageUtils;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.PermissionUtils;
 import com.maulana.custommodul.PhotoModel;
 import com.maulana.custommodul.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,16 +106,19 @@ import java.util.Locale;
 import cz.intik.overflowindicator.OverflowPagerIndicator;
 import cz.intik.overflowindicator.SimpleSnapHelper;
 import id.net.gmedia.perkasaapp.ActBranding.Adapter.PhotosAdapter;
+import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
+import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.CustomMapView;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapReadyCallback,LocationListener {
 
 
     private ModelOutlet outlet;
-    private TextView txt_nama, txt_alamat, txt_nomor, txt_nomorhp, txt_email, txt_bank
-            , txt_rekening, txt_cp, txt_area, txt_tempo, txt_digipos, txt_kategori_outlet, txt_jenis_outlet, txt_limit_order_malam, txt_limit_konsinyasi;
+    private TextView txt_nama, txt_alamat, txt_kota, txt_nomor, txt_nomorhp, txt_email, txt_bank
+            , txt_rekening, txt_cp, txt_area, txt_tempo, txt_ktp, txt_kelurahan, txt_kecamatan, txt_digipos, txt_kategori_outlet, txt_jenis_outlet, txt_limit_order_malam, txt_limit_konsinyasi;
     private Context context;
     private DialogBox dialogBox;
     private ItemValidation iv = new ItemValidation();
@@ -142,6 +151,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
     private Location mCurrentLocation;
     private boolean isUpdateLocation = false;
     private String TAG = "DetailCustomer";
+    public static final String flag = "DETAILCUSTOMER";
     private SessionManager session;
     private GoogleMap maps;
     private String address0 = "";
@@ -169,6 +179,9 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
     private Button btnKtp;
     private boolean isKtp = false;
     private ImageView ivKtp;
+    private boolean isVerifikasi = false;
+    private List<OptionItem> listSegmentasi = new ArrayList<>();
+    private String fileKtp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,6 +195,9 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
 
         context = this;
         isEdit = false;
+        isVerifikasi = false;
+        dialogBox = new DialogBox(context);
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
@@ -193,12 +209,14 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         initLocationUtils();
         initUI();
         initEvent();
+        getSegmentasi();
     }
 
     private void initUI() {
 
         txt_nama = findViewById(R.id.txt_nama);
         txt_alamat = findViewById(R.id.txt_alamat);
+        txt_kota = findViewById(R.id.txt_kota);
         txt_nomor = findViewById(R.id.txt_nomor);
         txt_nomorhp = findViewById(R.id.txt_nomorhp);
         txt_email = (EditText) findViewById(R.id.txt_email);
@@ -210,6 +228,10 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         txt_digipos = (EditText) findViewById(R.id.txt_digipos);
         txt_kategori_outlet = (EditText) findViewById(R.id.txt_kategori_outlet);
         txt_jenis_outlet = (EditText) findViewById(R.id.txt_jenis_outlet);
+        txt_ktp = (EditText) findViewById(R.id.txt_ktp);
+        txt_kelurahan = (EditText) findViewById(R.id.txt_kelurahan);
+        txt_kecamatan = (EditText) findViewById(R.id.txt_kecamatan);
+
         spnSegmentasi = (Spinner) findViewById(R.id.spn_segmentasi);
         txt_limit_order_malam = (EditText) findViewById(R.id.txt_limit_order_malam);
         cbKonsinyasi = (CheckBox) findViewById(R.id.cb_konsinyasi);
@@ -234,26 +256,35 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         opiPhoto.attachToRecyclerView(rvPhoto);
         new SimpleSnapHelper(opiPhoto).attachToRecyclerView(rvPhoto);
 
-        if(getIntent().hasExtra("outlet")){
-            outlet = getIntent().getParcelableExtra("outlet");
-            txt_nama.setText(outlet.getNama());
-            txt_alamat.setText(outlet.getAlamat());
-            txt_nomor.setText(outlet.getNomor());
-            txt_nomorhp.setText(outlet.getNomorHp());
-        }
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         if(!statusCustomer.isEmpty()){
 
-            btnTolak.setVisibility(View.VISIBLE);
-            rlKtp.setVisibility(View.VISIBLE);
             btnSimpan.setText("Setujui");
+
+            if(statusCustomer.equals("2")){ //butuh verifikasi spv
+
+                isVerifikasi = true;
+                btnTolak.setVisibility(View.VISIBLE);
+                rlKtp.setVisibility(View.VISIBLE);
+            }else{
+
+                isVerifikasi = false;
+                rlKtp.setVisibility(View.VISIBLE);
+                btnTolak.setVisibility(View.GONE);
+                btnSimpan.setVisibility(View.GONE);
+            }
         }else{
+
             rlKtp.setVisibility(View.GONE);
             btnTolak.setVisibility(View.GONE);
+
+            if(isEdit){
+                btnSimpan.setVisibility(View.GONE);
+            }
+
         }
     }
 
@@ -306,6 +337,257 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                 //refreshMode = true;
                 //location = getLocation();
                 updateAllLocation();
+            }
+        });
+
+        btnSimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Validasi
+                if(isEdit){
+
+
+                }
+
+                if(txt_nama.getText().toString().isEmpty()){
+
+                    txt_nama.setError("Harap diisi");
+                    txt_nama.requestFocus();
+                    return;
+                }else{
+
+                    txt_nama.setError(null);
+                }
+
+                if(txt_alamat.getText().toString().isEmpty()){
+
+                    txt_alamat.setError("Harap diisi");
+                    txt_alamat.requestFocus();
+                    return;
+                }else{
+
+                    txt_alamat.setError(null);
+                }
+
+                if(cbKonsinyasi.isChecked() && txt_limit_konsinyasi.getText().toString().isEmpty()){
+
+                    txt_limit_konsinyasi.setError("Harap diisi");
+                    txt_limit_konsinyasi.requestFocus();
+                    return;
+                }else{
+
+                    txt_limit_konsinyasi.setError(null);
+                }
+
+                if(cbTempo.isChecked() && txt_tempo.getText().toString().isEmpty()){
+
+                    txt_tempo.setError("Harap diisi");
+                    txt_tempo.requestFocus();
+                    return;
+                }else{
+
+                    txt_tempo.setError(null);
+                }
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Anda yakin ingin menyimpan data?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                if(isVerifikasi) statusCustomer = "3";
+                                saveData();
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+
+            }
+        });
+
+        btnTolak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Validasi
+                if(isEdit){
+
+
+                }
+
+                if(txt_nama.getText().toString().isEmpty()){
+
+                    txt_nama.setError("Harap diisi");
+                    txt_nama.requestFocus();
+                    return;
+                }else{
+
+                    txt_nama.setError(null);
+                }
+
+                if(txt_alamat.getText().toString().isEmpty()){
+
+                    txt_alamat.setError("Harap diisi");
+                    txt_alamat.requestFocus();
+                    return;
+                }else{
+
+                    txt_alamat.setError(null);
+                }
+
+                if(cbKonsinyasi.isChecked() && txt_limit_konsinyasi.getText().toString().isEmpty()){
+
+                    txt_limit_konsinyasi.setError("Harap diisi");
+                    txt_limit_konsinyasi.requestFocus();
+                    return;
+                }else{
+
+                    txt_limit_konsinyasi.setError(null);
+                }
+
+                if(cbTempo.isChecked() && txt_tempo.getText().toString().isEmpty()){
+
+                    txt_tempo.setError("Harap diisi");
+                    txt_tempo.requestFocus();
+                    return;
+                }else{
+
+                    txt_tempo.setError(null);
+                }
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Anda yakin ingin menyimpan data?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                statusCustomer = "0";
+                                saveData();
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+
+            }
+        });
+    }
+
+    private void saveData() {
+
+        btnSimpan.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONArray jImage = new JSONArray();
+
+        for(PhotoModel image: listPhoto){
+
+            JSONObject dataImage = new JSONObject();
+            try {
+                dataImage.put("foto", image.getKeterangan());
+                jImage.put(dataImage);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("nama", txt_nama.getText().toString());
+            jBody.put("alamat", txt_alamat.getText().toString());
+            jBody.put("kota", txt_kota.getText().toString());
+            jBody.put("nomor", txt_nomor.getText().toString());
+            jBody.put("hp_owner", txt_nomorhp.getText().toString());
+            jBody.put("email", txt_email.getText().toString());
+            jBody.put("bank", txt_bank.getText().toString());
+            jBody.put("rekening", txt_rekening.getText().toString());
+            jBody.put("flag_tempo", cbTempo.isChecked() ? "Y" : "N");
+            jBody.put("tempo", txt_tempo.getText().toString());
+            jBody.put("contact", txt_cp.getText().toString());
+            jBody.put("digipos", txt_digipos.getText().toString());
+            jBody.put("kategori", txt_kategori_outlet.getText().toString());
+            jBody.put("jenis", txt_jenis_outlet.getText().toString());
+            String segmentasi = "";
+            try {
+                if(spnSegmentasi.getSelectedItem() != null){
+                    segmentasi = ((OptionItem) spnSegmentasi.getSelectedItem()).getValue();
+                }
+            }catch (Exception e) {}
+            jBody.put("segmentasi", segmentasi);
+            jBody.put("limit_malam", txt_limit_order_malam.getText().toString());
+            jBody.put("flag_konsinyasi", cbKonsinyasi.isChecked() ? "Y" : "N");
+            jBody.put("jumlah_konsinyasi", txt_limit_konsinyasi.getText().toString());
+            jBody.put("kelurahan", txt_kelurahan.getText().toString());
+            jBody.put("kecamatan", txt_kecamatan.getText().toString());
+            jBody.put("no_ktp", txt_ktp.getText().toString());
+            jBody.put("latitude", iv.doubleToStringFull(latitude));
+            jBody.put("longitude", iv.doubleToStringFull(longitude));
+            String imei = "";
+            ArrayList<String> imeis = iv.getIMEI(context);
+            if(imeis != null) if(imeis.size() > 0) imei = imeis.get(0);
+            jBody.put("imei", imei);
+            jBody.put("image", jImage);
+            if(isVerifikasi){
+                jBody.put("kdcus", kdcus);
+                jBody.put("status", statusCustomer);
+                jBody.put("ktp", fileKtp);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = ServerURL.saveCustomer;
+        if(isVerifikasi) url = ServerURL.updateCustomer;
+        ApiVolley request = new ApiVolley(context, jBody, "POST", url, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                btnSimpan.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Intent intent = new Intent(context, ActivityHome.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("flag", isVerifikasi ? ActivityVerifikasiOutlet1.flag :flag);
+                        startActivity(intent);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btnSimpan.setEnabled(true);
             }
         });
     }
@@ -420,6 +702,280 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
 
         imageFilePath = image.getAbsolutePath();
         return image;
+    }
+
+    private void getSegmentasi(){
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        ApiVolley request = new ApiVolley(context, jBody, "GET", ServerURL.getSegmentasi, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan, harap ulangi proses";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    listSegmentasi = new ArrayList<>();
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        for(int i = 0; i < ja.length(); i++){
+
+                            JSONObject jo = ja.getJSONObject(i);
+                            listSegmentasi.add(new OptionItem(
+                                    jo.getString("id")
+                                    ,jo.getString("nama")
+                            ));
+                        }
+
+                        setSegmentasiAdapter();
+
+                        if(isEdit){
+
+                            getDetailReseller();
+                        }
+
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getSegmentasi();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getSegmentasi();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
+    }
+
+    private void setSegmentasiAdapter() {
+
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listSegmentasi);
+        spnSegmentasi.setAdapter(adapter);
+        spnSegmentasi.setSelection(0);
+    }
+
+    private void getDetailReseller(){
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("kdcus", kdcus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerInfo, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan, harap ulangi proses";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONObject jo = response.getJSONObject("response");
+                        txt_nama.setText(jo.getString("nama"));
+                        txt_alamat.setText(jo.getString("alamat"));
+                        txt_ktp.setText(jo.getString("no_ktp"));
+                        txt_kelurahan.setText(jo.getString("kelurahan"));
+                        txt_kecamatan.setText(jo.getString("kecamatan"));
+                        txt_kota.setText(jo.getString("kota"));
+                        txt_nomor.setText(jo.getString("notelp"));
+                        txt_nomor.setText(jo.getString("notelp"));
+                        txt_nomorhp.setText(jo.getString("nohp"));
+                        txt_email.setText(jo.getString("email"));
+                        txt_bank.setText(jo.getString("bank"));
+                        txt_rekening.setText(jo.getString("norekening"));
+                        txt_rekening.setText(jo.getString("norekening"));
+                        String tempo = jo.getString("flag_tempo");
+                        cbTempo.setChecked(tempo.toUpperCase().equals("Y"));
+                        txt_tempo.setText(jo.getString("tempo"));
+                        txt_cp.setText(jo.getString("contact_person"));
+                        txt_digipos.setText(jo.getString("id_digipos"));
+                        txt_kategori_outlet.setText(jo.getString("kategori_outlet"));
+                        txt_jenis_outlet.setText(jo.getString("jenis_outlet"));
+                        txt_limit_order_malam.setText(jo.getString("limit_malam"));
+                        txt_area.setText(jo.getString("omo"));
+                        String idSegmentasi = jo.getString("id_segmentasi");
+                        int x = 0;
+                        for(OptionItem item : listSegmentasi){
+
+                            if(item.getValue().equals(idSegmentasi)){
+                                spnSegmentasi.setSelection(x);
+                                break;
+                            }
+                            x++;
+                        }
+                        String konsinyasi = jo.getString("konsinyasi");
+                        cbKonsinyasi.setChecked(konsinyasi.toUpperCase().equals("Y"));
+                        txt_limit_konsinyasi.setText(jo.getString("limit_konsinyasi"));
+
+                        latitude = iv.parseNullDouble(jo.getString("lat"));
+                        longitude = iv.parseNullDouble(jo.getString("long"));
+                        location = new Location("set");
+                        location.setLatitude(latitude);
+                        location.setLongitude(longitude);
+
+                        String ktp = jo.getString("file_ktp");
+                        ImageUtils iu = new ImageUtils();
+                        iu.LoadRealImage(context, ktp, ivKtp);
+
+                        setPointMap();
+
+                        getCustomerImage();
+                    }else{
+
+                        DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getDetailReseller();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getDetailReseller();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
+    }
+
+    private void getCustomerImage(){
+
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("kdcus", kdcus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getCustomerImage, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan, harap ulangi proses";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    listPhoto.clear();
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray ja = response.getJSONArray("response");
+                        for(int i = 0; i < ja.length();i++ ){
+
+                            JSONObject jo = ja.getJSONObject(i);
+                            listPhoto.add(new PhotoModel("", jo.getString("image"), ""));
+                        }
+
+                    }else{
+
+                        //DialogBox.showDialog(context, 3, message);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getCustomerImage();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                }
+
+                adapterPhoto.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getCustomerImage();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
     }
 
     @Override
@@ -555,10 +1111,11 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
             final int time = (int) (new Date().getTime()/1000);
 
             extension = extension.toLowerCase();
+            Bitmap bm2 = null;
             if(extension.equals(".jpeg") || extension.equals(".jpg") || extension.equals(".png") || extension.equals(".bmp")){
 
                 outputStream = new FileOutputStream( saveDirectory.getAbsoluteFile() + File.separator + time + namaFile); // filename.png, .mp3, .mp4 ...
-                Bitmap bm2 = BitmapFactory.decodeStream(inputStream);
+                bm2 = BitmapFactory.decodeStream(inputStream);
                 int scale = 80;
 
                 int imageHeight = bm2.getHeight();
@@ -639,11 +1196,15 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                     newWidth = newHeight * imageWidth / imageHeight;
                 }
 
+                fileKtp = ImageUtils.convert(bm2);
                 iu.LoadRealImage(context, file, ivKtp, newWidth, newHeight);
             }else{
 
-                listPhoto.add(new PhotoModel(filePathURI, ""));
-                adapterPhoto.notifyDataSetChanged();
+                if(bm2 != null){
+
+                    listPhoto.add(new PhotoModel(filePathURI, "", ImageUtils.convert(bm2)));
+                    adapterPhoto.notifyDataSetChanged();
+                }
             }
 
             //new UploadFileToServer().execute();

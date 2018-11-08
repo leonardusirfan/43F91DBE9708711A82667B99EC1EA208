@@ -149,10 +149,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet1"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="ACT_CUSTOMER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet2"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -189,7 +196,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActCustomer.ActivityTambahCustomer2"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".ActivityPreorderPerdana1"
             android:screenOrientation="portrait" />

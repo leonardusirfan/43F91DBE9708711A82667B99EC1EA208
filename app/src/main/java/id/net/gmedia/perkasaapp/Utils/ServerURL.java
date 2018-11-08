@@ -66,5 +66,9 @@ public class ServerURL {
     public static final String saveRekonsinyasi = baseUrl + "Konsinyasi/simpan_rekonsinyasi/";
     public static final String returRekonsinyasi = baseUrl + "Konsinyasi/retur_konsinyasi/";
     public static final String getReturKonsinyasi = baseUrl + "Konsinyasi/history_retur/";
+    public static final String getSegmentasi = baseUrl + "Customer/segmentasi/";
+    public static final String saveCustomer = baseUrl + "Customer/add_customer/";
+    public static final String getCustomerImage = baseUrl + "Customer/image/";
+    public static final String updateCustomer = baseUrl + "Customer/update_customer/";
 
 }

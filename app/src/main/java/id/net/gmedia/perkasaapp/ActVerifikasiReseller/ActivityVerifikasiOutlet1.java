@@ -51,6 +51,7 @@ public class ActivityVerifikasiOutlet1 extends AppCompatActivity {
     private boolean isLoading = false;
     private TabLayout tlTop;
     private String currentStatus = "2";
+    public static String flag = "VERIFIKASI_CUSTOMER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +174,7 @@ public class ActivityVerifikasiOutlet1 extends AppCompatActivity {
         lvReseller.addFooterView(footerList);
 
         try {
+            jBody.put("status", currentStatus);
             jBody.put("keyword", keyword);
             jBody.put("start", start);
             jBody.put("count", count);

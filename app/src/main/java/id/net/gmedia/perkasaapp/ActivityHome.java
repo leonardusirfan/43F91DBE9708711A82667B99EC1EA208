@@ -37,6 +37,7 @@ import id.net.gmedia.perkasaapp.ActBranding.DetailBranding;
 import id.net.gmedia.perkasaapp.ActBranding.ListBranding;
 import id.net.gmedia.perkasaapp.ActChangePassword.ActChangePassword;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer1;
+import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
@@ -115,7 +116,7 @@ public class ActivityHome extends AppCompatActivity
         if(session.isSuperuser()){
             llSupervisor.setVisibility(View.VISIBLE);
         }else{
-            llSupervisor.setVisibility(View.VISIBLE);
+            llSupervisor.setVisibility(View.GONE);
         }
 
         btn_mkios = findViewById(R.id.btn_mkios);
@@ -355,6 +356,14 @@ public class ActivityHome extends AppCompatActivity
 
                 Intent intent = new Intent(ActivityHome.this, ActKonsinyasi.class);
                 intent.putExtra("flag", flag);
+                startActivity(intent);
+            }else if(flag.equals(ActivityTambahCustomer2.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ActivityTambahCustomer1.class);
+                startActivity(intent);
+            }else if(flag.equals(ActivityVerifikasiOutlet1.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ActivityVerifikasiOutlet1.class);
                 startActivity(intent);
             }
         }

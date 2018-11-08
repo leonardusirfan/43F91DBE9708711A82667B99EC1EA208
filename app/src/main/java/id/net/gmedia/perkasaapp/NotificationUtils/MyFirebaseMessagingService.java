@@ -20,6 +20,7 @@ import com.maulana.custommodul.ItemValidation;
 import java.util.HashMap;
 import java.util.Map;
 
+import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.R;
 
@@ -63,6 +64,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     typeContent = 2;
                 }else if(extra.get(key).trim().toUpperCase().equals("DEPOSIT")){
                     typeContent = 3;
+                }else if(extra.get(key).trim().toUpperCase().equals(ActivityVerifikasiOutlet1.flag)){
+                    typeContent = 4;
                 }else{
                     typeContent = 9;
                 }

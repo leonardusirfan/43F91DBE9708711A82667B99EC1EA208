@@ -95,6 +95,78 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/ll_alamat"
+            android:id="@+id/ll_ktp"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KTP"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_ktp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"
+                android:inputType="numberSigned"
+                android:imeOptions="actionNext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_ktp"
+            android:id="@+id/ll_kelurahan"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kelurahan"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_kelurahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_kelurahan"
+            android:id="@+id/ll_kecamatan"
+            style="@style/formGroup">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kecamatan"
+                style="@style/Subtitle"/>
+
+            <EditText
+                android:id="@+id/txt_kecamatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueEdittext"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_kecamatan"
             android:id="@+id/ll_kota"
             style="@style/formGroup">
 
@@ -266,7 +338,7 @@
                     android:layout_height="wrap_content"
                     style="@style/ValueEdittext"
                     android:hint="Hari"
-                    android:inputType="textPhonetic"
+                    android:inputType="numberSigned"
                     android:imeOptions="actionNext"/>
 
             </RelativeLayout>
