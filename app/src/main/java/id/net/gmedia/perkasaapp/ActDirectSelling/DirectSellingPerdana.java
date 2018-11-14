@@ -367,6 +367,7 @@ public class DirectSellingPerdana extends AppCompatActivity implements LocationL
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("ccid", ccid);
+            jBody.put("kdcus", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
