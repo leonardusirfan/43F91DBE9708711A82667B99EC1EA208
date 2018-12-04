@@ -386,6 +386,8 @@ public class ActivityHome extends AppCompatActivity
                 }
             }
         });
+
+        getProfile();
     }
 
     @Override
@@ -493,8 +495,6 @@ public class ActivityHome extends AppCompatActivity
                             }
                         }
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -506,6 +506,59 @@ public class ActivityHome extends AppCompatActivity
                 if(dialogVersion != null){
                     if(dialogVersion.isShowing()) dialogVersion.dismiss();
                 }
+            }
+        });
+    }
+
+    private void getProfile(){
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("nik", session.getNikGa());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getPencapaian, new ApiVolley.VolleyCallback() {
+
+            @Override
+            public void onSuccess(String result) {
+
+                JSONObject responseAPI;
+
+                try {
+                    responseAPI = new JSONObject(result);
+                    String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONObject jo = responseAPI.getJSONObject("response");
+                        tvNamaSales.setText(jo.getString("nama"));
+                        tvJabatan.setText(jo.getString("jabatan"));
+                        tvTotalOmset.setText(iv.ChangeToCurrencyFormat(jo.getString("total_omset")));
+                        tvDsTargetMkios.setText(iv.ChangeToCurrencyFormat(jo.getString("target_mkios")));
+                        tvDsOmsetMkios.setText(iv.ChangeToCurrencyFormat(jo.getString("total_mkios")));
+                        tvDsGapMkios.setText(iv.ChangeToCurrencyFormat(jo.getString("gap_mkios")));
+                        tvDsTargetPerdana.setText(iv.ChangeToCurrencyFormat(jo.getString("target_perdana")));
+                        tvDsOmsetPerdana.setText(iv.ChangeToCurrencyFormat(jo.getString("jml_perdana")));
+                        tvDsGapPerdana.setText(iv.ChangeToCurrencyFormat(jo.getString("gap_perdana")));
+                        tvDsTargetBulk.setText(iv.ChangeToCurrencyFormat(jo.getString("target_bulk")));
+                        tvDsOmsetBulk.setText(iv.ChangeToCurrencyFormat(jo.getString("total_bulk")));
+                        tvDsGapBulk.setText(iv.ChangeToCurrencyFormat(jo.getString("gap_bulk")));
+                        tvDsTargetSurvey.setText(iv.ChangeToCurrencyFormat(jo.getString("target_pjp")));
+                        tvDsEffectiveCall.setText(iv.ChangeToCurrencyFormat(jo.getString("jml_pjp")));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             }
         });
     }

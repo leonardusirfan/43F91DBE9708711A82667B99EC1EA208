@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/text18"
-                android:id="@+id/tv_jabatan"
+                android:id="@+id/tv_nama_sales"
                 android:text=""/>
 
             <TextView
@@ -63,15 +63,16 @@
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/text12"
                 android:textStyle="bold"
-                android:id="@+id/tv_nama_sales"
+                android:id="@+id/tv_jabatan"
                 android:text=""/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_white"
-                android:layout_marginTop="@dimen/padding5"
-                android:textSize="@dimen/text12"
+                android:layout_marginTop="@dimen/padding2"
+                android:textSize="@dimen/text10"
+                android:gravity="right"
                 android:text="Total Omset"/>
 
             <TextView
@@ -80,6 +81,7 @@
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/text12"
                 android:textStyle="bold"
+                android:gravity="right"
                 android:id="@+id/tv_total_omset"
                 android:text=""/>
         </LinearLayout>
@@ -110,9 +112,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padding5"
                     android:layout_margin="@dimen/padding2"
-                    android:background="@color/color_white"
+
                     android:gravity="center"
-                    android:padding="@dimen/padding5"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -126,21 +127,27 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Target MKIOS"/>
+                            android:text="Target MKIOS"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Omset MKIOS"/>
+                            android:text="Omset MKIOS"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="GAP MKIOS"/>
+                            android:text="GAP MKIOS"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -155,7 +162,10 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_ds_target_mkios"
                             android:text=""
-                            style="@style/Subtitle"/>
+                            android:gravity="right"
+                            style="@style/Subtitle"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -163,7 +173,10 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_ds_omset_mkios"
                             android:text=""
-                            style="@style/Subtitle"/>
+                            android:gravity="right"
+                            style="@style/Subtitle"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -171,7 +184,11 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_ds_gap_mkios"
                             android:text=""
-                            style="@style/Subtitle"/>
+                            android:gravity="right"
+                            style="@style/Subtitle"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -180,9 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padding5"
                     android:layout_margin="@dimen/padding2"
-                    android:background="@color/color_white"
                     android:gravity="center"
-                    android:padding="@dimen/padding5"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -196,21 +211,27 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Target Perdana"/>
+                            android:text="Target Perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Omset Perdana"/>
+                            android:text="Omset Perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="GAP Perdana"/>
+                            android:text="GAP Perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -224,21 +245,32 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_target_perdana"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_target_perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"
+                            />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_omset_perdana"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_omset_perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_gap_perdana"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_gap_perdana"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -248,9 +280,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padding5"
                     android:layout_margin="@dimen/padding2"
-                    android:background="@color/color_white"
                     android:gravity="center"
-                    android:padding="@dimen/padding5"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -264,21 +294,27 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Target Bulk"/>
+                            android:text="Target Bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Omset Bulk"/>
+                            android:text="Omset Bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="GAP Bulk"/>
+                            android:text="GAP Bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -292,21 +328,30 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_target_bulk"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_target_bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_omset_bulk"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_omset_bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_gap_bulk"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_gap_bulk"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -315,9 +360,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padding5"
                     android:layout_margin="@dimen/padding2"
-                    android:background="@color/color_white"
                     android:gravity="center"
-                    android:padding="@dimen/padding5"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -331,14 +374,18 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Target Survey"/>
+                            android:text="Target Survey"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/TitleText2"
-                            android:text="Effective Call"/>
+                            android:text="Effective Call"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -352,14 +399,20 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_target_survey"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_target_survey"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             style="@style/Subtitle"
-                            android:id="@+id/tv_ds_effective_call"/>
+                            android:gravity="right"
+                            android:id="@+id/tv_ds_effective_call"
+                            android:background="@color/color_white"
+                            android:padding="@dimen/padding5"/>
                     </LinearLayout>
                 </LinearLayout>
 

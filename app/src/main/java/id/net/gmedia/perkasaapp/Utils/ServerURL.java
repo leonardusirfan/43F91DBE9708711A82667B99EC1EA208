@@ -70,5 +70,6 @@ public class ServerURL {
     public static final String saveCustomer = baseUrl + "Customer/add_customer/";
     public static final String getCustomerImage = baseUrl + "Customer/image/";
     public static final String updateCustomer = baseUrl + "Customer/update_customer/";
+    public static final String getPencapaian = baseUrl + "Sales/target/";
 
 }
