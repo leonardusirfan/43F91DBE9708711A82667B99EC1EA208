@@ -1349,23 +1349,101 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
     }
 
     public void updateCcid(){
-        //Mengupdate tampilan informasi berdasarkan CCID yang dipilih
-        //Update RecyclerView
-        //System.out.println(this.selectedCcid.size());
-        adapter.notifyDataSetChanged();
 
-        //Update total
-        txt_total.setText(String.valueOf(selectedCcid.size()));
-        double total = 0;
-        for(ModelCcid c : selectedCcid){
-            total += iv.parseNullDouble(c.getHarga());
+        dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("kdcus", kdcus);
+            jBody.put("kodebrg", kdbrg);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        txt_total_harga.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(total)));
 
-        //Update CCID ditampilkan
-        txt_no_ccid.setText("-");
-        txt_nama_ccid.setText("-");
-        txt_harga_ccid.setText("-");
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getHargaMarkup, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "";
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        String hargaMarkup = response.getJSONObject("response").getString("harga");
+                        String maks = response.getJSONObject("response").getString("maks");
+                        for(ModelCcid c : selectedCcid){
+                            c.setHarga(hargaMarkup);
+                            //total += iv.parseNullDouble(c.getHarga());
+                        }
+
+                        if(selectedCcid.size() > iv.parseNullLong(maks)){
+
+                            Toast.makeText(context, "Maaf, barang ini hanya diperbolehkan maksimal " +maks, Toast.LENGTH_LONG).show();
+
+                            for(int i = selectedCcid.size() - 1; i >= iv.parseNullInteger(maks) ;i--){
+
+                                selectedCcid.remove(i);
+                            }
+
+                        }
+                    }
+
+                    //Mengupdate tampilan informasi berdasarkan CCID yang dipilih
+                    //Update RecyclerView
+                    //System.out.println(this.selectedCcid.size());
+                    adapter.notifyDataSetChanged();
+
+                    //Update total
+                    txt_total.setText(String.valueOf(selectedCcid.size()));
+                    double total = 0;
+                    for(ModelCcid c : selectedCcid){
+                        total += iv.parseNullDouble(c.getHarga());
+                    }
+                    txt_total_harga.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(total)));
+
+                    //Update CCID ditampilkan
+                    txt_no_ccid.setText("-");
+                    txt_nama_ccid.setText("-");
+                    txt_harga_ccid.setText("-");
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            updateCcid();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        updateCcid();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
+
     }
 
     @Override

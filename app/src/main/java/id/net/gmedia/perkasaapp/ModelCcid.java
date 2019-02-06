@@ -27,15 +27,19 @@ public class ModelCcid {
         return nama;
     }
 
-    public String getHarga() {
-        return harga;
-    }
-
     public boolean isSelected() {
         return selected;
     }
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
     }
 }

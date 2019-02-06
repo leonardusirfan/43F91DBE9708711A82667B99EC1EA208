@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: cz.intik:overflow-pager-indicator:1.2.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/overflow-pager-indicator-1.2.1.aar/dc4e7687be029bc7188fc284b1b0b0f6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/overflow-pager-indicator-1.2.1.aar/dc4e7687be029bc7188fc284b1b0b0f6/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cz.intik/overflow-pager-indicator/1.2.1/e5677c919bf9f9482d82cccc30dd1f8bf396af58/overflow-pager-indicator-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

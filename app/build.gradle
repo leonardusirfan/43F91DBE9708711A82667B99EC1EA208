@@ -7,8 +7,8 @@ android {
         applicationId "id.net.gmedia.perkasaapp"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 23
-        versionName "3.7.0"
+        versionCode 25
+        versionName "3.9.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="id.net.gmedia.perkasaapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -31,6 +30,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
+        <activity android:name=".ActPerdanaCustom.DetailJualPerdanaCustom"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ActPerdanaCustom.BarangPerdanaCustom"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPerdanaCustom.CustomerPerdanaCustom"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPerdanaCustom.ListJualPerdanaCustom"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -39,10 +50,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>
-
-        <!-- Service -->
-
+        </provider> <!-- Service -->
         <service android:name=".NotificationUtils.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -149,17 +157,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet1"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="ACT_CUSTOMER" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ActVerifikasiReseller.ActivityVerifikasiOutlet2"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -196,8 +203,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActCustomer.ActivityTambahCustomer2"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityPreorderPerdana1"
             android:screenOrientation="portrait" />
@@ -318,10 +324,18 @@
         <activity
             android:name=".ActKonsinyasi.InformasiBarang.OutletInfoBarang"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActKonsinyasi.InformasiBarang.ActivityInfoBarang" />
-        <activity android:name=".ActKonsinyasi.Retur.OutletRetur" />
-        <activity android:name=".ActKonsinyasi.Retur.DetailReturKonsinyasi" />
-        <activity android:name=".ActKonsinyasi.Retur.ActReturKonsinyasi"></activity>
+        <activity
+            android:name=".ActKonsinyasi.InformasiBarang.ActivityInfoBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Retur.OutletRetur"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Retur.DetailReturKonsinyasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKonsinyasi.Retur.ActReturKonsinyasi"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

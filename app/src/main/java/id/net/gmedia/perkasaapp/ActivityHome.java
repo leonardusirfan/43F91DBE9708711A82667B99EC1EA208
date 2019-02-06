@@ -60,6 +60,7 @@ import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash3;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
+import id.net.gmedia.perkasaapp.ActPerdanaCustom.ListJualPerdanaCustom;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 import id.net.gmedia.perkasaapp.ActSetoran.ListSetoran;
 import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
@@ -91,6 +92,7 @@ public class ActivityHome extends AppCompatActivity
             , tvDsTargetSurvey, tvDsEffectiveCall;
     private LinearLayout btnSetoran, btnKonsinyasi;
     private LinearLayout llSupervisor;
+    private LinearLayout btnPerdanaCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +118,8 @@ public class ActivityHome extends AppCompatActivity
         if(session.isSuperuser()){
             llSupervisor.setVisibility(View.VISIBLE);
         }else{
-            llSupervisor.setVisibility(View.GONE);
+            //llSupervisor.setVisibility(View.GONE);
+            llSupervisor.setVisibility(View.VISIBLE);
         }
 
         btn_mkios = findViewById(R.id.btn_mkios);
@@ -141,6 +144,7 @@ public class ActivityHome extends AppCompatActivity
         suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
         ivIcon = (ImageView) findViewById(R.id.iv_icon);
         btnKonsinyasi = (LinearLayout) findViewById(R.id.btn_konsinyasi);
+        btnPerdanaCustom = (LinearLayout) findViewById(R.id.btn_perdana_custom);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -189,6 +193,14 @@ public class ActivityHome extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivityHome.this, ActivityVerifikasiOutlet1.class));
+            }
+        });
+
+        btnPerdanaCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListJualPerdanaCustom.class));
             }
         });
 

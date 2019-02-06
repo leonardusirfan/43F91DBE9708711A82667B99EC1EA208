@@ -963,7 +963,7 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
             jBody.put("sender", sender);
             jBody.put("balasan", text);
             jBody.put("flag_order", lastFlagOrder);
-            jBody.put("nomor", edtNomor.getText().toString());
+            jBody.put("nomor", generalizePhoneNumber(edtNomor.getText().toString()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -986,19 +986,25 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
 
                             String harga = response.getJSONObject("response").getString("harga");
                             String nomor = response.getJSONObject("response").getString("nomor");
-                            lastSN = response.getJSONObject("response").getString("sn");
-                            edtNomor.setText(nomor);
-                            selectedHarga = harga;
-                            edtNominal.setText(harga);
+                            String outstanding = response.getJSONObject("response").getString("outstanding");
 
-                            if(!isKonfirmasiManual && isSaveButtonClicked){
+                            if(generalizePhoneNumber(nomor).equals(generalizePhoneNumber(edtNomor.getText().toString()))
+                                    && !outstanding.equals("1")){
 
-                                if(isOnSaving){
-                                    Toast.makeText(context, "Harap tunggu hingga proses selesai", Toast.LENGTH_LONG).show();
-                                    return;
+                                lastSN = response.getJSONObject("response").getString("sn");
+                                edtNomor.setText(nomor);
+                                selectedHarga = harga;
+                                edtNominal.setText(harga);
+
+                                if(!isKonfirmasiManual && isSaveButtonClicked){
+
+                                    if(isOnSaving){
+                                        Toast.makeText(context, "Harap tunggu hingga proses selesai", Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+
+                                    saveData();
                                 }
-
-                                saveData();
                             }
                         }
                     }
@@ -1072,7 +1078,7 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
             jDataDetail.put("kdcus", kdcus);
             jDataDetail.put("nama", nama);
             jDataDetail.put("alamat", alamat);
-            jDataDetail.put("nomor", edtNomor.getText().toString());
+            jDataDetail.put("nomor", generalizePhoneNumber(edtNomor.getText().toString()));
             jDataDetail.put("jarak", jarak);
             jDataDetail.put("sn", lastSN);
             jDataDetail.put("transaction_id", String.valueOf(transactionID));
@@ -1790,6 +1796,27 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
     protected void onDestroy() {
         super.onDestroy();
         isSaveButtonClicked = false;
+    }
+
+    private static String generalizePhoneNumber(String number){
+
+        String result = number;
+
+        if(number.length() > 3){
+
+            if(number.startsWith("+62")){
+
+                result = number.replace("+62", "0");
+            }else if(number.startsWith("62")){
+
+                result = "0" + number.substring(2);
+            }else if(number.startsWith("8")){
+
+                result = "0" + number;
+            }
+        }
+
+        return result;
     }
 
 }
