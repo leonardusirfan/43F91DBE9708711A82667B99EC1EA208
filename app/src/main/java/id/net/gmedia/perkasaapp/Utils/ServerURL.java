@@ -73,5 +73,6 @@ public class ServerURL {
     public static final String getPencapaian = baseUrl + "Sales/target/";
     public static final String getHargaMarkup = baseUrl + "Perdana/harga_markup/";
     public static final String getPenjualanDealing = baseUrl + "Perdana/view_perdana_qty/";
+    public static final String getBarangDealing = baseUrl + "Perdana/stok_dealing/";
 
 }

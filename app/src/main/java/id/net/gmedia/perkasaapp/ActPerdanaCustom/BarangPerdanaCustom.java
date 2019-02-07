@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -16,15 +17,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActPerdanaCustom.Adapter.ListBarangPerdanaCustomAdapter;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class BarangPerdanaCustom extends AppCompatActivity {
 
@@ -39,6 +46,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
     private int start = 0, count = 10;
     private EditText edtSearch;
     private boolean isLoading = false;
+    private String namaCus = "", kdcus = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
         setContentView(R.layout.activity_barang_perdana_custom);
 
         if(getSupportActionBar() != null){
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("List Barang");
         }
@@ -96,6 +105,14 @@ public class BarangPerdanaCustom extends AppCompatActivity {
 
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            namaCus = bundle.getString("nama", "");
+            kdcus = bundle.getString("kdcus", "");
+
+        }
     }
 
     private void initEvent() {
@@ -124,8 +141,11 @@ public class BarangPerdanaCustom extends AppCompatActivity {
 
                 CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(view.getContext(), DetailJualPerdanaCustom.class);
-                intent.putExtra("id", item.getItem1());
-                intent.putExtra("nama", item.getItem2());
+                intent.putExtra("kodebrg", item.getItem1());
+                intent.putExtra("namabrg", item.getItem2());
+                intent.putExtra("stok", item.getItem4());
+                intent.putExtra("kdcus", kdcus);
+                intent.putExtra("namacus", namaCus);
                 view.getContext().startActivity(intent);
             }
         });
@@ -133,12 +153,12 @@ public class BarangPerdanaCustom extends AppCompatActivity {
 
     private void initData() {
 
-        masterList.add(new CustomItem("1","Telkomsel 1 GB", "5000", "2"));
+        /*masterList.add(new CustomItem("1","Telkomsel 1 GB", "5000", "2"));
         masterList.add(new CustomItem("2","Telkomsel AS", "10000", "21"));
         masterList.add(new CustomItem("3","Telkomsel 4 GB", "20000", "23"));
         masterList.add(new CustomItem("4","Telkomsel 5 Mid", "10000", "12"));
-        adapter.notifyDataSetChanged();
-        /*isLoading = true;
+        adapter.notifyDataSetChanged();*/
+        isLoading = true;
         if(start == 0) dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
         lvBarang.addFooterView(footerList);
@@ -151,7 +171,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerPerdana, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getBarangDealing, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -173,9 +193,10 @@ public class BarangPerdanaCustom extends AppCompatActivity {
 
                             JSONObject jo = jsonArray.getJSONObject(i);
                             masterList.add(new CustomItem(
-                                    jo.getString("kdcus")
-                                    ,jo.getString("nama")
-                                    ,jo.getString("alamat")
+                                    jo.getString("kodebrg")
+                                    ,jo.getString("namabrg")
+                                    ,jo.getString("hargajual")
+                                    ,jo.getString("stok")
                             ));
                         }
 
@@ -199,7 +220,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
                     dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
                 }
 
-                adapterReseller.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -219,7 +240,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
 
                 dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan, harap ulangi proses");
             }
-        });*/
+        });
     }
 
     @Override

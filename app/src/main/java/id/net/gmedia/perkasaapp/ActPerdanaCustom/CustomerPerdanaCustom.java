@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,7 @@ public class CustomerPerdanaCustom extends AppCompatActivity {
     private int start = 0, count = 10;
     private EditText edtSearch;
     private boolean isLoading = false;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,13 @@ public class CustomerPerdanaCustom extends AppCompatActivity {
         setContentView(R.layout.activity_customer_perdana_custom);
 
         if(getSupportActionBar() != null){
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Reseller Perdana");
         }
 
         context = this;
+        session = new SessionManager(context);
         initUI();
         initEvent();
         initPerdana();
@@ -146,6 +151,7 @@ public class CustomerPerdanaCustom extends AppCompatActivity {
 
         try {
             jBody.put("keyword", keyword);
+            jBody.put("flag", session.getSuperuser());
             jBody.put("start", start);
             jBody.put("count", count);
         } catch (JSONException e) {

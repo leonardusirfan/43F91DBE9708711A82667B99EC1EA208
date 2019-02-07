@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
+        android:gravity="center"
         android:id="@+id/ll_footer"
         android:layout_marginTop="@dimen/padding20"
         android:layout_marginBottom="@dimen/padding20"
@@ -26,6 +27,7 @@
             android:layout_marginRight="@dimen/padding20"
             android:background="#cacaca"
             android:text="@string/peta_outlet"
+            android:visibility="gone"
             android:textColor="#000"/>
 
         <Button
@@ -100,11 +102,37 @@
                 android:layout_marginTop="@dimen/padding5"
                 android:text="Cara Bayar" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_end"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="@dimen/padding5"
+                    android:src="@drawable/calender" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/iv_end"
+                    android:textColor="@color/color_black"
+                    android:ellipsize="end"
+                    android:paddingTop="@dimen/padding5"
+                    android:paddingBottom="@dimen/padding5"
+                    android:textSize="@dimen/text14" />
+
+            </RelativeLayout>
+
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/rg_crbayar"
+                android:visibility="gone"
                 android:weightSum="2">
 
                 <RadioButton

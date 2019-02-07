@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -69,6 +70,7 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setTitle("Perdana Dealing");
         }
 
@@ -233,7 +235,7 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
 
             if(resultCode == Activity.RESULT_OK){
 
-                selectedNik = data.getStringExtra("nik_ga");
+                selectedNik = data.getStringExtra("nik");
                 String nama = data.getStringExtra("nama");
                 tvSales.setText(nama);
                 listSurvey.clear();
@@ -252,6 +254,7 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
         listSurvey.add(new CustomItem("1", "2019-01-11 18:12:00", "Anam Cell", "1000", "10000", "10000000"));
         listSurvey.add(new CustomItem("1", "2019-01-11 18:12:00", "MS Cell", "1000", "10000", "10000000"));
         adapter.notifyDataSetChanged();*/
+        selectedNik = session.getNikGa();
         dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
         try {

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginTop="@dimen/padding10"
+        android:layout_marginTop="@dimen/padding5"
         android:layout_marginLeft="@dimen/padding10"
         android:layout_marginRight="@dimen/padding10"
         >
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:padding="@dimen/padding10"
+                android:padding="@dimen/padding8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -36,10 +36,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
-                    android:gravity="center"
-                    android:padding="@dimen/padding5"
+                    android:padding="@dimen/padding2"
                     android:textColor="#fff"
-                    android:textSize="@dimen/text12"
+                    android:textSize="@dimen/text18"
                     android:textStyle="bold" />
 
                 <ImageView

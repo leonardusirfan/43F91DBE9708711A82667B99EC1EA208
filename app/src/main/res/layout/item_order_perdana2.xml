@@ -130,7 +130,7 @@
                             android:textSize="@dimen/text12" />
 
                         <TextView
-                            android:id="@+id/tv_item3"
+                            android:id="@+id/txt_stok"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/padding5"
