@@ -74,5 +74,8 @@ public class ServerURL {
     public static final String getHargaMarkup = baseUrl + "Perdana/harga_markup/";
     public static final String getPenjualanDealing = baseUrl + "Perdana/view_perdana_qty/";
     public static final String getBarangDealing = baseUrl + "Perdana/stok_dealing/";
+    public static final String saveBarangDealing = baseUrl + "Perdana/perdana_qty/";
+    public static final String getPengajuanRKP = baseUrl + "Perdana/header_kemas/";
+    public static final String savePengajuanRKP = baseUrl + "Perdana/approve_kemas/";
 
 }

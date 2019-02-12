@@ -116,6 +116,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
     }
 
     private void initEvent() {
+
         edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -143,6 +144,7 @@ public class BarangPerdanaCustom extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), DetailJualPerdanaCustom.class);
                 intent.putExtra("kodebrg", item.getItem1());
                 intent.putExtra("namabrg", item.getItem2());
+                intent.putExtra("harga", item.getItem3());
                 intent.putExtra("stok", item.getItem4());
                 intent.putExtra("kdcus", kdcus);
                 intent.putExtra("namacus", namaCus);

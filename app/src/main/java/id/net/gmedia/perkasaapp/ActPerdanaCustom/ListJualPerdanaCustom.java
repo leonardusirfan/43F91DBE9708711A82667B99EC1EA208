@@ -288,10 +288,11 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
                             JSONObject jo = ja.getJSONObject(i);
                             listSurvey.add(new CustomItem(
                                     jo.getString("id")
-                                    ,iv.ChangeFormatDateString(jo.getString("tanggal"), FormatItem.formatDate, FormatItem.formatDateDisplay) + " "+jo.getString("jam")
-                                    ,jo.getString("customer")
-                                    ,jo.getString("state")
-                                    ,jo.getString("kdcus")
+                                    ,jo.getString("insert_at")
+                                    ,jo.getString("nama")
+                                    ,jo.getString("jumlah")
+                                    ,jo.getString("harga")
+                                    ,jo.getString("total")
                             ));
 
                         }
@@ -345,5 +346,10 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

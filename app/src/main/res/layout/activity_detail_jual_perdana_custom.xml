@@ -10,36 +10,90 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:gravity="center"
+        android:orientation="vertical"
         android:id="@+id/ll_footer"
         android:layout_marginTop="@dimen/padding20"
         android:layout_marginBottom="@dimen/padding20"
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/btn_peta"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding20"
-            android:layout_marginRight="@dimen/padding20"
-            android:background="#cacaca"
-            android:text="@string/peta_outlet"
-            android:visibility="gone"
-            android:textColor="#000"/>
+            android:orientation="horizontal"
+            android:id="@+id/ll_jarak"
+            android:layout_marginLeft="@dimen/padding5"
+            android:layout_marginRight="@dimen/padding5"
+            android:weightSum="1">
 
-        <Button
-            android:id="@+id/btn_proses"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/posisi_user"
+                    android:textSize="@dimen/text14"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_jarak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text18"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_height_thor"
+                    android:layout_height="@dimen/ic_height_thor"
+                    android:background="?attr/selectableItemBackground"
+                    android:id="@+id/iv_refresh_jarak"
+                    android:src="@mipmap/ic_refresh"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding20"
-            android:layout_marginRight="@dimen/padding20"
-            android:text="@string/proses"
-            android:background="@color/colorAccent"
-            android:textColor="#fff" />
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="@dimen/padding8"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_peta"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding20"
+                android:layout_marginRight="@dimen/padding20"
+                android:background="#cacaca"
+                android:text="@string/peta_outlet"
+                android:textColor="#000"/>
+
+            <Button
+                android:id="@+id/btn_proses"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding20"
+                android:layout_marginRight="@dimen/padding20"
+                android:text="@string/proses"
+                android:background="@color/colorAccent"
+                android:textColor="#fff" />
+        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
@@ -61,7 +115,7 @@
                 android:text="@string/nama_reseller" />
 
             <TextView
-                android:id="@+id/txt_nama"
+                android:id="@+id/tv_nama"
                 style="@style/ValueText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"
-                android:text="Cara Bayar" />
+                android:text="Tanggal Tempo" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -156,12 +210,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding10"
                 style="@style/TitleText"
+                android:visibility="gone"
                 android:text="Akun"/>
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sp_akun"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/padding10"></Spinner>
 
             <TextView
@@ -193,7 +249,7 @@
                 style="@style/ValueEdittext"
                 android:inputType="numberSigned"
                 android:hint=""
-                android:imeOptions="actionDone"/>
+                android:imeOptions="actionNext"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -207,6 +263,24 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edt_total"
                 style="@style/ValueEdittext.disable"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:layout_marginTop="@dimen/padding8"
+                style="@style/TitleText"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:id="@+id/edt_keterangan"
+                style="@style/ValueEdittext"
+                android:ellipsize="none"
+                android:text=""
+                android:gravity="top"
+                android:imeOptions="actionDone"/>
 
         </LinearLayout>
     </ScrollView>
