@@ -70,6 +70,7 @@ public class HistoryPengajuanRKP extends AppCompatActivity {
     private boolean isLoading = false;
     private int start = 0, count = 10;
     private SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

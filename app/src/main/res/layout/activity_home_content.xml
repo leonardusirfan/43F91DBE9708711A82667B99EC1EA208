@@ -240,18 +240,17 @@
                         android:layout_marginTop="5dp"
                         android:background="#9b9b9b" />
 
-                    <LinearLayout
+                    <android.support.v7.widget.GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/menu_height"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:layout_height="wrap_content"
+                        app:columnCount="3">
 
                         <LinearLayout
                             android:id="@+id/btn_verifikasi"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:orientation="vertical">
 
@@ -277,8 +276,8 @@
                             android:id="@+id/btn_perdana_custom"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:orientation="vertical">
 
@@ -301,12 +300,67 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/btn_pencapain_sales"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/ic_rkp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Pencapaian Sales"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btn_kunjungan_admin"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/lokasi" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Kunjungan Admin"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:id="@+id/btn_rkp"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
+                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <ImageView
@@ -331,8 +385,8 @@
                             android:id="@+id/btn_lokasi"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:visibility="gone"
                             android:orientation="vertical">
@@ -355,7 +409,7 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
+                    </android.support.v7.widget.GridLayout>
 
                 </LinearLayout>
 

@@ -44,6 +44,7 @@ import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
 import id.net.gmedia.perkasaapp.ActKonsinyasi.ActKonsinyasi;
 import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjungan;
 import id.net.gmedia.perkasaapp.ActKunjungan.DetailKunjungan;
+import id.net.gmedia.perkasaapp.ActKunjunganAdmin.ListKunjunganAdmin;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.DetailMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.ListMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
@@ -59,6 +60,7 @@ import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash2;
 import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash3;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
+import id.net.gmedia.perkasaapp.ActPencapaianSales.DetailPencapaianSales;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.ListPengajuanRKP;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActPerdanaCustom.DetailJualPerdanaCustom;
@@ -115,14 +117,15 @@ public class ActivityHome extends AppCompatActivity
         //Inisialisasi button UI
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
-                , btn_market_survey, btn_direct_selling, btn_perubahan_data_rs, btn_pelunasan_piutang, btn_branding, btn_market_intelligent;
+                , btn_market_survey, btn_direct_selling, btn_perubahan_data_rs, btn_pelunasan_piutang, btn_branding
+                , btn_market_intelligent, btn_pencapaian_sales, btn_kunjungan_sales;
 
         llSupervisor = (LinearLayout) findViewById(R.id.ll_menu_supervisor);
         if(session.isSuperuser()){
             llSupervisor.setVisibility(View.VISIBLE);
         }else{
-            llSupervisor.setVisibility(View.GONE);
-            //llSupervisor.setVisibility(View.VISIBLE);
+            //llSupervisor.setVisibility(View.GONE);
+            llSupervisor.setVisibility(View.VISIBLE);
         }
 
         btn_mkios = findViewById(R.id.btn_mkios);
@@ -142,7 +145,10 @@ public class ActivityHome extends AppCompatActivity
         btn_pelunasan_piutang = (LinearLayout) findViewById(R.id.btn_pelunasan_piutang);
         btn_branding = (LinearLayout) findViewById(R.id.btn_branding);
         btn_market_intelligent = (LinearLayout) findViewById(R.id.btn_market_intelligent);
-        btn_kunjungan = findViewById(R.id.btn_kunjungan);
+        btn_kunjungan = (LinearLayout) findViewById(R.id.btn_kunjungan);
+        btn_pencapaian_sales = (LinearLayout) findViewById(R.id.btn_pencapain_sales);
+        btn_kunjungan_sales = (LinearLayout) findViewById(R.id.btn_kunjungan_admin);
+
         btnSetoran = (LinearLayout) findViewById(R.id.btn_setoran);
         suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
         ivIcon = (ImageView) findViewById(R.id.iv_icon);
@@ -311,6 +317,22 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, ListPengajuanRKP.class));
+            }
+        });
+
+        btn_kunjungan_sales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListKunjunganAdmin.class));
+            }
+        });
+
+        btn_pencapaian_sales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, DetailPencapaianSales.class));
             }
         });
 

@@ -237,7 +237,10 @@ public class ActivityKunjunganOutlet extends AppCompatActivity implements Locati
             public void onSuccess(String result) {
 
                 lvOutlet.removeFooterView(footerList);
-                if(start == 0) dialogBox.dismissDialog();
+                if(start == 0){
+                    dialogBox.dismissDialog();
+                    listItems.clear();
+                }
                 String message = "";
                 isLoading = false;
 
