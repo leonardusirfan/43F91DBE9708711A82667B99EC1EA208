@@ -134,16 +134,16 @@ public class ListKunjunganAdmin extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 CustomItem selectedItem = (CustomItem) adapterView.getItemAtPosition(i);
-                if(!selectedItem.getItem9().equals("0")){
-                    /*Intent intent = new Intent(context, DetailKunjungan.class);
+                /*if(!selectedItem.getItem9().equals("0")){
+                    *//*Intent intent = new Intent(context, DetailKunjungan.class);
                     intent.putExtra("kdcus", selectedItem.getItem1());
                     intent.putExtra("timestamp", selectedItem.getItem2());
                     intent.putExtra("nik", selectedItem.getItem7());
                     intent.putExtra("flag", selfCheckin);
                     intent.putExtra("nama", namaSales);
                     intent.putExtra("id", selectedItem.getItem9());
-                    ((Activity) context).startActivity(intent);*/
-                }
+                    ((Activity) context).startActivity(intent);*//*
+                }*/
             }
         });
 
@@ -178,10 +178,11 @@ public class ListKunjunganAdmin extends AppCompatActivity {
             }
         });
 
+        initHeaderEvent();
 
     }
 
-    private void setDataSales(){
+    private void initHeaderEvent(){
 
         llTop.setVisibility(View.VISIBLE);
         dateString = iv.getCurrentDate(FormatItem.formatDateDisplay);
@@ -239,12 +240,15 @@ public class ListKunjunganAdmin extends AppCompatActivity {
         isLoading = true;
         if(startIndex == 0) dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
+        selectedNikGa = session.getNikGa();
+        selectedNikMkios = session.getNikMkios();
         lvKunjungan.addFooterView(footerList);
 
         try {
             jBody.put("start", startIndex);
             jBody.put("count", count);
-            jBody.put("date", dateKunjungan);
+            jBody.put("tgl", dateKunjungan);
+            jBody.put("keyword", "");
             jBody.put("nomor", "");
             jBody.put("kdcus", "");
             jBody.put("nik_ga", selectedNikGa);
@@ -253,7 +257,7 @@ public class ListKunjunganAdmin extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getKunjungan, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getJadwalSurveyAdmin, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -279,12 +283,8 @@ public class ListKunjunganAdmin extends AppCompatActivity {
                                             jo.getString("kdcus")
                                             , jo.getString("timestamp")
                                             , jo.getString("nama")
-                                            , jo.getString("jarak")
                                             , jo.getString("alamat")
-                                            , jo.getString("outlet_location")
-                                            , jo.getString("nik")
-                                            , jo.getString("is_pjp")
-                                            , jo.getString("id")
+                                            , jo.getString("notelp")
                                     ));
                         }
 

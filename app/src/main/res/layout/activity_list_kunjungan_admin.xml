@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:visibility="gone"
             android:id="@+id/ll_top"
             android:layout_alignParentTop="true"
             android:background="@color/color_red"
@@ -37,7 +36,7 @@
                     android:textSize="20sp"
                     android:textColor="@color/color_white"
                     android:paddingLeft="24dp"
-                    android:drawableRight="@mipmap/ic_date_white"/>
+                    android:drawableRight="@mipmap/ic_date_ws"/>
 
                 <TextView
                     android:layout_width="match_parent"

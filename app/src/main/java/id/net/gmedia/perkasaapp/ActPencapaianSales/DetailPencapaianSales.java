@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import com.maulana.custommodul.SessionManager;
 
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DetailPencapaianSales extends AppCompatActivity {
 
@@ -36,6 +37,12 @@ public class DetailPencapaianSales extends AppCompatActivity {
     private void initUI() {
 
         wvPencapaian = (WebView) findViewById(R.id.wv_pencapaian);
+
+        String url = ServerURL.getPencapaianSales + session.getNikGa();
+        wvPencapaian.getSettings().setJavaScriptEnabled(true);
+        wvPencapaian.getSettings().setDomStorageEnabled(true);
+        wvPencapaian.loadUrl(url);
+
     }
 
     @Override

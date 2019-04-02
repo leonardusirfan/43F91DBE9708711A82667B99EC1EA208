@@ -37,8 +37,7 @@
             android:name=".ActKunjunganAdmin.ListKunjunganAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActPencapaianSales.DetailPencapaianSales"
-            android:screenOrientation="portrait" />
+            android:name=".ActPencapaianSales.DetailPencapaianSales" />
         <activity
             android:name=".ActPengajuanRKP.HistoryPengajuanRKP"
             android:screenOrientation="portrait" />

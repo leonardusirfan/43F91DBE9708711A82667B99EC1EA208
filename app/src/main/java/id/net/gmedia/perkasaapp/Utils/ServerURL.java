@@ -77,5 +77,10 @@ public class ServerURL {
     public static final String saveBarangDealing = baseUrl + "Perdana/perdana_qty/";
     public static final String getPengajuanRKP = baseUrl + "Perdana/header_kemas/";
     public static final String savePengajuanRKP = baseUrl + "Perdana/approve_kemas/";
+    public static final String getSurveyAdmin = baseUrl + "web_view/Survey?kdcus=%s&nik=%s&latitude=%s&longitude=%s";
+    public static final String getPencapaianSales = "https://myperkasa.com/simanajer/index.php/main/achievement_sales_mobile/";
+    public static final String getJadwalSurveyAdmin = baseUrl + "web_view/Survey/list_jadwal/";
+    public static final String getCustomerSurveyAdmin = baseUrl + "web_view/Survey/view_customer/";
+    public static final String validateSurveyAdmin = baseUrl + "web_view/Survey/validasi_lokasi/";
 
 }

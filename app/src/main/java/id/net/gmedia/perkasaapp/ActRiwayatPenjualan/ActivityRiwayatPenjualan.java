@@ -62,7 +62,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     private RiwayatPenjualanAdapter adapterRiwayat;
     private EditText txt_nama;
     private String keyword = "";
-    private TextView tvTotal;
+    private TextView tvTotal, tvTotalTcash;
     private LinearLayout llCustom;
     private Button btnPilihSales;
     private TextView tvSales;
@@ -120,6 +120,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
         lvRiwayat = (ListView) findViewById(R.id.lv_riwayat);
         txt_nama = (EditText) findViewById(R.id.txt_nama);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvTotalTcash = (TextView) findViewById(R.id.tv_total_tcash);
 
         Calendar now = Calendar.getInstance();
         start_day = end_day = now.get(Calendar.DATE);
@@ -302,7 +303,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
                 dialogBox.dismissDialog();
                 String message = "Terjadi kesalahan saat memuat data, harap ulangi";
-                double totalAll = 0;
+                double totalAll = 0, totalTcash = 0;
 
                 try {
 
@@ -352,7 +353,14 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                                 totalPerNama = 0;
                             }
 
-                            totalAll += iv.parseNullDouble(jo.getString("piutang"));
+                            if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
+
+                                totalTcash += iv.parseNullDouble(jo.getString("piutang"));
+                            }else{
+
+                                totalAll += iv.parseNullDouble(jo.getString("piutang"));
+                            }
+
                         }
 
                     }else{
@@ -376,6 +384,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                 }
 
                 tvTotal.setText(iv.ChangeToRupiahFormat(totalAll));
+                tvTotalTcash.setText(iv.ChangeToRupiahFormat(totalTcash));
                 adapterRiwayat.notifyDataSetChanged();
             }
 

@@ -70,47 +70,26 @@ public class ListKunjunganAdminAdapter extends ArrayAdapter {
 
         final CustomItem itemSelected = items.get(position);
 
-        if(itemSelected.getItem8().equals("0")){ // bukan pjp tapi terkunjungi
+        if(!itemSelected.getItem2().equals("")){ //terkunjungi
 
-            holder.llTime.setBackgroundColor(context.getResources().getColor(R.color.color_pjp_diluar));
-            holder.ivTime.setBackground(context.getResources().getDrawable(R.drawable.bg_round_yellow));
-        }else if(itemSelected.getItem8().equals("1")){ // pjp terkunjungi
             holder.llTime.setBackgroundColor(context.getResources().getColor(R.color.color_pjp_beli));
             holder.ivTime.setBackground(context.getResources().getDrawable(R.drawable.bg_round_green));
-        }else if(itemSelected.getItem8().equals("2")){ // pjb belum terkunjungi
+        }else{ // pjp belum terkunjungi
             holder.llTime.setBackgroundColor(context.getResources().getColor(R.color.color_pjp_belum));
             holder.ivTime.setBackground(context.getResources().getDrawable(R.drawable.bg_round_red));
-        }else{ // terkunjungi tidak belanja
-            holder.llTime.setBackgroundColor(context.getResources().getColor(R.color.color_pjp_tidak));
-            holder.ivTime.setBackground(context.getResources().getDrawable(R.drawable.bg_round_blue));
         }
 
         holder.tvItem2.setText(itemSelected.getItem3());
-        if(itemSelected.getItem8().equals("2")){
+        holder.tvItem3.setText(itemSelected.getItem4() + " ("+ itemSelected.getItem5() + ")");
+
+        if(itemSelected.getItem2().equals("")){
 
             holder.tvItem1.setText("");
-            holder.tvItem3.setText(itemSelected.getItem4());
 
         }else{
 
             holder.tvItem1.setText(iv.ChangeFormatDateString(itemSelected.getItem2(), FormatItem.formatTimestamp, FormatItem.formatTime));
-            if(iv.parseNullDouble(itemSelected.getItem4()) < 6371.00){
-                String jarak = "";
-                if(iv.parseNullDouble(itemSelected.getItem4()) <= 1){
-                    jarak = (iv.doubleToString(iv.parseNullDouble(itemSelected.getItem4()) * 1000, "2") + " m");
-                }else{
-                    jarak = (iv.doubleToString(iv.parseNullDouble(itemSelected.getItem4()), "2") + " km");
-                }
-
-                holder.tvItem3.setText(jarak+ " dari lokasi");
-            }else if(itemSelected.getItem6().length() == 0){
-                holder.tvItem3.setText("Posisi outlet belum tersedia");
-            }else{
-                holder.tvItem3.setText("Jarak diluar jangkauan");
-            }
         }
-
-
 
         return convertView;
 

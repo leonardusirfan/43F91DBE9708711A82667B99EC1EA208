@@ -44,7 +44,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
     private String keyword = "";
     private List<CustomItem> listTransaksi = new ArrayList<>();
     private PenjualanHariIniAdapter adapter;
-    private TextView tvTotal;
+    private TextView tvTotal, tvTotalTcash;
     private LinearLayout llCustom;
     private Button btnPilihSales;
     private TextView tvSales;
@@ -78,6 +78,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
         lvRiwayat = (ListView) findViewById(R.id.lv_riwayat);
         edtSearch = (EditText) findViewById(R.id.edt_search);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvTotalTcash = (TextView) findViewById(R.id.tv_total_tcash);
         keyword  = "";
         listTransaksi = new ArrayList<>();
         adapter = new PenjualanHariIniAdapter(context, listTransaksi);
@@ -162,7 +163,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
                 dialogBox.dismissDialog();
                 String message = "Terjadi kesalahan saat memuat data, harap ulangi";
-                double totalAll = 0;
+                double totalAll = 0, totalTcash = 0;
 
                 try {
 
@@ -240,7 +241,12 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
                             if(!jo.getString("jenis").equals("1") // transaksi
                                     && !jo.getString("crbayar").toUpperCase().equals("K")){ // carabayar tempo
-                                totalAll += iv.parseNullDouble(jo.getString("total"));
+                                if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
+
+                                    totalTcash += iv.parseNullDouble(jo.getString("total"));
+                                }else{
+                                    totalAll += iv.parseNullDouble(jo.getString("total"));
+                                }
                             }
                         }
 
@@ -265,6 +271,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                 }
 
                 tvTotal.setText(iv.ChangeToRupiahFormat(totalAll));
+                tvTotalTcash.setText(iv.ChangeToRupiahFormat(totalTcash));
                 adapter.notifyDataSetChanged();
             }
 

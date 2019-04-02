@@ -226,12 +226,12 @@ public class ListOutletKunjunganAdmin extends AppCompatActivity implements Locat
             jBody.put("latitude", iv.doubleToStringFull(latitude));
             jBody.put("longitude", iv.doubleToStringFull(longitude));
             jBody.put("nik", session.getNikGa());
-            jBody.put("date", iv.getCurrentDate(FormatItem.formatDate));
+            jBody.put("tgl", iv.getCurrentDate(FormatItem.formatDate));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerPerdana/*ServerURL.getResellerKunjungan*/, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getCustomerSurveyAdmin/*ServerURL.getResellerKunjungan*/, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

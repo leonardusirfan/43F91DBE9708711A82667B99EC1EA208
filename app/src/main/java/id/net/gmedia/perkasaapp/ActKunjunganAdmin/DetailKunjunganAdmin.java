@@ -3,6 +3,7 @@ package id.net.gmedia.perkasaapp.ActKunjunganAdmin;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,6 +47,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.maulana.custommodul.ApiVolley;
+import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
@@ -179,7 +181,7 @@ public class DetailKunjunganAdmin extends AppCompatActivity implements LocationL
 
                 if(tvJarak.getText().toString().isEmpty()){
 
-                    Toast.makeText(context, "Mohon tunggu hingga jarak diketahui", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Mohon tunggu hingga jarak diketahui atau tekan tombol refresh", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -189,9 +191,7 @@ public class DetailKunjunganAdmin extends AppCompatActivity implements LocationL
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //saveData();
-                                Intent intent = new Intent(context, SurveyKunjunganAdmin.class);
-                                startActivity(intent);
+                                saveData();
                             }
                         })
                         .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -201,6 +201,65 @@ public class DetailKunjunganAdmin extends AppCompatActivity implements LocationL
                             }
                         })
                         .show();
+            }
+        });
+    }
+
+    private void saveData() {
+
+        btnProses.setEnabled(false);
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+
+            jBody.put("kdcus", kdcus);
+            jBody.put("latitude", iv.doubleToStringFull(latitude));
+            jBody.put("longitude", iv.doubleToStringFull(longitude));
+            jBody.put("state", state);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.validateSurveyAdmin, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan data, harap ulangi";
+                btnProses.setEnabled(true);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Intent intent = new Intent(context, SurveyKunjunganAdmin.class);
+                        intent.putExtra("kdcus", kdcus);
+                        intent.putExtra("lat", iv.doubleToStringFull(latitude));
+                        intent.putExtra("long", iv.doubleToStringFull(longitude));
+                        startActivity(intent);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(context, "Terjadi kesalahan koneksi, harap ulangi kembali nanti", Toast.LENGTH_SHORT).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                btnProses.setEnabled(true);
             }
         });
     }

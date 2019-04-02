@@ -124,8 +124,8 @@ public class ActivityHome extends AppCompatActivity
         if(session.isSuperuser()){
             llSupervisor.setVisibility(View.VISIBLE);
         }else{
-            //llSupervisor.setVisibility(View.GONE);
-            llSupervisor.setVisibility(View.VISIBLE);
+            llSupervisor.setVisibility(View.GONE);
+            //llSupervisor.setVisibility(View.VISIBLE);
         }
 
         btn_mkios = findViewById(R.id.btn_mkios);
