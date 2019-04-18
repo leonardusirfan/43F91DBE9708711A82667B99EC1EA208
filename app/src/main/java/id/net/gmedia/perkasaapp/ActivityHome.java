@@ -60,6 +60,8 @@ import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash2;
 import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash3;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.ActivityPiutang;
 import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
+import id.net.gmedia.perkasaapp.ActPembayaranDealing.DetailPembayaranDealing;
+import id.net.gmedia.perkasaapp.ActPembayaranDealing.ListPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPencapaianSales.DetailPencapaianSales;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.ListPengajuanRKP;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
@@ -98,6 +100,7 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout llSupervisor;
     private LinearLayout btnPerdanaCustom;
     private LinearLayout btnPengajuanRKP;
+    private LinearLayout btnPembayaranDealing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +158,7 @@ public class ActivityHome extends AppCompatActivity
         btnKonsinyasi = (LinearLayout) findViewById(R.id.btn_konsinyasi);
         btnPerdanaCustom = (LinearLayout) findViewById(R.id.btn_perdana_custom);
         btnPengajuanRKP = (LinearLayout) findViewById(R.id.btn_rkp);
+        btnPembayaranDealing = (LinearLayout) findViewById(R.id.btn_pembayaran_dealing);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -358,6 +362,14 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
+        btnPembayaranDealing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListPembayaranDealing.class));
+            }
+        });
+
         //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -425,6 +437,10 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(ListPengajuanRKP.flag)){
 
                 Intent intent = new Intent(ActivityHome.this, ListPengajuanRKP.class);
+                startActivity(intent);
+            }else if(flag.equals(DetailPembayaranDealing.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ListPembayaranDealing.class);
                 startActivity(intent);
             }
         }

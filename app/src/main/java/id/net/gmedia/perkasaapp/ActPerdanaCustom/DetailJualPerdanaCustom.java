@@ -69,7 +69,7 @@ import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
-public class DetailJualPerdanaCustom extends AppCompatActivity  implements LocationListener {
+public class DetailJualPerdanaCustom extends AppCompatActivity implements LocationListener {
 
     private Context context;
     private SessionManager session;

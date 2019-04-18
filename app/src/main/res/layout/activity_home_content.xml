@@ -286,7 +286,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
                                 android:layout_marginBottom="5dp"
-                                app:srcCompat="@drawable/ic_rkp" />
+                                app:srcCompat="@drawable/ic_pencapaian_sales" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -333,7 +333,6 @@
                             app:layout_columnWeight="1"
                             android:layout_height="@dimen/menu_height"
                             android:clickable="false"
-                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <ImageView
@@ -349,6 +348,33 @@
                                 android:layout_weight="0.5"
                                 android:gravity="center_horizontal"
                                 android:text="Penjualan Perdana Dealing"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btn_pembayaran_dealing"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/ic_pembayaran_dealing" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Pembayaran Dealing"
                                 android:textColor="#000"
                                 android:textSize="@dimen/text10" />
 

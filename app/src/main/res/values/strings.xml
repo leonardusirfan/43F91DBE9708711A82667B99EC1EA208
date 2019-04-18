@@ -80,6 +80,7 @@
     <string name="nomor_handphone">Nomor Handphone</string>
     <string name="edit_posisi">Edit Posisi</string>
     <string name="jumlah_piutang">Jumlah Pelunasan Piutang</string>
+    <string name="jumlah_pembayaran">Jumlah Pembayaran</string>
     <string name="jumlah_stok">Jumlah Stok</string>
     <string name="nama_reseller">Nama Reseller</string>
     <string name="surat_jalan">Surat Jalan</string>

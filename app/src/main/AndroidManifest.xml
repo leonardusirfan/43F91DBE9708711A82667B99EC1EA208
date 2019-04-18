@@ -30,14 +30,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
-        <activity android:name=".ActKunjunganAdmin.SurveyKunjunganAdmin"></activity>
+        <activity android:name=".ActPembayaranDealing.DetailPembayaranDealing"></activity>
+        <activity android:name=".ActPembayaranDealing.ListResellerDealing" />
+        <activity android:name=".ActPembayaranDealing.ListPembayaranDealing" />
+        <activity android:name=".ActKunjunganAdmin.SurveyKunjunganAdmin" />
         <activity android:name=".ActKunjunganAdmin.DetailKunjunganAdmin" />
         <activity android:name=".ActKunjunganAdmin.ListOutletKunjunganAdmin" />
         <activity
             android:name=".ActKunjunganAdmin.ListKunjunganAdmin"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ActPencapaianSales.DetailPencapaianSales" />
+        <activity android:name=".ActPencapaianSales.DetailPencapaianSales" />
         <activity
             android:name=".ActPengajuanRKP.HistoryPengajuanRKP"
             android:screenOrientation="portrait" />
