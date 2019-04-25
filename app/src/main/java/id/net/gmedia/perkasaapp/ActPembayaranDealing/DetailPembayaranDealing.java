@@ -308,10 +308,11 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
             JSONArray jNota = new JSONArray();
             for(CustomItem item : listNota){
 
-                if(item.getItem4().equals("1")){
+                if(item.getItem4().equals("1") && !item.getItem6().equals("0")){
 
                     JSONObject joNota = new JSONObject();
                     joNota.put("nomor", item.getItem2());
+                    joNota.put("jumlah", item.getItem6());
                     jNota.put(joNota);
                 }
             }
@@ -329,7 +330,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.savePelunasanPiutang, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.savePelunasanDealing, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -487,7 +488,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getPelunasanPiutang, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getPelunasanDealing, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

@@ -60,9 +60,18 @@ public class AdapterNotaDealing extends RecyclerView.Adapter<AdapterNotaDealing.
                     // kalau sudah tidak ada sisa
                     if(sisa == 0){
 
-                        holder.cbItem1.setSelected(false);
-                        ((DetailPembayaranDealing) context).refreshData();
+                        if(b){
 
+                            holder.cbItem1.setSelected(false);
+                            ((DetailPembayaranDealing) context).getTotal();
+                        }else{
+
+                            String terbayar = "0";
+                            listItems.get(position).setItem4("0");
+                            listItems.get(position).setItem6(terbayar);
+                            holder.tvItem3.setText(iv.ChangeToCurrencyFormat(terbayar));
+                            ((DetailPembayaranDealing)context).getTotal();
+                        }
                     }else{
 
                         String terbayar =  "0";
@@ -80,6 +89,7 @@ public class AdapterNotaDealing extends RecyclerView.Adapter<AdapterNotaDealing.
                             listItems.get(position).setItem4("1");
                         }else{
 
+                            terbayar =  "0";
                             listItems.get(position).setItem4("0");
                         }
 
@@ -89,8 +99,9 @@ public class AdapterNotaDealing extends RecyclerView.Adapter<AdapterNotaDealing.
                     }
                 }else{
 
+                    listItems.get(position).setItem4("0");
                     holder.cbItem1.setSelected(false);
-                    ((DetailPembayaranDealing) context).refreshData();
+                    ((DetailPembayaranDealing) context).getTotal();
                 }
             }
         });

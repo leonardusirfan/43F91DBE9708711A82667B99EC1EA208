@@ -82,5 +82,8 @@ public class ServerURL {
     public static final String getJadwalSurveyAdmin = baseUrl + "web_view/Survey/list_jadwal/";
     public static final String getCustomerSurveyAdmin = baseUrl + "web_view/Survey/view_customer/";
     public static final String validateSurveyAdmin = baseUrl + "web_view/Survey/validasi_lokasi/";
+    public static final String getPelunasanDealing = baseUrl + "pelunasan/pelunasan_dealing/";
+    public static final String getResellerPelunasanDealing = baseUrl + "pelunasan/customer_dealing/";
+    public static final String savePelunasanDealing = baseUrl + "pelunasan/simpan_pelunasan_dealing/";
 
 }

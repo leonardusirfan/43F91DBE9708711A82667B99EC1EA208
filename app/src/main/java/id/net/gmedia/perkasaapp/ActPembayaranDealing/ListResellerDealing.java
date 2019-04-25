@@ -167,7 +167,7 @@ public class ListResellerDealing extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerPelunasan, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getResellerPelunasanDealing, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
