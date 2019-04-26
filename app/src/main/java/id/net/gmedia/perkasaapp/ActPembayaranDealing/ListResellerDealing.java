@@ -66,6 +66,7 @@ public class ListResellerDealing extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setTitle("Pilih Reseller / POI");
         }
 

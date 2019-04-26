@@ -51,7 +51,7 @@ public class AdapterNotaDealing extends RecyclerView.Adapter<AdapterNotaDealing.
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                double totalBayar = iv.parseNullDouble(((DetailPembayaranDealing)context).edtPembayaran.getText().toString());
+                double totalBayar = iv.parseNullDouble(((DetailPembayaranDealing)context).edtPembayaran.getText().toString().replaceAll("[,.]","" ));
 
                 if(totalBayar > 0){
 
@@ -113,6 +113,8 @@ public class AdapterNotaDealing extends RecyclerView.Adapter<AdapterNotaDealing.
 
             holder.cbItem1.setChecked(false);
         }
+
+        holder.tvItem3.setText(iv.ChangeToCurrencyFormat(item.getItem6()));
     }
 
     @Override

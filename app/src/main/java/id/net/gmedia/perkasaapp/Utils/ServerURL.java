@@ -85,5 +85,6 @@ public class ServerURL {
     public static final String getPelunasanDealing = baseUrl + "pelunasan/pelunasan_dealing/";
     public static final String getResellerPelunasanDealing = baseUrl + "pelunasan/customer_dealing/";
     public static final String savePelunasanDealing = baseUrl + "pelunasan/simpan_pelunasan_dealing/";
+    public static final String getNotaDealing = baseUrl + "pelunasan/piutang_dealing/";
 
 }

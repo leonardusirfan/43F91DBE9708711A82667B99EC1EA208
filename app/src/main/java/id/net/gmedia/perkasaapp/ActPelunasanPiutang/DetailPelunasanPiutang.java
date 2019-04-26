@@ -264,7 +264,7 @@ public class DetailPelunasanPiutang extends AppCompatActivity implements Locatio
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
-                        .setMessage("Apakah anda yakin ingin memproses data market intelligent?")
+                        .setMessage("Apakah anda yakin ingin memproses pelunasan ini?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -382,6 +382,7 @@ public class DetailPelunasanPiutang extends AppCompatActivity implements Locatio
 
         if(!idPelunasan.isEmpty()){
 
+            btnProses.setVisibility(View.GONE);
             getDetailPelunasan();
         }else{
             getDataNota();

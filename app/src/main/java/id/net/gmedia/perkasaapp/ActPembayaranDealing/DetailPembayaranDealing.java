@@ -27,6 +27,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,6 +131,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
     private RadioButton rbTunai, rbBank;
     public EditText edtPembayaran;
     private TextView tvSisa;
+    private String currentJmlString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setTitle("Detail Pembayaran Dealing");
         }
 
@@ -246,7 +249,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
-                        .setMessage("Apakah anda yakin ingin memproses data market intelligent?")
+                        .setMessage("Apakah anda yakin ingin memproses pembayaran ini?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -277,16 +280,29 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
             @Override
             public void afterTextChanged(Editable editable) {
 
-                for(CustomItem item: listNota){
+                if(!editable.toString().equals(currentJmlString)){
 
-                    item.setItem4("0");
-                    item.setItem6("0");
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edtPembayaran.removeTextChangedListener(this);
+
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
+                    cleanString = formatted;
+                    edtPembayaran.setText(formatted);
+                    edtPembayaran.setSelection(formatted.length());
+
+                    for(CustomItem item: listNota){
+
+                        item.setItem4("0");
+                        item.setItem6("0");
+                    }
+
+                    adapter.notifyDataSetChanged();
+                    getTotal();
+                    edtPembayaran.addTextChangedListener(this);
                 }
-
-                adapter.notifyDataSetChanged();
-                getTotal();
             }
         });
+
     }
 
     private void saveData() {
@@ -390,6 +406,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
 
         if(!idPelunasan.isEmpty()){
 
+            btnProses.setVisibility(View.GONE);
             getDetailPelunasan();
         }else{
             getDataNota();
@@ -502,6 +519,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
                     message = response.getJSONObject("metadata").getString("message");
                     listAccount.clear();
                     listNota.clear();
+                    total = 0;
 
                     if(iv.parseNullInteger(status) == 200){
 
@@ -516,7 +534,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
                                     ,jo.getString("jumlah")
                                     ,"1"
                                     ,jo.getString("tgl")
-                                    ,"0"
+                                    ,jo.getString("jumlah")
                             ));
 
                             if(i == 0) listAccount.add(new OptionItem(jo.getString("kode_akun"), jo.getString("namaakun")));
@@ -530,8 +548,11 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
                             edtKeterangan.setText(jo.getString("keterangan"));
                             latitude = iv.parseNullDouble(jo.getString("latitude"));
                             longitude = iv.parseNullDouble(jo.getString("longitude"));
+
+                            total += iv.parseNullDouble(jo.getString("jumlah"));
                         }
 
+                        tvTotal.setText(iv.ChangeToCurrencyFormat(total));
                         getJarak();
 
                     }else{
@@ -590,7 +611,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDataPiutang, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getNotaDealing, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -612,7 +633,7 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
                             JSONObject jo = ja.getJSONObject(i);
 
                             listNota.add(new CustomItem(
-                                    jo.getString("id")
+                                    jo.getString("nonota")
                                     ,jo.getString("nonota")
                                     ,jo.getString("sisa")
                                     ,"0"
@@ -667,20 +688,24 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
 
     public void getTotal(){
 
-        total = 0;
-        for(CustomItem item: listNota){
+        if(idPelunasan.isEmpty()){
+            total = 0;
+            for(CustomItem item: listNota){
 
-            if(item.getItem4().equals("1")){
+                if(item.getItem4().equals("1")){
 
-                total += iv.parseNullDouble(item.getItem6());
+                    total += iv.parseNullDouble(item.getItem6());
+                }
             }
+
+            double bayar = iv.parseNullDouble(edtPembayaran.getText().toString().replaceAll("[,.]","" ));
+            tvTotal.setText(iv.ChangeToRupiahFormat(total));
+
+            sisa = bayar-total;
+            tvSisa.setText(iv.ChangeToCurrencyFormat(sisa));
         }
 
-        double bayar = iv.parseNullDouble(edtPembayaran.getText().toString());
-        tvTotal.setText(iv.ChangeToRupiahFormat(total));
 
-        sisa = bayar-total;
-        tvSisa.setText(iv.ChangeToCurrencyFormat(sisa));
     }
 
     public void refreshData(){
