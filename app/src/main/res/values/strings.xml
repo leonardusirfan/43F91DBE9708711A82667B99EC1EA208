@@ -81,8 +81,10 @@
     <string name="edit_posisi">Edit Posisi</string>
     <string name="jumlah_piutang">Jumlah Pelunasan Piutang</string>
     <string name="jumlah_pembayaran">Jumlah Pembayaran</string>
+    <string name="jumlah_pengajuan">Jumlah Pengajuan Plafon</string>
     <string name="jumlah_stok">Jumlah Stok</string>
     <string name="nama_reseller">Nama Reseller</string>
+    <string name="nama_sales">Nama Sales</string>
     <string name="surat_jalan">Surat Jalan</string>
     <string name="nomor_reseller_star">Nomor Reseller*</string>
     <string name="nomor_reseller">No Reseller</string>

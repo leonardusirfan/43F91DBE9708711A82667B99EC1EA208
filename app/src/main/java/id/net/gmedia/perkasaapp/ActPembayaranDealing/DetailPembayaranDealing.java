@@ -229,6 +229,12 @@ public class DetailPembayaranDealing extends AppCompatActivity implements Locati
                     return;
                 }
 
+                if(sisa > 0){
+
+                    Toast.makeText(context, "Sisa pembayaran harus 0", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(listAccount.size() <= 0){
 
                     Toast.makeText(context, "Data akun belum termuat", Toast.LENGTH_LONG).show();

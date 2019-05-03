@@ -63,6 +63,7 @@ import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.DetailPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.ListPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPencapaianSales.DetailPencapaianSales;
+import id.net.gmedia.perkasaapp.ActPengajuanPLSales.ListPengajuanPlafon;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.ListPengajuanRKP;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
 import id.net.gmedia.perkasaapp.ActPerdanaCustom.DetailJualPerdanaCustom;
@@ -101,6 +102,8 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout btnPerdanaCustom;
     private LinearLayout btnPengajuanRKP;
     private LinearLayout btnPembayaranDealing;
+    private LinearLayout btnOrderVoucher;
+    private LinearLayout btnPengajuanPlafonSales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +162,7 @@ public class ActivityHome extends AppCompatActivity
         btnPerdanaCustom = (LinearLayout) findViewById(R.id.btn_perdana_custom);
         btnPengajuanRKP = (LinearLayout) findViewById(R.id.btn_rkp);
         btnPembayaranDealing = (LinearLayout) findViewById(R.id.btn_pembayaran_dealing);
+        btnPengajuanPlafonSales = (LinearLayout) findViewById(R.id.btn_pengajuan_plafon_sales);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -367,6 +371,14 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, ListPembayaranDealing.class));
+            }
+        });
+
+        btnPengajuanPlafonSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListPengajuanPlafon.class));
             }
         });
 

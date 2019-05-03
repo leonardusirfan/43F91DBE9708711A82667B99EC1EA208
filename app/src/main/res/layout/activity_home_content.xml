@@ -66,18 +66,17 @@
                         android:layout_marginTop="5dp"
                         android:background="#9b9b9b" />
 
-                    <LinearLayout
+                    <android.support.v7.widget.GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/menu_height"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:layout_height="wrap_content"
+                        app:columnCount="3">
 
                         <LinearLayout
                             android:id="@+id/btn_mkios"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:orientation="vertical">
 
@@ -86,7 +85,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="0.3"
-                                android:scaleType="centerInside"
                                 app:srcCompat="@drawable/order_mkios" />
 
                             <TextView
@@ -105,8 +103,8 @@
                             android:id="@+id/btn_perdana"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:orientation="vertical">
 
@@ -114,7 +112,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
-                                android:scaleType="centerInside"
                                 android:layout_marginBottom="5dp"
                                 app:srcCompat="@drawable/order_perdana" />
 
@@ -132,8 +129,8 @@
                             android:id="@+id/btn_tcash"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
                             android:clickable="false"
                             android:orientation="vertical">
 
@@ -154,7 +151,36 @@
                                 android:textColor="#000"
                                 android:textSize="@dimen/text10" />
                         </LinearLayout>
-                    </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btn_voucher"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/order_perdana" />
+
+                            <TextView
+                                style="@android:style/Widget.DeviceDefault.Light.TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Order Voucher"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+                        </LinearLayout>
+
+                    </android.support.v7.widget.GridLayout>
 
                 </LinearLayout>
 
@@ -375,6 +401,33 @@
                                 android:layout_weight="0.5"
                                 android:gravity="center_horizontal"
                                 android:text="Pembayaran Dealing"
+                                android:textColor="#000"
+                                android:textSize="@dimen/text10" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btn_pengajuan_plafon_sales"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            app:layout_columnWeight="1"
+                            android:layout_height="@dimen/menu_height"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/lokasi" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:gravity="center_horizontal"
+                                android:text="Pengajuan Perubahan Plafon Sales"
                                 android:textColor="#000"
                                 android:textSize="@dimen/text10" />
 

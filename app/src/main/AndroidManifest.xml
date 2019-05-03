@@ -30,12 +30,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
-        <activity android:name=".ActPembayaranDealing.DetailPembayaranDealing"></activity>
-        <activity android:name=".ActPembayaranDealing.ListResellerDealing" />
-        <activity android:name=".ActPembayaranDealing.ListPembayaranDealing" />
-        <activity android:name=".ActKunjunganAdmin.SurveyKunjunganAdmin" />
-        <activity android:name=".ActKunjunganAdmin.DetailKunjunganAdmin" />
-        <activity android:name=".ActKunjunganAdmin.ListOutletKunjunganAdmin" />
+        <activity android:name=".ActPengajuanPLSales.DetailPengajuanPlafon"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ActPengajuanPLSales.ListSalesPengajuanPL"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActPengajuanPLSales.ListPengajuanPlafon"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ActOrderVoucher.OrderVoucherReseller"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPembayaranDealing.DetailPembayaranDealing"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPembayaranDealing.ListResellerDealing"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPembayaranDealing.ListPembayaranDealing"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjunganAdmin.SurveyKunjunganAdmin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjunganAdmin.DetailKunjunganAdmin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActKunjunganAdmin.ListOutletKunjunganAdmin"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActKunjunganAdmin.ListKunjunganAdmin"
             android:screenOrientation="portrait" />
