@@ -6,6 +6,7 @@
     <dimen name="text14">28sp</dimen>
     <dimen name="text12">24sp</dimen>
     <dimen name="text10">20sp</dimen>
+    <dimen name="text8">16sp</dimen>
     <dimen name="text24">48sp</dimen>
     <dimen name="padding2">4dp</dimen>
     <dimen name="padding5">10dp</dimen>

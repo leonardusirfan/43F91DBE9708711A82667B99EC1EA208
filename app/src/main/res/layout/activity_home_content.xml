@@ -420,15 +420,17 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
                                 android:layout_marginBottom="5dp"
-                                app:srcCompat="@drawable/lokasi" />
+                                app:srcCompat="@drawable/ic_note_pengajuan"/>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.5"
                                 android:gravity="center_horizontal"
-                                android:text="Pengajuan Perubahan Plafon Sales"
+                                android:text="Perubahan Plafon Sales"
                                 android:textColor="#000"
+                                android:maxLines="2"
+                                android:ellipsize="end"
                                 android:textSize="@dimen/text10" />
 
                         </LinearLayout>

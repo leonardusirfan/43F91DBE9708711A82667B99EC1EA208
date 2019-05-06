@@ -41,8 +41,9 @@ public class AdapterPengajuanPlafon extends RecyclerView.Adapter<AdapterPengajua
     public void onBindViewHolder(@NonNull PiutangViewHolder holder, int position) {
 
         final CustomItem outlet = listOutlet.get(position);
-        holder.txt_nama.setText(outlet.getItem2());
-        holder.txt_alamat.setText(iv.ChangeFormatDateString(outlet.getItem3(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay));
+
+        holder.txt_nama.setText(outlet.getItem4());
+        holder.txt_alamat.setText(iv.ChangeFormatDateString(outlet.getItem3(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay) + " "+ outlet.getItem2());
         holder.txt_piutang.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(outlet.getItem5())));
 
     }

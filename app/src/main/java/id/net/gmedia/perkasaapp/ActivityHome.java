@@ -63,6 +63,7 @@ import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.DetailPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.ListPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPencapaianSales.DetailPencapaianSales;
+import id.net.gmedia.perkasaapp.ActPengajuanPLSales.DetailPengajuanPlafon;
 import id.net.gmedia.perkasaapp.ActPengajuanPLSales.ListPengajuanPlafon;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.ListPengajuanRKP;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
@@ -453,6 +454,10 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailPembayaranDealing.flag)){
 
                 Intent intent = new Intent(ActivityHome.this, ListPembayaranDealing.class);
+                startActivity(intent);
+            }else if(flag.equals(DetailPengajuanPlafon.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ListPengajuanPlafon.class);
                 startActivity(intent);
             }
         }

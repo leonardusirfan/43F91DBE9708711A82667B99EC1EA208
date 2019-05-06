@@ -26,6 +26,7 @@ import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,7 @@ import id.net.gmedia.perkasaapp.Utils.ServerURL;
 public class ListPengajuanPlafon extends AppCompatActivity {
 
     private Context context;
+    private SessionManager session;
     private DialogBox dialogBox;
     private ItemValidation iv = new ItemValidation();
     private FloatingActionButton fabAdd;
@@ -71,6 +73,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
         }
 
         context = this;
+        session = new SessionManager(context);
         dialogBox = new DialogBox(context);
         initUI();
         initEvent();
@@ -210,6 +213,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
         dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
         try {
+            jBody.put("user_input",  session.getNikGa());
             jBody.put("datestart", dateStart);
             jBody.put("dateend", dateEnd);
             jBody.put("keyword", keyword);
@@ -217,7 +221,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getPelunasanDealing, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getPengajuanPlafonSales, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -239,12 +243,11 @@ public class ListPengajuanPlafon extends AppCompatActivity {
 
                             JSONObject jo = ja.getJSONObject(i);
                             listOutlet.add(new CustomItem(
-                                    jo.getString("nobukti")
-                                    ,jo.getString("nama_customer")
+                                    jo.getString("id")
+                                    ,jo.getString("jenis")
                                     ,jo.getString("insert_at")
-                                    ,jo.getString("namaakun")
-                                    ,jo.getString("total")
-                                    ,jo.getString("kdcus")
+                                    ,jo.getString("nama_sales")
+                                    ,jo.getString("nominal")
                             ));
 
                         }

@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,9 +22,13 @@ import android.widget.Toast;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.R;
@@ -41,7 +46,9 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
     private String nik = "";
     private EditText edtNominal;
     private String currentJmlString = "";
-    public static final String flag = "";
+    public static final String flag = "PENGAJUANPLAFONSALES";
+    private List<OptionItem> listJenis = new ArrayList<>();
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +58,7 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Detail Perubahan Data RS");
+            getSupportActionBar().setTitle("Detail Pengajuan Plafon");
         }
 
         context = this;
@@ -67,6 +74,7 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
         edtNominal = (EditText) findViewById(R.id.edt_nominal);
         edtKeterangan = (EditText) findViewById(R.id.edt_keterangan);
         btnProses = (Button) findViewById(R.id.btn_proses);
+        spJenis = (Spinner) findViewById(R.id.sp_jenis);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -77,6 +85,12 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
             tvNama.setText(nama);
 
         }
+
+        listJenis.add(new OptionItem("mkios","Mkios"));
+        listJenis.add(new OptionItem("perdana","Perdana"));
+
+        adapter = new ArrayAdapter(context, R.layout.layout_simple_list, listJenis);
+        spJenis.setAdapter(adapter);
     }
 
     private void initEvent() {
@@ -162,15 +176,18 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+
         JSONObject jBody = new JSONObject();
         try {
-            jBody.put("nik", nik);
+            jBody.put("sales", nik);
+            jBody.put("nominal", edtNominal.getText().toString().replaceAll("[,.]", ""));
+            jBody.put("jenis", ((OptionItem) spJenis.getSelectedItem()).getValue());
             jBody.put("keterangan", edtKeterangan.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.savePengajuanReseller, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.savePengajuanPlafonSales, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
