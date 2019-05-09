@@ -30,12 +30,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
-        <activity android:name=".ActPengajuanPLSales.DetailPengajuanPlafon"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ActPengajuanPLSales.ListSalesPengajuanPL"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActPengajuanPLSales.ListPengajuanPlafon"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ActPengajuanPLSales.DetailApprovalPL"></activity>
+        <activity android:name=".ActPengajuanPLSales.ListApprovalPL" />
+        <activity
+            android:name=".ActPengajuanPLSales.DetailPengajuanPlafon"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPengajuanPLSales.ListSalesPengajuanPL"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActPengajuanPLSales.ListPengajuanPlafon"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActOrderVoucher.OrderVoucherReseller"
             android:screenOrientation="portrait" />

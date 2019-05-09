@@ -1,6 +1,7 @@
 package id.net.gmedia.perkasaapp.ActPengajuanPLSales;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,21 +15,29 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.OptionItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.R;
@@ -49,6 +58,9 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
     public static final String flag = "PENGAJUANPLAFONSALES";
     private List<OptionItem> listJenis = new ArrayList<>();
     private ArrayAdapter adapter;
+    private TextView tvStart, tvEnd;
+    private LinearLayout btnKalenderStart, btnKalenderEnd;
+    private String dateStart = "", dateEnd = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,14 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
         edtKeterangan = (EditText) findViewById(R.id.edt_keterangan);
         btnProses = (Button) findViewById(R.id.btn_proses);
         spJenis = (Spinner) findViewById(R.id.sp_jenis);
+        btnKalenderStart = findViewById(R.id.btn_kalender_start);
+        btnKalenderEnd = findViewById(R.id.btn_kalender_end);
+        dateStart = iv.getCurrentDate(FormatItem.formatDate);
+        dateEnd = iv.getCurrentDate(FormatItem.formatDate);
+        tvStart = (TextView) findViewById(R.id.tv_start);
+        tvEnd = (TextView) findViewById(R.id.tv_end);
+        tvStart.setText(iv.ChangeFormatDateString(dateStart, FormatItem.formatDate, FormatItem.formatDateDisplay));
+        tvEnd.setText(iv.ChangeFormatDateString(dateEnd, FormatItem.formatDate, FormatItem.formatDateDisplay));
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -86,7 +106,7 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
 
         }
 
-        listJenis.add(new OptionItem("mkios","Mkios"));
+        listJenis.add(new OptionItem("mki os","Mkios"));
         listJenis.add(new OptionItem("perdana","Perdana"));
 
         adapter = new ArrayAdapter(context, R.layout.layout_simple_list, listJenis);
@@ -94,6 +114,72 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
     }
 
     private void initEvent() {
+
+        btnKalenderStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
+                Date dateValue = null;
+                final Calendar customDate;
+
+                try {
+                    dateValue = sdf.parse(iv.ChangeFormatDateString(dateStart, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                customDate = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        customDate.set(Calendar.YEAR,year);
+                        customDate.set(Calendar.MONTH,month);
+                        customDate.set(Calendar.DATE,date);
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
+                        dateStart = iv.ChangeFormatDateString(sdFormat.format(customDate.getTime()), FormatItem.formatDateDisplay, FormatItem.formatDate);
+                        tvStart.setText(sdFormat.format(customDate.getTime()));
+                    }
+                };
+
+                SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+                new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
+            }
+        });
+
+        btnKalenderEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
+                Date dateValue = null;
+                final Calendar customDate;
+
+                try {
+                    dateValue = sdf.parse(iv.ChangeFormatDateString(dateEnd, FormatItem.formatDate, FormatItem.formatDateDisplay));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                customDate = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        customDate.set(Calendar.YEAR,year);
+                        customDate.set(Calendar.MONTH,month);
+                        customDate.set(Calendar.DATE,date);
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
+                        dateEnd = iv.ChangeFormatDateString(sdFormat.format(customDate.getTime()), FormatItem.formatDateDisplay, FormatItem.formatDate);
+                        tvEnd.setText(sdFormat.format(customDate.getTime()));
+                    }
+                };
+
+                SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+                new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
+            }
+        });
 
         edtNominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,10 +214,9 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Validasi
-
                 if(iv.parseNullDouble(edtNominal.getText().toString().replaceAll("[,.]", "")) <= 0){
 
-                    edtNominal.setError("Kete");
+                    edtNominal.setError("Nominal harap diisi");
                     edtNominal.requestFocus();
                     return;
                 }
@@ -176,10 +261,11 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("sales", nik);
+            jBody.put("tgl_awal", dateStart);
+            jBody.put("tgl_akhir", dateEnd);
             jBody.put("nominal", edtNominal.getText().toString().replaceAll("[,.]", ""));
             jBody.put("jenis", ((OptionItem) spJenis.getSelectedItem()).getValue());
             jBody.put("keterangan", edtKeterangan.getText().toString());

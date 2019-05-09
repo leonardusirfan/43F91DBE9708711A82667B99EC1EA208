@@ -81,7 +81,7 @@
     <string name="edit_posisi">Edit Posisi</string>
     <string name="jumlah_piutang">Jumlah Pelunasan Piutang</string>
     <string name="jumlah_pembayaran">Jumlah Pembayaran</string>
-    <string name="jumlah_pengajuan">Jumlah Pengajuan Plafon</string>
+    <string name="jumlah_pengajuan">Jumlah Penambahan Plafon</string>
     <string name="jumlah_stok">Jumlah Stok</string>
     <string name="nama_reseller">Nama Reseller</string>
     <string name="nama_sales">Nama Sales</string>
@@ -107,6 +107,9 @@
     <string name="foto_sebelum">Foto Sebelum</string>
     <string name="foto_sesudah">Foto Sesudah</string>
     <string name="keyword">Keyword</string>
+    <string name="diajukan_oleh">Diajukan Oleh</string>
+    <string name="setujui">Setujui</string>
+    <string name="tolak">Tolak</string>
 
     <string name="accessibility_description">Layanan ini untuk mengakses balasan USSD</string>
 
