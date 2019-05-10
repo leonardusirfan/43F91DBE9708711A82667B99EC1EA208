@@ -88,7 +88,7 @@ public class ServerURL {
     public static final String getNotaDealing = baseUrl + "pelunasan/piutang_dealing/";
     public static final String getPengajuanPlafonSales = baseUrl + "pengajuan/view_pengajuan/";
     public static final String savePengajuanPlafonSales = baseUrl + "pengajuan/simpan_pengajuan/";
-    public static final String saveAprrovalPlafonSales = baseUrl + "pengajuan/view_approval/";
-    public static final String getApprovalPlafonSales = baseUrl + "pengajuan/approval_process/";
+    public static final String getAprrovalPlafonSales = baseUrl + "pengajuan/view_approval/";
+    public static final String saveApprovalPlafonSales = baseUrl + "pengajuan/approval_process/";
 
 }

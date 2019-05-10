@@ -1,6 +1,7 @@
 package id.net.gmedia.perkasaapp.ActPengajuanPLSales.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.maulana.custommodul.ItemValidation;
 
 import java.util.List;
 
+import id.net.gmedia.perkasaapp.ActPengajuanPLSales.DetailApprovalPL;
 import id.net.gmedia.perkasaapp.R;
 
 public class AdapterApprovalPlafon extends RecyclerView.Adapter<AdapterApprovalPlafon.PiutangViewHolder> {
@@ -43,7 +45,17 @@ public class AdapterApprovalPlafon extends RecyclerView.Adapter<AdapterApprovalP
         holder.txtNama.setText(outlet.getItem4());
         holder.txtTgl.setText(iv.ChangeFormatDateString(outlet.getItem3(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay) + " "+ outlet.getItem2());
         holder.txtPengajuan.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(outlet.getItem5())));
+        holder.txtStatus.setText(outlet.getItem6());
+        holder.txtPengaju.setText(outlet.getItem7());
 
+        holder.cvContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, DetailApprovalPL.class);
+                intent.putExtra("id", outlet.getItem1());
+            }
+        });
     }
 
     @Override
@@ -54,7 +66,7 @@ public class AdapterApprovalPlafon extends RecyclerView.Adapter<AdapterApprovalP
 
     class PiutangViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView txtNama, txtTgl, txtPengajuan, txtPengaju;
+        private TextView txtNama, txtTgl, txtPengajuan, txtPengaju, txtStatus;
         private CardView cvContainer;
 
         private PiutangViewHolder(@NonNull View itemView) {
@@ -62,6 +74,7 @@ public class AdapterApprovalPlafon extends RecyclerView.Adapter<AdapterApprovalP
             txtNama = itemView.findViewById(R.id.txt_nama);
             txtTgl = itemView.findViewById(R.id.txt_tgl);
             txtPengaju = itemView.findViewById(R.id.txt_pengaju);
+            txtStatus = itemView.findViewById(R.id.txt_status);
             txtPengajuan = itemView.findViewById(R.id.txt_pengajuan);
             cvContainer = itemView.findViewById(R.id.cv_container);
         }

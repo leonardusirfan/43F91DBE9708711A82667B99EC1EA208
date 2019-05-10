@@ -34,6 +34,7 @@ public class SessionManager {
 	public static final String TAG_EXPIRATION = "expiration";
 	public static final String TAG_SUPERUSER = "superuser";
 	public static final String TAG_NIK_HR = "nik_hr";
+	public static final String TAG_JABATAN = "jabatan";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -45,7 +46,7 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String username, String nikGa, String nikMkios, String nama, String password, String session, String expiration, String superuser, String nikHR){
+	public void createLoginSession(String username, String nikGa, String nikMkios, String nama, String password, String session, String expiration, String superuser, String nikHR, String jabatan){
 
 		editor.putString(TAG_USERNAME, username);
 
@@ -64,6 +65,8 @@ public class SessionManager {
 		editor.putString(TAG_SUPERUSER, superuser);
 
 		editor.putString(TAG_NIK_HR, nikHR);
+
+		editor.putString(TAG_JABATAN, jabatan);
 		// commit changes
 		editor.commit();
 	}
@@ -117,6 +120,10 @@ public class SessionManager {
 
 	public String getNikHR(){
 		return pref.getString(TAG_NIK_HR, "");
+	}
+
+	public String getJabatan(){
+		return pref.getString(TAG_JABATAN, "");
 	}
 
 	public boolean isSuperuser(){

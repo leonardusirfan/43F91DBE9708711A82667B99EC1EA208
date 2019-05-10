@@ -77,7 +77,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
         dialogBox = new DialogBox(context);
         initUI();
         initEvent();
-        initPiutang();
+        initData();
     }
 
     private void initUI() {
@@ -176,7 +176,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                initPiutang();
+                initData();
             }
         });
 
@@ -208,7 +208,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
         });
     }
 
-    private void initPiutang(){
+    private void initData(){
 
         dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
@@ -248,6 +248,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
                                     ,jo.getString("insert_at")
                                     ,jo.getString("nama_sales")
                                     ,jo.getString("nominal")
+                                    ,jo.getString("keterangan_status")
                             ));
 
                         }
@@ -264,7 +265,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
                         public void onClick(View view) {
 
                             dialogBox.dismissDialog();
-                            initPiutang();
+                            initData();
                         }
                     };
 
@@ -283,7 +284,7 @@ public class ListPengajuanPlafon extends AppCompatActivity {
                     public void onClick(View view) {
 
                         dialogBox.dismissDialog();
-                        initPiutang();
+                        initData();
                     }
                 };
 

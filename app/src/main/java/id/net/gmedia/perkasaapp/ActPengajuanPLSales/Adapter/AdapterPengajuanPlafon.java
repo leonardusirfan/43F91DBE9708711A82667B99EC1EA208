@@ -45,6 +45,7 @@ public class AdapterPengajuanPlafon extends RecyclerView.Adapter<AdapterPengajua
         holder.txt_nama.setText(outlet.getItem4());
         holder.txt_alamat.setText(iv.ChangeFormatDateString(outlet.getItem3(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay) + " "+ outlet.getItem2());
         holder.txt_piutang.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(outlet.getItem5())));
+        holder.txtStatus.setText(outlet.getItem6());
 
     }
 
@@ -56,13 +57,14 @@ public class AdapterPengajuanPlafon extends RecyclerView.Adapter<AdapterPengajua
 
     class PiutangViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView txt_nama, txt_alamat, txt_piutang;
+        private TextView txt_nama, txt_alamat, txt_piutang, txtStatus;
         private CardView cvContainer;
 
         private PiutangViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_nama = itemView.findViewById(R.id.txt_nama);
             txt_alamat = itemView.findViewById(R.id.txt_alamat);
+            txtStatus = itemView.findViewById(R.id.txt_status);
             txt_piutang = itemView.findViewById(R.id.txt_pengajuan);
             cvContainer = itemView.findViewById(R.id.cv_container);
         }

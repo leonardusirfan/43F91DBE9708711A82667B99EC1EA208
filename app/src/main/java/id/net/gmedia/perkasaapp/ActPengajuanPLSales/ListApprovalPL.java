@@ -74,7 +74,7 @@ public class ListApprovalPL extends AppCompatActivity {
         dialogBox = new DialogBox(context);
         initUI();
         initEvent();
-        initPiutang();
+        initData();
     }
 
     private void initUI() {
@@ -172,7 +172,7 @@ public class ListApprovalPL extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                initPiutang();
+                initData();
             }
         });
 
@@ -196,7 +196,7 @@ public class ListApprovalPL extends AppCompatActivity {
 
     }
 
-    private void initPiutang(){
+    private void initData(){
 
         dialogBox.showDialog(true);
         JSONObject jBody = new JSONObject();
@@ -209,7 +209,7 @@ public class ListApprovalPL extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getApprovalPlafonSales, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getAprrovalPlafonSales, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -236,6 +236,10 @@ public class ListApprovalPL extends AppCompatActivity {
                                     ,jo.getString("insert_at")
                                     ,jo.getString("nama_sales")
                                     ,jo.getString("nominal")
+                                    ,jo.getString("keterangan_status")
+                                    ,jo.getString("nama_pengaju")
+                                    ,jo.getString("tgl_awal")
+                                    ,jo.getString("tgl_akhir")
                             ));
 
                         }
@@ -252,7 +256,7 @@ public class ListApprovalPL extends AppCompatActivity {
                         public void onClick(View view) {
 
                             dialogBox.dismissDialog();
-                            initPiutang();
+                            initData();
                         }
                     };
 
@@ -271,7 +275,7 @@ public class ListApprovalPL extends AppCompatActivity {
                     public void onClick(View view) {
 
                         dialogBox.dismissDialog();
-                        initPiutang();
+                        initData();
                     }
                 };
 

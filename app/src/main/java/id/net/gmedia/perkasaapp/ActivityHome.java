@@ -63,7 +63,9 @@ import id.net.gmedia.perkasaapp.ActPelunasanPiutang.DetailPelunasanPiutang;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.DetailPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPembayaranDealing.ListPembayaranDealing;
 import id.net.gmedia.perkasaapp.ActPencapaianSales.DetailPencapaianSales;
+import id.net.gmedia.perkasaapp.ActPengajuanPLSales.DetailApprovalPL;
 import id.net.gmedia.perkasaapp.ActPengajuanPLSales.DetailPengajuanPlafon;
+import id.net.gmedia.perkasaapp.ActPengajuanPLSales.ListApprovalPL;
 import id.net.gmedia.perkasaapp.ActPengajuanPLSales.ListPengajuanPlafon;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.ListPengajuanRKP;
 import id.net.gmedia.perkasaapp.ActPenjualanHariIni.ActivityPenjualanHariIni;
@@ -104,7 +106,7 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout btnPengajuanRKP;
     private LinearLayout btnPembayaranDealing;
     private LinearLayout btnOrderVoucher;
-    private LinearLayout btnPengajuanPlafonSales;
+    private LinearLayout btnPengajuanPlafonSales, btnApprovePlafonSales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,7 @@ public class ActivityHome extends AppCompatActivity
         btnPengajuanRKP = (LinearLayout) findViewById(R.id.btn_rkp);
         btnPembayaranDealing = (LinearLayout) findViewById(R.id.btn_pembayaran_dealing);
         btnPengajuanPlafonSales = (LinearLayout) findViewById(R.id.btn_pengajuan_plafon_sales);
+        btnApprovePlafonSales = (LinearLayout) findViewById(R.id.btn_approve_plafon_sales);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -383,6 +386,14 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
+        btnApprovePlafonSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ListApprovalPL.class));
+            }
+        });
+
         //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -458,6 +469,10 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailPengajuanPlafon.flag)){
 
                 Intent intent = new Intent(ActivityHome.this, ListPengajuanPlafon.class);
+                startActivity(intent);
+            }else if(flag.equals(DetailApprovalPL.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ListApprovalPL.class);
                 startActivity(intent);
             }
         }
