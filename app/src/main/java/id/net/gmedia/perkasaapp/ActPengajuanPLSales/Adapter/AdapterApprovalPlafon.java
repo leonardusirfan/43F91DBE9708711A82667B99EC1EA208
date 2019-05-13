@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.FormatItem;
@@ -40,20 +41,27 @@ public class AdapterApprovalPlafon extends RecyclerView.Adapter<AdapterApprovalP
     @Override
     public void onBindViewHolder(@NonNull PiutangViewHolder holder, int position) {
 
-        final CustomItem outlet = listOutlet.get(position);
+        final CustomItem item = listOutlet.get(position);
 
-        holder.txtNama.setText(outlet.getItem4());
-        holder.txtTgl.setText(iv.ChangeFormatDateString(outlet.getItem3(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay) + " "+ outlet.getItem2());
-        holder.txtPengajuan.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(outlet.getItem5())));
-        holder.txtStatus.setText(outlet.getItem6());
-        holder.txtPengaju.setText(outlet.getItem7());
+        holder.txtNama.setText(item.getItem4());
+        holder.txtTgl.setText(iv.ChangeFormatDateString(item.getItem8(), FormatItem.formatDate, FormatItem.formatDateDisplay) + " s/d "+ iv.ChangeFormatDateString(item.getItem9(), FormatItem.formatDate, FormatItem.formatDateDisplay));
+        holder.txtPengajuan.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(item.getItem5())));
+        holder.txtStatus.setText(item.getItem6());
+        holder.txtPengaju.setText(item.getItem7());
 
         holder.cvContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, DetailApprovalPL.class);
-                intent.putExtra("id", outlet.getItem1());
+                if(item.getItem11().equals("1")){
+
+                    Intent intent = new Intent(context, DetailApprovalPL.class);
+                    //intent.putExtra("id", outlet.getItem1());
+                    DetailApprovalPL.item = item;
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, "Data yang telah diupdate tidak dapat diubah", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

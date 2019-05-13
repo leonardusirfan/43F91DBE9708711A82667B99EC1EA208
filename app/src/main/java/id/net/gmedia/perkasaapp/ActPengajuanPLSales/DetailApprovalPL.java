@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
+import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
@@ -49,7 +50,6 @@ public class DetailApprovalPL extends AppCompatActivity {
     private ItemValidation iv = new ItemValidation();
     private DialogBox dialogBox;
     private TextView tvNama;
-    private Spinner spJenis;
     private EditText edtKeterangan;
     private Button btnSetujui, btnTolak;
     private String nik = "";
@@ -61,6 +61,8 @@ public class DetailApprovalPL extends AppCompatActivity {
     private TextView tvStart, tvEnd;
     private LinearLayout btnKalenderStart, btnKalenderEnd;
     private String dateStart = "", dateEnd = "";
+    public static CustomItem item = new CustomItem();
+    private TextView tvJenis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class DetailApprovalPL extends AppCompatActivity {
         edtKeterangan = (EditText) findViewById(R.id.edt_keterangan);
         btnSetujui = (Button) findViewById(R.id.btn_setujui);
         btnTolak = (Button) findViewById(R.id.btn_tolak);
-        spJenis = (Spinner) findViewById(R.id.sp_jenis);
+        tvJenis = (TextView) findViewById(R.id.tv_jenis);
         btnKalenderStart = findViewById(R.id.btn_kalender_start);
         btnKalenderEnd = findViewById(R.id.btn_kalender_end);
         dateStart = iv.getCurrentDate(FormatItem.formatDate);
@@ -110,13 +112,28 @@ public class DetailApprovalPL extends AppCompatActivity {
         listJenis.add(new OptionItem("mkios","Mkios"));
         listJenis.add(new OptionItem("perdana","Perdana"));
 
-        adapter = new ArrayAdapter(context, R.layout.layout_simple_list, listJenis);
-        spJenis.setAdapter(adapter);
+        if(item.getItem1() != null && !item.getItem1().equals(null)){
+
+            tvNama.setText(item.getItem4());
+            tvJenis.setText(item.getItem2());
+            edtNominal.setText(iv.ChangeToCurrencyFormat(item.getItem5()));
+            tvStart.setText(iv.ChangeFormatDateString(item.getItem8(), FormatItem.formatDate, FormatItem.formatDateDisplay));
+            tvEnd.setText(iv.ChangeFormatDateString(item.getItem9(), FormatItem.formatDate, FormatItem.formatDateDisplay));
+            edtKeterangan.setText(item.getItem10());
+            btnSetujui.setEnabled(true);
+            btnTolak.setEnabled(true);
+        }else{
+
+            btnSetujui.setEnabled(false);
+            btnTolak.setEnabled(false);
+        }
+
+
     }
 
     private void initEvent() {
 
-        btnKalenderStart.setOnClickListener(new View.OnClickListener() {
+        /*btnKalenderStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -180,7 +197,7 @@ public class DetailApprovalPL extends AppCompatActivity {
                 SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
                 new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
             }
-        });
+        });*/
 
         edtNominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,25 +237,53 @@ public class DetailApprovalPL extends AppCompatActivity {
                     edtNominal.setError("Nominal harap diisi");
                     edtNominal.requestFocus();
                     return;
-                }
-
-                if(edtKeterangan.getText().toString().isEmpty()){
-
-                    edtKeterangan.setError("Keterangan harap diisi");
-                    edtKeterangan.requestFocus();
-                    return;
                 }else{
 
-                    edtKeterangan.setError(null);
+                    edtNominal.setError(null);
                 }
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
-                        .setMessage("Apakah anda yakin ingin menyimpan permohonan perubahan data reseller?")
+                        .setMessage("Apakah anda yakin ingin menyetujui permohonan ini?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                saveData();
+                                saveData("2");
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+
+            }
+        });
+
+        btnTolak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Validasi
+                if(iv.parseNullDouble(edtNominal.getText().toString().replaceAll("[,.]", "")) <= 0){
+
+                    edtNominal.setError("Nominal harap diisi");
+                    edtNominal.requestFocus();
+                    return;
+                }else{
+
+                    edtNominal.setError(null);
+                }
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Apakah anda yakin ingin menolak permohonan ini?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                saveData("9");
                             }
                         })
                         .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -253,7 +298,7 @@ public class DetailApprovalPL extends AppCompatActivity {
         });
     }
 
-    private void saveData() {
+    private void saveData(String approve) {
 
         btnSetujui.setEnabled(false);
         btnTolak.setEnabled(false);
@@ -266,15 +311,13 @@ public class DetailApprovalPL extends AppCompatActivity {
 
         JSONObject jBody = new JSONObject();
         try {
-            jBody.put("sales", nik);
-            jBody.put("nominal", edtNominal.getText().toString().replaceAll("[,.]", ""));
-            jBody.put("jenis", ((OptionItem) spJenis.getSelectedItem()).getValue());
-            jBody.put("keterangan", edtKeterangan.getText().toString());
+            jBody.put("id", item.getItem1());
+            jBody.put("approval", approve);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.savePengajuanPlafonSales, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveApprovalPlafonSales, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

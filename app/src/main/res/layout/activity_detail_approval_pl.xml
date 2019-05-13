@@ -39,13 +39,14 @@
             style="@style/TitleText"
             android:text="Jenis Pengajuan"/>
 
-        <Spinner
+        <TextView
+            android:id="@+id/tv_jenis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/padding10"
             android:layout_marginRight="@dimen/padding10"
-            android:layout_marginTop="@dimen/padding10"
-            android:id="@+id/sp_jenis"></Spinner>
+            style="@style/ValueText"
+            android:text=""/>
 
         <TextView
             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             android:layout_marginRight="@dimen/padding10"
             android:background="@drawable/style_box_bordered_rounded"
             android:text=""
-            android:inputType="numberSigned"/>
+            android:inputType="none"
+            android:editable="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -173,7 +175,8 @@
             android:ems="10"
             android:gravity="top"
             android:hint="..."
-            android:inputType="textMultiLine"
+            android:inputType="none"
+            android:editable="false"
             android:padding="@dimen/padding5"
             android:text=""
             android:textSize="@dimen/text14" />

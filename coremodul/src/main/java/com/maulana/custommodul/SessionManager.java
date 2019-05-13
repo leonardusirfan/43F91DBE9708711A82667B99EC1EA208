@@ -131,6 +131,11 @@ public class SessionManager {
 		return pref.getString(TAG_SUPERUSER, "").equals("1");
 	}
 
+	public boolean isBM(){
+
+		return (this.getJabatan().toUpperCase().contains("BM") || this.getJabatan().toUpperCase().contains("SUPERVISOR BDO"));
+	}
+
 	/**
 	 * Clear session details
 	 * */

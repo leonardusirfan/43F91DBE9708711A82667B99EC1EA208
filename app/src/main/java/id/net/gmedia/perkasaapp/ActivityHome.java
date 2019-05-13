@@ -130,12 +130,6 @@ public class ActivityHome extends AppCompatActivity
                 , btn_market_intelligent, btn_pencapaian_sales, btn_kunjungan_sales;
 
         llSupervisor = (LinearLayout) findViewById(R.id.ll_menu_supervisor);
-        if(session.isSuperuser()){
-            llSupervisor.setVisibility(View.VISIBLE);
-        }else{
-            llSupervisor.setVisibility(View.GONE);
-            //llSupervisor.setVisibility(View.VISIBLE);
-        }
 
         btn_mkios = findViewById(R.id.btn_mkios);
         btn_perdana = findViewById(R.id.btn_perdana);
@@ -182,6 +176,18 @@ public class ActivityHome extends AppCompatActivity
         tvDsGapBulk = (TextView) findViewById(R.id.tv_ds_gap_bulk);
         tvDsTargetSurvey = (TextView) findViewById(R.id.tv_ds_target_survey);
         tvDsEffectiveCall = (TextView) findViewById(R.id.tv_ds_effective_call);
+
+        if(session.isSuperuser()){
+            llSupervisor.setVisibility(View.VISIBLE);
+
+            if(!session.isBM()){
+
+                btnApprovePlafonSales.setVisibility(View.GONE);
+            }
+        }else{
+            llSupervisor.setVisibility(View.GONE);
+            //llSupervisor.setVisibility(View.VISIBLE);
+        }
 
         btn_mkios.setOnClickListener(new View.OnClickListener() {
             @Override

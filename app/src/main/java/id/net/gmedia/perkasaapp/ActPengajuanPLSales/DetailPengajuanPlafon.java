@@ -106,7 +106,7 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
 
         }
 
-        listJenis.add(new OptionItem("mki os","Mkios"));
+        listJenis.add(new OptionItem("mkios","Mkios"));
         listJenis.add(new OptionItem("perdana","Perdana"));
 
         adapter = new ArrayAdapter(context, R.layout.layout_simple_list, listJenis);
@@ -219,21 +219,15 @@ public class DetailPengajuanPlafon extends AppCompatActivity {
                     edtNominal.setError("Nominal harap diisi");
                     edtNominal.requestFocus();
                     return;
-                }
-
-                if(edtKeterangan.getText().toString().isEmpty()){
-
-                    edtKeterangan.setError("Keterangan harap diisi");
-                    edtKeterangan.requestFocus();
-                    return;
                 }else{
 
-                    edtKeterangan.setError(null);
+                    edtNominal.setError(null);
                 }
+
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
-                        .setMessage("Apakah anda yakin ingin menyimpan permohonan perubahan data reseller?")
+                        .setMessage("Apakah anda yakin ingin menyimpan permohonan penambahan data plafon?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

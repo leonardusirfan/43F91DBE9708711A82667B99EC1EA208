@@ -66,7 +66,7 @@ public class ListApprovalPL extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            getSupportActionBar().setTitle("Pengajuan Penambahan Plafon");
+            getSupportActionBar().setTitle("Penambahan Plafon");
         }
 
         context = this;
@@ -240,6 +240,8 @@ public class ListApprovalPL extends AppCompatActivity {
                                     ,jo.getString("nama_pengaju")
                                     ,jo.getString("tgl_awal")
                                     ,jo.getString("tgl_akhir")
+                                    ,jo.getString("keterangan")
+                                    ,jo.getString("status")
                             ));
 
                         }

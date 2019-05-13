@@ -210,7 +210,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                         String username = response.getJSONObject("response").getString("username");
                         String flagSuperuser = response.getJSONObject("response").getString("flag");
                         String nikHr = response.getJSONObject("response").getString("nik_hr");
-                        String jabatan = response.getJSONObject("response").getString("nik_hr");
+                        String jabatan = response.getJSONObject("response").getString("posisi");
                         session.createLoginSession(username,
                                 nikGa,
                                 nikMkios,
