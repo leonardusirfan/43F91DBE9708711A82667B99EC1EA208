@@ -293,6 +293,8 @@ public class ListJualPerdanaCustom extends AppCompatActivity {
                                     ,jo.getString("jumlah")
                                     ,jo.getString("harga")
                                     ,jo.getString("total")
+                                    ,jo.getString("namabrg")
+                                    ,jo.getString("nobukti")
                             ));
 
                         }

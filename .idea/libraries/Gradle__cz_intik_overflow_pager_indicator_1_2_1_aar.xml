@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: cz.intik:overflow-pager-indicator:1.2.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7df509ad128050c79bc57290203409bd/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7df509ad128050c79bc57290203409bd/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b92db3bc0c4c10c60e64727f7232d0a5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b92db3bc0c4c10c60e64727f7232d0a5/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

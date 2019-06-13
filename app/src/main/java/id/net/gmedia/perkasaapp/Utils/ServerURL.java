@@ -91,4 +91,6 @@ public class ServerURL {
     public static final String getAprrovalPlafonSales = baseUrl + "pengajuan/view_approval/";
     public static final String saveApprovalPlafonSales = baseUrl + "pengajuan/approval_process/";
 
+    public static final String batalkanDealing = baseUrl + "Perdana/batalkan_dealing/";
+
 }
