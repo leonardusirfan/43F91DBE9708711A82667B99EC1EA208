@@ -3,8 +3,10 @@ package id.net.gmedia.perkasaapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,12 +32,17 @@ import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActBranding.DetailBranding;
 import id.net.gmedia.perkasaapp.ActBranding.ListBranding;
 import id.net.gmedia.perkasaapp.ActChangePassword.ActChangePassword;
+import id.net.gmedia.perkasaapp.ActCheckinOutlet.ActCheckinOutlet;
+import id.net.gmedia.perkasaapp.ActCheckinOutlet.DetailCheckinOutlet;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer1;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
@@ -106,7 +113,7 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout btnPengajuanRKP;
     private LinearLayout btnPembayaranDealing;
     private LinearLayout btnOrderVoucher;
-    private LinearLayout btnPengajuanPlafonSales, btnApprovePlafonSales;
+    private LinearLayout btnPengajuanPlafonSales, btnApprovePlafonSales, btnCheckinOutlet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +168,7 @@ public class ActivityHome extends AppCompatActivity
         btnPembayaranDealing = (LinearLayout) findViewById(R.id.btn_pembayaran_dealing);
         btnPengajuanPlafonSales = (LinearLayout) findViewById(R.id.btn_pengajuan_plafon_sales);
         btnApprovePlafonSales = (LinearLayout) findViewById(R.id.btn_approve_plafon_sales);
+        btnCheckinOutlet = (LinearLayout) findViewById(R.id.btn_checkin_outlet);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -400,6 +408,14 @@ public class ActivityHome extends AppCompatActivity
             }
         });
 
+        btnCheckinOutlet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ActCheckinOutlet.class));
+            }
+        });
+
         //Inisialisasi Drawer UI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -479,6 +495,10 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailApprovalPL.flag)){
 
                 Intent intent = new Intent(ActivityHome.this, ListApprovalPL.class);
+                startActivity(intent);
+            }else if(flag.equals(DetailCheckinOutlet.flag)){
+
+                Intent intent = new Intent(ActivityHome.this, ActCheckinOutlet.class);
                 startActivity(intent);
             }
         }
@@ -613,6 +633,8 @@ public class ActivityHome extends AppCompatActivity
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                checkInstallerApplication();
             }
 
             @Override
@@ -623,6 +645,96 @@ public class ActivityHome extends AppCompatActivity
                 }
             }
         });
+    }
+
+    private void checkInstallerApplication(){
+
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> pkgAppsList = context.getPackageManager().queryIntentActivities( mainIntent, 0);
+
+        JSONArray jPackage = new JSONArray();
+        for(ResolveInfo info: pkgAppsList){
+
+            JSONObject jo = new JSONObject();
+
+            try {
+                jo.put("package", info.activityInfo.packageName);
+                jo.put("name", GetAppName(info.activityInfo.packageName));
+                jPackage.put(jo);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("apps", jPackage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveInstalledApps, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        String flag = response.getJSONObject("response").getString("flag");
+                        //String message = response.getJSONObject("response").getString("message");
+                        message = "Anda terdeteksi menggunakan aplikasi yang mengganggu proses " + context.getResources().getString(R.string.app_name);
+
+                        if(flag.equals("1")){
+
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(context, ActivityLogin.class);
+                            session.logoutUser(intent);
+                        }else{
+                            //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private String GetAppName(String ApkPackageName){
+
+        String Name = "";
+
+        ApplicationInfo applicationInfo;
+
+        PackageManager packageManager = context.getPackageManager();
+
+        try {
+
+            applicationInfo = packageManager.getApplicationInfo(ApkPackageName, 0);
+
+            if(applicationInfo!=null){
+
+                Name = (String)packageManager.getApplicationLabel(applicationInfo);
+            }
+
+        }catch (PackageManager.NameNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        return Name;
     }
 
     private void getProfile(){

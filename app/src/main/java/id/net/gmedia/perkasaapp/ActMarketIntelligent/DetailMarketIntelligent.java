@@ -100,6 +100,7 @@ import id.net.gmedia.perkasaapp.ActMarketIntelligent.Adapter.PhotosKeteranganAda
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 import static com.maulana.custommodul.ImageUtils.getImageUri;
@@ -195,6 +196,13 @@ public class DetailMarketIntelligent extends AppCompatActivity implements Locati
         initUI();
         initEvent();
         if(!idMarketIntelligent.isEmpty()) initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DetailMarketIntelligent.this);
     }
 
     private void initUI() {

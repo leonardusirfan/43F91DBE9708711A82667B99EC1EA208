@@ -48,6 +48,8 @@ public class ActKonsinyasi extends AppCompatActivity {
         initEvent();
     }
 
+
+
     private void initUI() {
 
         rlMutasi = (RelativeLayout) findViewById(R.id.rl_mutasi);

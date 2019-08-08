@@ -99,6 +99,7 @@ import id.net.gmedia.perkasaapp.ActBranding.Adapter.PhotosAdapter;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 import static com.maulana.custommodul.ImageUtils.getImageUri;
@@ -251,6 +252,13 @@ public class DetailBranding extends AppCompatActivity implements LocationListene
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DetailBranding.this);
     }
 
     private void initEvent() {

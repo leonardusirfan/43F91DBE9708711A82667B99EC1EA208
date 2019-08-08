@@ -76,6 +76,7 @@ import id.net.gmedia.perkasaapp.ActDirectSelling.Adapter.ListCCIDDSAdapter;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DirectSellingPerdana extends AppCompatActivity implements LocationListener {
@@ -221,6 +222,13 @@ public class DirectSellingPerdana extends AppCompatActivity implements LocationL
 
             //btnMapsOutlet.setText("Peta Event");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DirectSellingPerdana.this);
     }
 
     private void initLocationUtils() {

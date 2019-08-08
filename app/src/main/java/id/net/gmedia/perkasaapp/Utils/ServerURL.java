@@ -92,5 +92,9 @@ public class ServerURL {
     public static final String saveApprovalPlafonSales = baseUrl + "pengajuan/approval_process/";
 
     public static final String batalkanDealing = baseUrl + "Perdana/batalkan_dealing/";
+    public static final String saveInstalledApps = baseUrl + "Version/save_installed_apps/";
+    public static final String saveMockLocation = baseUrl + "Version/log_mock_location/";
+    public static final String saveCheckinOutlet = baseUrl + "checkin/";
+    public static final String viewCheckinOutlet = baseUrl + "checkin/view_checkin/";
 
 }

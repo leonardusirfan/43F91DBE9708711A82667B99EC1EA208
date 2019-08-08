@@ -82,6 +82,7 @@ import id.net.gmedia.perkasaapp.ActKunjungan.Adapter.PhotoKunjunganAdapter;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DetailKunjungan extends AppCompatActivity implements LocationListener {
@@ -193,6 +194,13 @@ public class DetailKunjungan extends AppCompatActivity implements LocationListen
             String nama = bundle.getString("nama","");
             edtNama.setText(nama);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DetailKunjungan.this);
     }
 
     private void initEvent() {

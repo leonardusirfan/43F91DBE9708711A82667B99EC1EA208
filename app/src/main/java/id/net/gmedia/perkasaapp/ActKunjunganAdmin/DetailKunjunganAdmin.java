@@ -61,6 +61,7 @@ import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DetailKunjunganAdmin extends AppCompatActivity implements LocationListener {
@@ -262,6 +263,13 @@ public class DetailKunjunganAdmin extends AppCompatActivity implements LocationL
                 btnProses.setEnabled(true);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DetailKunjunganAdmin.this);
     }
 
     //region File Chooser

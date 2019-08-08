@@ -90,6 +90,7 @@ import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.ModelCcid;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityOrderPerdana3 extends AppCompatActivity implements LocationListener {
@@ -432,6 +433,13 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
                 integrator.initiateScan();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(ActivityOrderPerdana3.this);
     }
 
     private void initDataReseller() {

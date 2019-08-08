@@ -80,6 +80,8 @@
     <string name="nomor_handphone">Nomor Handphone</string>
     <string name="edit_posisi">Edit Posisi</string>
     <string name="jumlah_piutang">Jumlah Pelunasan Piutang</string>
+    <string name="checkin">Checkin</string>
+    <string name="checkout">Checkout</string>
     <string name="jumlah_pembayaran">Jumlah Pembayaran</string>
     <string name="jumlah_pengajuan">Jumlah Penambahan Plafon</string>
     <string name="jumlah_stok">Jumlah Stok</string>

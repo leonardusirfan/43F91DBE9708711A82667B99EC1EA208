@@ -78,6 +78,7 @@ import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Services.USSDService;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.PinManager;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
@@ -855,7 +856,7 @@ public class DirectSellingPulsa extends AppCompatActivity implements LocationLis
     protected void onResume() {
         super.onResume();
 
-        //MockLocChecker checker = new MockLocChecker(DetailInjectPulsa.this);
+        MocLocChecker checker = new MocLocChecker(DirectSellingPulsa.this);
 
         isActive = true;
 

@@ -161,6 +161,82 @@
             app:layout_constraintTop_toBottomOf="@+id/ll_title_non_telkomsel" />
 
         <TextView
+            android:id="@+id/tv_title5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            android:layout_marginTop="@dimen/padding10"
+            style="@style/TitleText"
+            android:text="Transaksi Non Telkomsel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_non_telkomsel" />
+
+        <TextView
+            android:id="@+id/tv_title6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginRight="@dimen/padding10"
+            android:layout_marginTop="@dimen/padding2"
+            android:textSize="12sp"
+            android:text="* Perdana (Segel/ARP) &amp; Evoucher (Mkios/Bulk)"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title5" />
+
+        <LinearLayout
+            android:id="@+id/ll_title_t_non_telkomsel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding5"
+            android:layout_marginRight="@dimen/padding5"
+            android:layout_marginTop="@dimen/padding8"
+            android:background="@drawable/style_box_bordered_rounded"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title6"
+            android:weightSum="0.65">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:padding="@dimen/padding5"
+                android:text="@string/nama_barang"
+                android:textSize="@dimen/text14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:padding="@dimen/padding5"
+                android:text="Perdana"
+                android:textSize="@dimen/text14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:padding="@dimen/padding5"
+                android:text="Evoucher"
+                android:textSize="@dimen/text14"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_t_non_telkomsel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding5"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/ll_title_t_non_telkomsel" />
+
+        <TextView
             android:id="@+id/tv_title4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,7 +248,7 @@
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_non_telkomsel" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_t_non_telkomsel" />
 
         <EditText
             android:id="@+id/edt_keterangan"

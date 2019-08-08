@@ -27,4 +27,7 @@
     <color name="color_pjp_beli">#6be143</color>
     <color name="color_pjp_belum">#e2332d</color>
     <color name="color_pjp_tidak">#027fe5</color>
+
+    <color name="color_blue2">#027fe5</color>
+    <color name="color_blue2_active">#054C86</color>
 </resources>

@@ -63,10 +63,12 @@ import java.util.List;
 import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActMarketSurvey.Adapter.AdapterProviderNonTelkomsel;
+import id.net.gmedia.perkasaapp.ActMarketSurvey.Adapter.AdapterProviderTNonTelkomsel;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.Adapter.AdapterProviderTelkomsel;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class DetailMarketSurvey extends AppCompatActivity implements LocationListener {
@@ -105,14 +107,15 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
     private TextView tvJarak;
     private ImageView ivRefreshJarak;
     private TextView tvNama;
-    private RecyclerView rvTelkomsel, rvNonTelkomsel;
+    private RecyclerView rvTelkomsel, rvNonTelkomsel, rvTNonTelkomsel;
     private Button btnProses, btnPeta;
     private boolean isLoading = false;
     private String kdcus = "";
     private final String TAG = "DETAIL";
-    private List<CustomItem> listTelkomsel = new ArrayList<>(), listNonTelkomsel = new ArrayList<>();
+    private List<CustomItem> listTelkomsel = new ArrayList<>(), listNonTelkomsel = new ArrayList<>(), listTNonTelkomsel = new ArrayList<>();
     private AdapterProviderTelkomsel adapterTelkomsel;
     private AdapterProviderNonTelkomsel adapterNonTelkomsel;
+    private AdapterProviderTNonTelkomsel adapterTNonTelkomsel;
     private EditText edtKeterangan;
     private String state = "";
     public static final String flag = "MARKETSURVEY";
@@ -137,11 +140,19 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
         initEvent();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(DetailMarketSurvey.this);
+    }
+
     private void initUI() {
 
         tvNama = (TextView) findViewById(R.id.tv_nama);
         rvTelkomsel = (RecyclerView) findViewById(R.id.rv_telkomsel);
         rvNonTelkomsel = (RecyclerView) findViewById(R.id.rv_non_telkomsel);
+        rvTNonTelkomsel = (RecyclerView) findViewById(R.id.rv_t_non_telkomsel);
         btnProses = (Button) findViewById(R.id.btn_proses);
         tvJarak = (TextView) findViewById(R.id.tv_jarak);
         ivRefreshJarak = (ImageView) findViewById(R.id.iv_refresh_jarak);
@@ -151,8 +162,10 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
         isLoading = false;
         listTelkomsel = new ArrayList<>();
         listNonTelkomsel = new ArrayList<>();
+        listTNonTelkomsel = new ArrayList<>();
         adapterTelkomsel = new AdapterProviderTelkomsel(listTelkomsel, context);
         adapterNonTelkomsel = new AdapterProviderNonTelkomsel(listNonTelkomsel, context);
+        adapterTNonTelkomsel = new AdapterProviderTNonTelkomsel(listTNonTelkomsel, context);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvTelkomsel.setLayoutManager(layoutManager);
@@ -163,6 +176,12 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
         rvNonTelkomsel.setLayoutManager(layoutManager1);
         rvNonTelkomsel.setItemAnimator(new DefaultItemAnimator());
         rvNonTelkomsel.setAdapter(adapterNonTelkomsel);
+
+        // Transaksi Perdana dan Evoucher
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+        rvTNonTelkomsel.setLayoutManager(layoutManager2);
+        rvTNonTelkomsel.setItemAnimator(new DefaultItemAnimator());
+        rvTNonTelkomsel.setAdapter(adapterTNonTelkomsel);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -221,6 +240,12 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
                             nonTsel.setItem5(jo.getString("unit_"+nonTsel.getItem1()+"_high"));
                         }
 
+                        for(CustomItem tNonTsel:listTNonTelkomsel){
+
+                            tNonTsel.setItem3(jo.getString("kartu_"+tNonTsel.getItem1()+"_perdana"));
+                            tNonTsel.setItem4(jo.getString("kartu_"+tNonTsel.getItem1()+"_evoucher"));
+                        }
+
                         latitude = iv.parseNullDouble(jo.getString("latitude"));
                         longitude = iv.parseNullDouble(jo.getString("longitude"));
                         state = jo.getString("state");
@@ -248,6 +273,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
                 adapterTelkomsel = new AdapterProviderTelkomsel(listTelkomsel, context);
                 adapterNonTelkomsel = new AdapterProviderNonTelkomsel(listNonTelkomsel, context);
+                adapterTNonTelkomsel = new AdapterProviderTNonTelkomsel(listTNonTelkomsel, context);
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
                 rvTelkomsel.setLayoutManager(layoutManager);
@@ -258,6 +284,11 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
                 rvNonTelkomsel.setLayoutManager(layoutManager1);
                 rvNonTelkomsel.setItemAnimator(new DefaultItemAnimator());
                 rvNonTelkomsel.setAdapter(adapterNonTelkomsel);
+
+                RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(context);
+                rvTNonTelkomsel.setLayoutManager(layoutManager2);
+                rvTNonTelkomsel.setItemAnimator(new DefaultItemAnimator());
+                rvTNonTelkomsel.setAdapter(adapterTNonTelkomsel);
             }
 
             @Override
@@ -431,19 +462,27 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
                             JSONObject jo = ja.getJSONObject(i);
                             String idGroup = jo.getString("id_group");
 
-                            if(idGroup.equals("1")){
+                            if(idGroup.equals("1")){ // Telkomsel
 
                                 listTelkomsel.add(new CustomItem(
                                         jo.getString("field_name")
                                         ,jo.getString("provider")
                                         ,""
                                 ));
-                            }else if(idGroup.equals("2")){
+                            }else if(idGroup.equals("2")){ // non telkonsel
 
                                 listNonTelkomsel.add(new CustomItem(
                                         jo.getString("field_name")
                                         ,jo.getString("provider")
                                         ,""
+                                        ,""
+                                        ,""
+                                ));
+                            }else if(idGroup.equals("3")){ // Perdana & Evoucher
+
+                                listTNonTelkomsel.add(new CustomItem(
+                                        jo.getString("field_name")
+                                        ,jo.getString("provider")
                                         ,""
                                         ,""
                                 ));
@@ -471,6 +510,7 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
 
                 adapterTelkomsel.notifyDataSetChanged();
                 adapterNonTelkomsel.notifyDataSetChanged();
+                adapterTNonTelkomsel.notifyDataSetChanged();
 
                 if(!idSurvey.isEmpty()) getDetailSurvey();
             }
@@ -518,6 +558,12 @@ public class DetailMarketSurvey extends AppCompatActivity implements LocationLis
                 jBody.put("unit_"+nonTsel.getItem1()+"_small", nonTsel.getItem3());
                 jBody.put("unit_"+nonTsel.getItem1()+"_medium", nonTsel.getItem4());
                 jBody.put("unit_"+nonTsel.getItem1()+"_high", nonTsel.getItem5());
+            }
+
+            for(CustomItem tNonTsel : listTNonTelkomsel){
+
+                jBody.put("kartu_"+tNonTsel.getItem1()+"_perdana", tNonTsel.getItem3());
+                jBody.put("kartu_"+tNonTsel.getItem1()+"_evoucher", tNonTsel.getItem4());
             }
 
             jBody.put("latitude", iv.doubleToStringFull(latitude));

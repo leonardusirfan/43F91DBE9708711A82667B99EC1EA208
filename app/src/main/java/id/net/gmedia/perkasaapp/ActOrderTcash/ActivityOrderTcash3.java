@@ -66,6 +66,7 @@ import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityOrderTcash3 extends AppCompatActivity implements LocationListener {
@@ -135,6 +136,13 @@ public class ActivityOrderTcash3 extends AppCompatActivity implements LocationLi
         initLocationUtils();
         initUI();
         initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(ActivityOrderTcash3.this);
     }
 
     private void initLocationUtils() {

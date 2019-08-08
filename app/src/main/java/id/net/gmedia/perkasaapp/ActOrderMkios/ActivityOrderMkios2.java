@@ -70,6 +70,7 @@ import id.net.gmedia.perkasaapp.MapsResellerActivity;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.ModelPulsa;
 import id.net.gmedia.perkasaapp.R;
+import id.net.gmedia.perkasaapp.Utils.MocLocChecker;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 public class ActivityOrderMkios2 extends AppCompatActivity implements LocationListener {
@@ -154,6 +155,13 @@ public class ActivityOrderMkios2 extends AppCompatActivity implements LocationLi
         initUI();
         initData();
         //initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MocLocChecker checker = new MocLocChecker(ActivityOrderMkios2.this);
     }
 
     private void initLocationUtils() {
