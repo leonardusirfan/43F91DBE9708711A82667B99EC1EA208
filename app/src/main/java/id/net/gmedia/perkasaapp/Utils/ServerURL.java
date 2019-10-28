@@ -96,5 +96,9 @@ public class ServerURL {
     public static final String saveMockLocation = baseUrl + "Version/log_mock_location/";
     public static final String saveCheckinOutlet = baseUrl + "checkin/";
     public static final String viewCheckinOutlet = baseUrl + "checkin/view_checkin/";
+    public static final String getChatGroup = baseUrl + "chat/group/";
+    public static final String getChat = baseUrl + "chat/get_chat/";
+    public static final String saveChat = baseUrl + "chat/send_text/";
+    public static final String saveFIleChat = baseUrl + "chat/send_file/";
 
 }

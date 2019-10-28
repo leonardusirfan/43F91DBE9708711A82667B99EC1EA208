@@ -258,7 +258,7 @@ public class DetailRekonsinyasi extends AppCompatActivity implements LocationLis
             public void onClick(View view) {
 
                 //validasi
-                if(adapter == null ){
+                /*if(adapter == null ){
 
                     Toast.makeText(context, "Silahkan masukkan minimal satu barang", Toast.LENGTH_LONG).show();
                     return;
@@ -268,11 +268,11 @@ public class DetailRekonsinyasi extends AppCompatActivity implements LocationLis
 
                     Toast.makeText(context, "Silahkan masukkan minimal satu barang", Toast.LENGTH_LONG).show();
                     return;
-                }
+                }*/
 
                 String message = "Apakah anda yakin ingin memproses data?\n\n";
                 // if(editMode) message = "Apakah anda yakin ingin mengubah "+noBukti+" ?\n\n";
-                message += ("Total " + String.valueOf(adapter.getDataList().size())+" CCID");
+                message += ("Total " + String.valueOf(adapter.getDataList().size())+" CCID tersisa");
                 AlertDialog builder = new AlertDialog.Builder(context)
                         .setTitle("Konfirmasi")
                         .setIcon(getResources().getDrawable(R.mipmap.ic_launcher))
@@ -701,17 +701,20 @@ public class DetailRekonsinyasi extends AppCompatActivity implements LocationLis
         //7. id surat jalam
 
         JSONArray jData = new JSONArray();
-        for(CustomItem item: adapter.getDataList()){
+        if(adapter != null) {
 
-            JSONObject jDataDetail = new JSONObject();
-            try {
+            for(CustomItem item: adapter.getDataList()){
 
-                jDataDetail.put("ccid", item.getItem3());
-            } catch (JSONException e) {
-                e.printStackTrace();
+                JSONObject jDataDetail = new JSONObject();
+                try {
+
+                    jDataDetail.put("ccid", item.getItem3());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                jData.put(jDataDetail);
             }
-
-            jData.put(jDataDetail);
         }
 
         try {

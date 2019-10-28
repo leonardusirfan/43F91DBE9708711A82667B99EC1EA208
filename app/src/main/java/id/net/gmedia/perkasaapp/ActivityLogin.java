@@ -40,6 +40,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private static final int REQUEST_PERMISSIONS = 20;
     private String refreshToken = "";
     private String imei1 = "", imei2 = "";
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +133,14 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                     return;
                 }
 
-                saveData();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        saveData();
+                    }
+                });
+
 
             }
         });
@@ -141,7 +149,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private void saveData() {
 
         btn_login.setEnabled(false);
-        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
+        progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Default_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.setCancelable(false);
@@ -194,6 +202,7 @@ public class ActivityLogin extends RuntimePermissionsActivity {
 
                 String message = "";
                 btn_login.setEnabled(true);
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 
                 try {
 
@@ -201,8 +210,6 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                     String status = response.getJSONObject("metadata").getString("status");
                     message = response.getJSONObject("metadata").getString("message");
                     if(iv.parseNullInteger(status) == 200){
-
-                        if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 
                         String nikGa = response.getJSONObject("response").getString("nik_ga");
                         String nikMkios = response.getJSONObject("response").getString("nik_mkios");
@@ -230,7 +237,6 @@ public class ActivityLogin extends RuntimePermissionsActivity {
                     e.printStackTrace();
                 }
 
-                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
                 Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
             }
 
@@ -248,5 +254,14 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         Intent intent = new Intent(context, ActivityHome.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if ( progressDialog!=null && progressDialog.isShowing() ){
+            progressDialog.cancel();
+        }
     }
 }

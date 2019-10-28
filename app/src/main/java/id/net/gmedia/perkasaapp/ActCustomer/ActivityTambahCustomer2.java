@@ -903,6 +903,12 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialogBox.dismissDialog();
+    }
+
     private void getCustomerImage(){
 
         dialogBox.showDialog(true);

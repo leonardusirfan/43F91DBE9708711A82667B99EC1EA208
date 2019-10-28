@@ -20,6 +20,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,6 +48,7 @@ import id.net.gmedia.perkasaapp.ActCheckinOutlet.ActCheckinOutlet;
 import id.net.gmedia.perkasaapp.ActCheckinOutlet.DetailCheckinOutlet;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer1;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
+import id.net.gmedia.perkasaapp.ActCustomerService.ListGroupChatActivity;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
@@ -114,6 +118,7 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout btnPembayaranDealing;
     private LinearLayout btnOrderVoucher;
     private LinearLayout btnPengajuanPlafonSales, btnApprovePlafonSales, btnCheckinOutlet;
+    private String TAG = "HOME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -431,6 +436,9 @@ public class ActivityHome extends AppCompatActivity
 
             String flag = bundle.getString("flag", "");
 
+            String jenis = bundle.getString("jenis", "");
+
+            Log.d(TAG, "onCreate: ");
             try{
                 getIntent().removeExtra("flag");
             }catch (Exception e){
@@ -499,6 +507,12 @@ public class ActivityHome extends AppCompatActivity
             }else if(flag.equals(DetailCheckinOutlet.flag)){
 
                 Intent intent = new Intent(ActivityHome.this, ActCheckinOutlet.class);
+                startActivity(intent);
+            }
+
+            if(jenis.toLowerCase().equals("chat")){
+
+                Intent intent = new Intent(ActivityHome.this, ListGroupChatActivity.class);
                 startActivity(intent);
             }
         }
@@ -907,4 +921,32 @@ public class ActivityHome extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_home, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.nav_cs) {
+            Intent intent = new Intent(ActivityHome.this, ListGroupChatActivity.class);
+            startActivity(intent);
+            //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

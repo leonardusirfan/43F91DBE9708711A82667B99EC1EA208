@@ -211,6 +211,8 @@ public class ApiVolley {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
                 public boolean verify(String hostname, SSLSession session) {
                     if (hostname.equalsIgnoreCase("www.myperkasa.com") ||
+                            hostname.equalsIgnoreCase("myperkasa.com") ||
+                            hostname.equalsIgnoreCase("static9.depositphotos.com") ||
                             hostname.equalsIgnoreCase("reports.crashlytics.com") ||
                             hostname.equalsIgnoreCase("api.crashlytics.com") ||
                             hostname.equalsIgnoreCase("settings.crashlytics.com") ||

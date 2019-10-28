@@ -4,12 +4,15 @@ package id.net.gmedia.perkasaapp.NotificationUtils;
  * Created by Shin on 2/17/2017.
  */
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -20,6 +23,7 @@ import com.maulana.custommodul.ItemValidation;
 import java.util.HashMap;
 import java.util.Map;
 
+import id.net.gmedia.perkasaapp.ActCustomerService.DetailChatActivity;
 import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.R;
@@ -32,6 +36,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static String TAG = "MyFirebaseMessaging";
     private ItemValidation iv = new ItemValidation();
+    private String ANDROID_CHANNEL_ID = "id.net.gmedia.perkasaapp";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -77,6 +82,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 case 1:
                     intent = new Intent(this, ActivityHome.class);
                     break;
+                case 2:
+                    intent = new Intent(this, DetailChatActivity.class);
+                    intent.putExtra("notif", "1");
+                    break;
                 default:
                     intent = new Intent(this, ActivityHome.class);
                     break;
@@ -91,22 +100,76 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0 /*request code*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+            if(typeContent == 2 && DetailChatActivity.isChatActive){
+
+                if(extra.get("nomor").trim().equals(DetailChatActivity.nomor)){
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplication().startActivity(intent);
+                }
+            }
+
             Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
             int IconColor = getResources().getColor(R.color.color_notif);
 
             // Set Notification
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                createNotificationChannel();
+                Notification.Builder builder = new Notification.Builder(this, ANDROID_CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_notif)
+                        .setColor(IconColor)
+                        .setContentTitle(title)
+                        .setContentText(body)
+                        .setAutoCancel(true)
+                        .setSound(notificationSound)
+                        .setContentIntent(pendingIntent);
+                Notification notification = builder.build();
+                startForeground(0, notification);
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0/*Id of Notification*/, builder.build());
+
+            } else {
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notif)
+                        .setColor(IconColor)
+                        .setContentTitle(title)
+                        .setContentText(body)
+                        .setAutoCancel(true)
+                        .setSound(notificationSound)
+                        .setContentIntent(pendingIntent);
+                Notification notification = builder.build();
+                startForeground(0, notification);
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0/*Id of Notification*/, builder.build());
+
+            }
+
+            /*NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.ic_notif)
                     .setColor(IconColor)
                     .setContentTitle(title)
                     .setContentText(body)
                     .setAutoCancel(true)
                     .setSound(notificationSound)
-                    .setContentIntent(pendingIntent);
+                    .setContentIntent(pendingIntent);*/
 
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(0 /*Id of Notification*/, notificationBuilder.build());
+        }
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel serviceChannel = new NotificationChannel(
+                    ANDROID_CHANNEL_ID,
+                    "Foreground Service Channel",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(serviceChannel);
         }
     }
 }

@@ -180,18 +180,24 @@ public class ItemValidation {
 
     public String ChangeFormatDateString(String date, String formatDateFrom, String formatDateTo){
 
-        String result = date;
-        SimpleDateFormat sdf = new SimpleDateFormat(formatDateFrom);
-        SimpleDateFormat sdfCustom = new SimpleDateFormat(formatDateTo);
+        if (!date.isEmpty()){
 
-        Date date1 = null;
-        try {
-            date1 = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            String result = date;
+            SimpleDateFormat sdf = new SimpleDateFormat(formatDateFrom);
+            SimpleDateFormat sdfCustom = new SimpleDateFormat(formatDateTo);
+
+            Date date1 = null;
+            try {
+                date1 = sdf.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return (date1 == null || date.isEmpty()) ? "" : sdfCustom.format(date1);
+        }else{
+
+            return "";
         }
-
-        return (date1 == null || date.isEmpty()) ? "" : sdfCustom.format(date1);
     }
 
     public int dpToPx(Context context, int dp) {

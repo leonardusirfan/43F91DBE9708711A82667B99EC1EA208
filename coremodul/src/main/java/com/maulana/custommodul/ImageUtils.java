@@ -99,7 +99,7 @@ public class ImageUtils {
 
     public void LoadProfileImage(Context context, String uri, final ImageView image){
 
-        Picasso.with(context).load(Uri.parse(uri)).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).transform(new CircleTransform()).error(context.getResources().getDrawable(R.mipmap.ic_person)).placeholder(context.getResources().getDrawable(R.mipmap.ic_person)).into(image);
+        Picasso.with(context).load(Uri.parse(uri)).transform(new CircleTransform()).error(context.getResources().getDrawable(R.mipmap.ic_person)).placeholder(context.getResources().getDrawable(R.mipmap.ic_person)).into(image);
     }
 
     public void LoadCircleRealImage(Context context, String uri, final ImageView image){

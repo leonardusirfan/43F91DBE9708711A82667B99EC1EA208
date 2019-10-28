@@ -14,4 +14,7 @@
     <dimen name="radius">3dp</dimen>
     <dimen name="default_line">1dp</dimen>
     <dimen name="swipe_height">40dp</dimen>
+    <dimen name="margin_default">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
 </resources>
