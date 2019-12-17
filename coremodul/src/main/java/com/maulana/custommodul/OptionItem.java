@@ -31,6 +31,16 @@ public class OptionItem {
         this.selected = selected;
     }
 
+    public OptionItem(String att1, String att2, String att3, String att4, String att5, String att6,boolean selected) {
+        this.att1 = att1;
+        this.att2 = att2;
+        this.att3 = att3;
+        this.att4 = att4;
+        this.att5 = att5;
+        this.att6 = att6;
+        this.selected = selected;
+    }
+
     public OptionItem(String att1, String att2, String att3, String att4, String att5, String att6,String att7,boolean selected) {
         this.att1 = att1;
         this.att2 = att2;

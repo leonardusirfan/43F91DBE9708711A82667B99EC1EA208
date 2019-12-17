@@ -137,6 +137,7 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), ActivityOrderPerdana2.class);
                 intent.putExtra("kdcus", item.getItem1());
                 intent.putExtra("nama", item.getItem2());
+
                 view.getContext().startActivity(intent);
             }
         });
@@ -183,11 +184,12 @@ public class ActivityOrderPerdana1 extends AppCompatActivity {
                         JSONArray jsonArray = response.getJSONArray("response");
                         for(int i = 0; i < jsonArray.length(); i++){
 
-                            JSONObject jo = jsonArray.getJSONObject(i);
+                             JSONObject jo = jsonArray.getJSONObject(i);
                             listReller.add(new CustomItem(
                                     jo.getString("kdcus")
                                     ,jo.getString("nama")
                                     ,jo.getString("alamat")
+                                    ,jo.getString("nomor")
                             ));
                         }
 

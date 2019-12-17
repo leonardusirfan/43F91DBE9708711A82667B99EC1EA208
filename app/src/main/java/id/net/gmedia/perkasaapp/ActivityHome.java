@@ -49,6 +49,7 @@ import id.net.gmedia.perkasaapp.ActCheckinOutlet.DetailCheckinOutlet;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer1;
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
 import id.net.gmedia.perkasaapp.ActCustomerService.ListGroupChatActivity;
+import id.net.gmedia.perkasaapp.ActDeposit.MainDeposit;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPerdana;
 import id.net.gmedia.perkasaapp.ActDirectSelling.DirectSellingPulsa;
 import id.net.gmedia.perkasaapp.ActDirectSelling.ResellerDetailSelling;
@@ -85,6 +86,7 @@ import id.net.gmedia.perkasaapp.ActPerdanaCustom.ListJualPerdanaCustom;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 import id.net.gmedia.perkasaapp.ActSetoran.ListSetoran;
 import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
+import id.net.gmedia.perkasaapp.Deposit.MainPengajuanDeposit;
 import id.net.gmedia.perkasaapp.Services.LocationUpdater;
 import id.net.gmedia.perkasaapp.SideAkunAnda.SideAccount;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
@@ -117,6 +119,7 @@ public class ActivityHome extends AppCompatActivity
     private LinearLayout btnPengajuanRKP;
     private LinearLayout btnPembayaranDealing;
     private LinearLayout btnOrderVoucher;
+    private LinearLayout btn_trs_deposit;
     private LinearLayout btnPengajuanPlafonSales, btnApprovePlafonSales, btnCheckinOutlet;
     private String TAG = "HOME";
 
@@ -174,6 +177,7 @@ public class ActivityHome extends AppCompatActivity
         btnPengajuanPlafonSales = (LinearLayout) findViewById(R.id.btn_pengajuan_plafon_sales);
         btnApprovePlafonSales = (LinearLayout) findViewById(R.id.btn_approve_plafon_sales);
         btnCheckinOutlet = (LinearLayout) findViewById(R.id.btn_checkin_outlet);
+        btn_trs_deposit = (LinearLayout) findViewById(R.id.btn_transaksi_deposit);
 
         tvJabatan = (TextView) findViewById(R.id.tv_jabatan);
         tvNamaSales = (TextView) findViewById(R.id.tv_nama_sales);
@@ -418,6 +422,14 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, ActCheckinOutlet.class));
+            }
+        });
+
+        btn_trs_deposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, MainPengajuanDeposit.class));
             }
         });
 

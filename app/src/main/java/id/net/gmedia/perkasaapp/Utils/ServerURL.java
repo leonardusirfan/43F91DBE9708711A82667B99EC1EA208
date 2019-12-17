@@ -4,7 +4,8 @@ public class ServerURL {
 
     //private static final String baseUrl = "http://192.168.17.187/perkasa-sales/";
     //private static final String baseUrl = "http://36.66.177.165/sales/";
-    //private static final String baseUrl = "http://api.myperkasa.com/sales/";
+//    private static final String baseU = "http://api.myperkasa.com/sales/";
+
     private static final String baseUrl = "https://www.myperkasa.com/api/sales/";
 
     public static final String auth = baseUrl + "authentication/";
@@ -101,4 +102,13 @@ public class ServerURL {
     public static final String saveChat = baseUrl + "chat/send_text/";
     public static final String saveFIleChat = baseUrl + "chat/send_file/";
 
+    public static final String getListCCIDPerdana = baseUrl+ "perdana/get_list_ccid/";
+    public static final String getCCIDDeposit = baseUrl + "Deposit/view_ccid/";
+    public static final String getPengajuanHeader = baseUrl + "Deposit/header_pengajuan_deposit/";
+    public static final String savePengajuanDepositePerdana = baseUrl + "deposit/approval_perdana/";
+    public static final String savePengajuanDeposite = baseUrl + "Deposit/approval_pengajuan_deposit/";
+    public static final String getPengajuanDetail = baseUrl + "Deposit/detail_pengajuan_deposit/" ;
+    public static final String getJarak = baseUrl + "Location/hitung_jarak/";
+    public static final String getApproval = baseUrl + "";
+    public static final String getHistoryDeposit= baseUrl + "Deposit/get_pengajuan_deposit/";
 }

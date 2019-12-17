@@ -32,7 +32,7 @@ public class ListResellerPerdanaAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView txt_nama, txt_alamat;
+        private TextView txt_nama, txt_alamat, txt_nomor;
     }
 
     public void addMoreData(List<CustomItem> moreData){
@@ -56,6 +56,7 @@ public class ListResellerPerdanaAdapter extends ArrayAdapter{
             convertView = inflater.inflate(R.layout.item_order_perdana1, null);
             holder.txt_nama = convertView.findViewById(R.id.txt_nama);
             holder.txt_alamat = convertView.findViewById(R.id.txt_alamat);
+            holder.txt_nomor = convertView.findViewById(R.id.txt_notelp);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -64,6 +65,7 @@ public class ListResellerPerdanaAdapter extends ArrayAdapter{
         final CustomItem itemSelected = items.get(position);
         holder.txt_nama.setText(itemSelected.getItem2());
         holder.txt_alamat.setText(itemSelected.getItem3());
+        holder.txt_nomor.setText(itemSelected.getItem4());
 
         return convertView;
 

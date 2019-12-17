@@ -1,6 +1,6 @@
 package id.net.gmedia.perkasaapp;
 
-public class ModelCcid {
+public class    ModelCcid {
     private String ccid;
     private String nama;
     private String harga;

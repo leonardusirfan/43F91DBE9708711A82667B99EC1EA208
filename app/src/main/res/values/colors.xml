@@ -3,7 +3,12 @@
     <color name="colorSelected">#ba0d0d</color>
     <color name="colorPrimary">#e50216</color>
     <color name="colorPrimaryDark">#d80315</color>
+    <color name="colorPrimaryRed">#F31F31</color>
     <color name="colorAccent">#ff0504</color>
+    <color name="color_grey_2">#d7d7d7</color>
+    <color name="color_grey_text">#807B7B</color>
+    <color name="default_text">#9b9b9b</color>
+    <color name="color_text_dialog">#1e83d6</color>
 
     <color name="color_notif">#ff0504</color>
     <color name="color_blue">#28166F</color>
@@ -13,7 +18,23 @@
     <color name="color_red_active">#f77e7e</color>
     <color name="color_grey">#c9c9c9</color>
     <color name="btn_color">#f50606</color>
+    <color name="default_background">#e2332d</color>
     <color name="btn_color_active">#fa5b5b</color>
+    <color name="color_input">#fafafa</color>
+    <color name="color_border">#D5A5A2A2</color>
+    <color name="color_btn2">#58a8f9</color>
+    <color name="color_btn1">#b3b3b3</color>
+    <color name="color_input_disable">#6eb3b3b3</color>
+    <color name="color_stroke_2">#9b9b9b</color>
+    <color name="color_btn_yelow">#ff8800</color>
+
+    <color name="color_login_2">#432a75</color>
+    <color name="color_login_2_active">#7248c7</color>
+    <color name="color_login_3">#ff8800</color>
+    <color name="color_login_3_active">#e99c45</color>
+    <color name="color_blue3">#027fe5</color>
+    <color name="color_blue_2">#72abda</color>
+    <color name="color_blue_3">#0b5491</color>
 
     <color name="color_black">#000000</color>
     <color name="color_black_active">#7e7e7e</color>

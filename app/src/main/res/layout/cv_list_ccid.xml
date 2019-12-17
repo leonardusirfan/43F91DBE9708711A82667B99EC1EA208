@@ -18,14 +18,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/tv_item1"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
+                style="@style/TitleText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:paddingLeft="@dimen/padding2"
+                android:paddingTop="2dp"
                 android:paddingRight="@dimen/padding2"
-                style="@style/TitleText"/>
+                android:paddingBottom="2dp" />
 
         </LinearLayout>
 

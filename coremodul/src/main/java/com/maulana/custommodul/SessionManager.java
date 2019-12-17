@@ -26,7 +26,7 @@ public class SessionManager {
 	
 	// All Shared Preferences Keys
 	public static final String TAG_USERNAME = "username";
-	public static final String TAG_NIK_GA = "nik_ga";
+	public static final String TAG_NIK_GA = "Nik-Ga";
 	public static final String TAG_NIK_MKIOS = "nik_mkios";
 	public static final String TAG_NAMA = "nama";
 	public static final String TAG_PASSWORD = "password";
@@ -35,6 +35,15 @@ public class SessionManager {
 	public static final String TAG_SUPERUSER = "superuser";
 	public static final String TAG_NIK_HR = "nik_hr";
 	public static final String TAG_JABATAN = "jabatan";
+	private static final String TAG_FLAG = "flag";
+	private static final String TAG_AREA = "area";
+	private static final String TAG_LEVEL = "level";
+	private static final String TAG_EXP = "expired_at";
+	private static final String TAG_JAB = "jabatan";
+	private static final String TAG_SAVED = "saved";
+	private static final String TAG_NIK = "nik";
+	public static final String TAG_UID = "uid";
+
 
 	// Constructor
 	public SessionManager(Context context){
@@ -94,8 +103,7 @@ public class SessionManager {
 		return pref.getString(TAG_NIK_MKIOS, "");
 	}
 
-	public String getNikGa(){
-		return pref.getString(TAG_NIK_GA, "");
+	public String getNikGa(){ return pref.getString(TAG_NIK_GA, "");
 	}
 
 	public String getNama(){
@@ -135,6 +143,55 @@ public class SessionManager {
 
 		return (this.getJabatan().toUpperCase().contains("BM") || this.getJabatan().toUpperCase().contains("SUPERVISOR BDO"));
 	}
+
+	// getUser
+	public HashMap<String, String> getUserDetails(){
+		HashMap<String, String> user = new HashMap<String, String>();
+		// user uid
+		user.put(TAG_UID, pref.getString(TAG_UID, ""));
+
+		// user nik
+		user.put(TAG_NIK_GA, pref.getString(TAG_NIK_GA, ""));
+		
+		user.put(TAG_NIK, pref.getString(TAG_NIK, ""));
+
+		user.put(TAG_NAMA, pref.getString(TAG_NAMA, ""));
+
+		user.put(TAG_USERNAME, pref.getString(TAG_USERNAME, ""));
+
+		user.put(TAG_PASSWORD, pref.getString(TAG_PASSWORD, ""));
+
+		user.put(TAG_SAVED, pref.getString(TAG_SAVED, ""));
+
+		user.put(TAG_JAB, pref.getString(TAG_JAB, ""));
+
+		user.put(TAG_EXP, pref.getString(TAG_EXP, ""));
+
+		user.put(TAG_LEVEL, pref.getString(TAG_LEVEL, ""));
+
+		user.put(TAG_AREA, pref.getString(TAG_AREA, ""));
+
+		user.put(TAG_FLAG, pref.getString(TAG_FLAG, ""));
+		// return user
+		return user;
+	}
+
+
+
+	public String getUser(){
+		return pref.getString(TAG_NAMA, "");
+	}
+
+
+	public String getNikGA(){
+		return pref.getString(TAG_NIK_GA, "");
+	}
+
+
+	public String getLevel(){
+		return pref.getString(TAG_LEVEL, "");
+	}
+
 
 	/**
 	 * Clear session details
