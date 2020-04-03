@@ -666,7 +666,7 @@ public class DetailChatActivity extends AppCompatActivity {
 
             try {
 
-                connection = (HttpURLConnection) new URL(ServerURL.saveFIleChat).openConnection();
+                connection = (HttpURLConnection) new URL(ServerURL.saveFIleChat + nomor).openConnection();
                 connection.setRequestMethod("POST");
                 String boundary = "---------------------------boundary";
                 String tail = "\r\n--" + boundary + "--\r\n";
@@ -681,6 +681,7 @@ public class DetailChatActivity extends AppCompatActivity {
                 connection.setRequestProperty("token5", token5);
                 connection.setRequestProperty("flag", session.getSuperuser());
                 connection.setRequestProperty("Nik-Hr", session.getNikHR());
+                connection.setRequestProperty("nomor", nomor);
                 connection.setDoOutput(true);
 
                 String metadataPart = "--" + boundary + "\r\n"
