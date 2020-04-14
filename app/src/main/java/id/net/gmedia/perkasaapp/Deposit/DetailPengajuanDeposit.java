@@ -684,9 +684,6 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
             }else{
                 try {
                     jData.put("approval", jArray);
-                    Intent intent = new Intent(DetailPengajuanDeposit.this,HistoryPengajuanDeposit.class);
-                    startActivity(intent);
-                    finish();
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -732,6 +729,11 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
                             progressDialog.dismiss();
                             message = response.getJSONObject("response").getString("message");
                             String nobukti = response.getJSONObject("response").getString("nobukti");
+
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(DetailPengajuanDeposit.this,HistoryPengajuanDeposit.class);
+                            startActivity(intent);
+                            finish();
 
 //                            final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
 //                            final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
@@ -792,15 +794,7 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
 //                                    }
 //                                }
 //                            });
-
-                            try {
-
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
                         }
-
-                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
