@@ -93,12 +93,52 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_jml3"
+            android:layout_marginTop="@dimen/padding2"
+            android:layout_below="@id/ll_jml2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_above="@id/textView34"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/padding5"
+                    android:gravity="center_vertical"
+                    android:text="Total Transaksi RS"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text14"/>
+
+                <TextView
+                    android:id="@+id/tv_total_rs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:gravity="right|center_vertical|end"
+                    android:text="@string/rupiah_0"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text16"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView34"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_below="@id/ll_jml2"
+            android:layout_below="@id/ll_jml3"
             android:text="@string/warning_transaksi"
             android:textColor="#000"
             android:textSize="12sp" />

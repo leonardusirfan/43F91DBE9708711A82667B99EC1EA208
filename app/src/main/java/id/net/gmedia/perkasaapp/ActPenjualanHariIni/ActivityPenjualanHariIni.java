@@ -44,7 +44,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
     private String keyword = "";
     private List<CustomItem> listTransaksi = new ArrayList<>();
     private PenjualanHariIniAdapter adapter;
-    private TextView tvTotal, tvTotalTcash;
+    private TextView tvTotal, tvTotalTcash, tvTotalRS;
     private LinearLayout llCustom;
     private Button btnPilihSales;
     private TextView tvSales;
@@ -79,6 +79,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
         edtSearch = (EditText) findViewById(R.id.edt_search);
         tvTotal = (TextView) findViewById(R.id.tv_total);
         tvTotalTcash = (TextView) findViewById(R.id.tv_total_tcash);
+        tvTotalRS = (TextView) findViewById(R.id.tv_total_rs);
         keyword  = "";
         listTransaksi = new ArrayList<>();
         adapter = new PenjualanHariIniAdapter(context, listTransaksi);
@@ -163,7 +164,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
                 dialogBox.dismissDialog();
                 String message = "Terjadi kesalahan saat memuat data, harap ulangi";
-                double totalAll = 0, totalTcash = 0;
+                double totalAll = 0, totalTcash = 0, totalRS = 0;
 
                 try {
 
@@ -241,11 +242,17 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
                             if(!jo.getString("jenis").equals("1") // transaksi
                                     && !jo.getString("crbayar").toUpperCase().equals("K")){ // carabayar tempo
-                                if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
 
-                                    totalTcash += iv.parseNullDouble(jo.getString("total"));
+                                if(jo.getString("is_rs").equals("0")){
+
+                                    if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
+
+                                        totalTcash += iv.parseNullDouble(jo.getString("total"));
+                                    }else{
+                                        totalAll += iv.parseNullDouble(jo.getString("total"));
+                                    }
                                 }else{
-                                    totalAll += iv.parseNullDouble(jo.getString("total"));
+                                    totalRS += iv.parseNullDouble(jo.getString("total"));
                                 }
                             }
                         }
@@ -272,6 +279,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
 
                 tvTotal.setText(iv.ChangeToRupiahFormat(totalAll));
                 tvTotalTcash.setText(iv.ChangeToRupiahFormat(totalTcash));
+                tvTotalRS.setText(iv.ChangeToRupiahFormat(totalRS));
                 adapter.notifyDataSetChanged();
             }
 

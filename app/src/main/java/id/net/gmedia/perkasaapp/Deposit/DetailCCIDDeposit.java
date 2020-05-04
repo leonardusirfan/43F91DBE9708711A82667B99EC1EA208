@@ -368,8 +368,8 @@ public class DetailCCIDDeposit extends AppCompatActivity {
                                             , jo.getString("harga")
                                             , jo.getString("hpp")
                                             , jo.getString("nobukti")
-                                            , jo.getString("ccid")
-                                            , jo.getString("ccid")
+                                            , jo.getString("id_surat_jalan")
+                                            , jo.getString("no_surat_jalan")
                                             , false)
                             );
                         }

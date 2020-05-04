@@ -34,6 +34,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -205,6 +206,9 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         //Inisialisasi dialog list CCID
         dialog_list = new Dialog(ActivityOrderPerdana3.this, R.style.PopupTheme);
         dialog_list.setContentView(R.layout.dialog_order_perdana_list);
+        Window window = dialog_list.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
         layout_checkbox = dialog_list.findViewById(R.id.layout_checkbox);
 
         final EditText edtSearch = dialog_list.findViewById(R.id.edt_search);
@@ -539,6 +543,8 @@ public class ActivityOrderPerdana3 extends AppCompatActivity implements Location
         // Ambil dengan Rentang
         dialog_rentang = new Dialog(ActivityOrderPerdana3.this, R.style.PopupTheme);
         dialog_rentang.setContentView(R.layout.dialog_order_perdana_rentang);
+        Window window = dialog_rentang.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         final TextView txt_ccid_awal = dialog_rentang.findViewById(R.id.txt_ccid_awal);
         final TextView txt_ccid_akhir = dialog_rentang.findViewById(R.id.txt_ccid_akhir);
         txt_banyak_ccid = dialog_rentang.findViewById(R.id.txt_banyak_ccid);

@@ -78,6 +78,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.Deposit.Adapter.ListPengajuanDepositAdapter;
 import id.net.gmedia.perkasaapp.Deposit.maps.MapsOutletActivity;
 import id.net.gmedia.perkasaapp.Deposit.model.Item;
@@ -113,6 +114,7 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
     private LinearLayout btnMapsOutlet, btnTerima;
     private static String total = "0";
     public HashMap<String, List<CustomItem>> listCCID = new HashMap<>();
+    public static String flagTAG = "PENGAJUANDEPOSIT";
 
     // Location
     private double latitude, longitude;
@@ -727,11 +729,13 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
                         if(iv.parseNullInteger(status) == 200){
 
                             progressDialog.dismiss();
-                            message = response.getJSONObject("response").getString("message");
-                            String nobukti = response.getJSONObject("response").getString("nobukti");
+                            //message = response.getJSONObject("response").getString("message");
+                            //String nobukti = response.getJSONObject("response").getString("nobukti");
 
                             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(DetailPengajuanDeposit.this,HistoryPengajuanDeposit.class);
+                            Intent intent = new Intent(DetailPengajuanDeposit.this, ActivityHome.class);
+                            intent.putExtra("flag", flagTAG);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
 

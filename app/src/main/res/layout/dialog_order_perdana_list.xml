@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:minHeight="@dimen/popup_height"
-    android:minWidth="@dimen/popup_width"
     android:padding="@dimen/padding10">
 
     <LinearLayout

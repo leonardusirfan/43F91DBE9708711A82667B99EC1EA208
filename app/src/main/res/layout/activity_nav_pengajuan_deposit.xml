@@ -98,12 +98,13 @@
                   android:layout_height="40dp"
                   android:id="@+id/btn_maps_outlet"
                   android:layout_weight="1"
+                  android:padding="@dimen/margin_small"
                   android:layout_marginRight="8dp"
                   android:background="@color/color_pink_peta">
 
                   <ImageView
-                      android:layout_width="28dp"
-                      android:layout_height="28dp"
+                      android:layout_width="20dp"
+                      android:layout_height="20dp"
                       android:layout_gravity="center"
                       android:layout_marginLeft="4dp"
                       android:src="@drawable/peta"/>

@@ -86,6 +86,7 @@ import id.net.gmedia.perkasaapp.ActPerdanaCustom.ListJualPerdanaCustom;
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityRiwayatPenjualan;
 import id.net.gmedia.perkasaapp.ActSetoran.ListSetoran;
 import id.net.gmedia.perkasaapp.ActVerifikasiReseller.ActivityVerifikasiOutlet1;
+import id.net.gmedia.perkasaapp.Deposit.DetailPengajuanDeposit;
 import id.net.gmedia.perkasaapp.Deposit.MainPengajuanDeposit;
 import id.net.gmedia.perkasaapp.Services.LocationUpdater;
 import id.net.gmedia.perkasaapp.SideAkunAnda.SideAccount;
@@ -520,6 +521,10 @@ public class ActivityHome extends AppCompatActivity
 
                 Intent intent = new Intent(ActivityHome.this, ActCheckinOutlet.class);
                 startActivity(intent);
+            }else if(flag.equals(DetailPengajuanDeposit.flagTAG)){
+
+                Intent intent = new Intent(ActivityHome.this, MainPengajuanDeposit.class);
+                startActivity(intent);
             }
 
             if(jenis.toLowerCase().equals("chat")){
@@ -547,7 +552,6 @@ public class ActivityHome extends AppCompatActivity
                 }
             }
         });
-
         getProfile();
     }
 
