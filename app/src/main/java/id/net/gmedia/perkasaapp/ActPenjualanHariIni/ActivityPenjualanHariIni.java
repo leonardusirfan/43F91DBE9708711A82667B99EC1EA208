@@ -212,6 +212,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                             , jo.getString("nama")
                                             , jo.getString("total")
                                             , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                            , jo.getString("is_rs")
                                     ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                 }else{
@@ -221,6 +222,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                             , jo.getString("nama")
                                             , jo.getString("total")
                                             , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                            , jo.getString("is_rs")
                                     ));
                                     totalPerNama += iv.parseNullLong(jo.getString("total"));
                                     listTransaksi.add(new CustomItem("F", String.valueOf(totalPerNama)));
@@ -233,6 +235,7 @@ public class ActivityPenjualanHariIni extends AppCompatActivity {
                                         , jo.getString("nama")
                                         , jo.getString("total")
                                         , ((jo.getString("status").isEmpty()) ? jo.getString("flag") : jo.getString("status")) + " / " + iv.ChangeFormatDateString(jo.getString("usertgl"), FormatItem.formatTimestamp, FormatItem.formatTime)
+                                        , jo.getString("is_rs")
 
                                 ));
                                 totalPerNama += iv.parseNullLong(jo.getString("total"));

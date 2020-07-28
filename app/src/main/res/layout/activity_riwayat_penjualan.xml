@@ -70,6 +70,34 @@
                 android:textSize="@dimen/text16"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f6f4f5"
+            android:layout_marginTop="@dimen/padding2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:text="Total Penjualan RS"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text14"/>
+
+            <TextView
+                android:id="@+id/tv_total_rs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|right"
+                android:text="@string/rupiah_0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text16"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout

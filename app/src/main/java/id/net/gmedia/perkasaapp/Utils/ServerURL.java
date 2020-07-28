@@ -48,6 +48,7 @@ public class ServerURL {
     public static final String getRekapSetoran = baseUrl + "pelunasan/rekap_pelunasan/";
     public static final String getDetailRekapSetoran = baseUrl + "pelunasan/detail_pelunasan/";
     public static final String getHargaTcash = baseUrl + "tcash/get_harga/";
+    public static final String getHargaNgrs = baseUrl + "tcash/get_harga_ngrs/";
     public static final String saveTcash = baseUrl + "tcash/transaksi/";
     public static final String getResellerKunjungan = baseUrl + "kunjungan/view_reseller/";
     public static final String getKunjungan = baseUrl + "kunjungan/view_kunjungan/";
@@ -98,7 +99,7 @@ public class ServerURL {
     public static final String saveCheckinOutlet = baseUrl + "checkin/";
     public static final String viewCheckinOutlet = baseUrl + "checkin/view_checkin/";
     public static final String getChatGroup = baseUrl + "chat/group/";
-    public static final String getChat = baseUrl + "chat/get_chat/";
+    public static final String getChat = baseUrl + "chat/get_detail_chat/";
     public static final String saveChat = baseUrl + "chat/send_text/";
     public static final String saveFIleChat = baseUrl + "chat/send_file/";
 
@@ -111,4 +112,6 @@ public class ServerURL {
     public static final String getJarak = baseUrl + "Location/hitung_jarak/";
     public static final String getApproval = baseUrl + "";
     public static final String getHistoryDeposit= baseUrl + "Deposit/get_pengajuan_deposit/";
+
+    public static final String saveNGRS = baseUrl + "tcash/transaksi_ngrs/";
 }

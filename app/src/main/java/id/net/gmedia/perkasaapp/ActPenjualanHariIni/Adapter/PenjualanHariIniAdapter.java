@@ -113,6 +113,16 @@ public class PenjualanHariIniAdapter extends ArrayAdapter {
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setText(Html.fromHtml(item.getItem4()));
 
+            if(item.getItem5().equals("0")){ // is rs : no
+
+                holder.tvItem1.setTextColor(context.getResources().getColor(R.color.color_black));
+                holder.tvItem2.setTextColor(context.getResources().getColor(R.color.color_black));
+            }else{
+
+                holder.tvItem1.setTextColor(context.getResources().getColor(R.color.color_red));
+                holder.tvItem2.setTextColor(context.getResources().getColor(R.color.color_red));
+            }
+
         }else if(tipeViewList == 2){
 
             holder.tvItem1.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(item.getItem2())));

@@ -61,6 +61,7 @@ import id.net.gmedia.perkasaapp.ActMarketIntelligent.DetailMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketIntelligent.ListMarketIntelligent;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.DetailMarketSurvey;
 import id.net.gmedia.perkasaapp.ActMarketSurvey.ListMarketSurvey;
+import id.net.gmedia.perkasaapp.ActNGRS.ResellerNGRSActivity;
 import id.net.gmedia.perkasaapp.ActNotePengajuan.DetailPerubahanDataRS;
 import id.net.gmedia.perkasaapp.ActNotePengajuan.ListPengajuanPerubahanRS;
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios1;
@@ -143,7 +144,7 @@ public class ActivityHome extends AppCompatActivity
         LinearLayout btn_mkios, btn_perdana, btn_hari_ini, btn_stok, btn_komplain,
                 btn_tcash, btn_verifikasi, btn_lokasi, btn_riwayat, btn_customer, btn_preorder, btn_kunjungan
                 , btn_market_survey, btn_direct_selling, btn_perubahan_data_rs, btn_pelunasan_piutang, btn_branding
-                , btn_market_intelligent, btn_pencapaian_sales, btn_kunjungan_sales;
+                , btn_market_intelligent, btn_pencapaian_sales, btn_kunjungan_sales, btnNGRS;
 
         llSupervisor = (LinearLayout) findViewById(R.id.ll_menu_supervisor);
 
@@ -167,6 +168,7 @@ public class ActivityHome extends AppCompatActivity
         btn_kunjungan = (LinearLayout) findViewById(R.id.btn_kunjungan);
         btn_pencapaian_sales = (LinearLayout) findViewById(R.id.btn_pencapain_sales);
         btn_kunjungan_sales = (LinearLayout) findViewById(R.id.btn_kunjungan_admin);
+        btnNGRS = (LinearLayout) findViewById(R.id.btn_ngrs);
 
         btnSetoran = (LinearLayout) findViewById(R.id.btn_setoran);
         suplContainer = (SlidingUpPanelLayout) findViewById(R.id.supl_container);
@@ -369,6 +371,14 @@ public class ActivityHome extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivity(new Intent(ActivityHome.this, DetailPencapaianSales.class));
+            }
+        });
+
+        btnNGRS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ActivityHome.this, ResellerNGRSActivity.class));
             }
         });
 

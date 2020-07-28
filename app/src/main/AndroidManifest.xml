@@ -30,7 +30,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
-        <activity android:name=".ActCustomerService.DetailChatActivity"></activity>
+        <activity android:name=".ActNGRS.DetailNGRSActivity"></activity>
+        <activity android:name=".ActNGRS.ResellerNGRSActivity" />
+        <activity android:name=".ActCustomerService.DetailChatActivity" />
         <activity android:name=".ActCustomerService.ListResellerCSActivity" />
         <activity android:name=".ActCustomerService.ListGroupChatActivity" />
         <activity
@@ -173,11 +175,12 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="ACT_HOME" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="ACT_CHAT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -401,25 +404,27 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActKonsinyasi.Retur.ActReturKonsinyasi"
-            android:screenOrientation="portrait" />
-<!--        <activity-->
-<!--            android:name=".ActDeposit.ActHistory"-->
-<!--            android:screenOrientation="portrait" />-->
-
-
+            android:screenOrientation="portrait" /> <!-- <activity -->
+        <!-- android:name=".ActDeposit.ActHistory" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".Deposit.HistoryPengajuanDeposit"
             android:screenOrientation="portrait" />
-        <activity android:name=".Deposit.MainPengajuanDeposit"
-                android:screenOrientation="portrait" />
-        <activity android:name=".Deposit.HeaderPengajuanDeposit"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Deposit.DetailPengajuanDeposit"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Deposit.DetailCCIDDeposit"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Deposit.maps.MapsOutletActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Deposit.MainPengajuanDeposit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Deposit.HeaderPengajuanDeposit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Deposit.DetailPengajuanDeposit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Deposit.DetailCCIDDeposit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Deposit.maps.MapsOutletActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActDeposit.ActPengajuanDeposit"
             android:screenOrientation="portrait" />

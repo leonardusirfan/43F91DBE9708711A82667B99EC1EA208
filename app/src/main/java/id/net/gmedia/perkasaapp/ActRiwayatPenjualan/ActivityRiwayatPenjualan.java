@@ -62,7 +62,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
     private RiwayatPenjualanAdapter adapterRiwayat;
     private EditText txt_nama;
     private String keyword = "";
-    private TextView tvTotal, tvTotalTcash;
+    private TextView tvTotal, tvTotalTcash, tvTotalRS;
     private LinearLayout llCustom;
     private Button btnPilihSales;
     private TextView tvSales;
@@ -121,6 +121,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
         txt_nama = (EditText) findViewById(R.id.txt_nama);
         tvTotal = (TextView) findViewById(R.id.tv_total);
         tvTotalTcash = (TextView) findViewById(R.id.tv_total_tcash);
+        tvTotalRS = (TextView) findViewById(R.id.tv_total_rs);
 
         Calendar now = Calendar.getInstance();
         start_day = end_day = now.get(Calendar.DATE);
@@ -303,7 +304,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
                 dialogBox.dismissDialog();
                 String message = "Terjadi kesalahan saat memuat data, harap ulangi";
-                double totalAll = 0, totalTcash = 0;
+                double totalAll = 0, totalTcash = 0, totalRS = 0;
 
                 try {
 
@@ -336,31 +337,58 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
                                 JSONObject jo2 = jsonArray.getJSONObject(i+1);
                                 if(jo2.getString("nama").equals(jo.getString("nama")) && lastTgl.equals(jo2.getString("tgl"))){
 
-                                    listRiwayat.add(new CustomItem("I", jo.getString("nama"), jo.getString("piutang"), jo.getString("flag") + "("+jo.getString("nonota") + ")"));
+                                    listRiwayat.add(new CustomItem(
+                                            "I"
+                                            , jo.getString("nama")
+                                            , jo.getString("piutang")
+                                            , jo.getString("flag") + "("+jo.getString("nonota") + ")"
+                                            , jo.getString("is_rs")
+                                            )
+                                    );
                                     totalPerNama += iv.parseNullLong(jo.getString("piutang"));
+
                                 }else{
 
-                                    listRiwayat.add(new CustomItem("I", jo.getString("nama"), jo.getString("piutang"), jo.getString("flag") + "("+jo.getString("nonota") + ")"));
+                                    listRiwayat.add(new CustomItem(
+                                            "I"
+                                            , jo.getString("nama")
+                                            , jo.getString("piutang")
+                                            , jo.getString("flag") + "("+jo.getString("nonota") + ")"
+                                            , jo.getString("is_rs")
+                                            )
+                                    );
                                     totalPerNama += iv.parseNullLong(jo.getString("piutang"));
                                     listRiwayat.add(new CustomItem("F", String.valueOf(totalPerNama)));
                                     totalPerNama = 0;
                                 }
                             }else{
 
-                                listRiwayat.add(new CustomItem("I", jo.getString("nama"), jo.getString("piutang"), jo.getString("flag") + "("+jo.getString("nonota") + ")"));
+                                listRiwayat.add(new CustomItem(
+                                        "I"
+                                        , jo.getString("nama")
+                                        , jo.getString("piutang")
+                                        , jo.getString("flag") + "("+jo.getString("nonota") + ")"
+                                        , jo.getString("is_rs")
+                                        )
+                                );
                                 totalPerNama += iv.parseNullLong(jo.getString("piutang"));
                                 listRiwayat.add(new CustomItem("F", String.valueOf(totalPerNama)));
                                 totalPerNama = 0;
                             }
 
-                            if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
+                            if(jo.getString("is_rs").equals("0")){
 
-                                totalTcash += iv.parseNullDouble(jo.getString("piutang"));
+                                if(jo.getString("flag").trim().toUpperCase().equals("TCASH")){
+
+                                    totalTcash += iv.parseNullDouble(jo.getString("piutang"));
+                                }else{
+
+                                    totalAll += iv.parseNullDouble(jo.getString("piutang"));
+                                }
                             }else{
 
-                                totalAll += iv.parseNullDouble(jo.getString("piutang"));
+                                totalRS += iv.parseNullDouble(jo.getString("piutang"));
                             }
-
                         }
 
                     }else{
@@ -385,6 +413,7 @@ public class ActivityRiwayatPenjualan extends AppCompatActivity {
 
                 tvTotal.setText(iv.ChangeToRupiahFormat(totalAll));
                 tvTotalTcash.setText(iv.ChangeToRupiahFormat(totalTcash));
+                tvTotalRS.setText(iv.ChangeToRupiahFormat(totalRS));
                 adapterRiwayat.notifyDataSetChanged();
             }
 
