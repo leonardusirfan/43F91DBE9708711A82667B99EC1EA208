@@ -1,10 +1,9 @@
 package id.net.gmedia.perkasaapp.ActOrderMkios.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,10 @@ import android.widget.TextView;
 import com.maulana.custommodul.ItemValidation;
 
 import java.util.List;
-import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
 import id.net.gmedia.perkasaapp.ModelPulsa;
 import id.net.gmedia.perkasaapp.R;
-import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 
 public class AdapterOrderMkios2 extends RecyclerView.Adapter<AdapterOrderMkios2.OrderMkios2ViewHolder> {
 

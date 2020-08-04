@@ -1,7 +1,7 @@
 package id.net.gmedia.perkasaapp.ActDeposit;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import id.net.gmedia.perkasaapp.R;
 

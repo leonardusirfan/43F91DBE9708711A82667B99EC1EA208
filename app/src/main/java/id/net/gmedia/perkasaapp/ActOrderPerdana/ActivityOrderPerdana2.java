@@ -1,11 +1,11 @@
 package id.net.gmedia.perkasaapp.ActOrderPerdana;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maulana.custommodul.ApiVolley;
-import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.CustomView.EndlessScroll;
 import com.maulana.custommodul.ItemValidation;

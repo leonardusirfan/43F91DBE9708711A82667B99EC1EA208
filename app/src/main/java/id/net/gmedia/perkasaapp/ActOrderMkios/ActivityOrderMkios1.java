@@ -3,11 +3,8 @@ package id.net.gmedia.perkasaapp.ActOrderMkios;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
@@ -32,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.net.gmedia.perkasaapp.ActOrderMkios.Adapter.AdapterOrderMkios;
 import id.net.gmedia.perkasaapp.ActOrderMkios.Adapter.ListResellerMkiosAdapter;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;

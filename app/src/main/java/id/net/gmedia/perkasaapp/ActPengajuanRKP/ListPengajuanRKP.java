@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -51,7 +51,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import id.net.gmedia.perkasaapp.ActNotePengajuan.Adapter.ListPerubahanDataRSAdapter;
 import id.net.gmedia.perkasaapp.ActPengajuanRKP.Adapter.ListPengajuanRKPAdapter;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;

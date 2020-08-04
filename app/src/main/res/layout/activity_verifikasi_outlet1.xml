@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true"
     tools:context=".ActVerifikasiReseller.ActivityVerifikasiOutlet1">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tl_top"
@@ -21,17 +21,17 @@
         app:tabIndicatorColor="@color/color_white"
         >
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Butuh Approval SPV"/>
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Butuh Verifikasi MKIOS"/>
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <include
         android:id="@+id/include_search"

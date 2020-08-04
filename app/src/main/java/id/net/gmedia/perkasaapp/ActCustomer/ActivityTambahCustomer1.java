@@ -3,8 +3,8 @@ package id.net.gmedia.perkasaapp.ActCustomer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActCustomer.Adapter.ListCustomerAdapter;
-import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.ListResellerPerdanaAdapter;
-import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 

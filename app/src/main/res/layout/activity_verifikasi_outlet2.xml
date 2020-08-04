@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".ActVerifikasiReseller.ActivityVerifikasiOutlet2">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">
@@ -369,5 +369,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             map:srcCompat="@drawable/camera" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

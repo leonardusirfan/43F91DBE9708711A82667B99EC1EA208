@@ -3,7 +3,7 @@ package id.net.gmedia.perkasaapp.ActKonsinyasi.Retur;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.net.gmedia.perkasaapp.ActKonsinyasi.InformasiBarang.ActivityInfoBarang;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter.ListResellerPerdanaAdapter;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;

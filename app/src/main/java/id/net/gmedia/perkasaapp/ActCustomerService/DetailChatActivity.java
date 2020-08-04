@@ -17,8 +17,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +40,6 @@ import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
-import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ImageUtils;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.PermissionUtils;

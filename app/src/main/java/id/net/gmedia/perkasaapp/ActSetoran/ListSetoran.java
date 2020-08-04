@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.ActivityListSales;
-import id.net.gmedia.perkasaapp.ActRiwayatPenjualan.Adapter.RiwayatPenjualanAdapter;
 import id.net.gmedia.perkasaapp.ActSetoran.Adapter.ListSetoranSalesAdapter;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;

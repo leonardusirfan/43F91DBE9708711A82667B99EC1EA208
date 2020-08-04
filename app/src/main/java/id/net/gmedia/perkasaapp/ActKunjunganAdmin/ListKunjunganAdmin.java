@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,7 +37,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import id.net.gmedia.perkasaapp.ActKunjungan.ActivityKunjunganOutlet;
 import id.net.gmedia.perkasaapp.ActKunjunganAdmin.Adapter.ListKunjunganAdminAdapter;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;

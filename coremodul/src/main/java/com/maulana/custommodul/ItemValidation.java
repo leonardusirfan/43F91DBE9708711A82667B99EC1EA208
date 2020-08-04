@@ -22,12 +22,14 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatDrawableManager;
+import androidx.annotation.RequiresApi;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -1236,39 +1238,32 @@ public class ItemValidation {
     public static ArrayList<String> getIMEI(Context context) {
 
         ArrayList<String> imeiList = new ArrayList<>();
-        TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         try {
-            if (Build.VERSION.SDK_INT >= 21) {
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                String deviceId = Settings.Secure.getString(
+                        context.getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
+                if(deviceId != null && !deviceId.equals("")) imeiList.add(deviceId);
+            } else {
+
+                TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 Class<?> telephonyClass = Class.forName(telephony.getClass().getName());
                 Class<?>[] parameter = new Class[1];
+
                 parameter[0] = int.class;
                 Method getFirstMethod = telephonyClass.getMethod("getDeviceId", parameter);
-                //Log.d("SimData", getFirstMethod.toString());
                 Object[] obParameter = new Object[1];
+
+                //First IMEI
                 obParameter[0] = 0;
-                TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 String first = (String) getFirstMethod.invoke(telephony, obParameter);
                 if (first != null && !first.equals("")) imeiList.add(first);
-                //Log.d("SimData", "first :" + first);
+
+                //Second IMEI
                 obParameter[0] = 1;
                 String second = (String) getFirstMethod.invoke(telephony, obParameter);
                 if (second != null && !second.equals("")) imeiList.add(second);
-                //Log.d("SimData", "Second :" + second);
-            } else {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                }
-                @SuppressLint("MissingPermission") String first = telephony.getDeviceId();
-                imeiList.add(first);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

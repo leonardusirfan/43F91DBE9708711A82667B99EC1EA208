@@ -1,8 +1,8 @@
 package id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import java.util.List;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
 import id.net.gmedia.perkasaapp.ModelPerdana;
 import id.net.gmedia.perkasaapp.R;
-import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 
 public class AdapterOrderPerdanaBarang extends RecyclerView.Adapter<AdapterOrderPerdanaBarang.OrderPerdanaBarangViewHolder> {
 

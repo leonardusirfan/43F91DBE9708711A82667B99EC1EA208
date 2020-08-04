@@ -3,12 +3,9 @@ package id.net.gmedia.perkasaapp.ActVerifikasiReseller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,8 +28,6 @@ import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActCustomer.ActivityTambahCustomer2;
 import id.net.gmedia.perkasaapp.ActCustomer.Adapter.ListCustomerAdapter;
-import id.net.gmedia.perkasaapp.ActVerifikasiReseller.Adapter.AdapterVerifikasiOutlet;
-import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 

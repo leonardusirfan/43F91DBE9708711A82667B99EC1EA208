@@ -1,11 +1,10 @@
 package id.net.gmedia.perkasaapp.ActNGRS;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,13 +13,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
@@ -32,14 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import id.net.gmedia.perkasaapp.ActOrderMkios.Adapter.ListResellerMkiosAdapter;
-import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash1;
-import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash2;
-import id.net.gmedia.perkasaapp.ActOrderTcash.ActivityOrderTcash3;
 import id.net.gmedia.perkasaapp.ModelOutlet;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;

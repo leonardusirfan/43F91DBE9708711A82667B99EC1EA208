@@ -17,18 +17,18 @@
     sothree:umanoParallaxOffset="100dp"
     sothree:umanoShadowHeight="4dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3" />
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp">
@@ -66,7 +66,7 @@
                         android:layout_marginTop="5dp"
                         android:background="#9b9b9b" />
 
-                    <android.support.v7.widget.GridLayout
+                    <androidx.gridlayout.widget.GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:columnCount="3">
@@ -207,7 +207,7 @@
                                 android:textSize="@dimen/text10" />
                         </LinearLayout>
 
-                    </android.support.v7.widget.GridLayout>
+                    </androidx.gridlayout.widget.GridLayout>
 
                 </LinearLayout>
 
@@ -293,7 +293,7 @@
                         android:layout_marginTop="5dp"
                         android:background="#9b9b9b" />
 
-                    <android.support.v7.widget.GridLayout
+                    <androidx.gridlayout.widget.GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:columnCount="3">
@@ -547,7 +547,7 @@
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.GridLayout>
+                    </androidx.gridlayout.widget.GridLayout>
 
                 </LinearLayout>
 
@@ -573,7 +573,7 @@
                         android:layout_marginTop="5dp"
                         android:background="#9b9b9b" />
 
-                    <android.support.v7.widget.GridLayout
+                    <androidx.gridlayout.widget.GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:columnCount="3">
@@ -998,11 +998,11 @@
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.GridLayout>
+                    </androidx.gridlayout.widget.GridLayout>
 
                 </LinearLayout>
-            </android.support.constraint.ConstraintLayout>
-        </android.support.v4.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -1014,7 +1014,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- SLIDING LAYOUT -->
     <LinearLayout

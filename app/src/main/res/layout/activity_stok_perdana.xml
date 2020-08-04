@@ -40,7 +40,7 @@
         android:layout_below="@id/linearLayout6"
         android:background="#9b9b9b" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_stok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

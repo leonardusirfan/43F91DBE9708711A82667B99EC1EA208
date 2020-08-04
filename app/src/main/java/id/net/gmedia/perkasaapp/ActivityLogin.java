@@ -2,17 +2,22 @@ package id.net.gmedia.perkasaapp;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -26,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.net.gmedia.perkasaapp.NotificationUtils.InitFirebaseSetting;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
@@ -41,6 +47,10 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private String refreshToken = "";
     private String imei1 = "", imei2 = "";
     private ProgressDialog progressDialog;
+    private List<String> listImei = new ArrayList<>();
+    private LinearLayout llID1, llID2;
+    private TextView tvId1, tvId2;
+    private ImageView ivCopy1, ivCopy2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +121,43 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         btn_login = findViewById(R.id.btn_login);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);
+        llID1 = (LinearLayout) findViewById(R.id.ll_id1);
+        llID2 = (LinearLayout) findViewById(R.id.ll_id2);
+        tvId1 = (TextView) findViewById(R.id.tv_id1);
+        tvId2 = (TextView) findViewById(R.id.tv_id2);
+        ivCopy1 = (ImageView) findViewById(R.id.iv_copy1);
+        ivCopy2 = (ImageView) findViewById(R.id.iv_copy2);
+
+        listImei = iv.getIMEI(context);
+
+        tvId1.setText(listImei.get(0));
+        ivCopy1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("ID 1", tvId1.getText().toString().replaceAll("[,.]", ""));
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(context, "Id 1 disimpan di clipboard", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        if(listImei.size() > 1){
+
+            tvId2.setText(listImei.get(1));
+            ivCopy2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("ID 2", tvId2.getText().toString().replaceAll("[,.]", ""));
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(context, "Id 2 disimpan di clipboard", Toast.LENGTH_LONG).show();
+                }
+            });
+        }else{
+            llID2.setVisibility(View.GONE);
+        }
     }
 
     private void initEvent() {

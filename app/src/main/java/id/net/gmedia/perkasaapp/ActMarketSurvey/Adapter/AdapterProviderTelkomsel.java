@@ -1,8 +1,8 @@
 package id.net.gmedia.perkasaapp.ActMarketSurvey.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,8 +16,6 @@ import com.maulana.custommodul.ItemValidation;
 
 import java.util.List;
 
-import id.net.gmedia.perkasaapp.ActOrderMkios.ActivityOrderMkios2;
-import id.net.gmedia.perkasaapp.ModelPulsa;
 import id.net.gmedia.perkasaapp.R;
 
 public class AdapterProviderTelkomsel extends RecyclerView.Adapter<AdapterProviderTelkomsel.ViewXHolder> {

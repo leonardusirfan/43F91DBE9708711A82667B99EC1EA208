@@ -3,8 +3,8 @@ package id.net.gmedia.perkasaapp.ActOrderPerdana.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import java.util.List;
 import id.net.gmedia.perkasaapp.ActOrderPerdana.ActivityOrderPerdana3;
 import id.net.gmedia.perkasaapp.ModelCcid;
 import id.net.gmedia.perkasaapp.R;
-import id.net.gmedia.perkasaapp.RupiahFormatterUtil;
 
 public class AdapterOrderPerdanaCcid extends RecyclerView.Adapter<AdapterOrderPerdanaCcid.OrderPerdanaCcidViewHolder> {
 

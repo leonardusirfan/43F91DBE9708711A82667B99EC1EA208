@@ -58,13 +58,13 @@
             style="@style/TitleText"
             android:text="Nota yang dilunasi (harap pilih hingga sisa 0)"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:id="@+id/rv_nota"
             android:layout_marginLeft="@dimen/padding10"
             android:layout_marginRight="@dimen/padding10"
-            android:layout_marginTop="@dimen/padding10"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="@dimen/padding10"></androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:layout_width="match_parent"

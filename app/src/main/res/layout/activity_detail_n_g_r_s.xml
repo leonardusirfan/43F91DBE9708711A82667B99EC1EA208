@@ -7,7 +7,7 @@
     tools:context=".ActNGRS.DetailNGRSActivity"
     android:scrollbars="none">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -245,6 +245,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_peta"
             app:layout_constraintTop_toTopOf="@+id/btn_peta" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,13 +17,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -74,17 +73,13 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import id.net.gmedia.perkasaapp.ActivityHome;
 import id.net.gmedia.perkasaapp.Deposit.Adapter.ListPengajuanDepositAdapter;
 import id.net.gmedia.perkasaapp.Deposit.maps.MapsOutletActivity;
-import id.net.gmedia.perkasaapp.Deposit.model.Item;
-import id.net.gmedia.perkasaapp.Deposit.model.Transaksi;
 import id.net.gmedia.perkasaapp.R;
-import id.net.gmedia.perkasaapp.Utils.FormatItem;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
 //import gmedia.net.id.psp.MapsOutletActivity;
@@ -219,7 +214,6 @@ public class DetailPengajuanDeposit extends AppCompatActivity implements Locatio
             kdcus = bundle.getString("kdcus", "");
             nama = bundle.getString("nama", "");
             flag = bundle.getString("flag", "");
-
 
             setTitle("Pengajuan");
             if(flag.equals("PD")) setTitle("Pembelian Perdana");

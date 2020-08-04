@@ -1,27 +1,22 @@
 package id.net.gmedia.perkasaapp.Deposit;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 //import com.leonardus.irfan.bluetoothprinter.Model.Item;
 //import com.leonardus.irfan.bluetoothprinter.Model.Transaksi;
@@ -49,8 +44,6 @@ import java.util.Locale;
 //import gmedia.net.id.psp.Utils.FormatItem;
 //import gmedia.net.id.psp.Utils.ServerURL;
 import id.net.gmedia.perkasaapp.Deposit.Adapter.ListHistoryDepositAdapter;
-import id.net.gmedia.perkasaapp.Deposit.model.Item;
-import id.net.gmedia.perkasaapp.Deposit.model.Transaksi;
 import id.net.gmedia.perkasaapp.R;
 import id.net.gmedia.perkasaapp.Utils.ServerURL;
 
