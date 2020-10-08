@@ -128,8 +128,8 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
     private Criteria criteria;
     private String provider;
     private Location location;
-    private final int REQUEST_PERMISSION_COARSE_LOCATION=2;
-    private final int REQUEST_PERMISSION_FINE_LOCATION=3;
+    private final int REQUEST_PERMISSION_COARSE_LOCATION = 2;
+    private final int REQUEST_PERMISSION_FINE_LOCATION = 3;
     public boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
@@ -181,6 +181,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
     private boolean isVerifikasi = false;
     private List<OptionItem> listSegmentasi = new ArrayList<>();
     private String fileKtp = "";
+    private int defaultSelectedSegment = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -725,6 +726,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                     if(iv.parseNullInteger(status) == 200){
 
                         JSONArray ja = response.getJSONArray("response");
+                        defaultSelectedSegment = 0;
                         for(int i = 0; i < ja.length(); i++){
 
                             JSONObject jo = ja.getJSONObject(i);
@@ -732,6 +734,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                                     jo.getString("id")
                                     ,jo.getString("nama")
                             ));
+                            if (jo.getString("nama").toUpperCase().equals("BRONZE")) defaultSelectedSegment = i;
                         }
 
                         setSegmentasiAdapter();
@@ -739,6 +742,8 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
                         if(isEdit){
 
                             getDetailReseller();
+                        }else{
+
                         }
 
                     }else{
@@ -784,7 +789,7 @@ public class ActivityTambahCustomer2 extends AppCompatActivity implements OnMapR
 
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listSegmentasi);
         spnSegmentasi.setAdapter(adapter);
-        spnSegmentasi.setSelection(0);
+        spnSegmentasi.setSelection(defaultSelectedSegment);
     }
 
     private void getDetailReseller(){

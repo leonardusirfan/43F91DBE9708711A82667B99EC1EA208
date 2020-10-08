@@ -1,6 +1,7 @@
 package id.net.gmedia.perkasaapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +42,7 @@ import id.net.gmedia.perkasaapp.Utils.ServerURL;
 public class ActivityLogin extends RuntimePermissionsActivity {
 
     private Context context;
+    private Activity activity;
     private SessionManager session;
     private ItemValidation iv = new ItemValidation();
     private EditText txt_username, txt_password;
@@ -52,12 +56,21 @@ public class ActivityLogin extends RuntimePermissionsActivity {
     private TextView tvId1, tvId2;
     private ImageView ivCopy1, ivCopy2;
 
+    private String[] appPermission =  {
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_NETWORK_STATE
+    };
+
+    private final int PERMIOSSION_REQUEST_CODE = 1111;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         context = this;
+        activity = this;
         session = new SessionManager(this);
 
         InitFirebaseSetting.getFirebaseSetting(context);
@@ -127,37 +140,6 @@ public class ActivityLogin extends RuntimePermissionsActivity {
         tvId2 = (TextView) findViewById(R.id.tv_id2);
         ivCopy1 = (ImageView) findViewById(R.id.iv_copy1);
         ivCopy2 = (ImageView) findViewById(R.id.iv_copy2);
-
-        listImei = iv.getIMEI(context);
-
-        tvId1.setText(listImei.get(0));
-        ivCopy1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("ID 1", tvId1.getText().toString().replaceAll("[,.]", ""));
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(context, "Id 1 disimpan di clipboard", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        if(listImei.size() > 1){
-
-            tvId2.setText(listImei.get(1));
-            ivCopy2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("ID 2", tvId2.getText().toString().replaceAll("[,.]", ""));
-                    clipboard.setPrimaryClip(clip);
-                    Toast.makeText(context, "Id 2 disimpan di clipboard", Toast.LENGTH_LONG).show();
-                }
-            });
-        }else{
-            llID2.setVisibility(View.GONE);
-        }
     }
 
     private void initEvent() {
@@ -191,6 +173,66 @@ public class ActivityLogin extends RuntimePermissionsActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (checkPermission()){
+
+            listImei = iv.getIMEI(context);
+
+            tvId1.setText(listImei.get(0));
+            ivCopy1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("ID 1", tvId1.getText().toString().replaceAll("[,.]", ""));
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(context, "Id 1 disimpan di clipboard", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            if(listImei.size() > 1){
+
+                tvId2.setText(listImei.get(1));
+                ivCopy2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("ID 2", tvId2.getText().toString().replaceAll("[,.]", ""));
+                        clipboard.setPrimaryClip(clip);
+                        Toast.makeText(context, "Id 2 disimpan di clipboard", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }else{
+                llID2.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private boolean checkPermission(){
+
+        List<String> permissionList = new ArrayList<>();
+        for (String perm : appPermission) {
+
+            if (ContextCompat.checkSelfPermission(activity, perm) != PackageManager.PERMISSION_GRANTED){
+
+                permissionList.add(perm);
+            }
+        }
+
+        if (!permissionList.isEmpty()) {
+
+            ActivityCompat.requestPermissions(activity, permissionList.toArray(new String[permissionList.size()]), PERMIOSSION_REQUEST_CODE);
+
+            return  false;
+        }
+
+        return  true;
     }
 
     private void saveData() {

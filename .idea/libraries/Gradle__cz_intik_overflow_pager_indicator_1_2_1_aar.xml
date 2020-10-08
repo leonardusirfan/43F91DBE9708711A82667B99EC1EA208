@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: cz.intik:overflow-pager-indicator:1.2.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4a42d706becab690f71a1df6fdbe6b49/jetified-overflow-pager-indicator-1.2.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4a42d706becab690f71a1df6fdbe6b49/jetified-overflow-pager-indicator-1.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4a42d706becab690f71a1df6fdbe6b49/jetified-overflow-pager-indicator-1.2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2abf980d7927dbf92dfa0e79c151a1b8/jetified-overflow-pager-indicator-1.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2abf980d7927dbf92dfa0e79c151a1b8/jetified-overflow-pager-indicator-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2abf980d7927dbf92dfa0e79c151a1b8/jetified-overflow-pager-indicator-1.2.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cz.intik/overflow-pager-indicator/1.2.1/e348ae0da66b4c421c8e0e3edcb39242cf1b4c8a/overflow-pager-indicator-1.2.1-javadoc.jar!/" />
