@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PerkasaSales.iml" filepath="$PROJECT_DIR$/PerkasaSales.iml" group="PerkasaSales" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="PerkasaSales/app" />
-      <module fileurl="file://$PROJECT_DIR$/circualreveal/circualreveal.iml" filepath="$PROJECT_DIR$/circualreveal/circualreveal.iml" group="PerkasaSales/circualreveal" />
-      <module fileurl="file://$PROJECT_DIR$/coremodul/coremodul.iml" filepath="$PROJECT_DIR$/coremodul/coremodul.iml" group="PerkasaSales/coremodul" />
+      <module fileurl="file://$PROJECT_DIR$/PerkasaSales.iml" filepath="$PROJECT_DIR$/PerkasaSales.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PerkasaSales.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PerkasaSales.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circualreveal/PerkasaSales.circualreveal.iml" filepath="$PROJECT_DIR$/.idea/modules/circualreveal/PerkasaSales.circualreveal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coremodul/PerkasaSales.coremodul.iml" filepath="$PROJECT_DIR$/.idea/modules/coremodul/PerkasaSales.coremodul.iml" />
     </modules>
   </component>
 </project>
